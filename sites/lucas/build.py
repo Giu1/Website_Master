@@ -132,6 +132,7 @@ S = {
 
 PHOTOS = [  # file, backdrop colour sampled from the photo's edges, wide (fills the whole hero)
     ("img/hero/lucas-wide.jpg", "#344243", True),
+    ("img/hero/lucas-wide-2.jpg", "#384546", True),
     ("img/hero/lucas-1-w.jpg", "#3b4b49", False),
     ("img/hero/lucas-2.jpg", "#364747", False),
     ("img/hero/lucas-3.jpg", "#41514f", False),

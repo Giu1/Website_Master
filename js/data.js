@@ -147,6 +147,17 @@ window.FOLIO = {
       awards: 0,
       summary: "Personal portfolio. Four pages, curved panel transitions, live photo switcher.",
       media: [{ w: 16, h: 9, src: "img/lucas-card.jpg", kind: "sans", word: "Lucas Bastos", colors: ["#999d9e", "#1c1d20"], ink: "#ffffff", caption: "Freelancer" }]
+    },
+    {
+      slug: "lucas-folio",
+      title: "Lucas Bastos — Work",
+      featured: true,
+      year: "2026",
+      client: "showcase",
+      url: "sites/lucas-folio/",
+      awards: 0,
+      summary: "Lucas's header; scroll down to play the page change by hand and land on the 3D stage of every site.",
+      media: [{ w: 16, h: 9, src: "img/lucas-card.jpg", kind: "sans", word: "Work", colors: ["#344243", "#1c1d20"], ink: "#ffffff", caption: "Work" }]
     }
   ]
 };
