@@ -328,8 +328,24 @@
 
   /* ───────── Team ───────── */
 
+  // compact cards in a grid, or one roomy row per person; remembered per browser
+  var TEAM_LAYOUT = "aura-desk-team-layout";
+  var teamLayout = (function () { try { return localStorage.getItem(TEAM_LAYOUT) === "spacious" ? "spacious" : "compact"; } catch (e) { return "compact"; } })();
+  function paintTeamLayout() {
+    $("[data-team]").classList.toggle("is-spacious", teamLayout === "spacious");
+    $$("[data-team-layout]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-team-layout") === teamLayout)); });
+  }
+  $$("[data-team-layout]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      teamLayout = b.getAttribute("data-team-layout");
+      try { localStorage.setItem(TEAM_LAYOUT, teamLayout); } catch (e) { /* ignore */ }
+      paintTeamLayout();
+    });
+  });
+
   function paintTeam(data) {
     if (view !== "team") return;
+    paintTeamLayout();
     var week = weekDays(0), today = S.isoDay(0);
     $("[data-team]").innerHTML = data.staff.map(function (m) {
       var days = [1, 2, 3, 4, 5, 6, 0].map(function (d) {
@@ -343,20 +359,35 @@
       var offChips = off.length ? off.map(function (iso) {
         return '<span class="off-chip">' + esc(dayLabel(iso)) + '<button type="button" data-del-off="' + iso + '" aria-label="' + esc(t("remove")) + '">✕</button></span>';
       }).join("") : '<span class="muted small">' + esc(t("noOff")) + "</span>";
+      // this week, day by day: share of the working day already booked
+      var strip = week.map(function (iso) {
+        var l = staffLoad(data, m, [iso]), wd = S.weekday(iso), isOff = (m.off || []).indexOf(iso) !== -1;
+        var state = isOff ? "off" : !l.avail ? "out" : "";
+        return '<li class="' + state + (iso === today ? " today" : "") + '" title="' + esc(dayLabel(iso)) + '">' +
+          '<span class="ws-bar"><span style="height:' + (l.avail ? Math.max(4, Math.min(100, l.pct)) : 0) + '%"></span></span>' +
+          '<span class="ws-day">' + esc(t("d" + wd)).slice(0, 3) + '</span><span class="ws-n">' + (isOff ? esc(t("offShort")) : l.avail ? l.count : "·") + "</span></li>";
+      }).join("");
       return '<article class="card person-edit" data-staff="' + esc(m.id) + '" style="--accent:' + esc(m.color) + '">' +
-        '<div class="pe-head"><span class="avatar">' + esc(m.name.split(" ").map(function (w) { return w[0]; }).join("").slice(0, 2)) + "</span>" +
-        '<div class="pe-id"><input class="pe-name" data-f="name" value="' + esc(m.name) + '" aria-label="' + esc(t("name")) + '">' +
-        '<span class="pe-week">' + esc(t("weekLine", { n: load.count, p: load.pct })) + "</span></div>" +
-        '<label class="colour"><span class="sr-only">' + esc(t("colour")) + '</span><input type="color" data-f="color" value="' + esc(m.color) + '"></label>' +
-        '<button class="icon-btn danger" type="button" data-del-staff="' + esc(m.id) + '" aria-label="' + esc(t("remove")) + '">✕</button></div>' +
-        '<div class="meter" aria-hidden="true"><span style="width:' + Math.min(100, load.pct) + '%"></span></div>' +
-        '<div class="pe-roles"><label><span>' + esc(t("roleEn")) + '</span><input data-f="role.en" value="' + esc(m.role.en) + '"></label>' +
-        '<label><span>' + esc(t("rolePt")) + '</span><input data-f="role.pt" value="' + esc(m.role.pt) + '"></label></div>' +
-        '<p class="pe-label">' + esc(t("worksOn")) + '</p><div class="chips">' + days + "</div>" +
-        '<p class="pe-label">' + esc(t("does")) + '</p><div class="chips">' + svcs + "</div>" +
-        '<p class="pe-label">' + esc(t("timeOff")) + '</p><div class="chips off-list">' + offChips + "</div>" +
-        '<div class="off-add"><input type="date" data-off-date min="' + today + '" aria-label="' + esc(t("offAria")) + '"><button class="btn btn-mini btn-ghost" type="button" data-add-off>' + esc(t("addOff")) + "</button></div>" +
-        '<p class="form-status small" data-off-status role="status"></p></article>';
+        '<div class="pe-who">' +
+          '<div class="pe-head"><span class="avatar">' + esc(m.name.split(" ").map(function (w) { return w[0]; }).join("").slice(0, 2)) + "</span>" +
+          '<div class="pe-id"><input class="pe-name" data-f="name" value="' + esc(m.name) + '" aria-label="' + esc(t("name")) + '">' +
+          '<span class="pe-week">' + esc(t("weekLine", { n: load.count, p: load.pct })) + "</span></div>" +
+          '<label class="colour"><span class="sr-only">' + esc(t("colour")) + '</span><input type="color" data-f="color" value="' + esc(m.color) + '"></label>' +
+          '<button class="icon-btn danger" type="button" data-del-staff="' + esc(m.id) + '" aria-label="' + esc(t("remove")) + '">✕</button></div>' +
+          '<div class="meter" aria-hidden="true"><span style="width:' + Math.min(100, load.pct) + '%"></span></div>' +
+          '<ol class="week-strip" aria-label="' + esc(t("thisWeek")) + '">' + strip + "</ol>" +
+          '<div class="pe-roles"><label><span>' + esc(t("roleEn")) + '</span><input data-f="role.en" value="' + esc(m.role.en) + '"></label>' +
+          '<label><span>' + esc(t("rolePt")) + '</span><input data-f="role.pt" value="' + esc(m.role.pt) + '"></label></div>' +
+        "</div>" +
+        '<div class="pe-work">' +
+          '<p class="pe-label">' + esc(t("worksOn")) + '</p><div class="chips">' + days + "</div>" +
+          '<p class="pe-label">' + esc(t("does")) + '</p><div class="chips">' + svcs + "</div>" +
+        "</div>" +
+        '<div class="pe-off">' +
+          '<p class="pe-label">' + esc(t("timeOff")) + '</p><div class="chips off-list">' + offChips + "</div>" +
+          '<div class="off-add"><input type="date" data-off-date min="' + today + '" aria-label="' + esc(t("offAria")) + '"><button class="btn btn-mini btn-ghost" type="button" data-add-off>' + esc(t("addOff")) + "</button></div>" +
+          '<p class="form-status small" data-off-status role="status"></p>' +
+        "</div></article>";
     }).join("");
   }
 

@@ -184,7 +184,13 @@
             <p class="eyebrow" data-i18n="vTeam">Team</p>
             <h1 data-i18n="teamTitle">Who works when</h1>
           </div>
-          <button class="btn" type="button" data-add-staff data-i18n="addStaff">Add stylist</button>
+          <div class="head-tools">
+            <div class="segmented" role="group" aria-label="Layout" data-i18n-aria="layoutAria">
+              <button type="button" data-team-layout="compact" aria-pressed="true"><span aria-hidden="true">▦</span> <span data-i18n="layoutCompact">Compact</span></button>
+              <button type="button" data-team-layout="spacious" aria-pressed="false"><span aria-hidden="true">☰</span> <span data-i18n="layoutSpacious">Spacious</span></button>
+            </div>
+            <button class="btn" type="button" data-add-staff data-i18n="addStaff">Add stylist</button>
+          </div>
         </header>
         <div class="team-edit" data-team></div>
       </section>

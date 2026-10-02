@@ -9,7 +9,7 @@ Backoffice for Aura, as a working demo. Sign in with `demo` / `demo` (`sessionSt
 - **Clients** — one row per client built from every booking (visits, last and next visit, usual service, spend). Click for history, rhythm ("comes every n days") and **Book again**, which opens New booking prefilled.
 - **Insights** — six weeks of revenue per week, appointments, average ticket, online share, cancellations, what is booked ahead, most booked services and chair time booked per stylist this week.
 - **Services** — edit names (EN + PT), category, price, minutes, on/off site; add and remove. Saves as you type.
-- **Team** — name, role (EN + PT), colour, working days, which services each person does, this week's load, and days off (refused if that day already has bookings). Days off close that stylist's times on the site.
+- **Team** — a Compact / Spacious switch (remembered in `localStorage["aura-desk-team-layout"]`; Spacious gives each person a full-width row with a day-by-day strip of this week). Name, role (EN + PT), colour, working days, which services each person does, this week's load, and days off (refused if that day already has bookings). Days off close that stylist's times on the site.
 - **Hours** — open/closed and times per weekday.
 - **Site copy** — announcement, headline, intro (EN + PT), address and phone.
 - **Reset demo data** in the sidebar.
