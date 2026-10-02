@@ -20,7 +20,7 @@ Always serve from the repo root. The hub, the sibling links between demos, and t
 | --- | --- | --- | --- |
 | `sites/atelier/` | Atelier | Hub / sales studio, links to the other demos | EN + PT-PT |
 | `sites/lumen/` | Lumen | Photographer: viewfinder hero, light table, lightbox loupe, date check | EN + PT-PT |
-| `sites/osteria/` | Osteria Corvo | SPA · restaurant | EN + PT-PT |
+| `sites/osteria/` | Osteria Corvo | Restaurant: set menu with pairing, cellar, live table reservations | EN + PT-PT |
 | `sites/vela/` | Vela | SPA · perfume | EN + PT-PT |
 | `sites/aura/` | Aura | Salon: live availability booking fed by the desk | EN + PT-PT |
 | `sites/nido/` | Nido | Complete bakery | EN + PT-PT |
