@@ -87,7 +87,8 @@ window.SITE_I18N = {
     "photo4.attr": "Photo 4",
     "photo5.attr": "Photo 5",
     "photo6.attr": "Photo 6",
-    "photo7.attr": "Photo 7"
+    "photo7.attr": "Photo 7",
+    "photo8.attr": "Photo 8"
   },
   "pt": {
     "title.home": "Lucas Bastos • Designer & Programador freelancer",
@@ -176,7 +177,8 @@ window.SITE_I18N = {
     "photo4.attr": "Foto 4",
     "photo5.attr": "Foto 5",
     "photo6.attr": "Foto 6",
-    "photo7.attr": "Foto 7"
+    "photo7.attr": "Foto 7",
+    "photo8.attr": "Foto 8"
   }
 };
 

@@ -198,6 +198,26 @@ img { display: block; max-width: 100%; }
 
 .portrait img.incoming { opacity: 0; transform: scale(1.04); }
 
+/* landscape header: fills the whole hero, face kept right of centre */
+.portrait.wide {
+  left: 0;
+  width: 100%;
+  aspect-ratio: auto;
+  transform: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.portrait.wide img { object-position: 58% 30%; }
+
+/* keep the caption legible where it crosses the hair */
+.portrait.wide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.18) 100%);
+}
+
 /* keeps the looping name readable over the photo */
 .hero::after {
   content: "";

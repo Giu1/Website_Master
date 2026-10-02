@@ -130,16 +130,17 @@ S = {
     ),
 }
 
-PHOTOS = [  # file, backdrop colour sampled from the photo's edges
-    ("img/hero/lucas-1.jpg", "#3b4b49"),
-    ("img/hero/lucas-2.jpg", "#364747"),
-    ("img/hero/lucas-3.jpg", "#41514f"),
-    ("img/hero/lucas-4.jpg", "#3c4d4d"),
-    ("img/hero/lucas-5.jpg", "#334343"),
-    ("img/hero/lucas-6.jpg", "#374847"),
-    ("img/hero/lucas-7.jpg", "#324041"),
+PHOTOS = [  # file, backdrop colour sampled from the photo's edges, wide (fills the whole hero)
+    ("img/hero/lucas-wide.jpg", "#344243", True),
+    ("img/hero/lucas-1-w.jpg", "#3b4b49", False),
+    ("img/hero/lucas-2.jpg", "#364747", False),
+    ("img/hero/lucas-3.jpg", "#41514f", False),
+    ("img/hero/lucas-4-w.jpg", "#3c4d4d", False),
+    ("img/hero/lucas-5.jpg", "#334343", False),
+    ("img/hero/lucas-6.jpg", "#374847", False),
+    ("img/hero/lucas-7-w.jpg", "#324041", False),
 ]
-DEFAULT_PHOTO = 0  # lucas-1: the default on every visit
+DEFAULT_PHOTO = 0  # lucas-wide: the header on every visit
 for i in range(len(PHOTOS)):
     S[f"photo{i + 1}.attr"] = (f"Photo {i + 1}", f"Foto {i + 1}")
 
@@ -315,7 +316,7 @@ def footer():
     return f"""      <footer class="footer" id="contact">
         <div class="container footer-inner" id="footer-inner">
           <div class="footer-top">
-            <h2><img class="avatar" src="img/hero/lucas-4-thumb.jpg" alt="" />{T("footer.title")}</h2>
+            <h2><img class="avatar" src="img/hero/lucas-4-w-thumb.jpg" alt="" />{T("footer.title")}</h2>
             {ARROW_DOWN_LEFT}
           </div>
           <div class="footer-line">
@@ -356,9 +357,9 @@ def page(fname, page_key, current, body_class, skip_to, main):
 # ───────── home ─────────
 
 switch_buttons = "\n".join(
-    f'          <button type="button" data-photo="{src}" data-bg="{bg}" {aria(f"photo{i + 1}.attr")} aria-pressed="{str(i == DEFAULT_PHOTO).lower()}">'
+    f'          <button type="button" data-photo="{src}" data-bg="{bg}"{" data-wide" if wide else ""} {aria(f"photo{i + 1}.attr")} aria-pressed="{str(i == DEFAULT_PHOTO).lower()}">'
     f'<img src="{src.replace(".jpg", "-thumb.jpg")}" alt="" /></button>'
-    for i, (src, bg) in enumerate(PHOTOS)
+    for i, (src, bg, wide) in enumerate(PHOTOS)
 )
 
 home_list = "\n".join(
@@ -369,7 +370,7 @@ home_list = "\n".join(
 home = f"""      <header class="hero" id="top" style="--hero:{PHOTOS[DEFAULT_PHOTO][1]}">
 {bar("nav.home")}
 
-        <div class="portrait" id="portrait" data-speed="-0.12">
+        <div class="portrait{" wide" if PHOTOS[DEFAULT_PHOTO][2] else ""}" id="portrait" data-speed="-0.12">
           <img src="{PHOTOS[DEFAULT_PHOTO][0]}" alt="Lucas Bastos" fetchpriority="high" />
         </div>
 
@@ -548,7 +549,7 @@ contact = f"""      <section class="contact-page" id="main-contact">
 {bar("nav.contact", "on-dark")}
         <div class="container contact-grid">
           <div class="contact-main">
-            <h1><img class="avatar" src="img/hero/lucas-4-thumb.jpg" alt="" />{T("h1.contact", "span", 'class="split" data-reveal')}</h1>
+            <h1><img class="avatar" src="img/hero/lucas-4-w-thumb.jpg" alt="" />{T("h1.contact", "span", 'class="split" data-reveal')}</h1>
             <form class="contact-form" id="contact-form" novalidate>
 {field_html}
               <div class="field">

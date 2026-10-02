@@ -146,7 +146,7 @@ window.FOLIO = {
       url: "sites/lucas/",
       awards: 0,
       summary: "Personal portfolio. Four pages, curved panel transitions, live photo switcher.",
-      media: [{ w: 16, h: 9, src: "img/lucas-1-card.jpg", kind: "sans", word: "Lucas Bastos", colors: ["#999d9e", "#1c1d20"], ink: "#ffffff", caption: "Freelancer" }]
+      media: [{ w: 16, h: 9, src: "img/lucas-card.jpg", kind: "sans", word: "Lucas Bastos", colors: ["#999d9e", "#1c1d20"], ink: "#ffffff", caption: "Freelancer" }]
     }
   ]
 };

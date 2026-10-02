@@ -179,7 +179,7 @@
     const y = smoothOn ? scroll.cur : scrollY;
     for (const el of parallax) {
       const s = parseFloat(el.dataset.speed);
-      const base = el.classList.contains("portrait") ? "translateX(-50%) " : "";
+      const base = el.classList.contains("portrait") && !el.classList.contains("wide") ? "translateX(-50%) " : "";
       el.style.transform = `${base}translate3d(0,${-y * s}px,0)`;
     }
   }
@@ -360,13 +360,20 @@
     const img = new Image();
     img.alt = "Lucas Bastos";
     img.src = src;
+    const wide = btn.hasAttribute("data-wide");
     if (instant || reduced) {
+      portrait.classList.toggle("wide", wide);
       portrait.replaceChildren(img);
       return;
     }
     // crossfade: the new photo fades in on top, then the old ones are dropped
     img.className = "incoming";
     const reveal = () => {
+      // landscape photos fill the hero; portrait ones sit in the centre column
+      if (portrait.classList.contains("wide") !== wide) {
+        portrait.classList.toggle("wide", wide);
+        portrait.style.transform = "";
+      }
       portrait.appendChild(img);
       requestAnimationFrame(() => requestAnimationFrame(() => img.classList.remove("incoming")));
       setTimeout(() => { while (portrait.children.length > 1) portrait.firstElementChild.remove(); }, 900);
