@@ -28,7 +28,7 @@
         <button type="button" data-lang="en">EN</button>
         <button type="button" data-lang="pt">PT</button>
       </div>
-      <p class="login-foot"><a href="../aura/" data-i18n="viewSite">View the Aura site</a> · <a href="../atelier/" data-i18n="backAtelier">Atelier</a></p>
+      <p class="login-foot"><a href="../aura/" data-i18n="viewSite">View the Aura site</a> · <a href="../../" data-i18n="backAtelier">More demos</a></p>
     </div>
   </section>
 
@@ -40,6 +40,8 @@
         <button type="button" data-view="today"><span class="ico" aria-hidden="true">◐</span><span data-i18n="vToday">Today</span></button>
         <button type="button" data-view="requests"><span class="ico" aria-hidden="true">✉</span><span data-i18n="vRequests">Requests</span><span class="badge" data-badge hidden></span></button>
         <button type="button" data-view="bookings"><span class="ico" aria-hidden="true">▤</span><span data-i18n="vBookings">Bookings</span></button>
+        <button type="button" data-view="clients"><span class="ico" aria-hidden="true">◎</span><span data-i18n="vClients">Clients</span></button>
+        <button type="button" data-view="insights"><span class="ico" aria-hidden="true">▥</span><span data-i18n="vInsights">Insights</span></button>
         <button type="button" data-view="services"><span class="ico" aria-hidden="true">✂</span><span data-i18n="vServices">Services</span></button>
         <button type="button" data-view="team"><span class="ico" aria-hidden="true">☺</span><span data-i18n="vTeam">Team</span></button>
         <button type="button" data-view="hours"><span class="ico" aria-hidden="true">◷</span><span data-i18n="vHours">Hours</span></button>
@@ -140,6 +142,39 @@
         </header>
         <p class="muted view-note" data-i18n="servicesNote">Changes save as you type and show on the Aura site straight away. Hidden services stay out of the menu and booking.</p>
         <div class="card table-card"><div class="table-wrap" data-services></div></div>
+      </section>
+
+      <!-- Clients -->
+      <section class="view" data-panel="clients" hidden>
+        <header class="view-head">
+          <div>
+            <p class="eyebrow" data-i18n="vClients">Clients</p>
+            <h1 data-i18n="clientsTitle">Who sits in the chair</h1>
+          </div>
+          <input type="search" class="search" data-client-search placeholder="Search name or phone" data-i18n-placeholder="cSearch" aria-label="Search" data-i18n-aria="cSearch">
+        </header>
+        <p class="muted view-note" data-i18n="clientsNote">Built from every booking. Click a client to see their history or book them again.</p>
+        <div class="clients-layout">
+          <div class="card table-card"><div class="table-wrap" data-clients></div></div>
+          <aside class="card client-panel" data-client-panel hidden></aside>
+        </div>
+      </section>
+
+      <!-- Insights -->
+      <section class="view" data-panel="insights" hidden>
+        <header class="view-head">
+          <div>
+            <p class="eyebrow" data-i18n="vInsights">Insights</p>
+            <h1 data-i18n="insightsTitle">How the salon is doing</h1>
+          </div>
+        </header>
+        <p class="muted view-note" data-i18n="insightsNote">Finished appointments from the last six weeks, plus what is booked ahead.</p>
+        <div class="kpis kpis-5" data-insight-kpis></div>
+        <div class="insights-grid">
+          <section class="card"><h2 data-i18n="iWeekly">Revenue per week</h2><div class="bars" data-weekly></div></section>
+          <section class="card"><h2 data-i18n="iTop">Most booked services</h2><div class="hbars" data-top></div></section>
+          <section class="card wide"><h2 data-i18n="iLoad">Chair time booked this week</h2><p class="muted small" data-i18n="iLoadNote">Booked minutes against working hours, Monday to Sunday.</p><div class="load" data-load></div></section>
+        </div>
       </section>
 
       <!-- Team -->

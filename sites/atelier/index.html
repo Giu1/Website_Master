@@ -3,129 +3,174 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Atelier — sites with a pulse</title>
-  <meta name="description" content="A small studio making expressive websites for shops, salons, kitchens and local trades. Cheap in bulk. Handmade on purpose.">
+  <title>Atelier Moura — bespoke tailoring in Lisboa</title>
+  <meta name="description" content="Fictional bespoke tailor on Rua dos Fanqueiros. Design your jacket live, choose the cloth, and book a fitting.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
+  <!-- a tailor's tape that measures how far down the page you are -->
+  <div class="tape" aria-hidden="true"><div class="tape-ticks" data-tape></div><span class="tape-read" data-tape-read>0 cm</span></div>
+
   <header class="site-header">
-    <a class="logo" href="index.html">Atelier<span>.</span></a>
-    <div class="header-tools">
-      <div class="lang" role="group" data-i18n-aria="lang">
+    <a class="logo" href="#top"><span class="logo-m">M</span><span class="logo-word">Moura<small data-i18n="logoSub">Tailors · Lisboa</small></span></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#design" data-i18n="navDesign">Design</a>
+      <a href="#process" data-i18n="navProcess">Process</a>
+      <a href="#cloth" data-i18n="navCloth">Cloth</a>
+      <a href="#fitting" data-i18n="navFitting">Fittings</a>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Language" data-i18n-aria="lang">
         <button type="button" data-lang="en">EN</button>
         <button type="button" data-lang="pt">PT</button>
       </div>
+      <a class="btn btn-small" href="#fitting" data-i18n="bookCta">Book a fitting</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
     </div>
-    <nav id="nav" class="nav">
-      <a href="index.html" aria-current="page" data-i18n="navHome">Home</a>
-      <a href="work.html" data-i18n="navWork">Work</a>
-      <a href="offer.html" data-i18n="navOffer">Offer</a>
-      <a href="contact.html" data-i18n="navContact">Contact</a>
-    </nav>
   </header>
 
   <main id="main">
-    <section class="hero">
-      <p class="eyebrow reveal" data-i18n="eyebrow">Studio · 2026</p>
-      <h1 class="display reveal" data-i18n="hero">
-        <span>Sites that</span>
-        <span class="italic">feel</span>
-        <span>handmade.</span>
-      </h1>
-      <p class="lede reveal" data-i18n="lede">Expressive websites for cafés, salons, kitchens and local trades. Built fast. Priced for bulk. Never a template with the logo swapped.</p>
-      <div class="hero-actions reveal">
-        <a class="btn" href="work.html" data-i18n="seeDemos">See the demos</a>
-        <a class="btn btn-ghost" href="offer.html" data-i18n="packages">Packages</a>
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="kicker" data-i18n="kicker">Rua dos Fanqueiros · since 1987</p>
+        <h1 data-i18n="heroTitle">Cut for one person. <em>Sewn by hand.</em></h1>
+        <p class="lede" data-i18n="heroLede">A paper pattern drawn from your measurements, a jacket basted and fitted on you twice, and about sixty hours of hand work. Start by drawing it below.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#design" data-i18n="heroCta">Design your jacket</a>
+          <a class="link" href="#process" data-i18n="heroHow">How it's made</a>
+        </div>
+        <dl class="facts">
+          <div><dt data-i18n="f1">Hand stitches</dt><dd>≈ 9 000</dd></div>
+          <div><dt data-i18n="f2">Fittings</dt><dd>2–3</dd></div>
+          <div><dt data-i18n="f3">Weeks</dt><dd>6–9</dd></div>
+        </dl>
       </div>
-      <p class="scroll-hint" aria-hidden="true" data-i18n="scroll">Scroll</p>
+      <figure class="hero-img">
+        <img src="https://images.unsplash.com/photo-1584184924103-e310d9dc82fc?auto=format&fit=crop&w=1100&q=75" alt="Hands smoothing a grey wool jacket on the cutting table" data-i18n-alt="heroAlt">
+        <figcaption data-i18n="heroCap">Cutting table, second floor</figcaption>
+      </figure>
     </section>
 
-    <section class="strip">
-      <p data-i18n="strip">Kinetic type · Broken grids · Booking desks · Local SEO bones · Mobile first</p>
-    </section>
-
-    <section class="section">
+    <section class="design" id="design" aria-labelledby="design-title">
       <div class="section-head">
-        <p class="eyebrow" data-i18n="live">Live demos</p>
-        <h2 data-i18n="rooms">Seven rooms. Seven voices.</h2>
-        <p data-i18n="roomsLede">Each site lives in its own folder. Open one, sit with it, then tell us which mood you want.</p>
+        <p class="kicker" data-i18n="designKicker">The designer</p>
+        <h2 id="design-title" data-i18n="designTitle">Draw your jacket</h2>
+        <p class="muted" data-i18n="designLede">Every choice redraws the jacket and the price. Nothing here is a template: it's what we'd chalk on the cloth.</p>
       </div>
-      <div class="work-grid">
-        <a class="card card-spa" href="../lumen/">
-          <span class="card-meta">01 · SPA</span>
-          <h3>Lumen</h3>
-          <p data-i18n="lumen">Photographer lookbook. Cinema scroll, almost no copy.</p>
-        </a>
-        <a class="card card-spa" href="../osteria/">
-          <span class="card-meta">02 · SPA</span>
-          <h3>Osteria</h3>
-          <p data-i18n="osteria">A restaurant told as a meal. Editorial, warm, hungry.</p>
-        </a>
-        <a class="card card-spa" href="../vela/">
-          <span class="card-meta">03 · SPA</span>
-          <h3>Vela</h3>
-          <p data-i18n="vela">Perfume as colour and type. A brand, not a catalogue.</p>
-        </a>
-        <a class="card card-full" href="../aura/">
-          <span class="card-meta">04 · Complete</span>
-          <h3>Aura</h3>
-          <p data-i18n="aura">Salon with prices, team, gallery and booking.</p>
-        </a>
-        <a class="card card-full" href="../nido/">
-          <span class="card-meta">05 · Complete</span>
-          <h3>Nido</h3>
-          <p data-i18n="nido">Bakery that smiles. Menu, hours, weekend lists.</p>
-        </a>
-        <a class="card card-full" href="../brightline/">
-          <span class="card-meta">06 · Complete</span>
-          <h3>Brightline</h3>
-          <p data-i18n="brightline">Home cleaning that converts. Call, quote, trust.</p>
-        </a>
-        <a class="card card-desk" href="../aura-desk/">
-          <span class="card-meta">07 · Backoffice</span>
-          <h3>Aura Desk</h3>
-          <p data-i18n="desk">The salon’s admin. Change a price, watch the site move.</p>
-        </a>
+
+      <div class="designer">
+        <div class="stage">
+          <svg class="jacket" viewBox="0 0 300 350" role="img" aria-label="Your jacket" data-i18n-aria="jacketAria" data-jacket>
+            <defs>
+              <pattern id="cloth" patternUnits="userSpaceOnUse" width="16" height="16" data-cloth-pattern></pattern>
+              <pattern id="lining" patternUnits="userSpaceOnUse" width="12" height="12" data-lining-pattern></pattern>
+              <linearGradient id="shade" x1="0" x2="1">
+                <stop offset="0" stop-color="#000" stop-opacity="0.22"/>
+                <stop offset="0.35" stop-color="#000" stop-opacity="0"/>
+                <stop offset="0.65" stop-color="#000" stop-opacity="0"/>
+                <stop offset="1" stop-color="#000" stop-opacity="0.22"/>
+              </linearGradient>
+            </defs>
+            <g data-jacket-art></g>
+          </svg>
+          <div class="inside">
+            <span class="inside-lining" data-inside-lining></span>
+            <span class="inside-label"><b>MOURA</b><small>Lisboa</small><span data-inside-mono></span></span>
+            <span class="inside-cap" data-i18n="insideCap">Inside: lining and your label</span>
+          </div>
+        </div>
+
+        <form class="controls" data-designer novalidate>
+          <fieldset><legend data-i18n="cCloth">Cloth</legend><div class="swatches" data-opt="cloth"></div><p class="opt-note" data-cloth-note></p></fieldset>
+          <fieldset><legend data-i18n="cLapel">Lapel</legend><div class="seg" data-opt="lapel"></div></fieldset>
+          <fieldset><legend data-i18n="cFront">Front</legend><div class="seg" data-opt="front"></div></fieldset>
+          <fieldset><legend data-i18n="cPockets">Pockets</legend><div class="seg" data-opt="pockets"></div></fieldset>
+          <fieldset><legend data-i18n="cLining">Lining</legend><div class="swatches small" data-opt="lining"></div></fieldset>
+          <fieldset class="mono"><legend data-i18n="cMono">Monogram</legend>
+            <input maxlength="3" autocomplete="off" spellcheck="false" placeholder="ABC" data-mono aria-label="Monogram initials" data-i18n-aria="monoAria">
+            <span class="opt-note" data-i18n="monoNote">Up to three letters, sewn inside.</span>
+          </fieldset>
+          <div class="quote">
+            <p class="q-price"><span data-price>—</span></p>
+            <p class="q-meta" data-meta></p>
+            <div class="q-actions">
+              <button class="btn" type="button" data-save-design data-i18n="saveDesign">Keep this design</button>
+              <button class="link" type="button" data-random data-i18n="surprise">Surprise me</button>
+            </div>
+            <p class="q-saved" data-saved role="status"></p>
+          </div>
+        </form>
       </div>
     </section>
 
-    <section class="section section-split">
-      <div>
-        <p class="eyebrow" data-i18n="sell">How we sell this</p>
-        <h2 data-i18n="three">Three products. Not “a website”.</h2>
+    <section class="process" id="process" aria-labelledby="process-title">
+      <div class="section-head">
+        <p class="kicker" data-i18n="processKicker">Process</p>
+        <h2 id="process-title" data-i18n="processTitle">Nine weeks, five visits to the table</h2>
       </div>
-      <ol class="rungs">
-        <li>
-          <strong data-i18n="spa">Lookbook SPA</strong>
-          <span data-i18n="spaLede">Lumen, Osteria, Vela. Pride pieces. From €450.</span>
-        </li>
-        <li>
-          <strong data-i18n="local">Local complete</strong>
-          <span data-i18n="localLede">Aura, Nido, Brightline. The bulk SKU. From €750.</span>
-        </li>
-        <li>
-          <strong data-i18n="plus">Site + desk</strong>
-          <span data-i18n="plusLede">Aura with Aura Desk. You run the shop. From €1,100.</span>
-        </li>
-      </ol>
+      <div class="steps-wrap">
+        <ol class="steps" role="tablist" aria-label="Steps" data-i18n-aria="stepsAria" data-steps></ol>
+        <article class="step-detail" data-step-detail aria-live="polite"></article>
+      </div>
+    </section>
+
+    <section class="cloth" id="cloth" aria-labelledby="cloth-title">
+      <div class="section-head row">
+        <div>
+          <p class="kicker" data-i18n="clothKicker">Cloth</p>
+          <h2 id="cloth-title" data-i18n="clothTitle">The bunch book</h2>
+        </div>
+        <div class="seg filter" role="group" aria-label="Season" data-i18n-aria="seasonAria" data-season></div>
+      </div>
+      <div class="cloth-grid" data-cloth-grid></div>
+    </section>
+
+    <section class="gallery" aria-label="From the workroom" data-i18n-aria="galleryAria">
+      <figure><img src="https://images.unsplash.com/photo-1580657018950-c7f7d6a6d990?auto=format&fit=crop&w=900&q=70" alt="Two tweed jackets on tailor's dummies" data-i18n-alt="g1" loading="lazy"></figure>
+      <figure><img src="https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=900&q=70" alt="A dark suit with a silver tie on a stand" data-i18n-alt="g2" loading="lazy"></figure>
+      <figure><img src="https://images.unsplash.com/photo-1593032465175-481ac7f401a0?auto=format&fit=crop&w=900&q=70" alt="A bottle-green suit, buttoned" data-i18n-alt="g3" loading="lazy"></figure>
+      <figure><img src="https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?auto=format&fit=crop&w=900&q=70" alt="A navy checked jacket and tie" data-i18n-alt="g4" loading="lazy"></figure>
+    </section>
+
+    <section class="fitting" id="fitting" aria-labelledby="fitting-title">
+      <div class="fit-copy">
+        <p class="kicker" data-i18n="fitKicker">Fittings</p>
+        <h2 id="fitting-title" data-i18n="fitTitle">Come and stand on the box</h2>
+        <p class="muted" data-i18n="fitText">Tuesday to Saturday. A first visit takes an hour: we measure, talk, and you leave with your cloth chosen.</p>
+        <div class="carry" data-carry></div>
+        <div class="mine" data-mine></div>
+      </div>
+      <form class="fit-form" data-fit novalidate>
+        <span class="f-label" data-i18n="visitType">Visit</span>
+        <div class="seg" data-visit></div>
+        <span class="f-label" data-i18n="day">Day</span>
+        <div class="days" data-days></div>
+        <span class="f-label" data-i18n="time">Time</span>
+        <div class="slots" data-slots></div>
+        <div class="fields">
+          <label><span data-i18n="fName">Name</span><input name="name" autocomplete="name"></label>
+          <label><span data-i18n="fPhone">Phone</span><input name="phone" type="tel" autocomplete="tel"></label>
+          <label class="wide"><span data-i18n="fEmail">Email</span><input name="email" type="email" autocomplete="email"></label>
+        </div>
+        <p class="form-note" data-fit-note role="alert"></p>
+        <button class="btn btn-wide" type="submit" data-i18n="confirm">Confirm the visit</button>
+      </form>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p data-i18n="footer">Atelier · fictional studio, real craft.</p>
-    <p><a href="contact.html" data-i18n="start">Start a batch</a></p>
+    <div>
+      <span class="logo small"><span class="logo-m">M</span>Moura</span>
+      <p class="muted">Rua dos Fanqueiros 00, 1100-000 Lisboa · +351 21 000 0333</p>
+    </div>
+    <p class="muted" data-i18n="footerLine">A fictional tailor. Cloth names, prices and the house are made up.</p>
+    <a href="../../" data-i18n="moreDemos">More demos</a>
   </footer>
-
-  <aside class="demo-badge" data-i18n-aria="demo">
-    <span>Demo</span>
-    <a href="index.html" data-i18n="demoLink">I build sites like this</a>
-  </aside>
 
   <script src="js/i18n.js"></script>
   <script src="js/lang.js"></script>

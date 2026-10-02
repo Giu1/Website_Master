@@ -18,14 +18,14 @@ Always serve from the repo root. The hub, the sibling links between demos, and t
 
 | Folder | Site | Kind | Language |
 | --- | --- | --- | --- |
-| `sites/atelier/` | Atelier | Hub / sales studio, links to the other demos | EN + PT-PT |
+| `sites/atelier/` | Atelier Moura | Bespoke tailor: live jacket designer, cloth book, fitting bookings | EN + PT-PT |
 | `sites/lumen/` | Lumen | Photographer: viewfinder hero, light table, lightbox loupe, date check | EN + PT-PT |
 | `sites/osteria/` | Osteria Corvo | Restaurant: set menu with pairing, cellar, live table reservations | EN + PT-PT |
 | `sites/vela/` | Vela | Perfume: drawn living bottle, note layers, wear clock, sample request | EN + PT-PT |
 | `sites/aura/` | Aura | Salon: live availability booking fed by the desk | EN + PT-PT |
 | `sites/nido/` | Nido | Bakery: live tray and bake times, pre-order basket, weekend sign-ups, catering calculator | EN + PT-PT |
 | `sites/brightline/` | Brightline | Home cleaning: instant quote, area check, live booking | EN + PT-PT |
-| `sites/aura-desk/` | Aura Desk | Working backoffice demo: requests, bookings, services, team, hours, copy (login `demo` / `demo`) | EN + PT-PT |
+| `sites/aura-desk/` | Aura Desk | Working backoffice demo: requests, bookings, clients, insights, services, team and days off, hours, copy (login `demo` / `demo`) | EN + PT-PT |
 | `sites/forma/` | FORMA | 3D-print shop: catalog, cart, checkout, quote | PT-PT, PT-BR, ES, EN |
 | `sites/pulse/` | PULSE | Motion portfolio template (hidden from the hub: `hidden: true` in `js/data.js`) | PT + EN |
 | `sites/folio/` | Folio | Design-engineer portfolio template (Three.js stage) | EN |
@@ -48,18 +48,18 @@ To add a site, put it in `sites/<name>/`, then copy a project block in `js/data.
 
 ## Rules
 
-- **Each site is fully contained in its own folder.** No shared build and no imports across folders. The only links between sites are relative links between siblings (`../atelier/`, `../aura-desk/`), so keep all sites directly inside `sites/`.
+- **Each site is fully contained in its own folder.** No shared build and no imports across folders. The only links between sites are relative links between siblings (`../aura/`, `../aura-desk/`) and back to the hub (`../../`), so keep all sites directly inside `sites/`.
 - Forms stay on the page. There is no backend.
 - PT copy is Portugal Portuguese: *contacto, equipa, guardar, telemóvel, ementa*. Never *contato, salvar, celular, cardápio*.
 
 ### Showcase demos (atelier … aura-desk)
 
-- `js/i18n.js` is copied into all eight sites. If you change it, copy the new version into every site.
+- `js/i18n.js` is copied into all eight sites (and lucas, lucas-folio). If you change it, copy the new version into every site.
 - Language preference is shared across these sites via `localStorage["portfolio-lang"]`.
 - `sites/aura/js/store.js` and `sites/aura-desk/js/store.js` must stay identical. They share `localStorage["aura-demo-store-v2"]` and update each other live across tabs.
 - Script order: `store.js` (if any) → `i18n.js` → `lang.js` → `main.js` / `app.js`.
 - Mobile-first: test at 390×844 and check there is no horizontal scroll. Wrap entrance animations in `@media (prefers-reduced-motion: no-preference)`.
-- Vela's hero must stay vertically centred on small screens. Don't add a grain overlay back to Atelier: it hid the cream text.
+- Vela's hero must stay vertically centred on small screens. Demo footers link back to the hub as "More demos".
 
 ### Known leftovers
 

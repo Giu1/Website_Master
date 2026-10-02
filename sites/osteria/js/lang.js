@@ -74,7 +74,7 @@ window.SITE_I18N = {
     closed: "Closed",
     kitchenCloses: "Kitchen closes",
     footerLine: "A fictional restaurant. Photographs from Unsplash.",
-    backAtelier: "Made by Atelier",
+    backAtelier: "More demos",
     d0: "Sun", d1: "Mon", d2: "Tue", d3: "Wed", d4: "Thu", d5: "Fri", d6: "Sat",
     months: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
   },
@@ -153,7 +153,7 @@ window.SITE_I18N = {
     closed: "Fechado",
     kitchenCloses: "A cozinha fecha",
     footerLine: "Um restaurante fictício. Fotografias do Unsplash.",
-    backAtelier: "Feito pelo Atelier",
+    backAtelier: "Mais demos",
     d0: "Dom", d1: "Seg", d2: "Ter", d3: "Qua", d4: "Qui", d5: "Sex", d6: "Sáb",
     months: "jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez"
   }

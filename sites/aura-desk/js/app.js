@@ -28,6 +28,15 @@
     var d = new Date(iso + "T12:00:00");
     return t("d" + d.getDay()) + " " + d.getDate() + " " + t("months").split(",")[d.getMonth()];
   }
+  function shortDay(iso) { var d = new Date(iso + "T12:00:00"); return d.getDate() + " " + t("months").split(",")[d.getMonth()]; }
+  function price(data, b) { var s = S.service(data, b.service); return s ? s.price : 0; }
+  function mins(data, b) { var s = S.service(data, b.service); return s ? s.duration : 30; }
+  /** ISO dates Monday..Sunday of the week `weeks` away from this one. */
+  function weekDays(weeks) {
+    var wd = new Date().getDay(), monday = -((wd + 6) % 7) + weeks * 7, out = [];
+    for (var i = 0; i < 7; i++) out.push(S.isoDay(monday + i));
+    return out;
+  }
   function when(b) { return dayLabel(b.date) + ", " + b.time; }
   function svcName(data, id) { var s = S.service(data, id); return s ? txt(s.name) : id; }
   function staffName(data, id) { var m = S.member(data, id); return m ? m.name : "—"; }
@@ -93,7 +102,7 @@
 
   /* ───────── views ───────── */
 
-  var VIEWS = ["today", "requests", "bookings", "services", "team", "hours", "site"];
+  var VIEWS = ["today", "requests", "bookings", "clients", "insights", "services", "team", "hours", "site"];
   var view = VIEWS.indexOf(location.hash.slice(1)) !== -1 ? location.hash.slice(1) : "today";
 
   function show(name) {
@@ -137,7 +146,7 @@
     var hours = data.hours[S.weekday(iso)];
     if (!hours) { box.innerHTML = '<p class="empty">' + esc(t("closedDay")) + "</p>"; return; }
     var open = S.toMin(hours.open), close = S.toMin(hours.close), span = close - open;
-    var people = data.staff.filter(function (m) { return m.days.indexOf(S.weekday(iso)) !== -1; });
+    var people = data.staff.filter(function (m) { return S.worksOn(m, iso); });
     var rows = "";
     for (var h = Math.ceil(open / 60) * 60; h < close; h += 60) {
       rows += '<span class="tl-hour" style="top:' + ((h - open) / span * 100) + '%">' + S.toHHMM(h) + "</span>";
@@ -321,6 +330,7 @@
 
   function paintTeam(data) {
     if (view !== "team") return;
+    var week = weekDays(0), today = S.isoDay(0);
     $("[data-team]").innerHTML = data.staff.map(function (m) {
       var days = [1, 2, 3, 4, 5, 6, 0].map(function (d) {
         return '<label class="day-chip"><input type="checkbox" data-day="' + d + '"' + (m.days.indexOf(d) !== -1 ? " checked" : "") + "><span>" + esc(t("d" + d)) + "</span></label>";
@@ -328,21 +338,45 @@
       var svcs = data.services.map(function (s) {
         return '<label class="svc-chip"><input type="checkbox" data-does="' + esc(s.id) + '"' + (m.services.indexOf(s.id) !== -1 ? " checked" : "") + "><span>" + esc(txt(s.name)) + "</span></label>";
       }).join("");
+      var load = staffLoad(data, m, week);
+      var off = (m.off || []).filter(function (iso) { return iso >= today; }).sort();
+      var offChips = off.length ? off.map(function (iso) {
+        return '<span class="off-chip">' + esc(dayLabel(iso)) + '<button type="button" data-del-off="' + iso + '" aria-label="' + esc(t("remove")) + '">✕</button></span>';
+      }).join("") : '<span class="muted small">' + esc(t("noOff")) + "</span>";
       return '<article class="card person-edit" data-staff="' + esc(m.id) + '" style="--accent:' + esc(m.color) + '">' +
         '<div class="pe-head"><span class="avatar">' + esc(m.name.split(" ").map(function (w) { return w[0]; }).join("").slice(0, 2)) + "</span>" +
-        '<input class="pe-name" data-f="name" value="' + esc(m.name) + '" aria-label="' + esc(t("name")) + '">' +
+        '<div class="pe-id"><input class="pe-name" data-f="name" value="' + esc(m.name) + '" aria-label="' + esc(t("name")) + '">' +
+        '<span class="pe-week">' + esc(t("weekLine", { n: load.count, p: load.pct })) + "</span></div>" +
         '<label class="colour"><span class="sr-only">' + esc(t("colour")) + '</span><input type="color" data-f="color" value="' + esc(m.color) + '"></label>' +
         '<button class="icon-btn danger" type="button" data-del-staff="' + esc(m.id) + '" aria-label="' + esc(t("remove")) + '">✕</button></div>' +
+        '<div class="meter" aria-hidden="true"><span style="width:' + Math.min(100, load.pct) + '%"></span></div>' +
         '<div class="pe-roles"><label><span>' + esc(t("roleEn")) + '</span><input data-f="role.en" value="' + esc(m.role.en) + '"></label>' +
         '<label><span>' + esc(t("rolePt")) + '</span><input data-f="role.pt" value="' + esc(m.role.pt) + '"></label></div>' +
         '<p class="pe-label">' + esc(t("worksOn")) + '</p><div class="chips">' + days + "</div>" +
-        '<p class="pe-label">' + esc(t("does")) + '</p><div class="chips">' + svcs + "</div></article>";
+        '<p class="pe-label">' + esc(t("does")) + '</p><div class="chips">' + svcs + "</div>" +
+        '<p class="pe-label">' + esc(t("timeOff")) + '</p><div class="chips off-list">' + offChips + "</div>" +
+        '<div class="off-add"><input type="date" data-off-date min="' + today + '" aria-label="' + esc(t("offAria")) + '"><button class="btn btn-mini btn-ghost" type="button" data-add-off>' + esc(t("addOff")) + "</button></div>" +
+        '<p class="form-status small" data-off-status role="status"></p></article>';
     }).join("");
+  }
+
+  /** Bookings and the share of working minutes booked for one stylist over some days. */
+  function staffLoad(data, m, days) {
+    var avail = 0, booked = 0, count = 0;
+    days.forEach(function (iso) {
+      var h = data.hours[S.weekday(iso)];
+      if (!h || !S.worksOn(m, iso)) return;
+      avail += S.toMin(h.close) - S.toMin(h.open);
+      data.bookings.forEach(function (b) {
+        if (b.staff === m.id && b.date === iso && b.status !== "cancelled") { booked += mins(data, b); count++; }
+      });
+    });
+    return { count: count, booked: booked, avail: avail, pct: avail ? Math.round(booked / avail * 100) : 0 };
   }
 
   $("[data-team]").addEventListener("input", function (e) {
     var card = e.target.closest("[data-staff]");
-    if (!card) return;
+    if (!card || e.target.hasAttribute("data-off-date")) return;   // the day-off picker saves on "Add"
     var id = card.getAttribute("data-staff");
     var el = e.target;
     var apply = function (d) {
@@ -376,12 +410,172 @@
     if (name) { name.focus(); name.select(); }
   });
   $("[data-team]").addEventListener("click", function (e) {
+    var card = e.target.closest("[data-staff]");
+    var addOff = e.target.closest("[data-add-off]"), delOff = e.target.closest("[data-del-off]");
+    if (card && (addOff || delOff)) {
+      var id = card.getAttribute("data-staff"), data = S.load(), m = S.member(data, id), note = $("[data-off-status]", card);
+      if (delOff) {
+        var gone = delOff.getAttribute("data-del-off");
+        S.update(function (d) { var x = S.member(d, id); x.off = (x.off || []).filter(function (v) { return v !== gone; }); });
+      } else {
+        var iso = $("[data-off-date]", card).value;
+        if (!iso) return;
+        if ((m.off || []).indexOf(iso) !== -1) { note.textContent = t("offExists"); return; }
+        if (m.days.indexOf(S.weekday(iso)) === -1 || !data.hours[S.weekday(iso)]) { note.textContent = t("offClosed"); return; }
+        var clash = data.bookings.filter(function (b) { return b.staff === id && b.date === iso && b.status !== "cancelled"; }).length;
+        if (clash) { note.textContent = t("offClash", { n: clash }); return; }
+        S.update(function (d) { var x = S.member(d, id); x.off = (x.off || []).concat(iso); });
+      }
+      paintTeam(S.load());
+      return;
+    }
     var del = e.target.closest("[data-del-staff]");
     if (!del) return;
     var m = S.member(S.load(), del.getAttribute("data-del-staff"));
     if (!m || !confirm(t("removeStaffAsk", { name: m.name }))) return;
     S.update(function (d) { d.staff = d.staff.filter(function (x) { return x.id !== m.id; }); });
   });
+
+  /* ───────── Clients ───────── */
+
+  var clientQuery = "", openClient = null;
+  function clientKey(b) { return (b.phone || "").replace(/\D/g, "") || b.client.toLowerCase(); }
+  /** One row per client, built from every booking (phone number is the key). */
+  function clientList(data) {
+    var today = S.isoDay(0), map = {};
+    data.bookings.forEach(function (b) {
+      var k = clientKey(b);
+      var c = map[k] || (map[k] = { key: k, name: b.client, phone: b.phone, visits: 0, spent: 0, last: "", next: null, first: b.date, list: [], svc: {} });
+      c.list.push(b);
+      if (b.date < c.first) c.first = b.date;
+      if (b.status === "cancelled") return;
+      if (b.date < today || b.status === "done") {
+        c.visits++;
+        c.spent += price(data, b);
+        if (b.date > c.last) { c.last = b.date; c.name = b.client; }
+        c.svc[b.service] = (c.svc[b.service] || 0) + 1;
+      } else if (!c.next || b.date + b.time < c.next.date + c.next.time) {
+        c.next = b;
+      }
+    });
+    return Object.keys(map).map(function (k) {
+      var c = map[k];
+      c.usual = Object.keys(c.svc).sort(function (a, b) { return c.svc[b] - c.svc[a]; })[0] || (c.next && c.next.service) || "";
+      c.list.sort(function (a, b) { return (b.date + b.time).localeCompare(a.date + a.time); });
+      return c;
+    }).sort(function (a, b) { return b.spent - a.spent || a.name.localeCompare(b.name); });
+  }
+
+  function paintClients(data) {
+    if (view !== "clients") return;
+    var q = clientQuery.trim().toLowerCase(), qDigits = q.replace(/\s/g, "");
+    var list = clientList(data).filter(function (c) {
+      return !q || c.name.toLowerCase().indexOf(q) !== -1 || (qDigits && (c.phone || "").replace(/\s/g, "").indexOf(qDigits) !== -1);
+    });
+    var top = list.length ? Math.max.apply(null, list.map(function (c) { return c.spent; })) : 0;
+    $("[data-clients]").innerHTML = list.length
+      ? '<table class="table"><thead><tr><th>' + esc(t("cName")) + "</th><th>" + esc(t("cVisits")) + "</th><th>" + esc(t("cLast")) + "</th><th>" + esc(t("cNext")) + "</th><th>" + esc(t("cUsual")) + '</th><th class="num">' + esc(t("cSpent")) + "</th></tr></thead><tbody>" +
+        list.map(function (c) {
+          return '<tr class="row-link' + (openClient === c.key ? " is-open" : "") + '" data-client="' + esc(c.key) + '" tabindex="0">' +
+            '<td><span class="c-name">' + esc(c.name) + '</span><span class="muted small">' + esc(c.phone || "") + "</span></td>" +
+            "<td>" + c.visits + "</td><td>" + esc(c.last ? shortDay(c.last) : t("never")) + "</td>" +
+            "<td>" + (c.next ? '<span class="pill st-' + c.next.status + '">' + esc(shortDay(c.next.date) + " " + c.next.time) + "</span>" : esc(t("never"))) + "</td>" +
+            "<td>" + esc(c.usual ? svcName(data, c.usual) : "—") + "</td>" +
+            '<td class="num"><span class="spend" aria-hidden="true"><span style="width:' + (top ? Math.round(c.spent / top * 100) : 0) + '%"></span></span>' + c.spent + " €</td></tr>";
+        }).join("") + "</tbody></table>"
+      : '<p class="empty">' + esc(t("noClients")) + "</p>";
+    paintClientPanel(data, list);
+  }
+
+  function paintClientPanel(data, list) {
+    var panel = $("[data-client-panel]");
+    var c = openClient && list.filter(function (x) { return x.key === openClient; })[0];
+    panel.hidden = !c;
+    if (!c) return;
+    var seen = c.list.filter(function (b) { return b.status !== "cancelled"; }).map(function (b) { return new Date(b.date + "T12:00:00").getTime(); }).sort();
+    var gap = seen.length > 1 ? Math.round((seen[seen.length - 1] - seen[0]) / 864e5 / (seen.length - 1)) : 0;
+    panel.innerHTML = '<div class="cp-head"><span class="avatar">' + esc(c.name.split(" ").map(function (w) { return w[0]; }).join("").slice(0, 2)) + "</span>" +
+      "<div><h2>" + esc(c.name) + '</h2><p class="muted small">' + esc(c.phone || "") + "</p></div>" +
+      '<button class="icon-btn" type="button" data-close-client aria-label="' + esc(t("closePanel")) + '">✕</button></div>' +
+      '<dl class="cp-stats"><div><dt>' + esc(t("cVisits")) + "</dt><dd>" + c.visits + "</dd></div><div><dt>" + esc(t("cSpent")) + "</dt><dd>" + c.spent + " €</dd></div></dl>" +
+      '<p class="small muted">' + esc(c.visits ? t("cSince", { date: shortDay(c.first) }) : t("cNew")) + (gap ? " · " + esc(t("cEvery", { n: gap })) : "") + "</p>" +
+      '<button class="btn" type="button" data-book-again="' + esc(c.key) + '">' + esc(t("bookAgain")) + "</button>" +
+      '<h3 class="pe-label">' + esc(t("cHistory")) + '</h3><ol class="cp-history">' + c.list.map(function (b) {
+        var m = S.member(data, b.staff);
+        return '<li style="--accent:' + esc(m ? m.color : "#999") + '"><span class="cp-date">' + esc(shortDay(b.date)) + " · " + esc(b.time) + "</span>" +
+          "<span>" + esc(svcName(data, b.service)) + " · " + esc(staffName(data, b.staff)) + '</span><span class="pill st-' + b.status + '">' + esc(t("st." + b.status)) + "</span></li>";
+      }).join("") + "</ol>";
+  }
+
+  $("[data-client-search]").addEventListener("input", function (e) { clientQuery = e.target.value; paintClients(S.load()); });
+  function pickClient(row) {
+    var key = row.getAttribute("data-client");
+    openClient = openClient === key ? null : key;
+    paintClients(S.load());
+  }
+  $("[data-clients]").addEventListener("click", function (e) { var row = e.target.closest("[data-client]"); if (row) pickClient(row); });
+  $("[data-clients]").addEventListener("keydown", function (e) {
+    var row = e.target.closest("[data-client]");
+    if (row && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); pickClient(row); }
+  });
+  $("[data-client-panel]").addEventListener("click", function (e) {
+    if (e.target.closest("[data-close-client]")) { openClient = null; paintClients(S.load()); return; }
+    var again = e.target.closest("[data-book-again]");
+    if (!again) return;
+    var data = S.load(), c = clientList(data).filter(function (x) { return x.key === again.getAttribute("data-book-again"); })[0];
+    if (!c) return;
+    var last = c.list.filter(function (b) { return b.status !== "cancelled"; })[0] || c.list[0];
+    openDialog({ client: c.name, phone: c.phone, service: c.usual || last.service, staff: last.staff });
+  });
+
+  /* ───────── Insights ───────── */
+
+  function paintInsights(data) {
+    if (view !== "insights") return;
+    var today = S.isoDay(0), from = S.isoDay(-42), ahead = S.isoDay(14);
+    var past = data.bookings.filter(function (b) { return b.date >= from && b.date < today; });
+    var done = past.filter(function (b) { return b.status !== "cancelled"; });
+    var revenue = done.reduce(function (s, b) { return s + price(data, b); }, 0);
+    var web = done.filter(function (b) { return b.source === "site"; }).length;
+    var next = data.bookings.filter(function (b) { return b.date >= today && b.date <= ahead && b.status !== "cancelled"; });
+    $("[data-insight-kpis]").innerHTML =
+      kpi(t("iRevenue"), revenue + " €") +
+      kpi(t("iVisits"), done.length, "", "", t("iCancel") + ": " + (past.length - done.length)) +
+      kpi(t("iAvg"), (done.length ? Math.round(revenue / done.length) : 0) + " €") +
+      kpi(t("iWeb"), (done.length ? Math.round(web / done.length * 100) : 0) + "%") +
+      kpi(t("iAhead"), next.length, "", "bookings", t("iAheadNote", { n: next.length, sum: next.reduce(function (s, b) { return s + price(data, b); }, 0) }));
+
+    // revenue per week: six finished weeks and this one so far
+    var weeks = [];
+    for (var w = -6; w <= 0; w++) {
+      var ds = weekDays(w);
+      var sum = data.bookings.filter(function (b) {
+        return b.date >= ds[0] && b.date <= ds[6] && b.status !== "cancelled" && (b.date < today || b.status === "done");
+      }).reduce(function (s, b) { return s + price(data, b); }, 0);
+      weeks.push({ label: t("weekOf", { date: shortDay(ds[0]) }), sum: sum, now: w === 0 });
+    }
+    var max = Math.max.apply(null, weeks.map(function (x) { return x.sum; })) || 1;
+    $("[data-weekly]").innerHTML = weeks.map(function (x) {
+      return '<div class="bar' + (x.now ? " now" : "") + '"><span class="bar-val">' + x.sum + ' €</span><span class="bar-track"><span class="bar-fill" style="height:' + Math.max(2, Math.round(x.sum / max * 100)) + '%"></span></span><span class="bar-label">' + esc(x.label) + "</span></div>";
+    }).join("");
+
+    // most booked services
+    var counts = {};
+    done.forEach(function (b) { counts[b.service] = (counts[b.service] || 0) + 1; });
+    var top = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; }).slice(0, 6);
+    var tmax = top.length ? counts[top[0]] : 1;
+    $("[data-top]").innerHTML = top.map(function (id) {
+      return '<div class="hbar"><span class="hbar-name">' + esc(svcName(data, id)) + '</span><span class="hbar-track"><span style="width:' + Math.round(counts[id] / tmax * 100) + '%"></span></span><span class="hbar-val">' + counts[id] + "</span></div>";
+    }).join("");
+
+    // chair time this week per stylist
+    var week = weekDays(0);
+    $("[data-load]").innerHTML = data.staff.map(function (m) {
+      var l = staffLoad(data, m, week);
+      return '<div class="hbar load-row" style="--accent:' + esc(m.color) + '"><span class="hbar-name">' + esc(m.name) + '</span><span class="hbar-track"><span style="width:' + Math.min(100, l.pct) + '%"></span></span>' +
+        '<span class="hbar-val">' + l.pct + "% · " + String(Math.round(l.booked / 6) / 10).replace(".", I18N.lang === "pt" ? "," : ".") + " / " + Math.round(l.avail / 60) + " h</span></div>";
+    }).join("");
+  }
 
   /* ───────── Hours ───────── */
 
@@ -462,17 +656,23 @@
       : '<option value="">' + esc(t("noFreeTimes")) + "</option>";
   }
 
-  $$("[data-new-booking]").forEach(function (b) {
-    b.addEventListener("click", function () {
-      dform.reset();
-      $("[data-dlg-service]").innerHTML = "";
-      $("[data-dlg-date]").value = "";
-      $("[data-dlg-status]").textContent = "";
-      fillDialog();
-      dlg.showModal();
-      dform.elements.client.focus();
-    });
-  });
+  function openDialog(prefill) {
+    dform.reset();
+    $("[data-dlg-service]").innerHTML = "";
+    $("[data-dlg-date]").value = "";
+    $("[data-dlg-status]").textContent = "";
+    fillDialog();
+    if (prefill) {
+      var f = dform.elements;
+      f.client.value = prefill.client || "";
+      f.phone.value = prefill.phone || "";
+      if (prefill.service) { f.service.value = prefill.service; fillDialog(); }
+      if (prefill.staff && [].some.call(f.staff.options, function (o) { return o.value === prefill.staff; })) { f.staff.value = prefill.staff; fillDialog(); }
+    }
+    dlg.showModal();
+    (prefill ? dform.elements.date : dform.elements.client).focus();
+  }
+  $$("[data-new-booking]").forEach(function (b) { b.addEventListener("click", function () { openDialog(); }); });
   dform.addEventListener("change", function (e) { if (e.target.name !== "time" && e.target.name !== "client") fillDialog(); });
   $("[data-dlg-cancel]").addEventListener("click", function () { dlg.close(); });
   dform.addEventListener("submit", function (e) {
@@ -508,6 +708,8 @@
     paintRequests(data);
     if (view === "today") { paintToday(data); paintGuide(); }
     paintBookings(data);
+    paintClients(data);
+    paintInsights(data);
     paintServices(data);
     paintTeam(data);
     paintHours(data);

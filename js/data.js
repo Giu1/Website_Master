@@ -17,14 +17,14 @@ window.FOLIO = {
   projects: [
     {
       slug: "atelier",
-      title: "Atelier",
+      title: "Atelier Moura",
       featured: true,
       year: "2026",
       client: "showcase",
       url: "sites/atelier/",
       awards: 0,
-      summary: "Sales studio for the handmade sites. Dark, Syne and Manrope.",
-      media: [{ w: 16, h: 9, src: "img/arquivo.jpg", kind: "serif", word: "Atelier", colors: ["#141414", "#3a3228"], ink: "#f3efe6", caption: "Studio" }]
+      summary: "Bespoke tailor. Draw your jacket live, browse the cloth, book a fitting.",
+      media: [{ w: 16, h: 9, src: "img/arquivo.jpg", kind: "serif", word: "Moura", colors: ["#141414", "#3a3228"], ink: "#f3efe6", caption: "Tailor" }]
     },
     {
       slug: "lumen",
@@ -34,7 +34,7 @@ window.FOLIO = {
       client: "showcase",
       url: "sites/lumen/",
       awards: 0,
-      summary: "Photographer lookbook. Near-black, a horizontal rail, almost no copy.",
+      summary: "Photographer's light table. Viewfinder hero, filterable frames, loupe lightbox.",
       media: [{ w: 16, h: 9, src: "img/bruma.jpg", kind: "sans", word: "LUMEN", colors: ["#0c0c0c", "#2c2c2c"], ink: "#f5f5f5", caption: "Lookbook" }]
     },
     {
@@ -45,7 +45,7 @@ window.FOLIO = {
       client: "showcase",
       url: "sites/osteria/",
       awards: 0,
-      summary: "A restaurant told as one service. Paper and editorial type.",
+      summary: "One menu, two sittings. Wine pairing, cellar and live seat counts.",
       media: [{ w: 16, h: 9, src: "img/calma.jpg", kind: "serif", word: "Corvo", colors: ["#f4efe6", "#8c3a2f"], ink: "#2a1410", caption: "Restaurant" }]
     },
     {
@@ -56,7 +56,7 @@ window.FOLIO = {
       client: "showcase",
       url: "sites/vela/",
       awards: 0,
-      summary: "One perfume, Night Bloom. Night purple, type first.",
+      summary: "One perfume, a drawn bottle that takes each note's colour, and a wear clock.",
       media: [{ w: 16, h: 9, src: "img/nuno.jpg", kind: "serif", word: "Vela", colors: ["#1a1028", "#6b4c8a"], ink: "#f4eef8", caption: "Perfume" }]
     },
     {
@@ -67,7 +67,7 @@ window.FOLIO = {
       client: "showcase",
       url: "sites/aura/",
       awards: 0,
-      summary: "Salon in Chiado. Cream pages, booking, team, and gallery.",
+      summary: "Salon in Chiado. Live booking fed by Aura Desk.",
       media: [{ w: 16, h: 9, src: "img/costa.jpg", kind: "serif", word: "Aura", colors: ["#f6f1e8", "#c4a48a"], ink: "#2c211c", caption: "Salon" }]
     },
     {
@@ -78,7 +78,7 @@ window.FOLIO = {
       client: "showcase",
       url: "sites/nido/",
       awards: 0,
-      summary: "Bakery. Warm cocoa, menu, events, and catering.",
+      summary: "Bakery on the clock. Stock sells through the morning; pre-order for pick-up.",
       media: [{ w: 16, h: 9, src: "img/mare.jpg", kind: "serif", word: "Nido", colors: ["#3a2418", "#e6c39a"], ink: "#f8f1e6", caption: "Bakery" }]
     },
     {
@@ -89,7 +89,7 @@ window.FOLIO = {
       client: "showcase",
       url: "sites/brightline/",
       awards: 0,
-      summary: "Home cleaning. Sage pages, services, and a quote form.",
+      summary: "Home cleaning. Instant quote, area check, booking by crew size.",
       media: [{ w: 16, h: 9, src: "img/estacao.jpg", kind: "sans", word: "BRIGHT", colors: ["#e7f0e4", "#3d6b52"], ink: "#163024", caption: "Cleaning" }]
     },
     {
@@ -100,7 +100,7 @@ window.FOLIO = {
       client: "showcase",
       url: "sites/aura-desk/",
       awards: 0,
-      summary: "Backoffice for Aura. Login demo / demo.",
+      summary: "Aura's backoffice: requests, clients, insights, team and days off. Login demo / demo.",
       media: [{ w: 16, h: 9, src: "img/largo.jpg", kind: "stack", word: "AURA\nDESK", colors: ["#111318", "#2a3140"], ink: "#e8eef8", caption: "Desk" }]
     },
     {

@@ -137,7 +137,7 @@ window.SITE_I18N = {
     faqKicker: "FAQ",
     faqTitle: "Before you book",
     footerLine: "A fictional cleaning company. Prices and reviews are examples.",
-    backAtelier: "Made by Atelier",
+    backAtelier: "More demos",
     d0: "Sun", d1: "Mon", d2: "Tue", d3: "Wed", d4: "Thu", d5: "Fri", d6: "Sat",
     m0: "Jan", m1: "Feb", m2: "Mar", m3: "Apr", m4: "May", m5: "Jun", m6: "Jul", m7: "Aug", m8: "Sep", m9: "Oct", m10: "Nov", m11: "Dec"
   },
@@ -279,7 +279,7 @@ window.SITE_I18N = {
     faqKicker: "Perguntas",
     faqTitle: "Antes de marcar",
     footerLine: "Uma empresa de limpezas fictícia. Preços e opiniões são exemplos.",
-    backAtelier: "Feito pelo Atelier",
+    backAtelier: "Mais demos",
     d0: "Dom", d1: "Seg", d2: "Ter", d3: "Qua", d4: "Qui", d5: "Sex", d6: "Sáb",
     m0: "jan", m1: "fev", m2: "mar", m3: "abr", m4: "mai", m5: "jun", m6: "jul", m7: "ago", m8: "set", m9: "out", m10: "nov", m11: "dez"
   }

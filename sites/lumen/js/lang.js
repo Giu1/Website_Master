@@ -63,7 +63,7 @@ window.SITE_I18N = {
     errEmail: "Please add an email I can answer.",
     sent: "Thank you, {name} — your enquiry for {date} is noted. (Demo: nothing was sent.)",
     footerLine: "A fictional studio. Photographs from Unsplash.",
-    backAtelier: "Made by Atelier",
+    backAtelier: "More demos",
     months: "January,February,March,April,May,June,July,August,September,October,November,December"
   },
   pt: {
@@ -130,7 +130,7 @@ window.SITE_I18N = {
     errEmail: "Indique um email para eu responder.",
     sent: "Obrigada, {name} — o seu pedido para {date} ficou registado. (Demo: nada foi enviado.)",
     footerLine: "Um estúdio fictício. Fotografias do Unsplash.",
-    backAtelier: "Feito pelo Atelier",
+    backAtelier: "Mais demos",
     months: "janeiro,fevereiro,março,abril,maio,junho,julho,agosto,setembro,outubro,novembro,dezembro"
   }
 };
