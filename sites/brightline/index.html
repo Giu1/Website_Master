@@ -3,70 +3,169 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brightline — homes left brighter</title>
-  <meta name="description" content="Fictional home cleaning in Lisboa. Click to call, service pages, quotes, trust.">
+  <title>Brightline — home cleaning in Lisboa, priced in seconds</title>
+  <meta name="description" content="Fictional home cleaning service in Lisboa, Oeiras and Almada. Instant price, live booking, a 48-hour come-back guarantee.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
-  <div class="topbar">
-    <span data-i18n="top">Lisboa &amp; nearby · insured team</span>
-    <a href="tel:+351210000222" data-i18n="call">Call +351 21 000 222</a>
-  </div>
+
+  <p class="topbar"><span data-i18n="topbar">Call or WhatsApp, 8:00–20:00</span> <a href="tel:+351210000222">+351 21 000 0222</a></p>
+
   <header class="site-header">
-    <a class="logo" href="index.html">Brightline</a>
-    <div class="header-tools">
-      <div class="lang" role="group" data-i18n-aria="lang">
+    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"></span>Brightline</a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#included" data-i18n="navIncluded">What's included</a>
+      <a href="#areas" data-i18n="navAreas">Areas</a>
+      <a href="#reviews" data-i18n="navReviews">Reviews</a>
+      <a href="#faq" data-i18n="navFaq">FAQ</a>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Language" data-i18n-aria="lang">
         <button type="button" data-lang="en">EN</button>
         <button type="button" data-lang="pt">PT</button>
       </div>
+      <a class="btn btn-small" href="#book" data-i18n="bookNow">Book</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
     </div>
-    <nav id="nav" class="nav">
-      <a href="index.html" aria-current="page" data-i18n="navHome">Home</a>
-      <a href="services.html" data-i18n="navServices">Services</a>
-      <a href="areas.html" data-i18n="navAreas">Areas</a>
-      <a href="quote.html" data-i18n="navQuote">Quote</a>
-      <a href="contact.html" data-i18n="navContact">Contact</a>
-    </nav>
   </header>
+
   <main id="main">
-    <section class="hero">
-      <div>
-        <p data-i18n="slot">Home cleaning · same-week slots</p>
-        <h1 data-i18n="hero">A house you can walk into after work.</h1>
-        <p class="lede" data-i18n="lede">Fictional crew, real pattern: call, book a room count, we leave the keys where you asked.</p>
-        <div class="actions">
-          <a class="btn" href="tel:+351210000222" data-i18n="callNow">Call now</a>
-          <a class="btn btn-ghost" href="quote.html" data-i18n="quote">Get a quote</a>
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span> <span data-i18n="rating">4.9 from 1,240 cleans</span></p>
+        <h1 data-i18n="heroTitle">A spotless home, <span>priced in ten seconds.</span></h1>
+        <p class="lede" data-i18n="heroLede">Vetted, insured cleaners who bring everything. Tell us about your home and see the price straight away — no calls, no surprises.</p>
+        <ul class="ticks">
+          <li data-i18n="tick1">Same crew every visit</li>
+          <li data-i18n="tick2">Eco products included</li>
+          <li data-i18n="tick3">Not right? We come back free within 48 h</li>
+        </ul>
+      </div>
+
+      <form class="quote" data-quote aria-labelledby="quote-title" novalidate>
+        <h2 id="quote-title" data-i18n="quoteTitle">Your price</h2>
+        <div class="q-row">
+          <span class="q-label" data-i18n="qService">Service</span>
+          <div class="seg" role="group" data-q="service"></div>
         </div>
-      </div>
-      <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=80" alt="Bright, tidy living room">
+        <div class="q-row two">
+          <label><span class="q-label" data-i18n="qHome">Home size</span><select data-q-home></select></label>
+          <label><span class="q-label" data-i18n="qBaths">Bathrooms</span>
+            <span class="stepper"><button type="button" data-baths="-1" aria-label="Fewer bathrooms" data-i18n-aria="fewerBaths">−</button><output data-baths-out>1</output><button type="button" data-baths="1" aria-label="More bathrooms" data-i18n-aria="moreBaths">+</button></span>
+          </label>
+        </div>
+        <div class="q-row">
+          <span class="q-label" data-i18n="qFreq">How often</span>
+          <div class="seg" role="group" data-q="freq"></div>
+        </div>
+        <div class="q-row">
+          <span class="q-label" data-i18n="qExtras">Extras</span>
+          <div class="extras" data-q="extras"></div>
+        </div>
+        <div class="q-result" aria-live="polite">
+          <p class="q-price"><span data-price>—</span><small data-price-note></small></p>
+          <p class="q-meta" data-meta></p>
+        </div>
+        <a class="btn btn-wide" href="#book" data-i18n="bookThis">Book this clean</a>
+      </form>
     </section>
-    <section class="band">
-      <div class="trust">
-        <article class="card"><h2 data-i18n="insured">Insured</h2><p data-i18n="insuredC">Named team. No surprise faces on the day.</p></article>
-        <article class="card"><h2 data-i18n="products">Products you pick</h2><p data-i18n="productsC">Scent-free or citrus. We bring both.</p></article>
-        <article class="card"><h2 data-i18n="week">Same week</h2><p data-i18n="weekC">Most first visits land in three to five days.</p></article>
-      </div>
+
+    <section class="strip" aria-label="Photos of recent cleans" data-i18n-aria="stripAria">
+      <figure><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=70" alt="A tidy living room with a yellow armchair" data-i18n-alt="alt1" loading="lazy"></figure>
+      <figure><img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=70" alt="A clean white kitchen with fruit on the counter" data-i18n-alt="alt2" loading="lazy"></figure>
+      <figure><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=70" alt="A bright bathroom with a glass shower" data-i18n-alt="alt3" loading="lazy"></figure>
+      <figure><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=70" alt="A cleaner washing a window" data-i18n-alt="alt4" loading="lazy"></figure>
     </section>
-    <section class="band">
-      <h2 data-i18n="sendFor">What people send us for</h2>
-      <div class="service-list">
-        <a class="card" href="deep-clean.html"><h3 data-i18n="deep">Deep clean</h3><p data-i18n="deepC">The first visit. Baseboards, oven, the room you have been avoiding.</p></a>
-        <a class="card" href="move-out.html"><h3 data-i18n="move">Move-out</h3><p data-i18n="moveC">Deposit photos. We clean to the inventory, not to a vibe.</p></a>
-        <a class="card" href="office.html"><h3 data-i18n="office">Office</h3><p data-i18n="officeC">After hours. Bins, glass, the kitchen no one claims.</p></a>
+
+    <section class="included" id="included" aria-labelledby="included-title">
+      <div class="section-head">
+        <p class="kicker" data-i18n="includedKicker">What's included</p>
+        <h2 id="included-title" data-i18n="includedTitle">Room by room, nothing vague</h2>
       </div>
+      <div class="rooms" role="tablist" aria-label="Rooms" data-i18n-aria="roomsAria" data-rooms></div>
+      <div class="compare" data-compare role="tabpanel"></div>
+    </section>
+
+    <section class="how" aria-labelledby="how-title">
+      <h2 id="how-title" class="sr-only" data-i18n="howTitle">How it works</h2>
+      <ol class="steps">
+        <li><span class="n">1</span><h3 data-i18n="s1">Price it</h3><p data-i18n="s1d">Ten seconds, on this page. The price you see is the price you pay.</p></li>
+        <li><span class="n">2</span><h3 data-i18n="s2">Pick a window</h3><p data-i18n="s2d">Mornings, midday or afternoons, six days a week.</p></li>
+        <li><span class="n">3</span><h3 data-i18n="s3">Come home to it</h3><p data-i18n="s3d">We text when we arrive and send a photo when we leave.</p></li>
+      </ol>
+    </section>
+
+    <section class="areas" id="areas" aria-labelledby="areas-title">
+      <div>
+        <p class="kicker" data-i18n="areasKicker">Areas</p>
+        <h2 id="areas-title" data-i18n="areasTitle">Do we clean near you?</h2>
+        <p class="muted" data-i18n="areasText">Lisboa, Oeiras, Cascais and Almada. Type your postcode.</p>
+        <form class="area-form" data-area novalidate>
+          <label class="sr-only" for="postcode" data-i18n="postcode">Postcode</label>
+          <input id="postcode" name="postcode" inputmode="numeric" placeholder="1200-000" autocomplete="postal-code" data-i18n-placeholder="postcodePh">
+          <button class="btn" type="submit" data-i18n="check">Check</button>
+        </form>
+        <p class="area-result" data-area-result role="status"></p>
+      </div>
+      <ul class="zones" data-zones></ul>
+    </section>
+
+    <section class="book" id="book" aria-labelledby="book-title">
+      <div class="book-copy">
+        <p class="kicker" data-i18n="bookKicker">Book</p>
+        <h2 id="book-title" data-i18n="bookTitle">Pick a day and a window</h2>
+        <p class="muted" data-i18n="bookText">Your quote comes with you. Change anything above and the price here follows.</p>
+        <div class="summary" data-summary></div>
+        <div class="mine" data-mine></div>
+      </div>
+      <form class="book-form" data-book novalidate>
+        <span class="q-label" data-i18n="day">Day</span>
+        <div class="days" data-days></div>
+        <span class="q-label" data-i18n="window">Arrival window</span>
+        <div class="windows" data-windows></div>
+        <div class="fields">
+          <label><span data-i18n="fName">Name</span><input name="name" autocomplete="name"></label>
+          <label><span data-i18n="fPhone">Phone</span><input name="phone" type="tel" autocomplete="tel"></label>
+          <label class="wide"><span data-i18n="fAddress">Address</span><input name="address" autocomplete="street-address"></label>
+        </div>
+        <p class="form-note" data-book-note role="alert"></p>
+        <button class="btn btn-wide" type="submit" data-book-submit></button>
+      </form>
+    </section>
+
+    <section class="reviews" id="reviews" aria-labelledby="reviews-title">
+      <div class="section-head">
+        <p class="kicker" data-i18n="reviewsKicker">Reviews</p>
+        <h2 id="reviews-title" data-i18n="reviewsTitle">Homes we look after</h2>
+      </div>
+      <div class="review-row" data-reviews></div>
+      <aside class="guarantee">
+        <h3 data-i18n="guaranteeTitle">The 48-hour promise</h3>
+        <p data-i18n="guaranteeText">If anything on the checklist isn't right, tell us within 48 hours and we come back to fix it. Free, no forms.</p>
+      </aside>
+    </section>
+
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="section-head">
+        <p class="kicker" data-i18n="faqKicker">FAQ</p>
+        <h2 id="faq-title" data-i18n="faqTitle">Before you book</h2>
+      </div>
+      <div class="faq-list" data-faq></div>
     </section>
   </main>
+
   <footer class="site-footer">
-    <p data-i18n="footer">Brightline · fictional cleaning company</p>
-    <p><a href="tel:+351210000222">+351 21 000 222</a></p>
+    <span class="logo small"><span class="logo-mark" aria-hidden="true"></span>Brightline</span>
+    <span data-i18n="footerLine">A fictional cleaning company. Prices and reviews are examples.</span>
+    <a href="../atelier/" data-i18n="backAtelier">Made by Atelier</a>
   </footer>
-  <aside class="demo-badge" data-i18n-aria="demo"><span>Demo</span><a href="../atelier/" data-i18n="demoLink">I build sites like this</a></aside>
+
+  <a class="sticky-cta" href="#book" data-sticky></a>
+
   <script src="js/i18n.js"></script>
   <script src="js/lang.js"></script>
   <script src="js/main.js"></script>
