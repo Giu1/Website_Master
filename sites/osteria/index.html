@@ -3,116 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Osteria Corvo — one sitting</title>
-  <meta name="description" content="Fictional neighbourhood restaurant. A meal told as chapters. Reservations on the last card.">
+  <title>Osteria Corvo — one menu, two sittings</title>
+  <meta name="description" content="Fictional restaurant in Lisboa. Five courses, two sittings a night, a short cellar and live table booking.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,500&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip" href="#meal" data-i18n="skip">Skip to the meal</a>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
-  <header class="top">
-    <a href="#top" class="brand">Osteria Corvo</a>
-    <div class="header-tools">
-      <div class="lang" role="group" data-i18n-aria="lang">
+  <header class="site-header">
+    <a class="brand" href="#top">Osteria <i>Corvo</i></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#tonight" data-i18n="navTonight">Tonight</a>
+      <a href="#cellar" data-i18n="navCellar">Cellar</a>
+      <a href="#visit" data-i18n="navVisit">Visit</a>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Language" data-i18n-aria="lang">
         <button type="button" data-lang="en">EN</button>
         <button type="button" data-lang="pt">PT</button>
       </div>
-      <nav>
-        <a href="#meal" data-i18n="menu">Menu</a>
-        <a href="#wine" data-i18n="cellar">Cellar</a>
-        <a href="#table" data-i18n="table">Table</a>
-      </nav>
+      <a class="btn btn-small" href="#reserve" data-i18n="reserve">Reserve</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menuBtn">Menu</button>
     </div>
   </header>
 
-  <main id="top">
-    <section class="open">
-      <p class="season" data-i18n="season">Autumn sitting · Lisboa</p>
-      <h1 data-i18n="hero">
-        <span>Come</span>
-        <span>hungry.</span>
-        <span class="soft">Leave later.</span>
-      </h1>
-      <p class="open-copy" data-i18n="openCopy">A fictional room of twelve tables. Fire, paper menus, and a kitchen that cooks one sitting at a time.</p>
-      <a class="pill" href="#table" data-i18n="ask">Ask for a table</a>
-    </section>
-
-    <section id="meal" class="meal">
-      <article class="chapter">
-        <p class="num">I</p>
-        <div class="chapter-copy">
-          <p class="course" data-i18n="begin">To begin</p>
-          <h2 data-i18n="olives">Warm olives, orange wood</h2>
-          <p data-i18n="olivesCopy">Castelvetrano, a strip of peel, oil that has seen the fire. Bread from the morning, still arguing with the crust.</p>
-        </div>
-        <figure>
-          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1400&q=80" alt="Roasted meat and herbs on a dark plate">
-        </figure>
-      </article>
-
-      <article class="chapter chapter-flip">
-        <p class="num">II</p>
-        <div class="chapter-copy">
-          <p class="course" data-i18n="pasta">The pasta</p>
-          <h2 data-i18n="tonnarelli">Tonnarelli cacio e pepe</h2>
-          <p data-i18n="pastaCopy">Pepper cracked at the table. Cheese from a wheel we finish in a week. No cream. No apology.</p>
-        </div>
-        <figure>
-          <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1400&q=80" alt="Pasta with sauce in a shallow bowl">
-        </figure>
-      </article>
-
-      <article class="chapter">
-        <p class="num">III</p>
-        <div class="chapter-copy">
-          <p class="course" data-i18n="bird">The bird</p>
-          <h2 data-i18n="fowl">Guinea fowl, grapes, bay</h2>
-          <p data-i18n="birdCopy">Roasted until the skin sounds right. A pan sauce of last week's wine and this week's fruit.</p>
-        </div>
-        <figure>
-          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1400&q=80" alt="Set table in a warm restaurant">
-        </figure>
-      </article>
-    </section>
-
-    <section id="wine" class="wine">
-      <p class="course" data-i18n="glass">The glass</p>
-      <h2 data-i18n="pour">We pour what we drink.</h2>
-      <ul>
-        <li><strong>Etna Bianco</strong><span data-i18n="wine1">salt, almond, a cold night</span></li>
-        <li><strong>Barbera d’Asti</strong><span data-i18n="wine2">cherry, dust, the long story</span></li>
-        <li><strong>Madeira, dry</strong><span data-i18n="wine3">with the cheese, if you stay</span></li>
-      </ul>
-    </section>
-
-    <section id="table" class="reserve">
-      <div class="card">
-        <p class="course" data-i18n="aTable">A table</p>
-        <h2 data-i18n="night">Write the night you want.</h2>
-        <form id="reserve-form">
-          <label><span data-i18n="name">Name</span> <input name="name" required></label>
-          <label><span data-i18n="guests">Guests</span>
-            <select name="guests">
-              <option>2</option><option>3</option><option>4</option><option>6</option>
-            </select>
-          </label>
-          <label><span data-i18n="date">Date</span> <input type="date" name="date" required></label>
-          <label><span data-i18n="note">Note</span> <textarea name="note" rows="3" data-i18n-placeholder="notePh" placeholder="Window, late, no shellfish."></textarea></label>
-          <button type="submit" data-i18n="hold">Hold the table</button>
-          <p class="form-status" role="status"></p>
-        </form>
-        <p class="fine" data-i18n="fine">Tue–Sat · 19:00 sitting · Rua do Demo 12</p>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="kicker" data-i18n="kicker">Príncipe Real · Lisboa · twelve tables</p>
+        <h1 data-i18n="heroTitle">One menu.<br><i>Two sittings.</i><br>No hurry.</h1>
+        <p class="lede" data-i18n="heroLede">Five courses cooked for the whole room at once, at seven and at half past nine. You choose the night; we choose the food.</p>
+        <a class="live" href="#reserve" data-live></a>
       </div>
+      <figure class="hero-img">
+        <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=1400&q=75" alt="The dining room with plants and warm lamps" data-i18n-alt="heroAlt">
+        <figcaption data-i18n="heroCap">The room, ten minutes before the first sitting.</figcaption>
+      </figure>
+    </section>
+
+    <section class="tonight" id="tonight" aria-labelledby="tonight-title">
+      <header class="tonight-head">
+        <div>
+          <p class="kicker" data-i18n="tonightKicker">This week's menu</p>
+          <h2 id="tonight-title" data-i18n="tonightTitle">Tonight, in five chapters</h2>
+        </div>
+        <div class="pairing">
+          <label class="switch">
+            <input type="checkbox" data-pairing>
+            <span aria-hidden="true"></span>
+            <span data-i18n="pairing">Wine pairing</span>
+          </label>
+          <p class="price-line" data-price-line></p>
+        </div>
+      </header>
+      <ol class="courses" data-courses></ol>
+    </section>
+
+    <section class="kitchen" aria-labelledby="kitchen-title">
+      <figure>
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1200&q=75" alt="A cook chopping herbs on a board" data-i18n-alt="kitchenAlt" loading="lazy">
+      </figure>
+      <div>
+        <p class="kicker" data-i18n="kitchenKicker">The kitchen</p>
+        <h2 id="kitchen-title" data-i18n="kitchenTitle">Market at nine, menu by noon</h2>
+        <p data-i18n="kitchenText">Chef Leonor Abreu writes the week's menu after the Thursday market and keeps it until it runs out. Tell us about allergies when you book and the plate changes with you.</p>
+      </div>
+    </section>
+
+    <section class="cellar" id="cellar" aria-labelledby="cellar-title">
+      <div class="cellar-head">
+        <div>
+          <p class="kicker" data-i18n="cellarKicker">The cellar</p>
+          <h2 id="cellar-title" data-i18n="cellarTitle">Small growers, honest prices</h2>
+        </div>
+        <div class="filters" role="group" aria-label="Filter wines" data-i18n-aria="filterAria" data-wine-filters></div>
+      </div>
+      <div class="wine-list" data-wines></div>
+      <p class="muted small" data-i18n="cellarNote">Corkage on your own bottle: 15 €. Ask us for the reserve list.</p>
+    </section>
+
+    <section class="reserve" id="reserve" aria-labelledby="reserve-title">
+      <div class="reserve-intro">
+        <p class="kicker" data-i18n="reserveKicker">Reservations</p>
+        <h2 id="reserve-title" data-i18n="reserveTitle">Ask for a table</h2>
+        <p data-i18n="reserveText">Tables hold for fifteen minutes. For more than eight people, call us and we'll close the room for you.</p>
+        <div class="mine" data-mine></div>
+      </div>
+
+      <form class="reserve-form" data-reserve novalidate>
+        <div class="row">
+          <span class="row-label" data-i18n="guests">Guests</span>
+          <div class="stepper">
+            <button type="button" data-guests="-1" aria-label="Fewer guests" data-i18n-aria="fewer">−</button>
+            <output data-guests-out>2</output>
+            <button type="button" data-guests="1" aria-label="More guests" data-i18n-aria="more">+</button>
+          </div>
+        </div>
+        <div class="row">
+          <span class="row-label" data-i18n="night">Night</span>
+          <div class="nights" data-nights></div>
+        </div>
+        <div class="row">
+          <span class="row-label" data-i18n="sitting">Sitting</span>
+          <div class="sittings" data-sittings></div>
+        </div>
+        <div class="fields">
+          <label><span data-i18n="fName">Name</span><input name="name" autocomplete="name"></label>
+          <label><span data-i18n="fPhone">Phone</span><input name="phone" type="tel" autocomplete="tel"></label>
+        </div>
+        <fieldset class="diet">
+          <legend data-i18n="dietTitle">Anything we should cook around?</legend>
+          <div class="chips" data-diet></div>
+        </fieldset>
+        <p class="form-error" data-error role="alert"></p>
+        <button class="btn" type="submit" data-submit></button>
+      </form>
+    </section>
+
+    <section class="visit" id="visit" aria-labelledby="visit-title">
+      <div>
+        <p class="kicker" data-i18n="visitKicker">Visit</p>
+        <h2 id="visit-title">Rua da Escola Politécnica 00</h2>
+        <p class="muted">1250-000 Lisboa · +351 21 000 0111</p>
+      </div>
+      <dl class="hours">
+        <div><dt data-i18n="tueSat">Tuesday – Saturday</dt><dd>19:00 · 21:30</dd></div>
+        <div><dt data-i18n="sunMon">Sunday, Monday</dt><dd data-i18n="closed">Closed</dd></div>
+        <div><dt data-i18n="kitchenCloses">Kitchen closes</dt><dd>23:00</dd></div>
+      </dl>
     </section>
   </main>
 
-  <aside class="demo-badge" data-i18n-aria="demo">
-    <span>Demo</span>
-    <a href="../atelier/" data-i18n="demoLink">I build sites like this</a>
-  </aside>
+  <footer class="site-footer">
+    <span class="brand">Osteria <i>Corvo</i></span>
+    <span data-i18n="footerLine">A fictional restaurant. Photographs from Unsplash.</span>
+    <a href="../atelier/" data-i18n="backAtelier">Made by Atelier</a>
+  </footer>
 
   <script src="js/i18n.js"></script>
   <script src="js/lang.js"></script>

@@ -1,9 +1,12 @@
 # Lumen
 
-SPA photographer lookbook. Near-black, horizontal rail, almost no copy.
+Fictional photography studio (Clara Ventura, Lisboa). Near-black, Instrument Serif + Inter Tight, darkroom-red accent. EN + PT-PT. One page.
 
-**Page:** `index.html` — modes Work / About / Contact (`[data-mode]`, `[data-panel]`).
+- **Viewfinder hero** — full-screen photos crossfade inside a camera frame (corners, focus point) with a live readout: series, frame number, exposure and lens, and a meter bar timing the next frame. The image drifts slightly with the pointer.
+- **Series index** — five series as large rows; hovering one shows its first photograph following the pointer; clicking filters the light table.
+- **Light table** — every photo as a printed slide with frame number and caption, filterable by series; frames "develop" in as they appear.
+- **Lightbox** — keyboard (← →), swipe, and a 2.5× loupe that follows the pointer.
+- **Studio, sessions** — four packages; "Check a date" preselects the session.
+- **Enquiry** — a made-up but stable calendar: picking a day says whether it's free and, if not, the nearest free day. The form stays on the page.
 
-`js/main.js` updates the rail caption and re-runs on `langchange`. Categories use `data-cat-key` → `catHospitality` etc. Custom cursor only when `(pointer: fine)`.
-
-Nav aria: `data-i18n-aria="modes"`. See root `HANDOFF.md`.
+Photos and captions live in `PHOTOS` and packages in `SESSIONS`, both in `js/main.js`. Photos are from Unsplash.

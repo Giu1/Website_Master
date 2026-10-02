@@ -4,78 +4,105 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Aura — hair with a point of view</title>
-  <meta name="description" content="Fictional salon in Lisboa. Cuts, colour, booking. Prices live from the demo desk.">
+  <meta name="description" content="Fictional salon in Chiado, Lisboa. Cuts, colour and care, with live booking.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
-  <p class="announce" data-announce>New guests: first cut includes a consult.</p>
+
+  <p class="announce"><span data-announce></span></p>
 
   <header class="site-header">
-    <a class="logo" href="index.html">Aura</a>
+    <a class="logo" href="index.html" aria-label="Aura">Aura<span aria-hidden="true">.</span></a>
+    <nav id="nav" class="nav" aria-label="Main">
+      <a href="#services" data-i18n="navServices">Services</a>
+      <a href="#team" data-i18n="navTeam">Team</a>
+      <a href="#salon" data-i18n="navSalon">The salon</a>
+      <a href="#visit" data-i18n="navVisit">Visit</a>
+    </nav>
     <div class="header-tools">
-      <div class="lang" role="group" data-i18n-aria="lang">
+      <div class="lang" role="group" aria-label="Language" data-i18n-aria="lang">
         <button type="button" data-lang="en">EN</button>
         <button type="button" data-lang="pt">PT</button>
       </div>
+      <a class="btn btn-small" href="booking.html" data-i18n="book">Book</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
     </div>
-    <nav id="nav" class="nav">
-      <a href="index.html" aria-current="page" data-i18n="navHome">Home</a>
-      <a href="services.html" data-i18n="navServices">Services</a>
-      <a href="team.html" data-i18n="navTeam">Team</a>
-      <a href="gallery.html" data-i18n="navGallery">Gallery</a>
-      <a href="booking.html" data-i18n="navBook">Book</a>
-      <a href="contact.html" data-i18n="navContact">Contact</a>
-    </nav>
   </header>
 
   <main id="main">
     <section class="hero">
-      <div>
-        <p data-i18n="place">Chiado · Lisboa</p>
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="place">Chiado · Lisboa</p>
         <h1 data-hero>Hair with a point of view.</h1>
-        <p class="lede" data-i18n="lede">A small floor, three chairs, and colour that does not shout unless you ask it to.</p>
-        <div class="actions">
-          <a class="btn" href="booking.html" data-i18n="book">Book a chair</a>
-          <a class="btn btn-ghost" href="services.html" data-i18n="prices">See prices</a>
+        <p class="lede" data-intro></p>
+        <div class="hero-actions">
+          <a class="btn" href="booking.html" data-i18n="bookVisit">Book a visit</a>
+          <a class="link-arrow" href="#services" data-i18n="seePrices">See prices</a>
         </div>
+        <a class="next-slot" data-next-slot href="booking.html" hidden>
+          <span class="pulse" aria-hidden="true"></span>
+          <span><strong data-i18n="nextFree">Next free cut</strong> <span data-next-text></span></span>
+        </a>
       </div>
-      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80" alt="Warm salon interior">
+      <div class="hero-art" aria-hidden="true">
+        <figure class="arch"><img data-gallery-img="0" alt=""></figure>
+        <figure class="round"><img data-gallery-img="1" alt=""></figure>
+        <p class="stamp" data-i18n="stamp">three chairs · no rush</p>
+      </div>
     </section>
 
-    <section class="band">
-      <div class="grid-2">
-        <div class="glass">
-          <h2 data-i18n="today">Today on the floor</h2>
-          <p data-i18n="todayCopy">Walk-ins after 16:00 if a chair frees. Otherwise write us a time.</p>
-          <a class="btn" href="tel:+351210000000" data-i18n="callDesk">Call the desk</a>
-        </div>
-        <div class="card">
-          <h2 data-i18n="hours">Hours</h2>
-          <ul class="hours" data-hours></ul>
-        </div>
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="servicesEyebrow">Menu</p>
+        <h2 id="services-title" data-i18n="servicesTitle">Services &amp; prices</h2>
+        <p data-i18n="servicesNote">Prices include a wash and a finish. Long or very thick hair may add a little time.</p>
+      </div>
+      <div class="menu-grid" data-services></div>
+    </section>
+
+    <section class="team" id="team" aria-labelledby="team-title">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="teamEyebrow">The team</p>
+        <h2 id="team-title" data-i18n="teamTitle">Three chairs, three specialists</h2>
+      </div>
+      <div class="team-grid" data-team></div>
+    </section>
+
+    <section class="salon" id="salon" aria-labelledby="salon-title">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="salonEyebrow">The salon</p>
+        <h2 id="salon-title" data-i18n="salonTitle">Daylight, quiet music, good coffee</h2>
+      </div>
+      <div class="strip" data-gallery tabindex="0" aria-label="Photos of the salon" data-i18n-aria="galleryAria"></div>
+    </section>
+
+    <section class="visit" id="visit" aria-labelledby="visit-title">
+      <div class="visit-card">
+        <p class="eyebrow" data-i18n="visitEyebrow">Visit</p>
+        <h2 id="visit-title" data-i18n="visitTitle">Find us in Chiado</h2>
+        <p class="open-now" data-open-now></p>
+        <address data-address></address>
+        <p><a data-phone></a></p>
+        <a class="btn" href="booking.html" data-i18n="bookVisit">Book a visit</a>
+      </div>
+      <div class="hours-card">
+        <h3 data-i18n="hours">Opening hours</h3>
+        <dl class="hours" data-hours></dl>
       </div>
     </section>
   </main>
 
-  <div class="call-bar">
-    <a href="tel:+351210000000">+351 21 000 000</a>
-    <a href="https://wa.me/351210000000">WhatsApp</a>
-  </div>
-
   <footer class="site-footer">
-    <p data-i18n="footer">Aura · fictional salon</p>
-    <p><a href="../aura-desk/" data-i18n="openDesk">Open the desk</a></p>
+    <p><span class="logo small">Aura<span aria-hidden="true">.</span></span> <span data-i18n="footerLine">A fictional salon. Everything here is fed by the salon's own backoffice.</span></p>
+    <p class="footer-links">
+      <a href="../aura-desk/" data-i18n="openDesk">Open Aura Desk (demo / demo)</a>
+      <a href="../atelier/" data-i18n="backAtelier">Made by Atelier</a>
+    </p>
   </footer>
-
-  <aside class="demo-badge" data-i18n-aria="demo">
-    <span>Demo</span>
-    <a href="../atelier/" data-i18n="demoLink">I build sites like this</a>
-  </aside>
 
   <script src="js/store.js"></script>
   <script src="js/i18n.js"></script>
