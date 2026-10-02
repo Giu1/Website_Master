@@ -1,63 +1,116 @@
 <!DOCTYPE html>
-<html lang="en" data-i18n-page="booking">
+<html lang="en" data-i18n-page="book">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Book — Aura</title>
+  <meta name="description" content="Book a cut, colour or treatment at Aura. Live availability.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="page-book">
   <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
-  <p class="announce" data-announce></p>
+
   <header class="site-header">
-    <a class="logo" href="index.html">Aura</a>
+    <a class="logo" href="index.html" aria-label="Aura">Aura<span aria-hidden="true">.</span></a>
+    <nav id="nav" class="nav" aria-label="Main">
+      <a href="index.html#services" data-i18n="navServices">Services</a>
+      <a href="index.html#team" data-i18n="navTeam">Team</a>
+      <a href="index.html#salon" data-i18n="navSalon">The salon</a>
+      <a href="index.html#visit" data-i18n="navVisit">Visit</a>
+    </nav>
     <div class="header-tools">
-      <div class="lang" role="group" data-i18n-aria="lang">
+      <div class="lang" role="group" aria-label="Language" data-i18n-aria="lang">
         <button type="button" data-lang="en">EN</button>
         <button type="button" data-lang="pt">PT</button>
       </div>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
     </div>
-    <nav id="nav" class="nav">
-      <a href="index.html" data-i18n="navHome">Home</a>
-      <a href="services.html" data-i18n="navServices">Services</a>
-      <a href="team.html" data-i18n="navTeam">Team</a>
-      <a href="gallery.html" data-i18n="navGallery">Gallery</a>
-      <a href="booking.html" aria-current="page" data-i18n="navBook">Book</a>
-      <a href="contact.html" data-i18n="navContact">Contact</a>
-    </nav>
   </header>
-  <main id="main" class="page">
-    <h1 data-i18n="take">Take a chair.</h1>
-    <form class="glass" id="booking-form" style="max-width:32rem">
-      <label><span data-i18n="name">Name</span> <input name="name" required autocomplete="name"></label>
-      <label><span data-i18n="service">Service</span> <select name="service" data-service-select></select></label>
-      <label><span data-i18n="date">Date</span> <input type="date" name="date" required></label>
-      <label><span data-i18n="time">Time</span>
-        <select name="time">
-          <option>10:00</option>
-          <option>11:30</option>
-          <option>14:00</option>
-          <option>16:00</option>
-          <option>18:00</option>
-        </select>
-      </label>
-      <button class="btn" type="submit" data-i18n="hold">Hold it</button>
-      <p class="form-status" role="status"></p>
-    </form>
+
+  <main id="main" class="book-layout">
+    <div class="book-main">
+      <p class="eyebrow" data-i18n="bookEyebrow">Booking</p>
+      <h1 class="book-title" data-i18n="bookTitle">Find a time that suits you</h1>
+
+      <form id="book-form" novalidate>
+        <fieldset class="step" data-step="service">
+          <legend><span class="step-n">1</span> <span data-i18n="stepService">Choose a service</span></legend>
+          <div class="choice-grid" data-choose-service></div>
+        </fieldset>
+
+        <fieldset class="step" data-step="staff" disabled>
+          <legend><span class="step-n">2</span> <span data-i18n="stepStaff">Who would you like?</span></legend>
+          <div class="choice-row" data-choose-staff></div>
+        </fieldset>
+
+        <fieldset class="step" data-step="date" disabled>
+          <legend><span class="step-n">3</span> <span data-i18n="stepDate">Pick a day</span></legend>
+          <div class="days" data-choose-date></div>
+        </fieldset>
+
+        <fieldset class="step" data-step="time" disabled>
+          <legend><span class="step-n">4</span> <span data-i18n="stepTime">Pick a time</span></legend>
+          <div data-choose-time></div>
+        </fieldset>
+
+        <fieldset class="step" data-step="details" disabled>
+          <legend><span class="step-n">5</span> <span data-i18n="stepDetails">Your details</span></legend>
+          <div class="fields">
+            <label><span data-i18n="fName">Name</span><input name="client" autocomplete="name" required></label>
+            <label><span data-i18n="fPhone">Phone</span><input name="phone" type="tel" autocomplete="tel" required></label>
+            <label><span data-i18n="fEmail">Email (optional)</span><input name="email" type="email" autocomplete="email"></label>
+            <label class="wide"><span data-i18n="fNote">Anything we should know?</span><textarea name="note" rows="3"></textarea></label>
+          </div>
+          <p class="form-error" data-form-error role="alert"></p>
+          <button class="btn" type="submit" data-i18n="sendRequest">Send booking request</button>
+        </fieldset>
+      </form>
+
+      <section class="done" data-done hidden tabindex="-1">
+        <p class="eyebrow" data-i18n="doneEyebrow">Request sent</p>
+        <h2 data-i18n="doneTitle">Thank you — it's with the salon</h2>
+        <p data-i18n="doneText">We'll confirm by text message, usually within the hour. Keep your reference:</p>
+        <p class="ref" data-done-ref></p>
+        <p class="status-line"><span data-i18n="status">Status</span>: <span class="pill" data-done-status></span></p>
+        <p class="demo-hint" data-i18n="doneDemo">Demo: open Aura Desk in another tab (demo / demo) and accept this request — the status here changes on its own.</p>
+        <p class="done-actions">
+          <a class="btn" href="../aura-desk/" target="_blank" rel="noopener" data-i18n="openDeskShort">Open Aura Desk</a>
+          <a class="link-arrow" href="booking.html" data-i18n="bookAnother">Book something else</a>
+        </p>
+      </section>
+
+      <section class="lookup" aria-labelledby="lookup-title">
+        <h2 id="lookup-title" data-i18n="lookupTitle">Already booked?</h2>
+        <form class="lookup-form" data-lookup>
+          <label><span data-i18n="lookupLabel">Reference</span><input name="ref" placeholder="AU-XXXX" autocomplete="off" spellcheck="false"></label>
+          <button class="btn btn-ghost" type="submit" data-i18n="lookupBtn">Check status</button>
+        </form>
+        <p class="lookup-result" data-lookup-result role="status"></p>
+      </section>
+    </div>
+
+    <aside class="summary" aria-live="polite">
+      <h2 data-i18n="summary">Your visit</h2>
+      <dl data-summary></dl>
+      <p class="summary-total" data-total></p>
+    </aside>
   </main>
-  <div class="call-bar">
-    <a href="tel:+351210000000">+351 21 000 000</a>
-    <a href="https://wa.me/351210000000">WhatsApp</a>
-  </div>
-  <footer class="site-footer"><p data-i18n="footer">Aura · fictional salon</p><p><a href="../aura-desk/" data-i18n="openDesk">Open the desk</a></p></footer>
-  <aside class="demo-badge" data-i18n-aria="demo"><span>Demo</span><a href="../atelier/" data-i18n="demoLink">I build sites like this</a></aside>
+
+  <footer class="site-footer">
+    <p><span class="logo small">Aura<span aria-hidden="true">.</span></span> <span data-i18n="footerLine">A fictional salon. Everything here is fed by the salon's own backoffice.</span></p>
+    <p class="footer-links">
+      <a href="../aura-desk/" data-i18n="openDesk">Open Aura Desk (demo / demo)</a>
+      <a href="../atelier/" data-i18n="backAtelier">Made by Atelier</a>
+    </p>
+  </footer>
+
   <script src="js/store.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/lang.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/booking.js"></script>
 </body>
 </html>
