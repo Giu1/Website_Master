@@ -1,5 +1,5 @@
 /**
- * Lucas Bastos — portfolio.
+ * Lucas Bastos — about and contact pages of the work stage (copied from ../lucas/js/main.js).
  * Loader, page transitions, smooth scroll, looping name, magnetic buttons,
  * side menu, word reveals, work preview, sliding rows, footer curve, clock
  * and the contact form. No dependencies. Every block checks that its markup
@@ -22,7 +22,8 @@
   /* ───────── page transitions ───────── */
 
   // file name → label shown on the panel
-  const PAGES = { "": "nav.home", "index.html": "nav.home", "work.html": "nav.work", "about.html": "nav.about", "contact.html": "nav.contact" };
+  // this folder's pages: the work stage (index.html), about and contact
+  const PAGES = { "": "nav.work", "index.html": "nav.work", "about.html": "nav.about", "contact.html": "nav.contact" };
   const KEY = "lb-transition";
   const veil = $("#transition");
   const veilLabel = $("#t-label");

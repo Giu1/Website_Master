@@ -49,6 +49,8 @@ while ($listener.IsListening) {
       $ext = [IO.Path]::GetExtension($local).ToLowerInvariant()
       $response.ContentType = $(if ($types.ContainsKey($ext)) { $types[$ext] } else { "application/octet-stream" })
       $response.StatusCode = 200
+      # local preview: always re-check files, so edits show on reload
+      $response.AddHeader("Cache-Control", "no-cache")
     } else {
       $bytes = [Text.Encoding]::UTF8.GetBytes("Not found")
       $response.ContentType = "text/plain; charset=utf-8"
