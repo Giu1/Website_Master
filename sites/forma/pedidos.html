@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#17161c" />
+    <title>Os meus pedidos | FORMA</title>
+    <meta name="description" content="Acompanha os teus pedidos FORMA." />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="orders" data-title="pages.orders">
+    <noscript><p class="noscript">FORMA precisa de JavaScript para a loja, o carrinho e o idioma.</p></noscript>
+    <main id="main">
+      <section class="page-head">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="breadcrumb">
+            <a href="index.html" data-i18n="nav.home">Início</a><span>/</span><span data-i18n="pages.orders">Os meus pedidos</span>
+          </nav>
+          <h1 data-i18n="orders.title">Os meus pedidos</h1>
+          <p class="lead" data-i18n="orders.lead"></p>
+        </div>
+      </section>
+      <div class="wrap orders-layout">
+        <aside>
+          <form class="panel" id="lookup-form">
+            <h2 data-i18n="orders.lookup">Procurar um pedido</h2>
+            <label class="field"><span data-i18n="orders.number">Número</span><input id="lookup-number" required /></label>
+            <label class="field mt"><span data-i18n="orders.email">E-mail</span><input id="lookup-email" type="email" required /></label>
+            <p class="form-status" id="lookup-status" hidden></p>
+            <button class="btn btn-dark btn-block mt" type="submit" data-i18n="orders.find">Procurar</button>
+          </form>
+          <div class="panel">
+            <h2 data-i18n="orders.help">Ajuda</h2>
+            <a class="btn btn-grad btn-block" id="orders-help" href="contacto.html" data-i18n="orders.contact">Falar connosco</a>
+            <button class="btn btn-ghost btn-block mt" type="button" id="clear-orders" data-i18n="orders.clear">Limpar histórico</button>
+          </div>
+        </aside>
+        <div id="orders-list"></div>
+      </div>
+    </main>
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/orders.js"></script>
+  </body>
+</html>

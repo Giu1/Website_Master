@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Website Master</title>
+  <meta name="description" content="Every site in this repo, opened from one scrollable stage." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,460;6..72,520&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div id="flat" hidden></div>
+
+  <header class="chrome">
+    <a class="label" id="brand" href="#featured">Website Master</a>
+    <button class="label" id="profile-btn" type="button" aria-expanded="false">Profile</button>
+  </header>
+
+  <div class="dock">
+    <nav class="views label" aria-label="Project views">
+      <a id="nav-featured" href="#featured" aria-current="true">Featured</a>
+      <span aria-hidden="true">/</span>
+      <a id="nav-full" href="#full">Full</a>
+    </nav>
+    <button class="label" id="news-btn" type="button" aria-expanded="false">Newsletter</button>
+  </div>
+
+  <div id="arrows" hidden>
+    <button id="prev" type="button" aria-label="Previous project">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 L5 8 L10 13" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+    </button>
+    <button id="next" type="button" aria-label="Next project">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3 L11 8 L6 13" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+    </button>
+  </div>
+
+  <section id="profile" class="panel" hidden>
+    <div class="panel-inner">
+      <div id="profile-copy"></div>
+      <p class="awards" id="awards"></p>
+      <ul class="socials" id="socials"></ul>
+    </div>
+  </section>
+
+  <section id="news" class="panel" hidden>
+    <div class="panel-inner narrow">
+      <p id="news-copy"></p>
+      <form id="news-form" class="news-form">
+        <input id="news-email" type="email" name="email" required autocomplete="email" placeholder="Email address" aria-label="Email address" />
+        <button type="submit" aria-label="Subscribe">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8 H12 M9 4.5 L12.5 8 L9 11.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        </button>
+      </form>
+      <p class="form-note" id="news-note" role="status"></p>
+    </div>
+  </section>
+
+  <section id="index" hidden>
+    <h1 class="sr-only" id="index-title">Index</h1>
+    <p id="index-list"></p>
+  </section>
+
+  <section id="case" hidden role="dialog" aria-modal="true" aria-labelledby="case-title">
+    <button id="case-x" type="button" aria-label="Close">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4 L12 12 M12 4 L4 12" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+    </button>
+    <div class="case-copy">
+      <h1 id="case-title"></h1>
+      <p id="case-summary"></p>
+      <div id="case-meta" class="meta"></div>
+      <p id="case-nav" class="case-nav"></p>
+    </div>
+    <div id="case-media" class="case-media"></div>
+  </section>
+
+  <div class="sr-only" id="a11y"></div>
+
+  <script src="js/data.js"></script>
+  <script type="module" src="js/site.js"></script>
+</body>
+</html>

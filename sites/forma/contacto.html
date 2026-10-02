@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#17161c" />
+    <title>Contacto | FORMA</title>
+    <meta name="description" content="Contacta o atelier FORMA." />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="contact" data-title="pages.contact">
+    <noscript><p class="noscript">FORMA precisa de JavaScript para a loja, o carrinho e o idioma.</p></noscript>
+    <main id="main">
+      <section class="page-head">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="breadcrumb">
+            <a href="index.html" data-i18n="nav.home">Início</a><span>/</span><span data-i18n="pages.contact">Contacto</span>
+          </nav>
+          <h1 data-i18n="contact.title">Contacta-nos</h1>
+          <p class="lead" data-i18n="contact.lead"></p>
+        </div>
+      </section>
+      <div class="wrap contact-layout">
+        <form class="panel" id="contact-form">
+          <div class="form-grid">
+            <label class="field"><span data-i18n="contact.name">Nome</span><input name="name" required autocomplete="name" /></label>
+            <label class="field"><span data-i18n="contact.email">E-mail</span><input name="email" type="email" required autocomplete="email" /></label>
+            <label class="field span2"><span data-i18n="contact.subject">Assunto</span><select name="subject" id="contact-subject"></select></label>
+            <label class="field span2"><span data-i18n="contact.message">Mensagem</span><textarea name="message" required rows="6"></textarea></label>
+          </div>
+          <p class="form-status" id="contact-status" hidden></p>
+          <button class="btn btn-grad mt" type="submit" data-i18n="contact.send">Enviar mensagem</button>
+        </form>
+        <aside class="info-card" id="contact-info"></aside>
+      </div>
+      <section class="faq wrap">
+        <h2 data-i18n="contact.faq.title">Perguntas frequentes</h2>
+        <div class="faq-list" id="faq-list"></div>
+      </section>
+    </main>
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/contact.js"></script>
+  </body>
+</html>

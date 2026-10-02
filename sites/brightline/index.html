@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="home">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brightline — homes left brighter</title>
+  <meta name="description" content="Fictional home cleaning in Lisboa. Click to call, service pages, quotes, trust.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+  <div class="topbar">
+    <span data-i18n="top">Lisboa &amp; nearby · insured team</span>
+    <a href="tel:+351210000222" data-i18n="call">Call +351 21 000 222</a>
+  </div>
+  <header class="site-header">
+    <a class="logo" href="index.html">Brightline</a>
+    <div class="header-tools">
+      <div class="lang" role="group" data-i18n-aria="lang">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
+    </div>
+    <nav id="nav" class="nav">
+      <a href="index.html" aria-current="page" data-i18n="navHome">Home</a>
+      <a href="services.html" data-i18n="navServices">Services</a>
+      <a href="areas.html" data-i18n="navAreas">Areas</a>
+      <a href="quote.html" data-i18n="navQuote">Quote</a>
+      <a href="contact.html" data-i18n="navContact">Contact</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div>
+        <p data-i18n="slot">Home cleaning · same-week slots</p>
+        <h1 data-i18n="hero">A house you can walk into after work.</h1>
+        <p class="lede" data-i18n="lede">Fictional crew, real pattern: call, book a room count, we leave the keys where you asked.</p>
+        <div class="actions">
+          <a class="btn" href="tel:+351210000222" data-i18n="callNow">Call now</a>
+          <a class="btn btn-ghost" href="quote.html" data-i18n="quote">Get a quote</a>
+        </div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=80" alt="Bright, tidy living room">
+    </section>
+    <section class="band">
+      <div class="trust">
+        <article class="card"><h2 data-i18n="insured">Insured</h2><p data-i18n="insuredC">Named team. No surprise faces on the day.</p></article>
+        <article class="card"><h2 data-i18n="products">Products you pick</h2><p data-i18n="productsC">Scent-free or citrus. We bring both.</p></article>
+        <article class="card"><h2 data-i18n="week">Same week</h2><p data-i18n="weekC">Most first visits land in three to five days.</p></article>
+      </div>
+    </section>
+    <section class="band">
+      <h2 data-i18n="sendFor">What people send us for</h2>
+      <div class="service-list">
+        <a class="card" href="deep-clean.html"><h3 data-i18n="deep">Deep clean</h3><p data-i18n="deepC">The first visit. Baseboards, oven, the room you have been avoiding.</p></a>
+        <a class="card" href="move-out.html"><h3 data-i18n="move">Move-out</h3><p data-i18n="moveC">Deposit photos. We clean to the inventory, not to a vibe.</p></a>
+        <a class="card" href="office.html"><h3 data-i18n="office">Office</h3><p data-i18n="officeC">After hours. Bins, glass, the kitchen no one claims.</p></a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p data-i18n="footer">Brightline · fictional cleaning company</p>
+    <p><a href="tel:+351210000222">+351 21 000 222</a></p>
+  </footer>
+  <aside class="demo-badge" data-i18n-aria="demo"><span>Demo</span><a href="../atelier/" data-i18n="demoLink">I build sites like this</a></aside>
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

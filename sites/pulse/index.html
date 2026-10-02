@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#5e1b22" />
+  <meta name="description" content="PULSE — estúdio de motion. Template editável: troca pessoas, projetos e textos em js/data.js." />
+  <title>PULSE Motion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body id="top">
+  <a class="skip" href="#work" data-i18n="skip">Saltar para o trabalho</a>
+
+  <header class="bar">
+    <div class="crumb"><span id="crumb-name">PULSE</span><span class="hide-s" data-i18n="role">Motion Designer</span><span class="hide-s" id="clock">PT --:--</span></div>
+    <div class="sp"></div>
+    <a href="#work" data-i18n="nav.work">Trabalho</a>
+    <a href="#lab" class="hide-s">Lab</a>
+    <a href="#about" class="hide-s" data-i18n="nav.about">Sobre</a>
+    <a href="#contact" data-i18n="nav.contact">Contacto</a>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-pt" aria-pressed="true">PT</button><button type="button" id="lang-en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero" id="hero">
+      <div class="wrap">
+        <h1 class="sr">PULSE, Motion Designer</h1>
+        <div class="hero-top mono"><span class="rec hide-s" id="rec">PULSE_SHOWREEL_v1.aep · 1920×1080 · 25 fps</span><span class="tc" id="tc">00:00:00:00</span></div>
+        <div class="stage-h">
+          <canvas id="pix" aria-hidden="true"></canvas>
+          <div class="stk-layer" id="stk"></div>
+          <span class="cm tl"></span><span class="cm tr"></span><span class="cm bl"></span><span class="cm br"></span>
+        </div>
+        <div class="hero-foot">
+          <p class="lede" data-i18n="lede"></p>
+          <div class="cta">
+            <a class="btn solid" href="#work" data-i18n="cta.work">Ver trabalho ↓</a>
+            <a class="btn" href="#contact" data-i18n="cta.contact">Falar connosco</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brands" id="marq" aria-hidden="true"><div class="marq-in"></div></div>
+    <p class="sr" data-i18n="clients"></p>
+
+    <section id="work" class="sec">
+      <div class="wrap">
+        <div class="sh rv">
+          <div>
+            <p class="eyebrow mono"><span class="hop">01</span><span data-i18n="eb.work">Destaques</span></p>
+            <h2 data-i18n="work.h">Trabalho</h2>
+          </div>
+          <div class="tools">
+            <div class="filters" role="group" aria-label="Filter" id="filters"></div>
+            <div class="seg" role="group" aria-label="View">
+              <button type="button" class="chip" id="v-grid" data-i18n="view.grid">Grelha</button>
+              <button type="button" class="chip" id="v-list" data-i18n="view.list">Lista</button>
+            </div>
+          </div>
+        </div>
+        <ul class="grid" id="grid"></ul>
+        <ul class="index" id="index" hidden></ul>
+      </div>
+    </section>
+
+    <section id="lab" class="sec z-dark">
+      <div class="wrap">
+        <div class="sh rv">
+          <div>
+            <p class="eyebrow mono"><span class="hop">02</span><span data-i18n="eb.lab">Projetos pessoais</span></p>
+            <h2>Lab</h2>
+          </div>
+          <p class="sh-p" data-i18n="lab.p"></p>
+        </div>
+        <div class="lab" id="labgrid"></div>
+      </div>
+    </section>
+
+    <section id="about" class="sec">
+      <div class="wrap two">
+        <div>
+          <div class="rv">
+            <p class="eyebrow mono"><span class="hop">03</span><span data-i18n="eb.about">Sobre</span></p>
+            <div class="sh"><h2 data-i18n="about.h">Sobre</h2></div>
+          </div>
+          <p class="bio rv" data-i18n="bio1"></p>
+          <p class="bio rv" data-i18n="bio2"></p>
+          <dl class="facts mono rv">
+            <dt data-i18n="f.base">Base</dt><dd id="fact-base">Portugal</dd>
+            <dt data-i18n="f.now">Agora</dt><dd id="fact-now">PULSE</dd>
+            <dt data-i18n="f.lang">Línguas</dt><dd data-i18n="f.langv">Português, Inglês</dd>
+            <dt data-i18n="f.open">Estado</dt><dd data-i18n="f.openv">Aberto a novas oportunidades</dd>
+          </dl>
+          <p class="eyebrow mono rv" style="margin-top:48px"><span class="hop">+</span><span data-i18n="eb.people">Equipa</span></p>
+          <h2 class="rv" data-i18n="people.h" style="font-family:var(--f-display);font-size:clamp(32px,4vw,52px);line-height:.9;margin:0 0 8px">Quem faz</h2>
+          <div class="people rv" id="people"></div>
+        </div>
+        <div>
+          <div class="rv">
+            <p class="eyebrow mono"><span class="hop">+</span><span data-i18n="eb.caps">Capacidades</span></p>
+            <div class="sh"><h2 data-i18n="caps.h">Fazemos</h2></div>
+          </div>
+          <ul class="caps" id="caps"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec contact z-red" id="contact">
+      <div class="wrap">
+        <p class="eyebrow mono rv"><span class="hop">04</span><span data-i18n="eb.contact">Contacto</span></p>
+        <h2 class="rv" data-i18n="contact.h">Vamos pôr<br>coisas a mexer.</h2>
+        <div class="mail rv">
+          <output id="email">ola@studiopulse.pt</output>
+          <button class="btn" type="button" id="copy" data-i18n="copy">Copiar email</button>
+        </div>
+        <div class="links rv" id="links"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mono">
+    <div class="wrap">
+      <span id="copy-year">© 2026 PULSE</span>
+      <span data-i18n="foot">Feito à mão, pixel a pixel.</span>
+      <a href="#top" data-i18n="top">↑ Topo</a>
+    </div>
+  </footer>
+
+  <div class="floor" id="floor"></div>
+  <button class="egg-count" id="eggs" type="button" hidden></button>
+  <div class="egg-toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="dock" id="dock" role="group" data-i18n-aria="cw">
+    <div class="dock-tip" data-i18n="dock.tip"></div>
+    <div class="dock-i"><svg class="cw" viewBox="0 0 120 120"></svg></div>
+  </div>
+  <div class="preview" id="preview" aria-hidden="true"></div>
+  <div class="cur mono" id="cur" aria-hidden="true"></div>
+
+  <div class="case" id="case" role="dialog" aria-modal="true" aria-labelledby="case-title">
+    <div class="case-top">
+      <div class="wrap">
+        <button type="button" id="case-close" data-i18n="close">← Fechar</button>
+        <div class="case-nav mono">
+          <button type="button" id="case-prev" data-i18n-aria="prev">‹</button>
+          <span id="case-count"></span>
+          <button type="button" id="case-fwd" data-i18n-aria="nextp">›</button>
+        </div>
+      </div>
+    </div>
+    <div class="case-hero" id="case-hero" hidden></div>
+    <div class="wrap case-in" id="case-in"></div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>

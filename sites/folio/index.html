@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elena Voss</title>
+  <meta name="description" content="Design engineer portfolio template. Edit js/data.js." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300..700&family=Newsreader:opsz,wght@6..72,460;6..72,520&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body class="v-featured">
+  <canvas id="lens" aria-hidden="true"></canvas>
+
+  <section id="index" aria-labelledby="index-title">
+    <h1 class="sr-only" id="index-title">Index</h1>
+    <p id="index-list"></p>
+  </section>
+
+  <section id="grid" aria-labelledby="grid-title">
+    <div class="grid-inner">
+      <header class="grid-head">
+        <h1 id="grid-title">Selected work</h1>
+        <p id="grid-count" class="label"></p>
+      </header>
+      <ul class="grid-list" id="grid-list"></ul>
+    </div>
+  </section>
+
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div id="flat" hidden></div>
+  <div id="intro" aria-hidden="true"></div>
+
+  <section id="profile" class="panel" aria-label="Profile" hidden>
+    <div class="ring-css" aria-hidden="true"></div>
+    <div class="panel-inner">
+      <div id="profile-copy"></div>
+      <p class="awards label" id="awards"></p>
+      <ul class="socials" id="socials"></ul>
+    </div>
+  </section>
+
+  <section id="news" class="panel" aria-label="Newsletter" hidden>
+    <div class="ring-css" aria-hidden="true"></div>
+    <div class="panel-inner narrow">
+      <p id="news-copy"></p>
+      <form id="news-form" class="news-form">
+        <span class="field"><input id="news-email" type="email" name="email" required autocomplete="email" placeholder="Email address" aria-label="Email address" /></span>
+        <button type="submit" aria-label="Subscribe">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8 H12 M8.5 4.5 L12 8 L8.5 11.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </button>
+      </form>
+      <p class="form-note label" id="news-note" role="status"></p>
+    </div>
+  </section>
+
+  <header class="chrome">
+    <a class="label" id="brand" href="#featured">Elena Voss</a>
+    <button class="label" id="profile-btn" type="button" aria-expanded="false" aria-controls="profile">Profile</button>
+  </header>
+
+  <div class="dock">
+    <nav class="views label" aria-label="Project views">
+      <span class="pill" aria-hidden="true"></span>
+      <a id="nav-featured" href="#featured" aria-current="true">Featured</a>
+      <a id="nav-full" href="#full">Full</a>
+      <a id="nav-traditional" href="#traditional">Traditional</a>
+    </nav>
+    <button class="label" id="news-btn" type="button" aria-expanded="false" aria-controls="news">Newsletter</button>
+  </div>
+
+  <section id="case" hidden role="dialog" aria-modal="true" aria-labelledby="case-title">
+    <div class="case-backdrop"></div>
+    <div class="sheets" id="sheets"></div>
+    <button id="case-x" type="button" aria-label="Close">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 4.5 L11.5 11.5 M11.5 4.5 L4.5 11.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+  </section>
+
+  <div id="loader" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <div class="sr-only" id="a11y"></div>
+
+  <script src="js/data.js"></script>
+  <script type="module" src="js/site.js"></script>
+</body>
+</html>

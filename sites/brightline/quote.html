@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="quote">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quote — Brightline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+  <div class="topbar"><span data-i18n="week">Same-week slots</span><a href="tel:+351210000222" data-i18n="callNow">Call now</a></div>
+  <header class="site-header">
+    <a class="logo" href="index.html">Brightline</a>
+    <div class="header-tools">
+      <div class="lang" role="group" data-i18n-aria="lang">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
+    </div>
+    <nav id="nav" class="nav">
+      <a href="index.html" data-i18n="navHome">Home</a>
+      <a href="services.html" data-i18n="navServices">Services</a>
+      <a href="areas.html" data-i18n="navAreas">Areas</a>
+      <a href="quote.html" aria-current="page" data-i18n="navQuote">Quote</a>
+      <a href="contact.html" data-i18n="navContact">Contact</a>
+    </nav>
+  </header>
+  <main id="main" class="page">
+    <h1 data-i18n="rooms">Tell us the rooms.</h1>
+    <form id="quote-form" class="card">
+      <label><span data-i18n="name">Name</span> <input name="name" required></label>
+      <label><span data-i18n="phone">Phone</span> <input name="phone" type="tel" required></label>
+      <label><span data-i18n="job">Job</span>
+        <select name="job">
+          <option data-i18n="deep">Deep clean</option>
+          <option data-i18n="move">Move-out</option>
+          <option data-i18n="office">Office</option>
+        </select>
+      </label>
+      <label><span data-i18n="parish">Parish</span>
+        <select name="area">
+          <option>Chiado</option>
+          <option>Estrela</option>
+          <option>Campo de Ourique</option>
+          <option>Alvalade</option>
+        </select>
+      </label>
+      <label><span data-i18n="notes">Notes</span> <textarea name="note" rows="3" data-i18n-placeholder="notesPh" placeholder="Pets, keybox, scent-free."></textarea></label>
+      <button class="btn" type="submit" data-i18n="sendQ">Send quote request</button>
+      <p class="form-status" role="status"></p>
+    </form>
+  </main>
+  <footer class="site-footer"><p>Brightline</p><p><a href="tel:+351210000222" data-i18n="callNow">Call</a></p></footer>
+  <aside class="demo-badge" data-i18n-aria="demo"><span>Demo</span><a href="../atelier/" data-i18n="demoLink">I build sites like this</a></aside>
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#17161c" />
+    <title>Loja | FORMA</title>
+    <meta name="description" content="Loja FORMA: figuras em várias peças, chaveiros personalizados, miniaturas, decoração e props impressos em 3D." />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="shop" data-title="pages.shop">
+    <noscript><p class="noscript">FORMA precisa de JavaScript para a loja, o carrinho e o idioma.</p></noscript>
+
+    <main id="main">
+      <section class="page-head">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="breadcrumb">
+            <a href="index.html" data-i18n="nav.home">Início</a><span>/</span><span data-i18n="pages.shop">Loja</span><span id="crumb-cat" hidden></span>
+          </nav>
+          <h1 id="shop-title" data-i18n="shop.title">Loja</h1>
+          <p class="lead" id="shop-lead" data-i18n="shop.lead"></p>
+        </div>
+      </section>
+
+      <div class="wrap shop-layout">
+        <aside class="shop-side">
+          <button class="btn btn-ghost btn-sm filter-toggle" type="button" id="filter-toggle" aria-expanded="false">
+            <i class="ri-equalizer-line"></i> <span data-i18n="shop.filter">Filtrar</span>
+          </button>
+          <div class="side-block">
+            <h3 data-i18n="shop.categories">Categorias</h3>
+            <ul class="cat-list" id="cat-list"></ul>
+          </div>
+          <div class="side-block">
+            <h3 data-i18n="shop.status">Disponibilidade</h3>
+            <label class="check"><input type="checkbox" id="only-available" /><span data-i18n="shop.onlyAvailable"></span></label>
+          </div>
+        </aside>
+
+        <div>
+          <div class="shop-toolbar">
+            <div class="shop-search">
+              <i class="ri-search-line"></i>
+              <input id="shop-q" type="search" autocomplete="off" data-i18n-placeholder="shop.searchPlaceholder" />
+            </div>
+            <p class="muted" id="shop-count"></p>
+            <label>
+              <span data-i18n="shop.sort">Ordenar</span>
+              <select id="shop-sort">
+                <option value="featured" data-i18n="shop.sortFeatured"></option>
+                <option value="sale" data-i18n="shop.sortSale"></option>
+                <option value="price-asc" data-i18n="shop.sortPriceAsc"></option>
+                <option value="price-desc" data-i18n="shop.sortPriceDesc"></option>
+                <option value="name" data-i18n="shop.sortName"></option>
+              </select>
+            </label>
+          </div>
+          <div class="product-grid shop-grid" id="shop-grid"></div>
+          <div class="empty" id="shop-empty" hidden>
+            <p data-i18n="shop.empty"></p>
+            <button class="btn btn-dark btn-sm" type="button" id="shop-clear" data-i18n="shop.clear"></button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/shop.js"></script>
+  </body>
+</html>

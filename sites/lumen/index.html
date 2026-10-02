@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="home">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lumen — light, held still</title>
+  <meta name="description" content="Fictional photographer. A cinematic lookbook. Work, about, contact on one canvas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#work" data-i18n="skip">Skip to work</a>
+  <div class="cursor" hidden aria-hidden="true"></div>
+
+  <header class="bar">
+    <a class="mark" href="#top">Lumen</a>
+    <div class="header-tools">
+      <div class="lang" role="group" data-i18n-aria="lang">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <nav class="modes" data-i18n-aria="modes" aria-label="Studio modes">
+        <button type="button" data-mode="edit" aria-pressed="true" data-i18n="edit">Edit</button>
+        <button type="button" data-mode="about" aria-pressed="false" data-i18n="about">About</button>
+        <button type="button" data-mode="contact" aria-pressed="false" data-i18n="contact">Contact</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="index">No. 01</p>
+      <h1 class="name" aria-label="Lumen">
+        <span>L</span><span>u</span><span>m</span><span>e</span><span>n</span>
+      </h1>
+      <p class="tag" data-i18n="tag">Photographs for rooms that already know what they want.</p>
+      <p class="meta" data-i18n="meta">Lisboa · analog &amp; available light</p>
+    </section>
+
+    <section id="work" class="work" data-panel="edit">
+      <div class="rail" id="rail">
+        <figure class="frame" data-title="Atlantic kitchen" data-cat="Hospitality" data-cat-key="catHospitality">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=80" alt="Plated dish on dark linen">
+        </figure>
+        <figure class="frame" data-title="After the sitting" data-cat="Portrait" data-cat-key="catPortrait">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=80" alt="Close portrait in soft window light">
+        </figure>
+        <figure class="frame" data-title="House in the pines" data-cat="Architecture" data-cat-key="catArchitecture">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80" alt="Minimal interior with a long window">
+        </figure>
+        <figure class="frame" data-title="First service" data-cat="Hospitality" data-cat-key="catHospitality">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1400&q=80" alt="Restaurant table before guests arrive">
+        </figure>
+        <figure class="frame" data-title="Valley hour" data-cat="Landscape" data-cat-key="catLandscape">
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80" alt="Sunlit valley and a lone tree">
+        </figure>
+        <figure class="frame" data-title="Cloth and bone" data-cat="Still" data-cat-key="catStill">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80" alt="Wedding detail of fabric and flowers">
+        </figure>
+      </div>
+      <div class="caption">
+        <p class="cap-cat">Hospitality</p>
+        <p class="cap-title">Atlantic kitchen</p>
+      </div>
+    </section>
+
+    <section class="sheet" data-panel="about" hidden>
+      <div class="sheet-inner">
+        <h2 data-i18n="aboutTitle">Held still.</h2>
+        <p data-i18n="about1">Lumen is a fictional studio. The work is hospitality, quiet portraits, and rooms that keep their own time. Commissioned from Lisboa. Travels when the light is worth it.</p>
+        <p data-i18n="about2">No kits. No presets named after cities. One camera, one window, one long lunch after the sitting.</p>
+        <dl>
+          <div><dt data-i18n="selected">Selected</dt><dd data-i18n="selectedV">Hotels, kitchens, private houses</dd></div>
+          <div><dt data-i18n="format">Format</dt><dd data-i18n="formatV">Digital + 120</dd></div>
+          <div><dt data-i18n="books">Books</dt><dd data-i18n="booksV">On request</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="sheet" data-panel="contact" hidden>
+      <div class="sheet-inner">
+        <h2 data-i18n="write">Write first.</h2>
+        <p data-i18n="writeLede">A date, a room, what the pictures are for. This form stays on the page — a live job would reach the studio inbox.</p>
+        <form id="lumen-form">
+          <label><span data-i18n="name">Name</span> <input type="text" name="name" required></label>
+          <label><span data-i18n="email">Email</span> <input type="email" name="email" required></label>
+          <label><span data-i18n="sitting">The sitting</span> <textarea name="note" rows="4" required></textarea></label>
+          <button type="submit" data-i18n="send">Send</button>
+          <p class="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <aside class="demo-badge" data-i18n-aria="demo">
+    <span>Demo</span>
+    <a href="../atelier/" data-i18n="demoLink">I build sites like this</a>
+  </aside>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

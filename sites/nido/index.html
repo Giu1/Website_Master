@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="home">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nido — bread before the city wakes</title>
+  <meta name="description" content="Fictional bakery in Lisboa. Menu, hours, weekend lists, catering.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+  <header class="site-header">
+    <a class="logo" href="index.html">Nido</a>
+    <div class="header-tools">
+      <div class="lang" role="group" data-i18n-aria="lang">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
+    </div>
+    <nav id="nav" class="nav">
+      <a href="index.html" aria-current="page" data-i18n="navHome">Home</a>
+      <a href="menu.html" data-i18n="navMenu">Menu</a>
+      <a href="events.html" data-i18n="navWeek">Weekends</a>
+      <a href="catering.html" data-i18n="navCater">Catering</a>
+      <a href="contact.html" data-i18n="navVisit">Visit</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <p class="kicker" data-i18n="kicker">Open 07:00 · sold out by 13:00</p>
+      <h1 data-i18n="hero">Butter, flour, a little noise.</h1>
+      <p class="lede" data-i18n="lede">A fictional neighbourhood oven. Come early. The kouign-amann does not wait.</p>
+      <div class="actions">
+        <a class="btn" href="menu.html" data-i18n="tray">Today’s tray</a>
+        <a class="btn btn-ghost" href="contact.html" data-i18n="hoursMap">Hours &amp; map</a>
+      </div>
+    </section>
+    <section class="band">
+      <figure class="hero-pic">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1400&q=80" alt="Loaves cooling on a rack">
+      </figure>
+      <div class="tiles">
+        <article>
+          <h2 data-i18n="morning">Morning</h2>
+          <p data-i18n="morningCopy">Country loaf, croissant, coffee that is not an afterthought.</p>
+        </article>
+        <article>
+          <h2 data-i18n="weekend">Weekend</h2>
+          <p data-i18n="weekendCopy">Cinnamon lists, kids’ dough hour, the last focaccia at noon.</p>
+        </article>
+        <article>
+          <h2 data-i18n="office">Office</h2>
+          <p data-i18n="officeCopy">Breakfast boxes. You write a headcount. We butter the rest.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p data-i18n="footLine">Nido · Rua do Demo 3 · Tue–Sun 07–13</p>
+    <p><a href="tel:+351210000111">+351 21 000 111</a></p>
+  </footer>
+  <aside class="demo-badge" data-i18n-aria="demo"><span>Demo</span><a href="../atelier/" data-i18n="demoLink">I build sites like this</a></aside>
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

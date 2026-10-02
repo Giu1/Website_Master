@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="home">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atelier — sites with a pulse</title>
+  <meta name="description" content="A small studio making expressive websites for shops, salons, kitchens and local trades. Cheap in bulk. Handmade on purpose.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">Atelier<span>.</span></a>
+    <div class="header-tools">
+      <div class="lang" role="group" data-i18n-aria="lang">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
+    </div>
+    <nav id="nav" class="nav">
+      <a href="index.html" aria-current="page" data-i18n="navHome">Home</a>
+      <a href="work.html" data-i18n="navWork">Work</a>
+      <a href="offer.html" data-i18n="navOffer">Offer</a>
+      <a href="contact.html" data-i18n="navContact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow reveal" data-i18n="eyebrow">Studio · 2026</p>
+      <h1 class="display reveal" data-i18n="hero">
+        <span>Sites that</span>
+        <span class="italic">feel</span>
+        <span>handmade.</span>
+      </h1>
+      <p class="lede reveal" data-i18n="lede">Expressive websites for cafés, salons, kitchens and local trades. Built fast. Priced for bulk. Never a template with the logo swapped.</p>
+      <div class="hero-actions reveal">
+        <a class="btn" href="work.html" data-i18n="seeDemos">See the demos</a>
+        <a class="btn btn-ghost" href="offer.html" data-i18n="packages">Packages</a>
+      </div>
+      <p class="scroll-hint" aria-hidden="true" data-i18n="scroll">Scroll</p>
+    </section>
+
+    <section class="strip">
+      <p data-i18n="strip">Kinetic type · Broken grids · Booking desks · Local SEO bones · Mobile first</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="live">Live demos</p>
+        <h2 data-i18n="rooms">Seven rooms. Seven voices.</h2>
+        <p data-i18n="roomsLede">Each site lives in its own folder. Open one, sit with it, then tell us which mood you want.</p>
+      </div>
+      <div class="work-grid">
+        <a class="card card-spa" href="../lumen/">
+          <span class="card-meta">01 · SPA</span>
+          <h3>Lumen</h3>
+          <p data-i18n="lumen">Photographer lookbook. Cinema scroll, almost no copy.</p>
+        </a>
+        <a class="card card-spa" href="../osteria/">
+          <span class="card-meta">02 · SPA</span>
+          <h3>Osteria</h3>
+          <p data-i18n="osteria">A restaurant told as a meal. Editorial, warm, hungry.</p>
+        </a>
+        <a class="card card-spa" href="../vela/">
+          <span class="card-meta">03 · SPA</span>
+          <h3>Vela</h3>
+          <p data-i18n="vela">Perfume as colour and type. A brand, not a catalogue.</p>
+        </a>
+        <a class="card card-full" href="../aura/">
+          <span class="card-meta">04 · Complete</span>
+          <h3>Aura</h3>
+          <p data-i18n="aura">Salon with prices, team, gallery and booking.</p>
+        </a>
+        <a class="card card-full" href="../nido/">
+          <span class="card-meta">05 · Complete</span>
+          <h3>Nido</h3>
+          <p data-i18n="nido">Bakery that smiles. Menu, hours, weekend lists.</p>
+        </a>
+        <a class="card card-full" href="../brightline/">
+          <span class="card-meta">06 · Complete</span>
+          <h3>Brightline</h3>
+          <p data-i18n="brightline">Home cleaning that converts. Call, quote, trust.</p>
+        </a>
+        <a class="card card-desk" href="../aura-desk/">
+          <span class="card-meta">07 · Backoffice</span>
+          <h3>Aura Desk</h3>
+          <p data-i18n="desk">The salon’s admin. Change a price, watch the site move.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="section section-split">
+      <div>
+        <p class="eyebrow" data-i18n="sell">How we sell this</p>
+        <h2 data-i18n="three">Three products. Not “a website”.</h2>
+      </div>
+      <ol class="rungs">
+        <li>
+          <strong data-i18n="spa">Lookbook SPA</strong>
+          <span data-i18n="spaLede">Lumen, Osteria, Vela. Pride pieces. From €450.</span>
+        </li>
+        <li>
+          <strong data-i18n="local">Local complete</strong>
+          <span data-i18n="localLede">Aura, Nido, Brightline. The bulk SKU. From €750.</span>
+        </li>
+        <li>
+          <strong data-i18n="plus">Site + desk</strong>
+          <span data-i18n="plusLede">Aura with Aura Desk. You run the shop. From €1,100.</span>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footer">Atelier · fictional studio, real craft.</p>
+    <p><a href="contact.html" data-i18n="start">Start a batch</a></p>
+  </footer>
+
+  <aside class="demo-badge" data-i18n-aria="demo">
+    <span>Demo</span>
+    <a href="index.html" data-i18n="demoLink">I build sites like this</a>
+  </aside>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

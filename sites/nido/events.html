@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="events">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weekends — Nido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+  <header class="site-header">
+    <a class="logo" href="index.html">Nido</a>
+    <div class="header-tools">
+      <div class="lang" role="group" data-i18n-aria="lang">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
+    </div>
+    <nav id="nav" class="nav">
+      <a href="index.html" data-i18n="navHome">Home</a>
+      <a href="menu.html" data-i18n="navMenu">Menu</a>
+      <a href="events.html" aria-current="page" data-i18n="navWeek">Weekends</a>
+      <a href="catering.html" data-i18n="navCater">Catering</a>
+      <a href="contact.html" data-i18n="navVisit">Visit</a>
+    </nav>
+  </header>
+  <main id="main" class="page">
+    <h1 data-i18n="satLists">Saturday lists.</h1>
+    <ol class="events">
+      <li>
+        <p class="when">Sat 27 Sep · 09:00</p>
+        <h2 data-i18n="ev1t">Cinnamon morning</h2>
+        <p data-i18n="ev1c">A tray of rolls and a playlist that is older than the mixer.</p>
+      </li>
+      <li>
+        <p class="when">Sun 28 Sep · 10:30</p>
+        <h2 data-i18n="ev2t">Kids’ dough hour</h2>
+        <p data-i18n="ev2c">Small hands, a lot of flour, one loaf to take home.</p>
+      </li>
+      <li>
+        <p class="when">Sat 4 Oct · 08:00</p>
+        <h2 data-i18n="ev3t">Harvest focaccia</h2>
+        <p data-i18n="ev3c">Grapes, rosemary, the last of the summer oil.</p>
+      </li>
+    </ol>
+  </main>
+  <footer class="site-footer">
+    <p data-i18n="footer">Nido · fictional bakery</p>
+    <p><a href="contact.html" data-i18n="visit">Visit</a></p>
+  </footer>
+  <aside class="demo-badge" data-i18n-aria="demo"><span>Demo</span><a href="../atelier/" data-i18n="demoLink">I build sites like this</a></aside>
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="home">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aura — hair with a point of view</title>
+  <meta name="description" content="Fictional salon in Lisboa. Cuts, colour, booking. Prices live from the demo desk.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+  <p class="announce" data-announce>New guests: first cut includes a consult.</p>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">Aura</a>
+    <div class="header-tools">
+      <div class="lang" role="group" data-i18n-aria="lang">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
+    </div>
+    <nav id="nav" class="nav">
+      <a href="index.html" aria-current="page" data-i18n="navHome">Home</a>
+      <a href="services.html" data-i18n="navServices">Services</a>
+      <a href="team.html" data-i18n="navTeam">Team</a>
+      <a href="gallery.html" data-i18n="navGallery">Gallery</a>
+      <a href="booking.html" data-i18n="navBook">Book</a>
+      <a href="contact.html" data-i18n="navContact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div>
+        <p data-i18n="place">Chiado · Lisboa</p>
+        <h1 data-hero>Hair with a point of view.</h1>
+        <p class="lede" data-i18n="lede">A small floor, three chairs, and colour that does not shout unless you ask it to.</p>
+        <div class="actions">
+          <a class="btn" href="booking.html" data-i18n="book">Book a chair</a>
+          <a class="btn btn-ghost" href="services.html" data-i18n="prices">See prices</a>
+        </div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80" alt="Warm salon interior">
+    </section>
+
+    <section class="band">
+      <div class="grid-2">
+        <div class="glass">
+          <h2 data-i18n="today">Today on the floor</h2>
+          <p data-i18n="todayCopy">Walk-ins after 16:00 if a chair frees. Otherwise write us a time.</p>
+          <a class="btn" href="tel:+351210000000" data-i18n="callDesk">Call the desk</a>
+        </div>
+        <div class="card">
+          <h2 data-i18n="hours">Hours</h2>
+          <ul class="hours" data-hours></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="call-bar">
+    <a href="tel:+351210000000">+351 21 000 000</a>
+    <a href="https://wa.me/351210000000">WhatsApp</a>
+  </div>
+
+  <footer class="site-footer">
+    <p data-i18n="footer">Aura · fictional salon</p>
+    <p><a href="../aura-desk/" data-i18n="openDesk">Open the desk</a></p>
+  </footer>
+
+  <aside class="demo-badge" data-i18n-aria="demo">
+    <span>Demo</span>
+    <a href="../atelier/" data-i18n="demoLink">I build sites like this</a>
+  </aside>
+
+  <script src="js/store.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

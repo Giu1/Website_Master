@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#17161c" />
+    <title>FORMA — Figuras, chaveiros e peças premium impressas em 3D</title>
+    <meta
+      name="description"
+      content="Atelier de impressão 3D em Portugal: figuras em várias peças, chaveiros personalizados, miniaturas, decoração e props. Impressos numa Bambu Lab A2L, enviados para toda a UE e Brasil."
+    />
+    <meta property="og:title" content="FORMA — Figuras, chaveiros e peças premium impressas em 3D" />
+    <meta property="og:description" content="Ilumina a tua coleção com arte 3D. Peças de coleção feitas em Portugal numa Bambu Lab A2L." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="home">
+    <noscript><p class="noscript">FORMA precisa de JavaScript para a loja, o carrinho e o idioma.</p></noscript>
+
+    <main id="main">
+      <!-- ============================================================ HERO -->
+      <section class="hero" id="top">
+        <div class="hero-silhouettes" id="hero-silhouettes" aria-hidden="true"></div>
+        <div class="wrap hero-inner">
+          <div class="hero-copy reveal">
+            <h1>
+              <span data-i18n="hero.titleA">Ilumina a tua</span>
+              <span class="gradient-word" data-i18n="hero.titleWord">coleção</span>
+              <span data-i18n="hero.titleB">com arte 3D</span>
+            </h1>
+            <p class="lead" data-i18n="hero.lead"></p>
+            <a class="btn btn-grad btn-lg" href="loja.html" data-i18n="hero.cta">Ir para a loja</a>
+          </div>
+          <figure class="hero-media reveal">
+            <svg viewBox="0 0 600 600" role="img" aria-label="Shadow lamp">
+              <defs>
+                <radialGradient id="wall" cx="50%" cy="42%" r="60%">
+                  <stop offset="0" stop-color="#2a2933" />
+                  <stop offset="1" stop-color="#0b0a0e" />
+                </radialGradient>
+                <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0" stop-color="#eafffd" stop-opacity="0.95" />
+                  <stop offset="0.55" stop-color="#a2fef9" stop-opacity="0.55" />
+                  <stop offset="1" stop-color="#a2fef9" stop-opacity="0" />
+                </radialGradient>
+                <linearGradient id="cone" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0" stop-color="#a2fef9" stop-opacity="0.35" />
+                  <stop offset="1" stop-color="#a2fef9" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient id="lampbody" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#34333d" />
+                  <stop offset="1" stop-color="#1c1b22" />
+                </linearGradient>
+              </defs>
+              <rect width="600" height="600" fill="url(#wall)" />
+              <g opacity="0.08" stroke="#fff" stroke-width="1">
+                <path d="M0 80H600M0 160H600M0 240H600M0 320H600M0 400H600M0 480H600" />
+              </g>
+              <polygon class="lamp-cone" points="268,470 332,470 560,40 40,40" fill="url(#cone)" />
+              <circle class="lamp-glow" cx="300" cy="235" r="205" fill="url(#glow)" />
+              <!-- silhouette -->
+              <g fill="#0b0a0e">
+                <path d="M120 330c40-120 100-40 150-10 30 18 60-10 80-50 18-38 60-50 90-20 22 22 20 60-8 80-30 22-70 6-90-14-20 30-60 60-110 40-30-12-60 8-80 40z" />
+                <path d="M235 275c-30-70-70-110-130-120 60-10 120 20 160 80z" />
+                <path d="M300 250c10-70 60-120 130-130-40 30-70 70-80 130z" />
+                <circle cx="430" cy="260" r="34" />
+                <path d="M410 232l-14-40 30 24zM446 228l24-34-4 40z" />
+                <path d="M205 300l-20 60 40-40zM255 285l-10 50 30-30zM330 262l-2 46 22-30z" />
+              </g>
+              <circle cx="441" cy="252" r="4" fill="#a2fef9" opacity="0.9" />
+              <!-- lamp -->
+              <rect x="238" y="468" width="124" height="86" rx="16" fill="url(#lampbody)" stroke="#4a4955" />
+              <rect x="268" y="462" width="64" height="8" rx="4" fill="#a2fef9" opacity="0.9" />
+              <circle cx="300" cy="512" r="7" fill="#f9c5f3" />
+              <text x="300" y="545" text-anchor="middle" font-family="Unbounded, sans-serif" font-size="10" fill="#8a8994" letter-spacing="3">FORMA</text>
+              <ellipse cx="300" cy="566" rx="120" ry="10" fill="#000" opacity="0.5" />
+            </svg>
+            <figcaption data-i18n="hero.mediaCaption"></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ======================================================= TRUST BAR -->
+      <section class="trust" aria-label="highlights">
+        <div class="wrap trust-inner">
+          <div class="trust-item"><i class="ri-truck-line"></i><div><strong data-i18n="trust.shipping.title"></strong><span data-i18n="trust.shipping.desc"></span></div></div>
+          <div class="trust-item"><i class="ri-shield-check-line"></i><div><strong data-i18n="trust.secure.title"></strong><span data-i18n="trust.secure.desc"></span></div></div>
+          <div class="trust-item"><i class="ri-chat-smile-2-line"></i><div><strong data-i18n="trust.help.title"></strong><span data-i18n="trust.help.desc"></span></div></div>
+        </div>
+      </section>
+
+      <!-- ====================================================== CATEGORIES -->
+      <section class="section section-cats" id="categorias">
+        <div class="wrap">
+          <header class="section-head reveal">
+            <p class="kicker" data-i18n="cats.kicker">CATEGORIAS</p>
+            <h2 data-i18n="cats.title"></h2>
+            <p class="lead" data-i18n="cats.lead"></p>
+          </header>
+          <div class="cat-grid reveal" id="cat-grid"></div>
+        </div>
+      </section>
+
+      <!-- ======================================================== FEATURED -->
+      <section class="section section-cream" id="destaques">
+        <div class="wrap">
+          <header class="section-head reveal">
+            <h2 data-i18n="featured.title"></h2>
+            <p class="lead" data-i18n="featured.lead"></p>
+          </header>
+          <div class="product-grid reveal" id="featured-grid"></div>
+          <div class="more-row">
+            <a class="btn btn-dark" href="loja.html" data-i18n="featured.more">Ver mais produtos</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================== ABOUT -->
+      <section class="section section-white" id="sobre">
+        <div class="wrap about-grid">
+          <figure class="about-media reveal" aria-hidden="true">
+            <svg viewBox="0 0 800 600">
+              <defs>
+                <linearGradient id="ab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2a33" /><stop offset="1" stop-color="#151419" /></linearGradient>
+                <linearGradient id="bed" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3944" /><stop offset="1" stop-color="#25242c" /></linearGradient>
+              </defs>
+              <rect width="800" height="600" fill="url(#ab)" />
+              <rect x="0" y="470" width="800" height="130" fill="#0f0e12" />
+              <!-- printer frame -->
+              <rect x="150" y="90" width="500" height="400" rx="26" fill="#1d1c23" stroke="#3a3944" stroke-width="3" />
+              <rect x="170" y="110" width="460" height="330" rx="16" fill="#111015" />
+              <rect x="190" y="118" width="120" height="16" rx="8" fill="#25242c" />
+              <circle cx="205" cy="126" r="5" fill="#25d366" />
+              <text x="620" y="130" text-anchor="end" font-family="Unbounded, sans-serif" font-size="14" fill="#8a8994" letter-spacing="2">A2L</text>
+              <!-- gantry -->
+              <g class="gantry-anim">
+                <rect x="200" y="200" width="300" height="14" rx="7" fill="#42414a" />
+                <g class="head-anim">
+                  <rect x="250" y="186" width="54" height="52" rx="8" fill="#5a5964" />
+                  <path d="M270 238l7 14 7-14z" fill="#a2fef9" />
+                </g>
+              </g>
+              <!-- bed -->
+              <rect x="200" y="380" width="400" height="26" rx="8" fill="url(#bed)" />
+              <g opacity="0.25" stroke="#a2fef9" stroke-width="1"><path d="M220 393H580" /></g>
+              <!-- printed object (figure) -->
+              <g transform="translate(360 262) scale(1.5)">
+                <circle cx="40" cy="15" r="8" fill="#f4ecdc" />
+                <rect x="31" y="25" width="18" height="24" rx="3" fill="#f4ecdc" />
+                <rect x="20" y="27" width="10" height="6" rx="2" fill="#7b8cff" />
+                <rect x="50" y="27" width="10" height="6" rx="2" fill="#7b8cff" />
+                <rect x="31" y="51" width="7" height="18" fill="#f4ecdc" />
+                <rect x="42" y="51" width="7" height="18" fill="#f4ecdc" />
+              </g>
+              <!-- spools -->
+              <circle cx="90" cy="440" r="42" fill="#25242c" stroke="#3a3944" stroke-width="4" />
+              <circle cx="90" cy="440" r="26" fill="#f9c5f3" />
+              <circle cx="90" cy="440" r="8" fill="#111015" />
+              <circle cx="715" cy="440" r="42" fill="#25242c" stroke="#3a3944" stroke-width="4" />
+              <circle cx="715" cy="440" r="26" fill="#a2fef9" />
+              <circle cx="715" cy="440" r="8" fill="#111015" />
+              <!-- finished pieces on the table -->
+              <g transform="translate(560 500) scale(0.9)">
+                <path d="M22 22h36l8 40H14z" fill="#f4ecdc" />
+                <path d="M36 10c4 6 4 10 4 12s0-6 4-12" stroke="#3dba9a" stroke-width="4" stroke-linecap="round" fill="none" />
+              </g>
+              <g transform="translate(120 505) scale(0.8)">
+                <rect x="10" y="28" width="60" height="24" rx="7" fill="#f4ecdc" />
+                <circle cx="22" cy="40" r="4" fill="#ff6b2c" />
+                <path d="M32 36h28M32 44h20" stroke="#1a1410" stroke-width="3" stroke-linecap="round" />
+              </g>
+            </svg>
+            <figcaption class="about-badge" data-i18n="about.badge"></figcaption>
+          </figure>
+          <div class="about-text reveal">
+            <h2 data-i18n="about.title"></h2>
+            <p data-i18n="about.p1"></p>
+            <p data-i18n="about.p2"></p>
+            <p data-i18n="about.p3"></p>
+            <p data-i18n="about.p4"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================== TESTIMONIALS -->
+      <section class="section section-cream testi" id="testemunhos">
+        <div class="wrap">
+          <header class="section-head reveal">
+            <h2 data-i18n="testimonials.title"></h2>
+          </header>
+          <div class="testi-track" id="testi-track" aria-live="polite"></div>
+          <div class="testi-nav">
+            <button class="arrow" type="button" id="testi-prev" data-i18n-aria="testimonials.prev"><i class="ri-arrow-left-s-line"></i></button>
+            <div class="testi-dots" id="testi-dots"></div>
+            <button class="arrow" type="button" id="testi-next" data-i18n-aria="testimonials.next"><i class="ri-arrow-right-s-line"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================= CTA -->
+      <section class="section-dark cta">
+        <div class="wrap reveal">
+          <h2 data-i18n="cta.title"></h2>
+          <p class="lead" data-i18n="cta.lead"></p>
+          <a class="btn btn-grad btn-lg" href="loja.html" data-i18n="cta.button">Ir para a loja</a>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/home.js"></script>
+  </body>
+</html>

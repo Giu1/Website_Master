@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="contact">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Atelier</title>
+  <meta name="description" content="Start a batch of websites. Tell us the shop type and how many.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">Atelier<span>.</span></a>
+    <div class="header-tools">
+      <div class="lang" role="group" data-i18n-aria="lang">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
+    </div>
+    <nav id="nav" class="nav">
+      <a href="index.html" data-i18n="navHome">Home</a>
+      <a href="work.html" data-i18n="navWork">Work</a>
+      <a href="offer.html" data-i18n="navOffer">Offer</a>
+      <a href="contact.html" aria-current="page" data-i18n="navContact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main" class="page">
+    <header class="page-hero">
+      <p class="eyebrow reveal" data-i18n="contactEyebrow">Contact</p>
+      <h1 class="display reveal" data-i18n="contactHero">Tell us the batch.</h1>
+      <p class="lede reveal" data-i18n="contactLede">This form is a demo. On a live job it can land in your inbox. For now it confirms on the page.</p>
+    </header>
+
+    <form class="contact-form reveal" id="contact-form" novalidate>
+      <label>
+        <span data-i18n="name">Name</span>
+        <input type="text" name="name" required autocomplete="name">
+      </label>
+      <label>
+        <span data-i18n="email">Email</span>
+        <input type="email" name="email" required autocomplete="email">
+      </label>
+      <label>
+        <span data-i18n="kind">What are we making?</span>
+        <select name="kind">
+          <option value="spa" data-i18n="kindSpa">Lookbook SPA</option>
+          <option value="local" data-i18n="kindLocal">Local complete</option>
+          <option value="desk" data-i18n="kindDesk">Site + desk</option>
+          <option value="batch" data-i18n="kindBatch">A batch of shops</option>
+        </select>
+      </label>
+      <label>
+        <span data-i18n="count">How many sites?</span>
+        <input type="number" name="count" min="1" max="50" value="3">
+      </label>
+      <label class="full">
+        <span data-i18n="notes">Notes</span>
+        <textarea name="notes" rows="4" data-i18n-placeholder="notesPh" placeholder="City, trade, language, a demo you liked."></textarea>
+      </label>
+      <button class="btn" type="submit" data-i18n="send">Send the note</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footer">Atelier · fictional studio, real craft.</p>
+    <p><a href="mailto:hello@atelier.demo">hello@atelier.demo</a></p>
+  </footer>
+
+  <aside class="demo-badge" data-i18n-aria="demo">
+    <span>Demo</span>
+    <a href="index.html" data-i18n="demoLink">I build sites like this</a>
+  </aside>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

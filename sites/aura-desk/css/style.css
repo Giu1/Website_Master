@@ -1,0 +1,208 @@
+:root {
+  --bg: #f4f1ea;
+  --ink: #1c1a16;
+  --mute: #6b655c;
+  --line: #ddd6c8;
+  --side: #1c1a16;
+  --card: #fffdf8;
+  --good: #2f6b4f;
+  --warn: #a45b2c;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { overflow-x: clip; }
+
+.lang-bar {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  z-index: 5;
+}
+
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--card); }
+.lang button {
+  min-width: 2.4rem;
+  min-height: 2.3rem;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  color: var(--mute);
+}
+.lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+h1, h2, .brand {
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-weight: 500;
+}
+
+a { color: inherit; }
+
+.skip {
+  position: absolute;
+  left: 0.8rem;
+  top: -3rem;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.4rem 0.6rem;
+}
+
+.skip:focus { top: 0.8rem; }
+
+.login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.login-card {
+  width: min(28rem, 100%);
+  background: var(--card);
+  padding: 1.8rem;
+  border: 1px solid var(--line);
+}
+
+.eyebrow { letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.72rem; color: var(--mute); }
+.login h1 { font-size: 2.2rem; margin: 0.2rem 0 0.8rem; }
+
+.login form, .stack-form { display: grid; gap: 0.75rem; }
+label { display: grid; gap: 0.3rem; font-size: 0.9rem; }
+
+input, select, button {
+  font: inherit;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+button {
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  min-height: 100vh;
+}
+
+.side {
+  background: var(--side);
+  color: #f4f1ea;
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.brand { margin: 0 0 1rem; font-size: 1.3rem; }
+
+.side nav { display: grid; gap: 0.25rem; }
+
+.side button, .side-link {
+  background: transparent;
+  color: inherit;
+  border: 0;
+  text-align: left;
+  padding: 0.55rem 0.5rem;
+  text-decoration: none;
+  font: inherit;
+}
+
+.side button[aria-current="page"] { background: #2c2923; }
+
+.side-link, #logout { margin-top: auto; color: #c8c0b2; }
+
+.main { padding: 1.6rem; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  margin: 1rem 0 2rem;
+}
+
+.stat {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 1rem;
+}
+
+.stat strong { display: block; font-size: 2rem; font-family: "IBM Plex Serif", serif; }
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+}
+
+th, td {
+  text-align: left;
+  padding: 0.7rem 0.65rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+
+.inline-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+}
+
+.inline-form input { min-width: 8rem; }
+
+.pill {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: #ece5d6;
+  font-size: 0.78rem;
+}
+
+.pill.done { background: #d8eee2; color: var(--good); }
+.pill.cancelled { background: #f3ddd2; color: var(--warn); }
+
+.form-status { min-height: 1.2em; color: var(--good); }
+
+.demo-badge {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.4rem 0.7rem 0.4rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.demo-badge span { background: #f0c36b; color: #1c1a16; padding: 0.12rem 0.4rem; border-radius: 999px; }
+.demo-badge a { text-decoration: none; }
+
+@media (max-width: 800px) {
+  .app { grid-template-columns: 1fr; }
+  .side { flex-direction: row; flex-wrap: wrap; }
+  .side nav { display: flex; flex-wrap: wrap; }
+  .side button { min-height: 2.4rem; }
+  .stats { grid-template-columns: 1fr; }
+  .side-link, #logout { margin-top: 0; min-height: 2.4rem; }
+  .login { padding-top: 4rem; }
+  .login-card { width: min(100%, 28rem); }
+  .demo-badge { left: 0.75rem; right: auto; max-width: calc(100vw - 1.5rem); }
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#17161c" />
+    <title>Checkout | FORMA</title>
+    <meta name="description" content="Finalizar pedido FORMA." />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="checkout" data-title="pages.checkout">
+    <noscript><p class="noscript">FORMA precisa de JavaScript para a loja, o carrinho e o idioma.</p></noscript>
+    <main id="main">
+      <section class="page-head">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="breadcrumb">
+            <a href="index.html" data-i18n="nav.home">Início</a><span>/</span><a href="carrinho.html" data-i18n="pages.cart">Carrinho</a><span>/</span><span data-i18n="pages.checkout">Checkout</span>
+          </nav>
+          <h1 data-i18n="checkout.title">Finalizar pedido</h1>
+          <p class="lead" data-i18n="checkout.lead"></p>
+        </div>
+      </section>
+
+      <div class="wrap" id="checkout-empty" hidden>
+        <div class="empty">
+          <p data-i18n="checkout.emptyCart"></p>
+          <a class="btn btn-grad" href="loja.html" data-i18n="cart.goShop">Voltar à loja</a>
+        </div>
+      </div>
+
+      <div class="wrap success" id="checkout-success" hidden>
+        <div class="check-ico"><i class="ri-check-line"></i></div>
+        <h2 data-i18n="checkout.success.title">Pedido recebido!</h2>
+        <p class="lead" id="ok-body"></p>
+        <p class="muted" data-i18n="checkout.success.number">Número do pedido</p>
+        <p class="order-no" id="ok-number"></p>
+        <a class="btn btn-grad" href="pedidos.html" data-i18n="checkout.success.next">Ver os meus pedidos</a>
+        <a class="btn btn-ghost" href="loja.html" data-i18n="checkout.success.shop">Continuar a comprar</a>
+      </div>
+
+      <form class="wrap checkout-layout" id="checkout-form">
+        <div>
+          <div class="panel">
+            <h2><span class="num">1</span> <span data-i18n="checkout.contact">Os teus dados</span></h2>
+            <div class="form-grid">
+              <label class="field span2"><span data-i18n="checkout.name">Nome</span><input name="name" required autocomplete="name" /></label>
+              <label class="field"><span data-i18n="checkout.email">E-mail</span><input name="email" type="email" required autocomplete="email" /></label>
+              <label class="field"><span data-i18n="checkout.phone">Telemóvel</span><input name="phone" type="tel" autocomplete="tel" /></label>
+              <label class="field span2"><span data-i18n="checkout.address">Morada</span><input name="address" required autocomplete="street-address" /></label>
+              <label class="field span2"><span data-i18n="checkout.address2">Andar</span><input name="address2" autocomplete="address-line2" /></label>
+              <label class="field"><span data-i18n="checkout.city">Cidade</span><input name="city" required autocomplete="address-level2" /></label>
+              <label class="field"><span data-i18n="checkout.zip">Código postal</span><input name="zip" required autocomplete="postal-code" /></label>
+              <label class="field span2"><span data-i18n="checkout.country">País</span><input name="country" required autocomplete="country-name" value="Portugal" /></label>
+              <label class="field span2"><span data-i18n="checkout.notes">Notas</span><textarea name="notes" data-i18n-placeholder="checkout.notesPlaceholder"></textarea></label>
+            </div>
+          </div>
+          <div class="panel">
+            <h2><span class="num">2</span> <span data-i18n="checkout.shipping">Envio</span></h2>
+            <div class="radio-list" id="ship-list"></div>
+          </div>
+          <div class="panel">
+            <h2><span class="num">3</span> <span data-i18n="checkout.payment">Pagamento</span></h2>
+            <div class="radio-list" id="pay-list"></div>
+            <p class="muted small mt" data-i18n="checkout.paymentNote"></p>
+            <label class="consent"><input type="checkbox" name="consent" /><span data-i18n="checkout.consent"></span></label>
+            <p class="form-status" id="ck-status" hidden></p>
+            <button class="btn btn-grad btn-lg btn-block" type="submit" id="place-btn" data-i18n="checkout.place">Confirmar pedido</button>
+            <a class="btn btn-wa btn-block mt" id="wa-order" hidden data-i18n="checkout.whatsapp">Enviar pedido por WhatsApp</a>
+          </div>
+        </div>
+        <aside class="summary">
+          <h2 data-i18n="checkout.summary">Resumo</h2>
+          <div class="sum-lines" id="sum-lines"></div>
+          <div class="summary-row"><span data-i18n="cart.subtotal">Subtotal</span><strong id="ck-sub">—</strong></div>
+          <div class="summary-row"><span data-i18n="cart.shipping">Envio</span><span id="ck-ship">—</span></div>
+          <div class="summary-row total"><span data-i18n="cart.grandTotal">Total</span><strong id="ck-total">—</strong></div>
+        </aside>
+      </form>
+    </main>
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/checkout.js"></script>
+  </body>
+</html>

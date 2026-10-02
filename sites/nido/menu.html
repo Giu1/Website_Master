@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="menu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Menu — Nido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+  <header class="site-header">
+    <a class="logo" href="index.html">Nido</a>
+    <div class="header-tools">
+      <div class="lang" role="group" data-i18n-aria="lang">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
+    </div>
+    <nav id="nav" class="nav">
+      <a href="index.html" data-i18n="navHome">Home</a>
+      <a href="menu.html" aria-current="page" data-i18n="navMenu">Menu</a>
+      <a href="events.html" data-i18n="navWeek">Weekends</a>
+      <a href="catering.html" data-i18n="navCater">Catering</a>
+      <a href="contact.html" data-i18n="navVisit">Visit</a>
+    </nav>
+  </header>
+  <main id="main" class="page">
+    <h1 data-i18n="trayTitle">The tray.</h1>
+    <div class="menu">
+      <article>
+        <h2 data-i18n="bread">Bread</h2>
+        <ul>
+          <li><span data-i18n="country">Country loaf</span><span>€4.20 · vg</span></li>
+          <li><span data-i18n="rye">Seeded rye</span><span>€4.80 · vg</span></li>
+          <li><span data-i18n="foca">Olive focaccia</span><span>€3.50 · vg</span></li>
+        </ul>
+      </article>
+      <article>
+        <h2 data-i18n="vienno">Viennoiserie</h2>
+        <ul>
+          <li><span>Croissant</span><span>€2.40</span></li>
+          <li><span>Pain au chocolat</span><span>€2.70</span></li>
+          <li><span>Kouign-amann</span><span>€3.80</span></li>
+        </ul>
+      </article>
+      <article>
+        <h2 data-i18n="sweet">Sweet</h2>
+        <ul>
+          <li><span>Pastel de nata</span><span>€1.60</span></li>
+          <li><span>Olive oil cake</span><span>€3.20 · gf</span></li>
+          <li><span>Season tart</span><span>€4.00</span></li>
+        </ul>
+      </article>
+    </div>
+    <p class="note" data-i18n="note">vg vegetarian · gf gluten-free flour. Trays change when the oven says so.</p>
+  </main>
+  <footer class="site-footer">
+    <p data-i18n="footer">Nido · fictional bakery</p>
+    <p><a href="contact.html" data-i18n="visit">Visit</a></p>
+  </footer>
+  <aside class="demo-badge" data-i18n-aria="demo"><span>Demo</span><a href="../atelier/" data-i18n="demoLink">I build sites like this</a></aside>
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="contact">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visit — Nido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+  <header class="site-header">
+    <a class="logo" href="index.html">Nido</a>
+    <div class="header-tools">
+      <div class="lang" role="group" data-i18n-aria="lang">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
+    </div>
+    <nav id="nav" class="nav">
+      <a href="index.html" data-i18n="navHome">Home</a>
+      <a href="menu.html" data-i18n="navMenu">Menu</a>
+      <a href="events.html" data-i18n="navWeek">Weekends</a>
+      <a href="catering.html" data-i18n="navCater">Catering</a>
+      <a href="contact.html" aria-current="page" data-i18n="navVisit">Visit</a>
+    </nav>
+  </header>
+  <main id="main" class="page">
+    <h1 data-i18n="nest">The nest.</h1>
+    <div class="split">
+      <div>
+        <p>Rua do Demo 3<br>1200-000 Lisboa</p>
+        <p data-i18n="rest">Tue–Sun · 07:00–13:00<br>Monday: the mixer rests.</p>
+        <p><a href="tel:+351210000111">+351 21 000 111</a></p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=1200&q=80" alt="Bakery counter in warm light">
+    </div>
+  </main>
+  <footer class="site-footer">
+    <p data-i18n="footer">Nido · fictional bakery</p>
+    <p><a href="tel:+351210000111" data-i18n="call">Call</a></p>
+  </footer>
+  <aside class="demo-badge" data-i18n-aria="demo"><span>Demo</span><a href="../atelier/" data-i18n="demoLink">I build sites like this</a></aside>
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#17161c" />
+    <title>Produto | FORMA</title>
+    <meta name="description" content="Peça impressa em 3D na FORMA." />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="shop" data-title="pages.product">
+    <noscript><p class="noscript">FORMA precisa de JavaScript para a loja, o carrinho e o idioma.</p></noscript>
+
+    <main id="main">
+      <div class="wrap">
+        <nav class="crumbs on-light" id="crumbs" aria-label="breadcrumb" style="padding-top: 22px"></nav>
+      </div>
+      <div class="wrap product-layout" id="product-root"></div>
+      <section class="wrap" id="tabs-root"></section>
+      <section class="section-tight" id="related-section" hidden>
+        <div class="wrap">
+          <h2 data-i18n="product.related"></h2>
+          <div class="product-grid related-grid" id="related"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/product.js"></script>
+  </body>
+</html>

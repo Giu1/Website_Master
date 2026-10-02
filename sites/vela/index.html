@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="home">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vela — a perfume, not a catalogue</title>
+  <meta name="description" content="Fictional perfume house. Saturated colour, broken grid, notes you can open.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#notes" data-i18n="skip">Skip to notes</a>
+  <div class="blob" aria-hidden="true"></div>
+
+  <header class="bar">
+    <a href="#top">Vela</a>
+    <div class="header-tools">
+      <div class="lang" role="group" data-i18n-aria="lang">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <nav>
+        <a href="#notes" data-i18n="notes">Notes</a>
+        <a href="#look" data-i18n="look">Look</a>
+        <a href="#ask" data-i18n="ask">Ask</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="kicker" data-i18n="kicker">N°07 · Night Bloom</p>
+      <h1 data-i18n="hero">Wear the hour after the lights go out.</h1>
+      <p class="lead" data-i18n="lead">A fictional house. One juice. No seasonal drop. Tuberose, ink, and the heat that stays in a room.</p>
+      <div class="hero-art">
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=80" alt="Dark glass perfume bottle">
+        <p class="stamp">50 ml</p>
+      </div>
+    </section>
+
+    <section id="notes" class="notes">
+      <article class="tile t1">
+        <h2 data-i18n="top">Top</h2>
+        <p data-i18n="topCopy">Bitter orange peel, pink pepper, a struck match.</p>
+      </article>
+      <article class="tile t2">
+        <h2 data-i18n="heart">Heart</h2>
+        <p data-i18n="heartCopy">Tuberose, not polite. Jasmine that refuses daylight.</p>
+      </article>
+      <article class="tile t3">
+        <h2 data-i18n="base">Base</h2>
+        <p data-i18n="baseCopy">Ink, suede, a little smoke. Skin remembers it.</p>
+      </article>
+      <figure class="tile t4">
+        <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1000&q=80" alt="Close flowers in saturated light">
+      </figure>
+      <figure class="tile t5">
+        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1000&q=80" alt="Perfume bottles on a coloured surface">
+      </figure>
+    </section>
+
+    <section id="look" class="look">
+      <h2 data-i18n="lookTitle">Not a shop. A look.</h2>
+      <div class="look-row">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1000&q=80" alt="Fragrance bottle among dried botanicals">
+          <figcaption data-i18n="cap1">House still · 01</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1000&q=80" alt="Gold perfume bottle on marble">
+          <figcaption data-i18n="cap2">House still · 02</figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1400&q=80" alt="Soft fabrics and warm light">
+          <figcaption data-i18n="cap3">Cloth · evening</figcaption>
+        </figure>
+      </div>
+      <p class="price-line" data-i18n="price">Night Bloom · 50 ml · <s>€190</s> sample on request</p>
+    </section>
+
+    <section id="ask" class="ask">
+      <h2 data-i18n="askTitle">Ask for a sample.</h2>
+      <form id="vela-form">
+        <label><span data-i18n="name">Name</span> <input name="name" required></label>
+        <label><span data-i18n="email">Email</span> <input type="email" name="email" required></label>
+        <label><span data-i18n="city">City</span> <input name="city" placeholder="Lisboa"></label>
+        <button type="submit" data-i18n="request">Request</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <aside class="demo-badge" data-i18n-aria="demo">
+    <span>Demo</span>
+    <a href="../atelier/" data-i18n="demoLink">I build sites like this</a>
+  </aside>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

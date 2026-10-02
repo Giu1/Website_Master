@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#17161c" />
+    <title>Carrinho | FORMA</title>
+    <meta name="description" content="Carrinho de compras FORMA." />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="cart" data-title="pages.cart">
+    <noscript><p class="noscript">FORMA precisa de JavaScript para a loja, o carrinho e o idioma.</p></noscript>
+    <main id="main">
+      <section class="page-head">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="breadcrumb">
+            <a href="index.html" data-i18n="nav.home">Início</a><span>/</span><span data-i18n="pages.cart">Carrinho</span>
+          </nav>
+          <h1 data-i18n="cart.title">Carrinho de compras</h1>
+        </div>
+      </section>
+
+      <div class="wrap" id="cart-empty" hidden>
+        <div class="empty">
+          <p data-i18n="cart.empty"></p>
+          <a class="btn btn-grad" href="loja.html" data-i18n="cart.goShop">Voltar à loja</a>
+        </div>
+      </div>
+
+      <div class="wrap cart-layout" id="cart-layout" hidden>
+        <div>
+          <div class="cart-lines" id="cart-lines"></div>
+          <div class="cart-actions">
+            <a class="btn btn-ghost" href="loja.html" data-i18n="cart.continue">Continuar a comprar</a>
+          </div>
+        </div>
+        <aside class="summary">
+          <h2 data-i18n="cart.summary">Resumo do pedido</h2>
+          <div class="summary-row"><span data-i18n="cart.subtotal">Subtotal</span><strong id="sum-sub">—</strong></div>
+          <div class="summary-row"><span data-i18n="cart.shipping">Envio</span><span id="sum-ship">—</span></div>
+          <div class="free-bar" id="free-bar"><span></span><div class="bar"><i></i></div></div>
+          <div class="summary-row total"><span data-i18n="cart.grandTotal">Total</span><strong id="sum-total">—</strong></div>
+          <a class="btn btn-grad btn-block" href="checkout.html" data-i18n="cart.checkout">Finalizar pedido</a>
+        </aside>
+      </div>
+    </main>
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/cart.js"></script>
+  </body>
+</html>

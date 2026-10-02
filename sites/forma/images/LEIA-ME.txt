@@ -1,0 +1,9 @@
+# Fotos do catálogo
+
+Põe aqui as fotos dos produtos (JPG, PNG ou WEBP).
+
+Depois liga cada ficheiro em `js/products.js`, no campo `image`.
+
+Exemplo: `image: "images/chaveiro.jpg"`
+
+Tutorial: `COMO-EDITAR.md`

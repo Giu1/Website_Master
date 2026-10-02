@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#17161c" />
+    <title>Orçamento | FORMA</title>
+    <meta name="description" content="Estima o custo de uma impressão 3D na FORMA." />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="quote" data-title="pages.quote">
+    <noscript><p class="noscript">FORMA precisa de JavaScript para a loja, o carrinho e o idioma.</p></noscript>
+    <main id="main">
+      <section class="page-head">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="breadcrumb">
+            <a href="index.html" data-i18n="nav.home">Início</a><span>/</span><span data-i18n="pages.quote">Orçamento</span>
+          </nav>
+          <p class="kicker" data-i18n="quote.kicker">ESTIMATIVA</p>
+          <h1 data-i18n="quote.title">Quanto custa imprimir?</h1>
+          <p class="lead" data-i18n="quote.lead"></p>
+        </div>
+      </section>
+      <div class="wrap quote-layout">
+        <div>
+          <div class="quote-tabs">
+            <button class="chip" type="button" data-quote-tab="photo" aria-pressed="true" data-i18n="quote.tabPhoto">Foto</button>
+            <button class="chip" type="button" data-quote-tab="stl" aria-pressed="false" data-i18n="quote.tabStl">STL</button>
+          </div>
+          <div class="panel" data-quote-panel="photo">
+            <p class="muted" data-i18n="quote.photoHelp"></p>
+            <div class="dropzone" id="quote-drop-photo" tabindex="0" data-i18n="quote.dropPhoto">Larga uma foto</div>
+            <input id="quote-photo" type="file" accept="image/*" hidden />
+            <label class="field mt"><span data-i18n="quote.height">Altura</span>
+              <div class="range-row">
+                <input id="quote-height" type="range" min="3" max="32" value="12" />
+                <output id="quote-height-val">12 cm</output>
+              </div>
+            </label>
+          </div>
+          <div class="panel" data-quote-panel="stl" hidden>
+            <p class="muted" data-i18n="quote.stlHelp"></p>
+            <div class="dropzone" id="quote-drop-stl" tabindex="0" data-i18n="quote.dropStl">Larga um STL</div>
+            <input id="quote-stl" type="file" accept=".stl,model/stl" hidden />
+          </div>
+          <div class="panel quote-form">
+            <label class="field"><span data-i18n="quote.niche">Categoria</span><select id="quote-niche"></select></label>
+            <label class="field"><span data-i18n="quote.material">Material</span>
+              <select id="quote-material">
+                <option value="pla">PLA</option>
+                <option value="petg">PETG</option>
+              </select>
+            </label>
+            <label class="field"><span data-i18n="quote.infill">Infill</span>
+              <div class="range-row">
+                <input id="quote-infill" type="range" min="0.08" max="0.4" step="0.01" value="0.15" />
+                <output id="quote-infill-val">15%</output>
+              </div>
+            </label>
+            <label class="field"><span data-i18n="quote.detail">Detalhe</span>
+              <select id="quote-detail">
+                <option value="simple" data-i18n="quote.detailSimple">Simples</option>
+                <option value="normal" selected data-i18n="quote.detailNormal">Normal</option>
+                <option value="complex" data-i18n="quote.detailComplex">Complexo</option>
+              </select>
+            </label>
+          </div>
+          <form class="panel" id="waitlist-form">
+            <h2 data-i18n="quote.send">Pedir orçamento</h2>
+            <p class="muted small" data-i18n="quote.privacy"></p>
+            <input type="hidden" id="quote-summary" name="summary" />
+            <label class="field"><span data-i18n="waitlist.email">E-mail</span><input id="email" type="email" name="email" required /></label>
+            <label class="consent"><input type="checkbox" name="consent" required /><span data-i18n="waitlist.consent"></span></label>
+            <p class="form-status" id="quote-form-status" hidden></p>
+            <button class="btn btn-grad" type="submit" data-i18n="waitlist.submit">Enviar</button>
+          </form>
+        </div>
+        <aside class="quote-result" id="quote-result" hidden></aside>
+      </div>
+    </main>
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/quote.js"></script>
+    <script src="js/quote-page.js"></script>
+  </body>
+</html>
