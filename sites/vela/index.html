@@ -3,99 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vela — a perfume, not a catalogue</title>
-  <meta name="description" content="Fictional perfume house. Saturated colour, broken grid, notes you can open.">
+  <title>Vela N°07 — Night Bloom</title>
+  <meta name="description" content="Fictional perfume house. One fragrance, Night Bloom: tuberose, ink and the heat that stays in a room.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip" href="#notes" data-i18n="skip">Skip to notes</a>
-  <div class="blob" aria-hidden="true"></div>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
-  <header class="bar">
-    <a href="#top">Vela</a>
-    <div class="header-tools">
-      <div class="lang" role="group" data-i18n-aria="lang">
-        <button type="button" data-lang="en">EN</button>
-        <button type="button" data-lang="pt">PT</button>
-      </div>
-      <nav>
-        <a href="#notes" data-i18n="notes">Notes</a>
-        <a href="#look" data-i18n="look">Look</a>
-        <a href="#ask" data-i18n="ask">Ask</a>
-      </nav>
+  <header class="site-header">
+    <a class="mark" href="#top">VELA</a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#notes" data-i18n="navNotes">Notes</a>
+      <a href="#wear" data-i18n="navWear">On skin</a>
+      <a href="#making" data-i18n="navMaking">Making</a>
+      <a href="#formats" data-i18n="navFormats">Formats</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language" data-i18n-aria="lang">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="pt">PT</button>
     </div>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <p class="kicker" data-i18n="kicker">N°07 · Night Bloom</p>
-      <h1 data-i18n="hero">Wear the hour after the lights go out.</h1>
-      <p class="lead" data-i18n="lead">A fictional house. One juice. No seasonal drop. Tuberose, ink, and the heat that stays in a room.</p>
-      <div class="hero-art">
-        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=80" alt="Dark glass perfume bottle">
-        <p class="stamp">50 ml</p>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="stars" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="kicker" data-i18n="kicker">N°07 · Night Bloom · Eau de parfum</p>
+        <h1 data-i18n="heroTitle">Wear the hour after the lights go out.</h1>
+        <p class="lede" data-i18n="heroLede">One fragrance, made in small batches in Lisboa. Tuberose that isn't polite, ink, and the warmth a room keeps after everyone has left.</p>
+        <a class="btn" href="#formats" data-i18n="heroCta">Request a sample</a>
+      </div>
+
+      <!-- original bottle illustration; the liquid colour follows the chosen note -->
+      <div class="bottle-wrap" data-bottle-wrap>
+        <svg class="bottle" viewBox="0 0 240 420" role="img" aria-label="The Night Bloom bottle" data-i18n-aria="bottleAria">
+          <defs>
+            <linearGradient id="gold" x1="0" x2="1">
+              <stop offset="0" stop-color="#8a6a2f"/>
+              <stop offset="0.45" stop-color="#f1d79a"/>
+              <stop offset="0.6" stop-color="#d4ae62"/>
+              <stop offset="1" stop-color="#7a5b25"/>
+            </linearGradient>
+            <linearGradient id="glass" x1="0" x2="1">
+              <stop offset="0" stop-color="rgba(255,255,255,0.28)"/>
+              <stop offset="0.18" stop-color="rgba(255,255,255,0.06)"/>
+              <stop offset="0.8" stop-color="rgba(255,255,255,0.04)"/>
+              <stop offset="1" stop-color="rgba(255,255,255,0.22)"/>
+            </linearGradient>
+            <linearGradient id="juice" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="var(--juice-top, #b06fd0)"/>
+              <stop offset="1" stop-color="var(--juice-bottom, #4a1d6a)"/>
+            </linearGradient>
+            <clipPath id="body-clip"><rect x="28" y="128" width="184" height="272" rx="26"/></clipPath>
+          </defs>
+          <!-- cap -->
+          <rect x="84" y="18" width="72" height="62" rx="6" fill="url(#gold)"/>
+          <rect x="84" y="18" width="72" height="8" rx="4" fill="rgba(255,255,255,0.35)"/>
+          <!-- neck -->
+          <rect x="98" y="80" width="44" height="52" rx="4" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.35)"/>
+          <!-- body -->
+          <rect x="28" y="128" width="184" height="272" rx="26" fill="rgba(255,255,255,0.06)"/>
+          <g clip-path="url(#body-clip)">
+            <path class="liquid" data-liquid fill="url(#juice)" d="M0 200 Q60 188 120 200 T240 200 V420 H0 Z"/>
+          </g>
+          <rect x="28" y="128" width="184" height="272" rx="26" fill="url(#glass)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+          <!-- facets -->
+          <path d="M40 140 L58 140 L52 388 L40 380 Z" fill="rgba(255,255,255,0.12)"/>
+          <path d="M200 146 L188 146 L190 384 L200 378 Z" fill="rgba(255,255,255,0.08)"/>
+          <!-- label -->
+          <rect x="66" y="232" width="108" height="92" fill="rgba(20,10,30,0.72)" stroke="url(#gold)" stroke-width="1.2"/>
+          <text x="120" y="268" text-anchor="middle" class="lbl-mark">VELA</text>
+          <text x="120" y="290" text-anchor="middle" class="lbl-small">N°07</text>
+          <text x="120" y="308" text-anchor="middle" class="lbl-small">NIGHT BLOOM</text>
+        </svg>
+        <p class="bottle-tag" data-bottle-tag></p>
       </div>
     </section>
 
-    <section id="notes" class="notes">
-      <article class="tile t1">
-        <h2 data-i18n="top">Top</h2>
-        <p data-i18n="topCopy">Bitter orange peel, pink pepper, a struck match.</p>
-      </article>
-      <article class="tile t2">
-        <h2 data-i18n="heart">Heart</h2>
-        <p data-i18n="heartCopy">Tuberose, not polite. Jasmine that refuses daylight.</p>
-      </article>
-      <article class="tile t3">
-        <h2 data-i18n="base">Base</h2>
-        <p data-i18n="baseCopy">Ink, suede, a little smoke. Skin remembers it.</p>
-      </article>
-      <figure class="tile t4">
-        <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1000&q=80" alt="Close flowers in saturated light">
-      </figure>
-      <figure class="tile t5">
-        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1000&q=80" alt="Perfume bottles on a coloured surface">
-      </figure>
-    </section>
-
-    <section id="look" class="look">
-      <h2 data-i18n="lookTitle">Not a shop. A look.</h2>
-      <div class="look-row">
-        <figure>
-          <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1000&q=80" alt="Fragrance bottle among dried botanicals">
-          <figcaption data-i18n="cap1">House still · 01</figcaption>
-        </figure>
-        <figure>
-          <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1000&q=80" alt="Gold perfume bottle on marble">
-          <figcaption data-i18n="cap2">House still · 02</figcaption>
-        </figure>
-        <figure class="wide">
-          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1400&q=80" alt="Soft fabrics and warm light">
-          <figcaption data-i18n="cap3">Cloth · evening</figcaption>
-        </figure>
+    <section class="notes" id="notes" aria-labelledby="notes-title">
+      <div class="notes-head">
+        <p class="kicker" data-i18n="notesKicker">The notes</p>
+        <h2 id="notes-title" data-i18n="notesTitle">Three layers, one evening</h2>
       </div>
-      <p class="price-line" data-i18n="price">Night Bloom · 50 ml · <s>€190</s> sample on request</p>
+      <div class="layer-tabs" role="tablist" aria-label="Notes" data-i18n-aria="notesTitle" data-layer-tabs></div>
+      <div class="layer-panel" data-layer-panel role="tabpanel"></div>
     </section>
 
-    <section id="ask" class="ask">
-      <h2 data-i18n="askTitle">Ask for a sample.</h2>
-      <form id="vela-form">
-        <label><span data-i18n="name">Name</span> <input name="name" required></label>
-        <label><span data-i18n="email">Email</span> <input type="email" name="email" required></label>
-        <label><span data-i18n="city">City</span> <input name="city" placeholder="Lisboa"></label>
-        <button type="submit" data-i18n="request">Request</button>
-        <p class="form-status" role="status"></p>
+    <section class="wear" id="wear" aria-labelledby="wear-title">
+      <div class="wear-head">
+        <p class="kicker" data-i18n="wearKicker">On skin</p>
+        <h2 id="wear-title" data-i18n="wearTitle">The wear clock</h2>
+        <p class="muted" data-i18n="wearText">Drag through the night and see what is still there.</p>
+      </div>
+      <div class="clock">
+        <label class="clock-time"><span class="sr-only" data-i18n="wearSlider">Hours after spraying</span>
+          <input type="range" min="0" max="12" step="0.25" value="0" data-wear>
+        </label>
+        <p class="clock-readout"><span data-wear-label></span> <span class="muted" data-wear-moment></span></p>
+        <ul class="trail" data-trail></ul>
+      </div>
+    </section>
+
+    <section class="making" id="making" aria-labelledby="making-title">
+      <div class="making-copy">
+        <p class="kicker" data-i18n="makingKicker">Making</p>
+        <h2 id="making-title" data-i18n="makingTitle">Two hundred bottles at a time</h2>
+        <p data-i18n="makingText">Each batch macerates for eight weeks before it is filled by hand and numbered. When a batch is gone, we wait for the next one.</p>
+      </div>
+      <div class="making-grid">
+        <figure><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=75" alt="Orange flowers against a blue sky" data-i18n-alt="alt1" loading="lazy"><figcaption data-i18n="cap1">Flowers, picked at dawn</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=75" alt="A hand holding a glass dropper" data-i18n-alt="alt2" loading="lazy"><figcaption data-i18n="cap2">Blended drop by drop</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=900&q=75" alt="Glass bottles on a table in soft focus" data-i18n-alt="alt3" loading="lazy"><figcaption data-i18n="cap3">Batch 14, resting</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="formats" id="formats" aria-labelledby="formats-title">
+      <div class="formats-head">
+        <p class="kicker" data-i18n="formatsKicker">Formats</p>
+        <h2 id="formats-title" data-i18n="formatsTitle">Try it first</h2>
+      </div>
+      <div class="format-grid" role="radiogroup" aria-labelledby="formats-title" data-formats></div>
+      <form class="sample-form" data-sample novalidate>
+        <label><span data-i18n="fName">Name</span><input name="name" autocomplete="name"></label>
+        <label><span data-i18n="fEmail">Email</span><input name="email" type="email" autocomplete="email"></label>
+        <label><span data-i18n="fCity">City</span><input name="city" autocomplete="address-level2"></label>
+        <p class="sample-total" data-total></p>
+        <p class="form-note" data-note role="status"></p>
+        <button class="btn" type="submit" data-i18n="send">Send request</button>
       </form>
     </section>
   </main>
 
-  <aside class="demo-badge" data-i18n-aria="demo">
-    <span>Demo</span>
-    <a href="../atelier/" data-i18n="demoLink">I build sites like this</a>
-  </aside>
+  <footer class="site-footer">
+    <span class="mark">VELA</span>
+    <span data-i18n="footerLine">A fictional perfume house. The bottle is drawn, not photographed.</span>
+    <a href="../atelier/" data-i18n="backAtelier">Made by Atelier</a>
+  </footer>
 
   <script src="js/i18n.js"></script>
   <script src="js/lang.js"></script>
