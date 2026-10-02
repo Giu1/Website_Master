@@ -35,7 +35,7 @@ button, input { font: inherit; color: inherit; }
 
 /* ───────── header ───────── */
 
-.site-header { position: fixed; inset: 0 0 auto; z-index: 40; display: flex; align-items: center; gap: 1.8rem; padding: 1.1rem var(--pad); transition: background-color 0.4s ease; }
+.site-header { position: fixed; inset: 0 0 auto; z-index: 40; display: flex; align-items: center; gap: 1.8rem; padding: 1.1rem max(var(--pad), calc((100% - 1180px) / 2)); transition: background-color 0.4s ease; }
 .site-header.is-solid { background: rgba(20, 12, 34, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 .mark { font-family: var(--serif); letter-spacing: 0.4em; text-decoration: none; font-size: 1.05rem; }
 .nav { display: flex; gap: 1.8rem; margin-left: auto; }
@@ -51,23 +51,23 @@ button, input { font: inherit; color: inherit; }
 .hero {
   position: relative;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   align-items: center;
-  gap: clamp(20px, 4vw, 60px);
+  gap: clamp(20px, 5vw, 90px);
   min-height: 100vh;
   min-height: 100svh;
-  padding: clamp(100px, 14vh, 140px) var(--pad) clamp(50px, 8vh, 90px);
+  padding: clamp(100px, 14vh, 140px) max(var(--pad), calc((100% - 1180px) / 2)) clamp(50px, 8vh, 90px);
   background: radial-gradient(ellipse at 70% 50%, #3b1f5c 0%, transparent 55%), radial-gradient(ellipse at 10% 90%, #241036 0%, transparent 50%), var(--night);
   overflow: hidden;
 }
 .stars { position: absolute; inset: 0; pointer-events: none; }
 .stars i { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff; animation: twinkle 4s ease-in-out infinite; }
 @keyframes twinkle { 50% { opacity: 0.1; } }
-.hero-copy { position: relative; z-index: 1; }
-.hero h1 { font-size: clamp(2.8rem, 6.4vw, 6.2rem); max-width: 12ch; }
+.hero-copy { position: relative; z-index: 1; justify-self: end; width: min(100%, 560px); }
+.hero h1 { font-size: clamp(2.8rem, 5.6vw, 5.4rem); max-width: 11ch; line-height: 0.98; letter-spacing: -0.015em; }
 .lede { max-width: 40ch; color: var(--mute); font-size: 1.1rem; margin: 1.6rem 0 2.2rem; }
 
-.bottle-wrap { position: relative; justify-self: center; width: min(100%, 380px); perspective: 900px; transition: transform 0.8s var(--ease); transform-style: preserve-3d; }
+.bottle-wrap { position: relative; justify-self: start; width: min(100%, 380px); perspective: 900px; transition: transform 0.8s var(--ease); transform-style: preserve-3d; }
 .bottle-wrap::before { content: ""; position: absolute; left: 50%; top: 55%; width: 120%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--juice-top) 45%, transparent) 0%, transparent 62%); filter: blur(20px); transition: background 1s ease; z-index: -1; }
 .bottle { width: 100%; height: auto; filter: drop-shadow(0 40px 50px rgba(0, 0, 0, 0.55)); }
 .bottle #juice stop:first-child { stop-color: var(--juice-top); transition: stop-color 1s ease; }
@@ -188,7 +188,9 @@ button, input { font: inherit; color: inherit; }
   .nav.is-open { display: flex; }
   .nav a { padding: 0.9rem 0; border-bottom: 1px solid var(--line); opacity: 1; }
   .lang { margin-left: auto; }
-  .hero { grid-template-columns: 1fr; text-align: left; }
+  .hero { grid-template-columns: minmax(0, 1fr); text-align: left; }
+  .hero-copy { justify-self: stretch; width: auto; }
+  .bottle-wrap { justify-self: center; }
   .bottle-wrap { width: min(70vw, 300px); order: -1; }
   .making-grid, .format-grid, .sample-form { grid-template-columns: 1fr; }
   .note-list li { grid-template-columns: 1fr; gap: 0.4rem; }

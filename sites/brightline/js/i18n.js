@@ -40,7 +40,7 @@
       if (pack[key] != null) node.setAttribute("aria-label", pack[key]);
     });
 
-    document.querySelectorAll("[data-lang]").forEach(function (button) {
+    document.querySelectorAll("button[data-lang], a[data-lang]").forEach(function (button) {
       button.setAttribute("aria-pressed", button.getAttribute("data-lang") === lang ? "true" : "false");
     });
 
@@ -60,7 +60,7 @@
     start: function (dict) {
       apply(dict, this.lang);
       document.addEventListener("click", function (event) {
-        var button = event.target.closest("[data-lang]");
+        var button = event.target.closest("button[data-lang], a[data-lang]");   // <html> carries data-lang too
         if (!button) return;
         I18N.lang = button.getAttribute("data-lang");
         apply(dict, I18N.lang);
