@@ -23,7 +23,7 @@ Always serve from the repo root. The hub, the sibling links between demos, and t
 | `sites/osteria/` | Osteria Corvo | Restaurant: set menu with pairing, cellar, live table reservations | EN + PT-PT |
 | `sites/vela/` | Vela | Perfume: drawn living bottle, note layers, wear clock, sample request | EN + PT-PT |
 | `sites/aura/` | Aura | Salon: live availability booking fed by the desk | EN + PT-PT |
-| `sites/nido/` | Nido | Complete bakery | EN + PT-PT |
+| `sites/nido/` | Nido | Bakery: live tray and bake times, pre-order basket, weekend sign-ups, catering calculator | EN + PT-PT |
 | `sites/brightline/` | Brightline | Complete home cleaning | EN + PT-PT |
 | `sites/aura-desk/` | Aura Desk | Working backoffice demo: requests, bookings, services, team, hours, copy (login `demo` / `demo`) | EN + PT-PT |
 | `sites/forma/` | FORMA | 3D-print shop: catalog, cart, checkout, quote | PT-PT, PT-BR, ES, EN |

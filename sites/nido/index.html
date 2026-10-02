@@ -3,67 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nido — bread before the city wakes</title>
-  <meta name="description" content="Fictional bakery in Lisboa. Menu, hours, weekend lists, catering.">
+  <title>Nido — bakery in Campo de Ourique</title>
+  <meta name="description" content="Fictional neighbourhood bakery in Lisboa. Live tray, pre-order for pick-up, weekend classes and office breakfasts.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
   <header class="site-header">
-    <a class="logo" href="index.html">Nido</a>
-    <div class="header-tools">
-      <div class="lang" role="group" data-i18n-aria="lang">
+    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"></span>Nido</a>
+    <p class="status" data-status></p>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#tray" data-i18n="navTray">Today</a>
+      <a href="#weekends" data-i18n="navWeekends">Weekends</a>
+      <a href="#catering" data-i18n="navCatering">Catering</a>
+      <a href="#visit" data-i18n="navVisit">Visit</a>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Language" data-i18n-aria="lang">
         <button type="button" data-lang="en">EN</button>
         <button type="button" data-lang="pt">PT</button>
       </div>
+      <button class="basket-btn" type="button" data-open-basket aria-controls="basket">
+        <span data-i18n="basket">Basket</span> <span class="count" data-count>0</span>
+      </button>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n="menu">Menu</button>
     </div>
-    <nav id="nav" class="nav">
-      <a href="index.html" aria-current="page" data-i18n="navHome">Home</a>
-      <a href="menu.html" data-i18n="navMenu">Menu</a>
-      <a href="events.html" data-i18n="navWeek">Weekends</a>
-      <a href="catering.html" data-i18n="navCater">Catering</a>
-      <a href="contact.html" data-i18n="navVisit">Visit</a>
-    </nav>
   </header>
+
   <main id="main">
-    <section class="hero">
-      <p class="kicker" data-i18n="kicker">Open 07:00 · sold out by 13:00</p>
-      <h1 data-i18n="hero">Butter, flour, a little noise.</h1>
-      <p class="lede" data-i18n="lede">A fictional neighbourhood oven. Come early. The kouign-amann does not wait.</p>
-      <div class="actions">
-        <a class="btn" href="menu.html" data-i18n="tray">Today’s tray</a>
-        <a class="btn btn-ghost" href="contact.html" data-i18n="hoursMap">Hours &amp; map</a>
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="kicker" data-i18n="kicker">Campo de Ourique · since 2019</p>
+        <h1 data-i18n="heroTitle">Warm bread, <em>early.</em></h1>
+        <p class="lede" data-i18n="heroLede">A small oven on a quiet corner. We bake through the morning and stop when the tray is empty — order ahead and yours waits on the shelf with your name on it.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#tray" data-i18n="heroCta">See today's tray</a>
+          <a class="link" href="#visit" data-i18n="heroVisit">Find us</a>
+        </div>
+      </div>
+      <figure class="hero-img">
+        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=75" alt="Croissants dusted with sugar on a dark board" data-i18n-alt="heroAlt">
+      </figure>
+      <div class="bakeline" aria-labelledby="bake-title">
+        <h2 id="bake-title" class="bake-title" data-i18n="bakeTitle">Out of the oven today</h2>
+        <ol class="bake" data-bake></ol>
       </div>
     </section>
-    <section class="band">
-      <figure class="hero-pic">
-        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1400&q=80" alt="Loaves cooling on a rack">
-      </figure>
-      <div class="tiles">
-        <article>
-          <h2 data-i18n="morning">Morning</h2>
-          <p data-i18n="morningCopy">Country loaf, croissant, coffee that is not an afterthought.</p>
-        </article>
-        <article>
-          <h2 data-i18n="weekend">Weekend</h2>
-          <p data-i18n="weekendCopy">Cinnamon lists, kids’ dough hour, the last focaccia at noon.</p>
-        </article>
-        <article>
-          <h2 data-i18n="office">Office</h2>
-          <p data-i18n="officeCopy">Breakfast boxes. You write a headcount. We butter the rest.</p>
-        </article>
+
+    <section class="tray" id="tray" aria-labelledby="tray-title">
+      <div class="section-head">
+        <p class="kicker" data-i18n="trayKicker">The tray</p>
+        <h2 id="tray-title" data-i18n="trayTitle">What's left right now</h2>
+        <p class="muted" data-i18n="trayNote">Counts update through the morning. Sold out today? Pre-order it for tomorrow.</p>
+      </div>
+      <div class="tray-grid" data-tray></div>
+    </section>
+
+    <section class="weekends" id="weekends" aria-labelledby="weekends-title">
+      <div class="section-head">
+        <p class="kicker" data-i18n="weekendsKicker">Weekends</p>
+        <h2 id="weekends-title" data-i18n="weekendsTitle">Flour on your sleeves</h2>
+      </div>
+      <div class="events" data-events></div>
+    </section>
+
+    <section class="catering" id="catering" aria-labelledby="catering-title">
+      <div class="catering-copy">
+        <p class="kicker" data-i18n="cateringKicker">Catering</p>
+        <h2 id="catering-title" data-i18n="cateringTitle">Breakfast for the whole office</h2>
+        <p data-i18n="cateringText">Boxes of pastries, bread, butter and fruit, delivered by eight. Tell us how many people and we'll do the maths.</p>
+        <figure><img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?auto=format&fit=crop&w=1000&q=75" alt="A glass counter full of pastries" data-i18n-alt="cateringAlt" loading="lazy"></figure>
+      </div>
+      <form class="cater-form" data-cater novalidate>
+        <label class="range"><span data-i18n="people">People</span>
+          <input type="range" min="6" max="80" step="1" value="20" data-people>
+          <output data-people-out>20</output>
+        </label>
+        <div class="segmented" role="group" aria-label="Box" data-i18n-aria="boxAria" data-box-kind></div>
+        <dl class="cater-sum" data-cater-sum></dl>
+        <label><span data-i18n="fCompany">Company</span><input name="company" autocomplete="organization"></label>
+        <label><span data-i18n="fEmail">Email</span><input name="email" type="email" autocomplete="email"></label>
+        <p class="form-note" data-cater-note role="status"></p>
+        <button class="btn" type="submit" data-i18n="cateringSend">Ask for this quote</button>
+      </form>
+    </section>
+
+    <section class="visit" id="visit" aria-labelledby="visit-title">
+      <figure><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=75" alt="Round rustic loaves with wheat stalks" data-i18n-alt="visitAlt" loading="lazy"></figure>
+      <div>
+        <p class="kicker" data-i18n="visitKicker">Visit</p>
+        <h2 id="visit-title">Rua Ferreira Borges 00</h2>
+        <p class="muted">1350-000 Lisboa · +351 21 000 0222</p>
+        <dl class="hours" data-hours></dl>
       </div>
     </section>
   </main>
+
   <footer class="site-footer">
-    <p data-i18n="footLine">Nido · Rua do Demo 3 · Tue–Sun 07–13</p>
-    <p><a href="tel:+351210000111">+351 21 000 111</a></p>
+    <span class="logo small"><span class="logo-mark" aria-hidden="true"></span>Nido</span>
+    <span data-i18n="footerLine">A fictional bakery. Photographs from Unsplash.</span>
+    <a href="../atelier/" data-i18n="backAtelier">Made by Atelier</a>
   </footer>
-  <aside class="demo-badge" data-i18n-aria="demo"><span>Demo</span><a href="../atelier/" data-i18n="demoLink">I build sites like this</a></aside>
+
+  <!-- basket drawer -->
+  <div class="scrim" data-scrim hidden></div>
+  <aside class="basket" id="basket" aria-labelledby="basket-title" data-basket aria-hidden="true">
+    <header class="basket-head">
+      <h2 id="basket-title" data-i18n="basketTitle">Your order</h2>
+      <button class="icon-btn" type="button" data-close-basket aria-label="Close" data-i18n-aria="close">✕</button>
+    </header>
+    <div class="basket-body">
+      <ul class="lines" data-lines></ul>
+      <p class="empty muted" data-empty data-i18n="basketEmpty">Nothing yet. Add something from the tray.</p>
+      <form class="pickup" data-pickup novalidate>
+        <p class="row-label" data-i18n="pickupDay">Pick up</p>
+        <div class="segmented" role="group" data-days></div>
+        <div class="slots" data-slots></div>
+        <label><span data-i18n="fName">Name</span><input name="name" autocomplete="name"></label>
+        <label><span data-i18n="fPhone">Phone</span><input name="phone" type="tel" autocomplete="tel"></label>
+        <p class="total" data-total></p>
+        <p class="form-note" data-order-note role="alert"></p>
+        <button class="btn" type="submit" data-i18n="placeOrder">Place order</button>
+      </form>
+      <div class="orders" data-orders></div>
+    </div>
+  </aside>
+
   <script src="js/i18n.js"></script>
   <script src="js/lang.js"></script>
   <script src="js/main.js"></script>
