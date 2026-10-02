@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="about">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About • Lucas Bastos</title>
+  <meta name="description" content="About Lucas Bastos, freelance designer and developer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="" data-page="about">
+  <a class="skip" href="#story" data-i18n="skip">Skip to content</a>
+
+  <!-- first visit: greetings, then the panel lifts away -->
+  <div class="loader" aria-hidden="true">
+    <p class="loader-word"><span class="dot"></span><span id="hello">Hello</span></p>
+    <div class="loader-curve"></div>
+  </div>
+
+  <!-- page change: a panel rises, names the next page, then lifts off it -->
+  <div class="transition" id="transition" aria-hidden="true">
+    <div class="t-curve t-top"></div>
+    <p class="t-label"><span class="dot"></span><span id="t-label"></span></p>
+    <div class="t-curve t-bottom"></div>
+  </div>
+
+  <button class="fab magnetic" id="fab" type="button" aria-label="Open menu" data-i18n-aria="menu.open.attr" aria-expanded="false" aria-controls="menu">
+    <span class="fill" aria-hidden="true"></span>
+    <span class="burger magnetic-inner" aria-hidden="true"><i></i><i></i></span>
+  </button>
+
+  <div class="menu-dim" id="menu-dim"></div>
+
+  <nav class="menu" id="menu" aria-label="Main" data-i18n-aria="menu.main.attr" aria-hidden="true">
+    <div class="menu-body">
+      <div>
+        <p class="eyebrow" data-i18n="navigation">Navigation</p>
+        <ul class="menu-links">
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="work.html" data-i18n="nav.work">Work</a></li>
+          <li><a href="about.html" aria-current="page" data-i18n="nav.about">About</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="menu-foot">
+        <div class="menu-socials">
+          <p class="eyebrow" data-i18n="socials">Socials</p>
+          <ul>
+              <li><a href="#" data-social>Instagram</a></li>
+              <li><a href="#" data-social>Dribbble</a></li>
+              <li><a href="#" data-social>Behance</a></li>
+              <li><a href="#" data-social>LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="menu-lang">
+          <p class="eyebrow" data-i18n="language">Language</p>
+          <div class="lang dark" role="group" aria-label="Language" data-i18n-aria="language.attr"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="pt" aria-pressed="false">PT</button></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="preview" id="preview" aria-hidden="true"><div class="preview-track" id="preview-track"></div></div>
+  <div class="preview-cursor" id="preview-cursor" aria-hidden="true" data-i18n="view">View</div>
+
+  <div id="smooth">
+    <main>
+      <header class="page-head">
+        <div class="bar on-light">
+          <a class="credit magnetic" href="index.html">
+            <span class="magnetic-inner">
+              <span class="copy">©</span>
+              <span class="swap"><span data-i18n="credit">Code by Lucas</span><span>Lucas Bastos</span></span>
+            </span>
+          </a>
+          <div class="bar-right">
+            <ul class="bar-links">
+            <li><a class="magnetic" href="work.html"><span class="magnetic-inner" data-i18n="nav.work">Work</span></a></li>
+            <li><a class="magnetic is-current" href="about.html"><span class="magnetic-inner" data-i18n="nav.about">About</span></a></li>
+            <li><a class="magnetic" href="contact.html"><span class="magnetic-inner" data-i18n="nav.contact">Contact</span></a></li>
+            </ul>
+            <div class="lang" role="group" aria-label="Language" data-i18n-aria="language.attr"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="pt" aria-pressed="false">PT</button></div>
+            <button class="bar-menu" type="button" data-open-menu data-i18n="menu">Menu</button>
+          </div>
+        </div>
+        <div class="container head-copy">
+          <h1 class="split" data-reveal data-i18n="h1.about">Helping small brands sound like themselves online</h1>
+        </div>
+        <div class="container">
+          <div class="head-line">
+            <a class="btn-round magnetic" href="#story" aria-label="Read more" data-i18n-aria="readmore.attr">
+              <span class="fill" aria-hidden="true"></span>
+              <span class="magnetic-inner"><svg class="arrow" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 4.5 V12 H4.5" fill="none" stroke="currentColor" stroke-width="1.2" /></svg></span>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <section class="about" id="story">
+        <div class="container about-grid">
+          <div class="about-copy">
+            <p class="lead" data-reveal data-i18n="about.lead">I work with founders, studios and small teams who care how things feel, not only how they look. Most projects start with a conversation and a blank page, and end with a site the team can run on its own.</p>
+            <p class="small" data-reveal data-i18n="about.small">Always exploring</p>
+          </div>
+          <figure class="about-img" data-reveal>
+            <img src="img/bruma.jpg" alt="A quiet studio window looking out over a misty city" data-i18n-alt="about.img.attr" loading="lazy" />
+          </figure>
+        </div>
+      </section>
+
+      <section class="services">
+        <div class="container">
+          <h2 class="services-title" data-i18n="services.title">I can help you with …</h2>
+          <div class="services-grid">
+            <div class="service" data-reveal>
+              <p class="eyebrow num">01</p>
+              <h3 data-i18n="s1.title">Design</h3>
+              <p data-i18n="s1.copy">A clear visual direction, built for the screen first. Layout, type and motion decided together, so the site feels like one thing.</p>
+            </div>
+            <div class="service" data-reveal>
+              <p class="eyebrow num">02</p>
+              <h3 data-i18n="s2.title">Development</h3>
+              <p data-i18n="s2.copy">Hand-written, fast front ends with a CMS your team can actually use. Accessible by default, and easy to hand over.</p>
+            </div>
+            <div class="service" data-reveal>
+              <p class="eyebrow num">03</p>
+              <h3 data-i18n="s3.title">The full package</h3>
+              <p data-i18n="s3.copy">From the first sketch to launch day. One person on the whole project, so the details survive the trip from idea to browser.</p>
+            </div>
+          </div>
+        </div>
+        <div class="round-wrap"><div class="round"></div></div>
+      </section>
+
+      <footer class="footer" id="contact">
+        <div class="container footer-inner" id="footer-inner">
+          <div class="footer-top">
+            <h2><img class="avatar" src="img/hero/lucas-4-thumb.jpg" alt="" /><span data-i18n="footer.title">Let’s make<br />something</span></h2>
+            <svg class="arrow" viewBox="0 0 14 14" aria-hidden="true"><path d="M12 2 L2 12 M2 4.5 V12 H9.5" fill="none" stroke="currentColor" stroke-width="1.2" /></svg>
+          </div>
+          <div class="footer-line">
+            <a class="btn-cta magnetic" href="contact.html">
+              <span class="fill" aria-hidden="true"></span>
+              <span class="magnetic-inner" data-i18n="touch">Get in touch</span>
+            </a>
+          </div>
+          <div class="pills">
+            <a class="btn-pill dark magnetic" href="mailto:ola@lucasbastos.pt"><span class="fill" aria-hidden="true"></span><span class="magnetic-inner">ola@lucasbastos.pt</span></a>
+            <a class="btn-pill dark magnetic" href="tel:+351210000333"><span class="fill" aria-hidden="true"></span><span class="magnetic-inner">+351 21 000 0333</span></a>
+          </div>
+        </div>
+        <div class="container footer-bottom">
+          <div class="meta">
+            <div><p class="eyebrow" data-i18n="version">Version</p><p data-i18n="edition">2026 © Edition</p></div>
+            <div><p class="eyebrow" data-i18n="localtime">Local time</p><p data-clock>—</p></div>
+          </div>
+          <div class="meta socials">
+            <p class="eyebrow" data-i18n="socials">Socials</p>
+            <ul>
+              <li><a href="#" data-social>Instagram</a></li>
+              <li><a href="#" data-social>Dribbble</a></li>
+              <li><a href="#" data-social>Behance</a></li>
+              <li><a href="#" data-social>LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

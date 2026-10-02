@@ -29,6 +29,7 @@ Always serve from the repo root. The hub, the sibling links between demos, and t
 | `sites/forma/` | FORMA | 3D-print shop: catalog, cart, checkout, quote | PT-PT, PT-BR, ES, EN |
 | `sites/pulse/` | PULSE | Motion portfolio template (hidden from the hub: `hidden: true` in `js/data.js`) | PT + EN |
 | `sites/folio/` | Folio | Design-engineer portfolio template (Three.js stage) | EN |
+| `sites/lucas/` | Lucas Bastos | Personal portfolio: 4 pages, curved transitions, looping name, hero photo switcher | EN |
 
 Each site has its own `README.md`. FORMA's catalog guide is `sites/forma/COMO-EDITAR.md`.
 

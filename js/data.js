@@ -136,6 +136,17 @@ window.FOLIO = {
       awards: 0,
       summary: "The design-engineer stage this hub is built from.",
       media: [{ w: 16, h: 9, src: "img/mare.jpg", kind: "serif", word: "Folio", colors: ["#0a0a0a", "#3a3a3a"], ink: "#f2f2f2", caption: "Stage" }]
+    },
+    {
+      slug: "lucas",
+      title: "Lucas Bastos",
+      featured: true,
+      year: "2026",
+      client: "showcase",
+      url: "sites/lucas/",
+      awards: 0,
+      summary: "Personal portfolio. Four pages, curved panel transitions, live photo switcher.",
+      media: [{ w: 16, h: 9, src: "img/lucas.jpg", kind: "sans", word: "Lucas Bastos", colors: ["#999d9e", "#1c1d20"], ink: "#ffffff", caption: "Freelancer" }]
     }
   ]
 };

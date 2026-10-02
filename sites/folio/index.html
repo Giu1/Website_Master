@@ -69,12 +69,20 @@
   </header>
 
   <div class="dock">
+    <div class="dock-left">
     <nav class="views label" aria-label="Project views">
       <span class="pill" aria-hidden="true"></span>
       <a id="nav-featured" href="#featured" aria-current="true">Featured</a>
       <a id="nav-full" href="#full">Full</a>
       <a id="nav-traditional" href="#traditional">Traditional</a>
     </nav>
+    <div class="views styles label" id="styles" role="group" aria-label="Card style">
+      <span class="pill" aria-hidden="true"></span>
+      <button type="button" data-style="1" aria-pressed="false">Style 1</button>
+      <button type="button" data-style="2" aria-pressed="true">Style 2</button>
+      <button type="button" data-style="3" aria-pressed="false">Style 3</button>
+    </div>
+    </div>
     <button class="label" id="news-btn" type="button" aria-expanded="false" aria-controls="news">Newsletter</button>
   </div>
 
@@ -85,6 +93,11 @@
       <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 4.5 L11.5 11.5 M11.5 4.5 L4.5 11.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
     </button>
   </section>
+
+  <div id="arrows" hidden>
+    <button id="prev" type="button" aria-label="Previous project"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 L5 8 L10 13" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+    <button id="next" type="button" aria-label="Next project"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3 L11 8 L6 13" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+  </div>
 
   <div id="loader" aria-hidden="true"><i></i><i></i><i></i></div>
 

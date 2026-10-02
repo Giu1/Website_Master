@@ -6,3 +6,6 @@ Thumbs.db
 
 # local tooling
 .claude/
+
+# full-size photo originals (web copies live in sites/lucas/img/hero/)
+img/01022024-*.jpg

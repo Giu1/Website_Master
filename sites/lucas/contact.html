@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="contact">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact • Lucas Bastos</title>
+  <meta name="description" content="Start a project with Lucas Bastos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="dark-page" data-page="contact">
+  <a class="skip" href="#main-contact" data-i18n="skip">Skip to content</a>
+
+  <!-- first visit: greetings, then the panel lifts away -->
+  <div class="loader" aria-hidden="true">
+    <p class="loader-word"><span class="dot"></span><span id="hello">Hello</span></p>
+    <div class="loader-curve"></div>
+  </div>
+
+  <!-- page change: a panel rises, names the next page, then lifts off it -->
+  <div class="transition" id="transition" aria-hidden="true">
+    <div class="t-curve t-top"></div>
+    <p class="t-label"><span class="dot"></span><span id="t-label"></span></p>
+    <div class="t-curve t-bottom"></div>
+  </div>
+
+  <button class="fab magnetic" id="fab" type="button" aria-label="Open menu" data-i18n-aria="menu.open.attr" aria-expanded="false" aria-controls="menu">
+    <span class="fill" aria-hidden="true"></span>
+    <span class="burger magnetic-inner" aria-hidden="true"><i></i><i></i></span>
+  </button>
+
+  <div class="menu-dim" id="menu-dim"></div>
+
+  <nav class="menu" id="menu" aria-label="Main" data-i18n-aria="menu.main.attr" aria-hidden="true">
+    <div class="menu-body">
+      <div>
+        <p class="eyebrow" data-i18n="navigation">Navigation</p>
+        <ul class="menu-links">
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="work.html" data-i18n="nav.work">Work</a></li>
+          <li><a href="about.html" data-i18n="nav.about">About</a></li>
+          <li><a href="contact.html" aria-current="page" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="menu-foot">
+        <div class="menu-socials">
+          <p class="eyebrow" data-i18n="socials">Socials</p>
+          <ul>
+              <li><a href="#" data-social>Instagram</a></li>
+              <li><a href="#" data-social>Dribbble</a></li>
+              <li><a href="#" data-social>Behance</a></li>
+              <li><a href="#" data-social>LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="menu-lang">
+          <p class="eyebrow" data-i18n="language">Language</p>
+          <div class="lang dark" role="group" aria-label="Language" data-i18n-aria="language.attr"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="pt" aria-pressed="false">PT</button></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="preview" id="preview" aria-hidden="true"><div class="preview-track" id="preview-track"></div></div>
+  <div class="preview-cursor" id="preview-cursor" aria-hidden="true" data-i18n="view">View</div>
+
+  <div id="smooth">
+    <main>
+      <section class="contact-page" id="main-contact">
+        <div class="bar on-dark">
+          <a class="credit magnetic" href="index.html">
+            <span class="magnetic-inner">
+              <span class="copy">©</span>
+              <span class="swap"><span data-i18n="credit">Code by Lucas</span><span>Lucas Bastos</span></span>
+            </span>
+          </a>
+          <div class="bar-right">
+            <ul class="bar-links">
+            <li><a class="magnetic" href="work.html"><span class="magnetic-inner" data-i18n="nav.work">Work</span></a></li>
+            <li><a class="magnetic" href="about.html"><span class="magnetic-inner" data-i18n="nav.about">About</span></a></li>
+            <li><a class="magnetic is-current" href="contact.html"><span class="magnetic-inner" data-i18n="nav.contact">Contact</span></a></li>
+            </ul>
+            <div class="lang" role="group" aria-label="Language" data-i18n-aria="language.attr"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="pt" aria-pressed="false">PT</button></div>
+            <button class="bar-menu" type="button" data-open-menu data-i18n="menu">Menu</button>
+          </div>
+        </div>
+        <div class="container contact-grid">
+          <div class="contact-main">
+            <h1><img class="avatar" src="img/hero/lucas-4-thumb.jpg" alt="" /><span class="split" data-reveal data-i18n="h1.contact">Let’s start a project together</span></h1>
+            <form class="contact-form" id="contact-form" novalidate>
+              <div class="field">
+                <span class="eyebrow num">01</span>
+                <label for="f-name" data-i18n="f.name">What’s your name?</label>
+                <input id="f-name" name="name" type="text" placeholder="Ana Costa *" data-i18n-placeholder="ph.name.attr" autocomplete="name" required />
+              </div>
+              <div class="field">
+                <span class="eyebrow num">02</span>
+                <label for="f-email" data-i18n="f.email">What’s your email?</label>
+                <input id="f-email" name="email" type="email" placeholder="ana@costa.pt *" data-i18n-placeholder="ph.email.attr" autocomplete="email" required />
+              </div>
+              <div class="field">
+                <span class="eyebrow num">03</span>
+                <label for="f-org" data-i18n="f.org">What’s the name of your organisation?</label>
+                <input id="f-org" name="org" type="text" placeholder="Costa &amp; Filhos" data-i18n-placeholder="ph.org.attr" autocomplete="organization" />
+              </div>
+              <div class="field">
+                <span class="eyebrow num">04</span>
+                <label for="f-services" data-i18n="f.services">What services are you looking for?</label>
+                <input id="f-services" name="services" type="text" placeholder="Web design, development …" data-i18n-placeholder="ph.services.attr" autocomplete="off" />
+              </div>
+              <div class="field">
+                <span class="eyebrow num">05</span>
+                <label for="f-msg" data-i18n="f.msg">Your message</label>
+                <textarea id="f-msg" name="message" rows="3" placeholder="Hello Lucas, can you help me with … *" data-i18n-placeholder="ph.msg.attr" required></textarea>
+              </div>
+              <div class="footer-line send-line">
+                <button class="btn-cta magnetic" type="submit">
+                  <span class="fill" aria-hidden="true"></span>
+                  <span class="magnetic-inner" data-i18n="send">Send it!</span>
+                </button>
+              </div>
+              <p class="form-note" id="form-note" role="status"></p>
+            </form>
+          </div>
+          <aside class="contact-side">
+            <svg class="arrow" viewBox="0 0 14 14" aria-hidden="true"><path d="M12 2 L2 12 M2 4.5 V12 H9.5" fill="none" stroke="currentColor" stroke-width="1.2" /></svg>
+            <div>
+              <p class="eyebrow" data-i18n="contact.details">Contact details</p>
+              <p><a href="mailto:ola@lucasbastos.pt">ola@lucasbastos.pt</a><br /><a href="tel:+351210000333">+351 21 000 0333</a></p>
+            </div>
+            <div>
+              <p class="eyebrow" data-i18n="business.details">Business details</p>
+              <p data-i18n="business">Lucas Bastos, design &amp; code<br />Location: Lisbon, PT</p>
+            </div>
+            <div>
+              <p class="eyebrow" data-i18n="socials">Socials</p>
+              <ul class="side-socials">
+              <li><a href="#" data-social>Instagram</a></li>
+              <li><a href="#" data-social>Dribbble</a></li>
+              <li><a href="#" data-social>Behance</a></li>
+              <li><a href="#" data-social>LinkedIn</a></li>
+            </ul>
+            </div>
+          </aside>
+        </div>
+        <div class="container footer-bottom">
+          <div class="meta">
+            <div><p class="eyebrow" data-i18n="version">Version</p><p data-i18n="edition">2026 © Edition</p></div>
+            <div><p class="eyebrow" data-i18n="localtime">Local time</p><p data-clock>—</p></div>
+          </div>
+          <div class="meta socials">
+            <p class="eyebrow" data-i18n="socials">Socials</p>
+            <ul>
+              <li><a href="#" data-social>Instagram</a></li>
+              <li><a href="#" data-social>Dribbble</a></li>
+              <li><a href="#" data-social>Behance</a></li>
+              <li><a href="#" data-social>LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

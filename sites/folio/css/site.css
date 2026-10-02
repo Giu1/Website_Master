@@ -107,8 +107,13 @@ body.case-open .chrome > *, body.case-open .dock > * { pointer-events: none; }
   cursor: default;
 }
 
-.views a {
+.views a, .views button {
   position: relative;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-transform: inherit;
+  cursor: pointer;
   z-index: 1;
   padding: 0.85em 1.25em;
   border-radius: 999px;
@@ -117,8 +122,35 @@ body.case-open .chrome > *, body.case-open .dock > * { pointer-events: none; }
   transition: color 0.45s var(--ease-out);
 }
 
-.views a:hover { color: #fff; }
-.views a[aria-current="true"] { color: #000; }
+.views a:hover, .views button:hover { color: #fff; }
+.views a[aria-current="true"], .views button[aria-pressed="true"] { color: #000; }
+
+.dock-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+/* style switch only matters on the 3D featured stage */
+.styles { transition: opacity 0.4s ease, transform 0.5s var(--ease-out); }
+body:not(.v-featured) .styles,
+body.is-flat .styles { opacity: 0; transform: translateY(8px); pointer-events: none; }
+
+/* prev / next arrows (style 1) */
+#arrows[hidden] { display: none; }
+#prev, #next {
+  position: fixed;
+  z-index: 4;
+  width: max(28px, 2.3vw);
+  height: max(28px, 2.3vw);
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #0c0c0c;
+  color: #fff;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+}
+#prev svg, #next svg { width: 42%; height: 42%; }
+body:not(.v-featured) #arrows, body.overlay-open #arrows, body.case-open #arrows { display: none; }
 
 .views .pill {
   position: absolute;

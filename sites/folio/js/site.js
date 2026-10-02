@@ -26,10 +26,14 @@ const CARD_ASPECT = 1.42;
 const ARROW_SVG = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5 L11.5 4.5 M6 4.5 H11.5 V10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>`;
 const AWARD_SVG = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5 H12 V6 A4 4 0 0 1 4 6 Z M8 10 V13 M5.5 13.5 H10.5 M4 3.5 H2.5 V5 A2 2 0 0 0 4.4 7 M12 3.5 H13.5 V5 A2 2 0 0 1 11.6 7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>`;
 
+const STYLE_KEY = "folio-style";
 const ui = {
-  view: "featured",     // "featured" | "full"
+  view: "featured",     // "featured" | "full" | "traditional"
   overlay: null,        // null | "profile" | "news"
-  lastView: "#featured"
+  lastView: "#featured",
+  style: (() => {       // featured card look: 1 arc panels, 2 ribbon, 3 living ribbon
+    try { const v = Number(localStorage.getItem(STYLE_KEY)); return [1, 2, 3].includes(v) ? v : 2; } catch { return 2; }
+  })()
 };
 
 let stage = null;   // WebGL stage api
@@ -173,7 +177,7 @@ function drawPoster(ctx, media, title, w, h) {
 }
 
 /** Card face: picture, title bottom-left, round arrow bottom-right. */
-function paintCard(project, w) {
+function paintCard(project, w, withPhoto = true) {
   const h = Math.round(w / CARD_ASPECT);
   const canvas = document.createElement("canvas");
   canvas.width = w;
@@ -183,8 +187,10 @@ function paintCard(project, w) {
   ctx.save();
   ctx.clip();
   const m = project.media[0];
-  if (m._img) drawCover(ctx, m._img, w, h);
-  else drawPoster(ctx, m, project.title, w, h);
+  if (withPhoto) {
+    if (m._img) drawCover(ctx, m._img, w, h);
+    else drawPoster(ctx, m, project.title, w, h);
+  }
 
   const shade = ctx.createLinearGradient(0, h * 0.55, 0, h);
   shade.addColorStop(0, "rgba(0,0,0,0)");
@@ -218,6 +224,59 @@ function paintCard(project, w) {
   ctx.lineTo(cx + a, cy - a);
   ctx.lineTo(cx + a, cy + a * 0.35);
   ctx.stroke();
+  ctx.restore();
+  return canvas;
+}
+
+/** Style 1 face: 16:9 picture, caption band on top, bold title and two lines of summary. */
+function paintPanel(project, w) {
+  const h = Math.round(w * 9 / 16);
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d");
+  roundRect(ctx, 0, 0, w, h, w * 0.02);
+  ctx.save();
+  ctx.clip();
+  const m = project.media[0];
+  if (m._img) drawCover(ctx, m._img, w, h);
+  else drawPoster(ctx, m, project.title, w, h);
+
+  ctx.fillStyle = "rgba(0,0,0,0.35)";
+  ctx.fillRect(0, 0, w, Math.round(h * 0.1));
+  ctx.fillStyle = "rgba(255,255,255,0.92)";
+  ctx.font = `500 ${Math.round(w * 0.02)}px "Inter Tight", sans-serif`;
+  ctx.textBaseline = "middle";
+  ctx.fillText(m.caption || project.client || project.title, w * 0.045, h * 0.05);
+
+  const shade = ctx.createLinearGradient(0, h * 0.58, 0, h);
+  shade.addColorStop(0, "rgba(0,0,0,0)");
+  shade.addColorStop(1, "rgba(0,0,0,0.62)");
+  ctx.fillStyle = shade;
+  ctx.fillRect(0, h * 0.58, w, h * 0.42);
+
+  const x = w * 0.045;
+  ctx.fillStyle = "#fff";
+  ctx.textBaseline = "alphabetic";
+  ctx.font = `600 ${Math.round(w * 0.052)}px "Inter Tight", sans-serif`;
+  ctx.fillText(project.title, x, h - w * 0.1);
+  if (project.summary) {
+    ctx.globalAlpha = 0.82;
+    ctx.font = `400 ${Math.round(w * 0.02)}px "Inter Tight", sans-serif`;
+    const lines = [];
+    let line = "";
+    for (const word of String(project.summary).split(/\s+/)) {
+      const test = line ? `${line} ${word}` : word;
+      if (ctx.measureText(test).width > w * 0.62 && line) {
+        lines.push(line);
+        line = word;
+        if (lines.length === 2) break;
+      } else line = test;
+    }
+    if (lines.length < 2 && line) lines.push(line);
+    lines.slice(0, 2).forEach((ln, i) => ctx.fillText(ln, x, h - w * 0.055 + i * w * 0.028));
+    ctx.globalAlpha = 1;
+  }
   ctx.restore();
   return canvas;
 }
@@ -263,14 +322,28 @@ const VIEWS = {
 };
 
 /** Slide the white pill under the active tab. */
+/** Slide each segmented control's white pill under its active option. */
 function placePill(animate = true) {
-  const nav = document.querySelector(".views");
-  const a = $(`nav-${ui.view}`);
-  if (!nav || !a) return;
-  nav.classList.toggle("no-anim", !animate);
-  const pill = nav.querySelector(".pill");
-  pill.style.width = `${a.offsetWidth}px`;
-  pill.style.transform = `translateX(${a.offsetLeft}px)`;
+  const groups = [
+    [document.querySelector("nav.views"), $(`nav-${ui.view}`)],
+    [$("styles"), document.querySelector(`[data-style="${ui.style}"]`)]
+  ];
+  for (const [nav, a] of groups) {
+    if (!nav || !a) continue;
+    nav.classList.toggle("no-anim", !animate);
+    const pill = nav.querySelector(".pill");
+    pill.style.width = `${a.offsetWidth}px`;
+    pill.style.transform = `translateX(${a.offsetLeft}px)`;
+  }
+}
+
+function setStyle(n) {
+  if (n === ui.style) return;
+  ui.style = n;
+  try { localStorage.setItem(STYLE_KEY, String(n)); } catch { /* private mode */ }
+  document.querySelectorAll("[data-style]").forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.style) === n)));
+  placePill();
+  if (stage) stage.setStyle(n);
 }
 
 function setNav() {
@@ -493,6 +566,10 @@ function stepCase(dir) {
 /* ───────────────────────── chrome bindings ───────────────────────── */
 
 function bindChrome() {
+  document.querySelectorAll("[data-style]").forEach((b) => {
+    b.setAttribute("aria-pressed", String(Number(b.dataset.style) === ui.style));
+    b.onclick = () => setStyle(Number(b.dataset.style));
+  });
   $("profile-btn").onclick = () => setOverlay("profile");
   $("news-btn").onclick = () => setOverlay("news");
   $("case-x").onclick = () => { location.hash = ui.lastView; };
@@ -858,95 +935,350 @@ async function mountStage(mediaReady) {
   floor.position.set(0, -1.62, -6);
   scene.add(floor);
 
-  /* cards on a wavy ribbon */
-  const H = 2.12;
-  const W = H * CARD_ASPECT;
-  const GAP = 0.045;
-  const P = W + GAP;
-  const SEG = 56;
-  const copies = Math.max(1, Math.ceil(26 / (featured.length * P)));
-  const L = featured.length * copies * P;
-
-  const textures = featured.map((p) => {
-    const tex = new THREE.CanvasTexture(paintCard(p, 1500));
-    tex.colorSpace = THREE.SRGBColorSpace;
-    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-    return tex;
-  });
-
-  const cards = [];
-  for (let c = 0; c < copies; c++) {
-    featured.forEach((project, i) => {
-      const geo = new THREE.PlaneGeometry(W, H, SEG, 1);
-      const base = Float32Array.from(geo.attributes.position.array);
-      const mat = new THREE.MeshBasicMaterial({
-        map: textures[i],
-        transparent: true,
-        depthWrite: false,
-        toneMapped: false,
-        side: THREE.DoubleSide,
-        opacity: 0
-      });
-      const mesh = new THREE.Mesh(geo, mat);
-      mesh.frustumCulled = false;
-      mesh.userData = { slug: project.slug, title: project.title, slot: c * featured.length + i, base, lift: 0, intro: 0, x: 0 };
-      scene.add(mesh);
-      cards.push(mesh);
-    });
-  }
-
+  /* ───── card decks: three looks for the featured row ─────
+   * Scroll state is in card units (1 = one project), so switching style keeps
+   * the same project in front. Each deck builds its own meshes and lays them
+   * out every frame; the camera eases to that deck's framing.
+   */
   let target = 0;
   let current = 0;
   let prevCurrent = 0;
-  let amp = 0.2;
   let cardsAlpha = 0;
   let cardsGoal = 1;
   let hoverSlug = null;
+  let hoverUV = null;
   let lastInput = 0;
   let lastDir = 0;
   let introStart = Infinity;
   let paused = false;
   const t0 = performance.now();
+  const N = featured.length;
 
-  const ribbonZ = (x, phase) => -0.052 * x * x + amp * Math.sin(0.62 * x + phase);
-  const wrap = (x) => ((((x + L / 2) % L) + L) % L) - L / 2;
+  const CAMERAS = {
+    1: { pos: [0, 0.22, 6.3], look: [0, 0.02, -0.2] },
+    2: { pos: [0, 0.42, 8.2], look: [0, 0.06, 0] },
+    3: { pos: [0, 0.36, 8.0], look: [0, 0.04, 0] }
+  };
+  const camPos = new THREE.Vector3(...CAMERAS[ui.style].pos);
+  const camLook = new THREE.Vector3(...CAMERAS[ui.style].look);
+  camera.position.copy(camPos);
+  camera.lookAt(camLook);
 
-  function layout(time) {
-    const vel = current - prevCurrent;
-    prevCurrent = current;
-    amp = lerp(amp, 0.34 + Math.min(0.55, Math.abs(vel) * 2.4), 0.06);
-    const phase = time * 0.32 + current * 0.22;
-    for (const mesh of cards) {
-      const u = mesh.userData;
-      const X = wrap(u.slot * P - current);
-      u.x = X;
-      const hovered = hoverSlug && u.slug === hoverSlug && Math.abs(X) < 8;
-      u.lift = lerp(u.lift, hovered ? 1 : 0, 0.12);
+  const introAt = (time, distance) => easeOutExpo(clamp((time - introStart - Math.min(distance, 4) * 0.09) / 1.5, 0, 1));
 
-      // staggered entrance from below and behind
-      const delay = Math.min(Math.abs(X) / P, 4) * 0.09;
-      u.intro = easeOutExpo(clamp((time - introStart - delay) / 1.5, 0, 1));
-      const k = 1 - u.intro;
-
-      const pos = mesh.geometry.attributes.position;
-      const arr = pos.array;
-      const b = u.base;
-      for (let i = 0; i < arr.length; i += 3) {
-        const lx = b[i];
-        const ly = b[i + 1];
-        const wx = X + lx;
-        arr[i] = wx;
-        arr[i + 1] = ly + 0.04 - k * 2.4 + u.lift * 0.06;
-        arr[i + 2] = ribbonZ(wx, phase) - k * 3.2 + u.lift * 0.32;
-      }
-      pos.needsUpdate = true;
-      const dim = hoverSlug && !hovered ? 0.72 : 1;
-      mesh.material.color.setScalar(lerp(mesh.material.color.r, dim, 0.12));
-      mesh.material.opacity = cardsAlpha * u.intro;
-      mesh.visible = mesh.material.opacity > 0.003 && Math.abs(X) < L / 2 - P * 0.5;
+  function photoTexture(project) {
+    const m = project.media[0];
+    let tex;
+    if (m._img) tex = new THREE.Texture(m._img);
+    else {
+      const c = document.createElement("canvas");
+      c.width = 1200;
+      c.height = Math.round(1200 * (m.h / m.w));
+      drawPoster(c.getContext("2d"), m, project.title, c.width, c.height);
+      tex = new THREE.Texture(c);
     }
-    floorMat.uniforms.uAlpha.value = cardsAlpha * clamp((time - introStart + 0.2) / 1.2, 0, 1);
+    tex.needsUpdate = true;
+    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    return tex;
   }
+
+  /* style 1 — wide panels on an arc, caption band, bold title, arrows */
+  function makeArc() {
+    const H = 2.2;
+    const W = H * (16 / 9);
+    const GAP = 0.2;
+    const R = 7.8;
+    const step = (W + GAP) / R;
+    const meshes = featured.map((project, i) => {
+      const tex = new THREE.CanvasTexture(paintPanel(project, 1600));
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      const geo = new THREE.PlaneGeometry(W, H, 28, 10);
+      const pos = geo.attributes.position;
+      for (let v = 0; v < pos.count; v++) {
+        const nx = pos.getX(v) / (W * 0.5);
+        pos.setZ(v, -nx * nx * W * 0.2);
+      }
+      geo.computeVertexNormals();
+      const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, alphaTest: 0.02, depthWrite: false, toneMapped: false, opacity: 0 });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.userData = { slug: project.slug, title: project.title, index: i, lift: 0 };
+      scene.add(mesh);
+      return mesh;
+    });
+    return {
+      bounded: true,
+      meshes,
+      layout(time) {
+        for (const mesh of meshes) {
+          const u = mesh.userData;
+          const a = (u.index - current) * step;
+          const hovered = hoverSlug === u.slug;
+          u.lift = lerp(u.lift, hovered ? 1 : 0, 0.16);
+          const k = 1 - introAt(time, Math.abs(u.index - current));
+          mesh.position.set(Math.sin(a) * R, 0.08 + u.lift * 0.14 - k * 2.4, -(1 - Math.cos(a)) * R + u.lift * 0.42 - k * 3);
+          mesh.rotation.y = -a * (1 - u.lift * 0.4);
+          mesh.scale.setScalar(1 + u.lift * 0.07);
+          const dim = hoverSlug ? (hovered ? 1 : 0.5) : 1;
+          mesh.material.color.setScalar(lerp(mesh.material.color.r, dim, 0.14));
+          mesh.material.opacity = cardsAlpha * (1 - k);
+          mesh.visible = mesh.material.opacity > 0.003 && Math.abs(a) < 1.6;
+        }
+      },
+      /** Screen points beside the front card, for the prev / next buttons. */
+      arrowPoints() {
+        const i = Math.round(current);
+        const mesh = meshes[i];
+        if (!mesh) return null;
+        mesh.updateMatrixWorld();
+        const l = mesh.localToWorld(new THREE.Vector3(-W / 2, 0, -W * 0.2 + 0.02)).project(camera);
+        const r = mesh.localToWorld(new THREE.Vector3(W / 2, 0, -W * 0.2 + 0.02)).project(camera);
+        const toPx = (v) => ({ x: (v.x * 0.5 + 0.5) * innerWidth, y: (-v.y * 0.5 + 0.5) * innerHeight });
+        return { prev: i > 0 ? toPx(l) : null, next: i < N - 1 ? toPx(r) : null };
+      },
+      spots: () => [],
+      dispose() {
+        for (const m of meshes) { scene.remove(m); m.geometry.dispose(); m.material.map.dispose(); m.material.dispose(); }
+      }
+    };
+  }
+
+  /* style 2 — the wavy ribbon; style 3 — deeper wave, flush cards, living pictures */
+  function makeRibbon(alive) {
+    const H = alive ? 2.2 : 2.12;
+    const W = H * CARD_ASPECT;
+    const GAP = alive ? 0.014 : 0.045;
+    const P = W + GAP;
+    const SX = alive ? 40 : 56;
+    const SY = alive ? 10 : 1;
+    const copies = Math.max(1, Math.ceil(26 / (N * P)));
+    const L = N * copies * P;
+    let amp = alive ? 0.5 : 0.2;
+
+    const faces = featured.map((p) => {
+      const tex = new THREE.CanvasTexture(paintCard(p, 1500, !alive));
+      tex.colorSpace = alive ? THREE.NoColorSpace : THREE.SRGBColorSpace;
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      return tex;
+    });
+    const photos = alive ? featured.map(photoTexture) : [];
+
+    const VERT = `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }`;
+    const FRAG = `
+      uniform sampler2D uPhoto;
+      uniform sampler2D uFace;
+      uniform float uTime;
+      uniform float uHover;
+      uniform float uAlpha;
+      uniform float uDim;
+      uniform float uSeed;
+      uniform float uImgAspect;
+      uniform float uCardAspect;
+      uniform vec2 uMouse;
+      varying vec2 vUv;
+
+      float roundBox(vec2 p, vec2 b, float r) {
+        vec2 q = abs(p) - b + r;
+        return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
+      }
+
+      void main() {
+        vec2 p = (vUv - 0.5) * vec2(uCardAspect, 1.0);
+        float edge = roundBox(p, vec2(uCardAspect * 0.5, 0.5), 0.045);
+        float mask = 1.0 - smoothstep(-0.003, 0.003, edge);
+        if (mask <= 0.0) discard;
+
+        // cover-fit the photo, then let it drift and breathe like a loop
+        vec2 uv = vUv - 0.5;
+        if (uImgAspect > uCardAspect) uv.x *= uCardAspect / uImgAspect;
+        else uv.y *= uImgAspect / uCardAspect;
+        float zoom = 1.14 + 0.05 * sin(uTime * 0.23 + uSeed) + 0.08 * uHover;
+        uv /= zoom;
+        uv += 0.035 * vec2(sin(uTime * 0.17 + uSeed * 1.3), cos(uTime * 0.13 + uSeed)) * (1.0 - 0.6 * uHover);
+
+        // hover: a soft ripple spreading from the pointer
+        vec2 m = (vUv - uMouse) * vec2(uCardAspect, 1.0);
+        float r = length(m);
+        uv += uHover * 0.012 * normalize(m + 1e-4) * sin(r * 26.0 - uTime * 5.0) * exp(-r * 2.6);
+
+        vec3 col = texture2D(uPhoto, uv + 0.5).rgb;
+        vec4 face = texture2D(uFace, vUv);
+        col = mix(col, face.rgb, face.a);
+        gl_FragColor = vec4(col * uDim, mask * uAlpha);
+      }`;
+
+    const meshes = [];
+    for (let c = 0; c < copies; c++) {
+      featured.forEach((project, i) => {
+        const geo = new THREE.PlaneGeometry(W, H, SX, SY);
+        const base = Float32Array.from(geo.attributes.position.array);
+        let mat;
+        if (alive) {
+          const img = photos[i].image;
+          mat = new THREE.ShaderMaterial({
+            vertexShader: VERT,
+            fragmentShader: FRAG,
+            transparent: true,
+            depthWrite: false,
+            side: THREE.DoubleSide,
+            uniforms: {
+              uPhoto: { value: photos[i] },
+              uFace: { value: faces[i] },
+              uTime: { value: 0 },
+              uHover: { value: 0 },
+              uAlpha: { value: 0 },
+              uDim: { value: 1 },
+              uSeed: { value: i * 1.7 + c * 0.6 },
+              uImgAspect: { value: (img.naturalWidth || img.width) / (img.naturalHeight || img.height) },
+              uCardAspect: { value: CARD_ASPECT },
+              uMouse: { value: new THREE.Vector2(0.5, 0.5) }
+            }
+          });
+        } else {
+          mat = new THREE.MeshBasicMaterial({ map: faces[i], transparent: true, depthWrite: false, toneMapped: false, side: THREE.DoubleSide, opacity: 0 });
+        }
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.frustumCulled = false;
+        mesh.userData = { slug: project.slug, title: project.title, slot: c * N + i, base, lift: 0, dim: 1, mouse: new THREE.Vector2(0.5, 0.5) };
+        scene.add(mesh);
+        meshes.push(mesh);
+      });
+    }
+
+    const wrap = (x) => ((((x + L / 2) % L) + L) % L) - L / 2;
+    const ribbonZ = alive
+      ? (x, phase) => -0.04 * x * x + amp * Math.sin(0.86 * x + phase)
+      : (x, phase) => -0.052 * x * x + amp * Math.sin(0.62 * x + phase);
+    const ribbonY = alive ? (x, phase) => 0.11 * Math.sin(0.5 * x + phase * 1.3) : () => 0;
+
+    return {
+      bounded: false,
+      meshes,
+      layout(time) {
+        const vel = (current - prevCurrent) * P;
+        amp = alive
+          ? lerp(amp, 0.5 + Math.min(0.6, Math.abs(vel) * 2.6), 0.06)
+          : lerp(amp, 0.34 + Math.min(0.55, Math.abs(vel) * 2.4), 0.06);
+        const phase = time * 0.32 + current * P * 0.22;
+        for (const mesh of meshes) {
+          const u = mesh.userData;
+          const X = wrap((u.slot - current) * P);
+          const hovered = hoverSlug && u.slug === hoverSlug && Math.abs(X) < 8;
+          u.lift = lerp(u.lift, hovered ? 1 : 0, 0.12);
+          if (hovered && hoverUV) u.mouse.lerp(hoverUV, 0.2);
+          const k = 1 - introAt(time, Math.abs(X) / P);
+
+          const arr = mesh.geometry.attributes.position.array;
+          const b = u.base;
+          for (let i = 0; i < arr.length; i += 3) {
+            const lx = b[i];
+            const ly = b[i + 1];
+            const wx = X + lx;
+            let z = ribbonZ(wx, phase) - k * 3.2 + u.lift * (alive ? 0.22 : 0.32);
+            if (alive && u.lift > 0.001) {
+              // bulge toward the viewer around the pointer
+              const du = (lx / W + 0.5 - u.mouse.x) * CARD_ASPECT;
+              const dv = ly / H + 0.5 - u.mouse.y;
+              z += u.lift * 0.3 * Math.exp(-(du * du + dv * dv) * 5);
+            }
+            arr[i] = wx;
+            arr[i + 1] = ly + 0.04 + ribbonY(wx, phase) - k * 2.4 + u.lift * 0.06;
+            arr[i + 2] = z;
+          }
+          mesh.geometry.attributes.position.needsUpdate = true;
+
+          u.dim = lerp(u.dim, hoverSlug && !hovered ? 0.72 : 1, 0.12);
+          const alpha = cardsAlpha * (1 - k);
+          if (alive) {
+            const un = mesh.material.uniforms;
+            un.uTime.value = time;
+            un.uHover.value = u.lift;
+            un.uAlpha.value = alpha;
+            un.uDim.value = u.dim;
+            un.uMouse.value.copy(u.mouse);
+          } else {
+            mesh.material.color.setScalar(u.dim);
+            mesh.material.opacity = alpha;
+          }
+          mesh.visible = alpha > 0.003 && Math.abs(X) < L / 2 - P * 0.5;
+        }
+      },
+      arrowPoints: () => null,
+      /** Where each on-screen card's title will land once the intro finishes. */
+      spots() {
+        const out = [];
+        const v = new THREE.Vector3();
+        for (const mesh of meshes) {
+          const X = wrap((mesh.userData.slot - current) * P);
+          if (Math.abs(X) > 7) continue;
+          const lx = X - W / 2 + W * 0.04;
+          v.set(lx, -H / 2 + 0.04 + ribbonY(lx, 0) + H * 0.055, ribbonZ(lx, 0)).project(camera);
+          const x = (v.x * 0.5 + 0.5) * innerWidth;
+          const y = (-v.y * 0.5 + 0.5) * innerHeight;
+          if (x < -40 || x > innerWidth - 20) continue;
+          out.push({ title: mesh.userData.title, x: Math.max(8, x), y: y - 18 });
+        }
+        return out.sort((a, b) => a.x - b.x);
+      },
+      dispose() {
+        for (const m of meshes) { scene.remove(m); m.geometry.dispose(); m.material.dispose(); }
+        faces.forEach((t) => t.dispose());
+        photos.forEach((t) => t.dispose());
+      }
+    };
+  }
+
+  const makeDeck = (s) => (s === 1 ? makeArc() : makeRibbon(s === 3));
+  let deck = makeDeck(ui.style);
+  if (deck.bounded) target = current = prevCurrent = Math.min(1, N - 1);
+  let swapTimer = 0;
+
+  function switchDeck(s) {
+    clearTimeout(swapTimer);
+    cardsGoal = 0;                     // fade the old cards out …
+    swapTimer = setTimeout(() => {     // … then build the new ones and let them rise
+      deck.dispose();
+      deck = makeDeck(s);
+      const front = ((Math.round(current) % N) + N) % N;
+      target = current = prevCurrent = front;
+      hoverSlug = null;
+      cardsAlpha = 0;
+      cardsGoal = ui.view === "featured" ? 1 : 0;
+      introStart = (performance.now() - t0) / 1000;
+    }, 380);
+    camPos.set(...CAMERAS[s].pos);
+    camLook.set(...CAMERAS[s].look);
+  }
+
+  // the floor grid stays up while switching styles; it only fades for Full / Traditional
+  let floorAlpha = 0;
+  let firstIntro = Infinity;
+  function layout(time) {
+    deck.layout(time);
+    prevCurrent = current;
+    const on = ui.view === "featured" && time > firstIntro - 0.2;
+    floorAlpha = lerp(floorAlpha, on ? 1 : 0, 0.06);
+    floorMat.uniforms.uAlpha.value = floorAlpha;
+  }
+
+  const arrowsBox = $("arrows");
+  function placeArrows() {
+    const pts = !paused && ui.view === "featured" && !ui.overlay && cardsAlpha > 0.5 ? deck.arrowPoints() : null;
+    arrowsBox.hidden = !pts;
+    if (!pts) return;
+    for (const [id, pt] of [["prev", pts.prev], ["next", pts.next]]) {
+      const el = $(id);
+      el.style.visibility = pt ? "visible" : "hidden";
+      if (pt) { el.style.left = `${pt.x}px`; el.style.top = `${pt.y}px`; }
+    }
+  }
+  $("prev").onclick = () => api.step(-1);
+  $("next").onclick = () => api.step(1);
 
   /* profile / newsletter ring */
   const ring = new THREE.Group();
@@ -1094,9 +1426,10 @@ async function mountStage(mediaReady) {
     ndc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     ndc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(ndc, camera);
-    const live = cards.filter((m) => m.visible);
+    const live = deck.meshes.filter((m) => m.visible);
     for (const m of live) m.geometry.computeBoundingSphere();
     const hit = raycaster.intersectObjects(live)[0];
+    hoverUV = hit && hit.uv ? hit.uv.clone() : null;
     return hit ? hit.object.userData.slug : null;
   };
 
@@ -1118,7 +1451,7 @@ async function mountStage(mediaReady) {
       lastX = e.clientX;
       moved += Math.abs(dx);
       if (moved > 6) canvas.classList.add("dragging");
-      const units = (dx / innerWidth) * 7.6;
+      const units = (dx / innerWidth) * 2.5;   // one screen width ≈ 2.5 cards
       target -= units;
       lastDir = -Math.sign(dx) || lastDir;
       dragVel = lerp(dragVel, units, 0.5);
@@ -1151,7 +1484,7 @@ async function mountStage(mediaReady) {
     let d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
     if (e.deltaMode === 1) d *= 40;
     else if (e.deltaMode === 2) d *= innerHeight;
-    target += d * 0.005;
+    target += d * 0.0017;
     lastDir = Math.sign(d) || lastDir;
     lastInput = performance.now();
   }, { passive: false });
@@ -1160,30 +1493,38 @@ async function mountStage(mediaReady) {
   resize();
 
   /* loop */
+  const camLookNow = camLook.clone();
   renderer.setAnimationLoop(() => {
     if (paused) return;
     const now = performance.now();
     const time = (now - t0) / 1000;
     if (now - lastInput > 140 && !dragging) {
       // settle on a card, leaning toward the way the user was scrolling
-      const k = target / P;
-      target = (lastDir > 0 ? Math.ceil(k - 0.04) : lastDir < 0 ? Math.floor(k + 0.04) : Math.round(k)) * P;
+      const k = target;
+      target = lastDir > 0 ? Math.ceil(k - 0.04) : lastDir < 0 ? Math.floor(k + 0.04) : Math.round(k);
       lastDir = 0;
     }
+    if (deck.bounded) target = clamp(target, 0, N - 1);
     current = lerp(current, target, 0.14);
+    camera.position.lerp(camPos, 0.06);
+    camLookNow.lerp(camLook, 0.06);
+    camera.lookAt(camLookNow);
     cardsAlpha = lerp(cardsAlpha, cardsGoal, 0.09);
     layout(time);
     animateRing(time);
+    placeArrows();
     renderer.render(scene, camera);
   });
 
-  return {
+  const api = {
     step(dir) {
-      target = Math.round(target / P) * P + dir * P;
+      target = Math.round(target) + dir;
+      if (deck.bounded) target = clamp(target, 0, N - 1);
       lastInput = performance.now() - 1000;
     },
     setCards(on) { cardsGoal = on ? 1 : 0; },
-    pause(on) { paused = on; },
+    pause(on) { paused = on; if (on) arrowsBox.hidden = true; },
+    setStyle(s) { switchDeck(s); },
     setRing(kind) {
       const time = (performance.now() - t0) / 1000;
       ringFrom = ringP;
@@ -1198,25 +1539,13 @@ async function mountStage(mediaReady) {
       }
       ringKind = kind;
     },
-    /** Where each on-screen card's title will land once the intro finishes. */
-    titleSpots() {
-      const spots = [];
-      const phase = 0;
-      const v = new THREE.Vector3();
-      for (const mesh of cards) {
-        const X = wrap(mesh.userData.slot * P - current);
-        if (Math.abs(X) > 7) continue;
-        const lx = X - W / 2 + W * 0.04;
-        v.set(lx, -H / 2 + 0.04 + H * 0.055, ribbonZ(lx, phase)).project(camera);
-        const x = (v.x * 0.5 + 0.5) * innerWidth;
-        const y = (-v.y * 0.5 + 0.5) * innerHeight;
-        if (x < -40 || x > innerWidth - 20) continue;
-        spots.push({ title: mesh.userData.title, x: Math.max(8, x), y: y - 18 });
-      }
-      return spots.sort((a, b) => a.x - b.x);
-    },
-    startIntro() { introStart = (performance.now() - t0) / 1000; }
+    titleSpots() { return deck.spots(); },
+    startIntro() {
+      introStart = (performance.now() - t0) / 1000;
+      firstIntro = Math.min(firstIntro, introStart);
+    }
   };
+  return api;
 }
 
 /* ───────────────────────── boot ───────────────────────── */

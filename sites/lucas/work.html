@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-page="work">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work • Lucas Bastos</title>
+  <meta name="description" content="Selected projects by Lucas Bastos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="" data-page="work">
+  <a class="skip" href="#main-work" data-i18n="skip">Skip to content</a>
+
+  <!-- first visit: greetings, then the panel lifts away -->
+  <div class="loader" aria-hidden="true">
+    <p class="loader-word"><span class="dot"></span><span id="hello">Hello</span></p>
+    <div class="loader-curve"></div>
+  </div>
+
+  <!-- page change: a panel rises, names the next page, then lifts off it -->
+  <div class="transition" id="transition" aria-hidden="true">
+    <div class="t-curve t-top"></div>
+    <p class="t-label"><span class="dot"></span><span id="t-label"></span></p>
+    <div class="t-curve t-bottom"></div>
+  </div>
+
+  <button class="fab magnetic" id="fab" type="button" aria-label="Open menu" data-i18n-aria="menu.open.attr" aria-expanded="false" aria-controls="menu">
+    <span class="fill" aria-hidden="true"></span>
+    <span class="burger magnetic-inner" aria-hidden="true"><i></i><i></i></span>
+  </button>
+
+  <div class="menu-dim" id="menu-dim"></div>
+
+  <nav class="menu" id="menu" aria-label="Main" data-i18n-aria="menu.main.attr" aria-hidden="true">
+    <div class="menu-body">
+      <div>
+        <p class="eyebrow" data-i18n="navigation">Navigation</p>
+        <ul class="menu-links">
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="work.html" aria-current="page" data-i18n="nav.work">Work</a></li>
+          <li><a href="about.html" data-i18n="nav.about">About</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="menu-foot">
+        <div class="menu-socials">
+          <p class="eyebrow" data-i18n="socials">Socials</p>
+          <ul>
+              <li><a href="#" data-social>Instagram</a></li>
+              <li><a href="#" data-social>Dribbble</a></li>
+              <li><a href="#" data-social>Behance</a></li>
+              <li><a href="#" data-social>LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="menu-lang">
+          <p class="eyebrow" data-i18n="language">Language</p>
+          <div class="lang dark" role="group" aria-label="Language" data-i18n-aria="language.attr"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="pt" aria-pressed="false">PT</button></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="preview" id="preview" aria-hidden="true"><div class="preview-track" id="preview-track"></div></div>
+  <div class="preview-cursor" id="preview-cursor" aria-hidden="true" data-i18n="view">View</div>
+
+  <div id="smooth">
+    <main>
+      <header class="page-head">
+        <div class="bar on-light">
+          <a class="credit magnetic" href="index.html">
+            <span class="magnetic-inner">
+              <span class="copy">©</span>
+              <span class="swap"><span data-i18n="credit">Code by Lucas</span><span>Lucas Bastos</span></span>
+            </span>
+          </a>
+          <div class="bar-right">
+            <ul class="bar-links">
+            <li><a class="magnetic is-current" href="work.html"><span class="magnetic-inner" data-i18n="nav.work">Work</span></a></li>
+            <li><a class="magnetic" href="about.html"><span class="magnetic-inner" data-i18n="nav.about">About</span></a></li>
+            <li><a class="magnetic" href="contact.html"><span class="magnetic-inner" data-i18n="nav.contact">Contact</span></a></li>
+            </ul>
+            <div class="lang" role="group" aria-label="Language" data-i18n-aria="language.attr"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="pt" aria-pressed="false">PT</button></div>
+            <button class="bar-menu" type="button" data-open-menu data-i18n="menu">Menu</button>
+          </div>
+        </div>
+        <div class="container head-copy">
+          <h1 class="split" data-reveal data-i18n="h1.work">Work that had to earn its place</h1>
+        </div>
+      </header>
+
+      <section class="work work-page" id="main-work">
+        <div class="container">
+          <div class="table-head" aria-hidden="true">
+            <span class="eyebrow" data-i18n="th.client">Client</span><span class="eyebrow" data-i18n="th.location">Location</span><span class="eyebrow" data-i18n="th.services">Services</span><span class="eyebrow" data-i18n="th.year">Year</span>
+          </div>
+          <ul class="work-table" data-preview-list>
+            <li><a href="../folio/#p/mare" data-preview="img/mare.jpg" data-bg="#203038">
+              <h3>Maré</h3><span>Ericeira</span><span data-i18n="svc.dd">Design &amp; Development</span><span>2025</span>
+            </a></li>
+            <li><a href="../folio/#p/estacao" data-preview="img/estacao.jpg" data-bg="#1f2a33">
+              <h3>Estação</h3><span data-i18n="loc.lisbon">Lisbon</span><span data-i18n="svc.id">Interaction &amp; Development</span><span>2024</span>
+            </a></li>
+            <li><a href="../folio/#p/calma" data-preview="img/calma.jpg" data-bg="#d9e0d2">
+              <h3>Manual da Calma</h3><span>Porto</span><span data-i18n="svc.dd">Design &amp; Development</span><span>2024</span>
+            </a></li>
+            <li><a href="../folio/#p/largo" data-preview="img/largo.jpg" data-bg="#cfc6b8">
+              <h3>Tipo Largo</h3><span data-i18n="loc.lisbon">Lisbon</span><span data-i18n="svc.td">Type &amp; Development</span><span>2025</span>
+            </a></li>
+            <li><a href="../folio/#p/arquivo" data-preview="img/arquivo.jpg" data-bg="#d6d2cb">
+              <h3>O Arquivo</h3><span>Coimbra</span><span data-i18n="svc.d">Development</span><span>2026</span>
+            </a></li>
+            <li><a href="../folio/#p/costa" data-preview="img/costa.jpg" data-bg="#c9d4cf">
+              <h3>Costa Clara</h3><span>Algarve</span><span data-i18n="svc.dd">Design &amp; Development</span><span>2025</span>
+            </a></li>
+            <li><a href="../folio/#p/nuno" data-preview="img/nuno.jpg" data-bg="#e8dcd4">
+              <h3>Nuno Vale</h3><span data-i18n="loc.lisbon">Lisbon</span><span data-i18n="svc.ds">Design</span><span>2023</span>
+            </a></li>
+            <li><a href="../folio/#p/bruma" data-preview="img/bruma.jpg" data-bg="#dfe3e6">
+              <h3>Bruma</h3><span>Braga</span><span data-i18n="svc.id">Interaction &amp; Development</span><span>2023</span>
+            </a></li>
+          </ul>
+        </div>
+        <div class="round-wrap"><div class="round"></div></div>
+      </section>
+
+      <footer class="footer" id="contact">
+        <div class="container footer-inner" id="footer-inner">
+          <div class="footer-top">
+            <h2><img class="avatar" src="img/hero/lucas-4-thumb.jpg" alt="" /><span data-i18n="footer.title">Let’s make<br />something</span></h2>
+            <svg class="arrow" viewBox="0 0 14 14" aria-hidden="true"><path d="M12 2 L2 12 M2 4.5 V12 H9.5" fill="none" stroke="currentColor" stroke-width="1.2" /></svg>
+          </div>
+          <div class="footer-line">
+            <a class="btn-cta magnetic" href="contact.html">
+              <span class="fill" aria-hidden="true"></span>
+              <span class="magnetic-inner" data-i18n="touch">Get in touch</span>
+            </a>
+          </div>
+          <div class="pills">
+            <a class="btn-pill dark magnetic" href="mailto:ola@lucasbastos.pt"><span class="fill" aria-hidden="true"></span><span class="magnetic-inner">ola@lucasbastos.pt</span></a>
+            <a class="btn-pill dark magnetic" href="tel:+351210000333"><span class="fill" aria-hidden="true"></span><span class="magnetic-inner">+351 21 000 0333</span></a>
+          </div>
+        </div>
+        <div class="container footer-bottom">
+          <div class="meta">
+            <div><p class="eyebrow" data-i18n="version">Version</p><p data-i18n="edition">2026 © Edition</p></div>
+            <div><p class="eyebrow" data-i18n="localtime">Local time</p><p data-clock>—</p></div>
+          </div>
+          <div class="meta socials">
+            <p class="eyebrow" data-i18n="socials">Socials</p>
+            <ul>
+              <li><a href="#" data-social>Instagram</a></li>
+              <li><a href="#" data-social>Dribbble</a></li>
+              <li><a href="#" data-social>Behance</a></li>
+              <li><a href="#" data-social>LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
