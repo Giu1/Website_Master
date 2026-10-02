@@ -139,7 +139,7 @@ PHOTOS = [  # file, backdrop colour sampled from the photo's edges
     ("img/hero/lucas-6.jpg", "#374847"),
     ("img/hero/lucas-7.jpg", "#324041"),
 ]
-DEFAULT_PHOTO = 3  # lucas-4: front, smiling
+DEFAULT_PHOTO = 0  # lucas-1: the default on every visit
 for i in range(len(PHOTOS)):
     S[f"photo{i + 1}.attr"] = (f"Photo {i + 1}", f"Foto {i + 1}")
 

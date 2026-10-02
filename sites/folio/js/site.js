@@ -31,8 +31,8 @@ const ui = {
   view: "featured",     // "featured" | "full" | "traditional"
   overlay: null,        // null | "profile" | "news"
   lastView: "#featured",
-  style: (() => {       // featured card look: 1 arc panels, 2 ribbon, 3 living ribbon
-    try { const v = Number(localStorage.getItem(STYLE_KEY)); return [1, 2, 3].includes(v) ? v : 2; } catch { return 2; }
+  style: (() => {       // featured card look: 1 arc panels, 2 ribbon, 3 living ribbon, 4 still deep wave
+    try { const v = Number(localStorage.getItem(STYLE_KEY)); return [1, 2, 3, 4].includes(v) ? v : 2; } catch { return 2; }
   })()
 };
 
@@ -225,6 +225,48 @@ function paintCard(project, w, withPhoto = true) {
   ctx.lineTo(cx + a, cy + a * 0.35);
   ctx.stroke();
   ctx.restore();
+  return canvas;
+}
+
+/** Style 4 face: transparent card with a small title and a small round button (the picture is drawn in the shader). */
+function paintFace4(project, w, aspect) {
+  const h = Math.round(w / aspect);
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d");
+  const shade = ctx.createLinearGradient(0, h * 0.72, 0, h);
+  shade.addColorStop(0, "rgba(0,0,0,0)");
+  shade.addColorStop(1, "rgba(0,0,0,0.22)");
+  ctx.fillStyle = shade;
+  ctx.fillRect(0, h * 0.72, w, h * 0.28);
+
+  const pad = w * 0.034;
+  const size = Math.round(w * 0.028);
+  ctx.fillStyle = "#fff";
+  ctx.textBaseline = "alphabetic";
+  ctx.font = `400 ${size}px "Inter Tight", sans-serif`;
+  if ("letterSpacing" in ctx) ctx.letterSpacing = `${(-0.03 * size).toFixed(2)}px`;
+  ctx.fillText(project.title, pad, h - pad);
+
+  const r = w * 0.0125;
+  const cx = w - pad - r;
+  const cy = h - pad - r * 0.55;
+  ctx.fillStyle = "#0a0a0a";
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = "#fff";
+  ctx.lineWidth = r * 0.13;
+  ctx.lineCap = "round";
+  const a = r * 0.34;
+  ctx.beginPath();
+  ctx.moveTo(cx - a, cy + a);
+  ctx.lineTo(cx + a, cy - a);
+  ctx.moveTo(cx - a * 0.3, cy - a);
+  ctx.lineTo(cx + a, cy - a);
+  ctx.lineTo(cx + a, cy + a * 0.3);
+  ctx.stroke();
   return canvas;
 }
 
@@ -957,7 +999,8 @@ async function mountStage(mediaReady) {
   const CAMERAS = {
     1: { pos: [0, 0.22, 6.3], look: [0, 0.02, -0.2] },
     2: { pos: [0, 0.42, 8.2], look: [0, 0.06, 0] },
-    3: { pos: [0, 0.36, 8.0], look: [0, 0.04, 0] }
+    3: { pos: [0, 0.36, 8.0], look: [0, 0.04, 0] },
+    4: { pos: [0, 0.42, 8.2], look: [0, 0.06, 0] }
   };
   const camPos = new THREE.Vector3(...CAMERAS[ui.style].pos);
   const camLook = new THREE.Vector3(...CAMERAS[ui.style].look);
@@ -1043,20 +1086,27 @@ async function mountStage(mediaReady) {
     };
   }
 
-  /* style 2 — the wavy ribbon; style 3 — deeper wave, flush cards, living pictures */
-  function makeRibbon(alive) {
-    const H = alive ? 2.2 : 2.12;
-    const W = H * CARD_ASPECT;
-    const GAP = alive ? 0.014 : 0.045;
+  /* style 2 — the wavy ribbon
+   * style 3 — deeper drifting wave, flush cards, living pictures, hover bulge
+   * style 4 — a still, deep wave fixed in space that the cards slide through;
+   *           it only swells while scrolling. Wide 1.6:1 cards, no hover motion.
+   */
+  function makeRibbon(alive, still = false) {
+    const ASP = still ? 1.6 : CARD_ASPECT;
+    const H = still ? 2.0 : alive ? 2.2 : 2.12;
+    const W = H * ASP;
+    const GAP = still ? 0.012 : alive ? 0.014 : 0.045;
     const P = W + GAP;
-    const SX = alive ? 40 : 56;
-    const SY = alive ? 10 : 1;
+    const SX = still ? 48 : alive ? 40 : 56;
+    const SY = still ? 4 : alive ? 10 : 1;
     const copies = Math.max(1, Math.ceil(26 / (N * P)));
     const L = N * copies * P;
-    let amp = alive ? 0.5 : 0.2;
+    const K = (Math.PI * 2) / (2.1 * W);      // style 4: one full wave every ~2 cards
+    const CREST = -0.45 * W;                   // nearest point sits left of centre
+    let amp = still ? 0.72 : alive ? 0.5 : 0.2;
 
     const faces = featured.map((p) => {
-      const tex = new THREE.CanvasTexture(paintCard(p, 1500, !alive));
+      const tex = new THREE.CanvasTexture(still ? paintFace4(p, 1600, ASP) : paintCard(p, 1500, !alive));
       tex.colorSpace = alive ? THREE.NoColorSpace : THREE.SRGBColorSpace;
       tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
       return tex;
@@ -1135,7 +1185,7 @@ async function mountStage(mediaReady) {
               uDim: { value: 1 },
               uSeed: { value: i * 1.7 + c * 0.6 },
               uImgAspect: { value: (img.naturalWidth || img.width) / (img.naturalHeight || img.height) },
-              uCardAspect: { value: CARD_ASPECT },
+              uCardAspect: { value: ASP },
               uMouse: { value: new THREE.Vector2(0.5, 0.5) }
             }
           });
@@ -1151,24 +1201,28 @@ async function mountStage(mediaReady) {
     }
 
     const wrap = (x) => ((((x + L / 2) % L) + L) % L) - L / 2;
-    const ribbonZ = alive
-      ? (x, phase) => -0.04 * x * x + amp * Math.sin(0.86 * x + phase)
-      : (x, phase) => -0.052 * x * x + amp * Math.sin(0.62 * x + phase);
-    const ribbonY = alive ? (x, phase) => 0.11 * Math.sin(0.5 * x + phase * 1.3) : () => 0;
+    const ribbonZ = still
+      ? (x) => -0.035 * x * x + amp * Math.cos(K * (x - CREST))
+      : alive
+        ? (x, phase) => -0.04 * x * x + amp * Math.sin(0.86 * x + phase)
+        : (x, phase) => -0.052 * x * x + amp * Math.sin(0.62 * x + phase);
+    const ribbonY = alive && !still ? (x, phase) => 0.11 * Math.sin(0.5 * x + phase * 1.3) : () => 0;
 
     return {
       bounded: false,
       meshes,
       layout(time) {
         const vel = (current - prevCurrent) * P;
-        amp = alive
-          ? lerp(amp, 0.5 + Math.min(0.6, Math.abs(vel) * 2.6), 0.06)
-          : lerp(amp, 0.34 + Math.min(0.55, Math.abs(vel) * 2.4), 0.06);
+        amp = still
+          ? lerp(amp, 0.72 + Math.min(0.7, Math.abs(vel) * 3), 0.08)
+          : alive
+            ? lerp(amp, 0.5 + Math.min(0.6, Math.abs(vel) * 2.6), 0.06)
+            : lerp(amp, 0.34 + Math.min(0.55, Math.abs(vel) * 2.4), 0.06);
         const phase = time * 0.32 + current * P * 0.22;
         for (const mesh of meshes) {
           const u = mesh.userData;
           const X = wrap((u.slot - current) * P);
-          const hovered = hoverSlug && u.slug === hoverSlug && Math.abs(X) < 8;
+          const hovered = !still && hoverSlug && u.slug === hoverSlug && Math.abs(X) < 8;
           u.lift = lerp(u.lift, hovered ? 1 : 0, 0.12);
           if (hovered && hoverUV) u.mouse.lerp(hoverUV, 0.2);
           const k = 1 - introAt(time, Math.abs(X) / P);
@@ -1180,9 +1234,9 @@ async function mountStage(mediaReady) {
             const ly = b[i + 1];
             const wx = X + lx;
             let z = ribbonZ(wx, phase) - k * 3.2 + u.lift * (alive ? 0.22 : 0.32);
-            if (alive && u.lift > 0.001) {
+            if (alive && !still && u.lift > 0.001) {
               // bulge toward the viewer around the pointer
-              const du = (lx / W + 0.5 - u.mouse.x) * CARD_ASPECT;
+              const du = (lx / W + 0.5 - u.mouse.x) * ASP;
               const dv = ly / H + 0.5 - u.mouse.y;
               z += u.lift * 0.3 * Math.exp(-(du * du + dv * dv) * 5);
             }
@@ -1192,7 +1246,7 @@ async function mountStage(mediaReady) {
           }
           mesh.geometry.attributes.position.needsUpdate = true;
 
-          u.dim = lerp(u.dim, hoverSlug && !hovered ? 0.72 : 1, 0.12);
+          u.dim = lerp(u.dim, !still && hoverSlug && !hovered ? 0.72 : 1, 0.12);
           const alpha = cardsAlpha * (1 - k);
           if (alive) {
             const un = mesh.material.uniforms;
@@ -1233,7 +1287,7 @@ async function mountStage(mediaReady) {
     };
   }
 
-  const makeDeck = (s) => (s === 1 ? makeArc() : makeRibbon(s === 3));
+  const makeDeck = (s) => (s === 1 ? makeArc() : makeRibbon(s >= 3, s === 4));
   let deck = makeDeck(ui.style);
   if (deck.bounded) target = current = prevCurrent = Math.min(1, N - 1);
   let swapTimer = 0;

@@ -100,10 +100,11 @@ Caminhos em `data.js` são relativos a `folio/` (`img/mare.jpg`). Sem `src`, o s
 
 - **Entrada:** três traços enchem enquanto as imagens carregam; os títulos aparecem onde os cartões vão aterrar, e os cartões sobem do chão.
 - **Palco:** fila infinita de cartões numa fita ondulada sobre uma grelha em perspetiva. Roda ou arrasto percorrem; a fita ondula mais com a velocidade e assenta num cartão. Hover puxa o cartão para a frente. Clique abre a ficha.
-- **Estilos (Style 1 / 2 / 3):** só na vista Featured. A escolha fica guardada no browser (`localStorage`, `folio-style`); o padrão é o 2.
+- **Estilos (Style 1 / 2 / 3 / 4):** só na vista Featured. A escolha fica guardada no browser (`localStorage`, `folio-style`); o padrão é o 2.
   - **Style 1:** painéis largos 16:9 num arco, faixa de legenda em cima, título forte + resumo, botões ‹ › ao lado do cartão da frente. Tem princípio e fim.
   - **Style 2:** a fita ondulada (cartões 1.42:1, título + seta).
   - **Style 3:** fita mais funda e inclinada, cartões encostados. A imagem de cada cartão está sempre a mexer (zoom e deriva lentos, no shader). Ao passar o rato, o cartão abaúla na direção do ponteiro, a imagem aproxima-se e espalha-se uma onda suave a partir do cursor.
+  - **Style 4:** uma onda funda e parada, fixa no espaço: a crista (o ponto mais perto) fica à esquerda do centro e os cartões deslizam através dela. Só aumenta enquanto se faz scroll. Cartões largos 1.6:1 quase encostados, título pequeno e botão redondo pequeno, imagens a mexer devagar. O hover não mexe na geometria. Três "ticks" da roda avançam um cartão.
   - Ao trocar, os cartões antigos desaparecem, a câmara ajusta-se ao estilo novo e os novos sobem do chão, sempre com o mesmo projeto à frente.
 - **Setas do teclado:** movem a fila; dentro da ficha, mudam de projeto. Esc fecha.
 - **Full:** todos os nomes centrados, separados por `·`. Ao passar o rato num nome, uma lente líquida deforma o texto à volta e mostra a imagem do projeto (WebGL; sem WebGL fica um hover simples).

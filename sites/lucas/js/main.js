@@ -349,7 +349,6 @@
   const portrait = $("#portrait");
   const hero = $(".hero");
   const photoBtns = $$(".photo-switch [data-photo]");
-  const PHOTO_KEY = "lb-photo";
 
   function showPhoto(btn, instant = false) {
     if (!portrait || !btn) return;
@@ -375,17 +374,9 @@
     img.decode ? img.decode().then(reveal, reveal) : (img.onload = reveal);
   }
 
-  photoBtns.forEach((b) => b.addEventListener("click", () => {
-    showPhoto(b);
-    try { localStorage.setItem(PHOTO_KEY, b.dataset.photo); } catch { /* private mode: choice just isn't kept */ }
-  }));
-
-  // keep the visitor's last pick (per browser)
-  try {
-    const saved = localStorage.getItem(PHOTO_KEY);
-    const btn = saved && photoBtns.find((b) => b.dataset.photo === saved);
-    if (btn) showPhoto(btn, true);
-  } catch { /* ignore */ }
+  // switching is temporary: every visit starts on the default photo
+  photoBtns.forEach((b) => b.addEventListener("click", () => showPhoto(b)));
+  try { localStorage.removeItem("lb-photo"); } catch { /* ignore */ }
 
   // warm the other photos once the page has settled
   addEventListener("load", () => setTimeout(() => photoBtns.forEach((b) => { new Image().src = b.dataset.photo; }), 2500));

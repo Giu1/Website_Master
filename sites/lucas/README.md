@@ -7,7 +7,7 @@ Four-page portfolio (Home, Work, About, Contact) for Lucas Bastos. Vanilla HTML/
 - **Page transitions:** every link between the four pages raises a dark panel with a bowed top edge, names the next page ("• Contact"), then navigates under it. The new page opens behind the same panel, which lifts off with a bowed bottom edge while the heading rises in. The Hello loader only plays on a direct visit.
 - **Loader:** a short run of greetings, then the dark panel lifts away with a bowed edge.
 - **Hero:** a full-height photo whose sides fade into a colour sampled from that photo, "Located in Portugal" pill with a turning globe, and the name looping across the bottom. The loop speeds up while you scroll and flips direction when you scroll back up.
-- **Photo switcher:** the thumbnail pill in the hero crossfades between the 7 photos and shifts the hero colour to match. The pick is remembered in this browser (`localStorage`, key `lb-photo`).
+- **Photo switcher:** the thumbnail pill in the hero crossfades between the 7 photos and shifts the hero colour to match. The switch is temporary: every visit starts on photo 1 (`DEFAULT_PHOTO` in `build.py`).
 - **Smooth scroll** on desktop (the page eases toward the scroll position). Phones and reduced-motion use native scroll.
 - **Magnetic buttons:** round buttons and top links lean toward the pointer and spring back. Round buttons fill blue from the bottom on hover.
 - **Menu:** a round button appears once the top bar scrolls away. It opens a dark side panel whose bulging edge straightens as it lands.
