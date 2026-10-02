@@ -63,7 +63,7 @@ window.FOLIO = {
       client: "Backoffice",
       url: "../aura-desk/",
       awards: 0,
-      summary: "Backoffice for the Aura salon. Bookings, services, staff and site copy. Login demo / demo.",
+      summary: "Aura's backoffice: requests, clients, insights, team and days off. Login demo / demo.",
       media: [{ w: 16, h: 9, src: "img/largo.jpg", caption: "Desk" }]
     },
     {
@@ -74,7 +74,7 @@ window.FOLIO = {
       client: "Cleaning",
       url: "../brightline/",
       awards: 0,
-      summary: "Home cleaning. Sage pages, services, areas and a quote form built to convert.",
+      summary: "Home cleaning. Instant quote, area check, booking by crew size.",
       media: [{ w: 16, h: 9, src: "img/estacao.jpg", caption: "Cleaning" }]
     },
     {
@@ -85,7 +85,7 @@ window.FOLIO = {
       client: "Bakery",
       url: "../nido/",
       awards: 0,
-      summary: "Neighbourhood bakery. Warm cocoa, the daily tray, weekend lists and catering.",
+      summary: "Bakery on the clock. Stock sells through the morning; pre-order for pick-up.",
       media: [{ w: 16, h: 9, src: "img/mare.jpg", caption: "Bakery" }]
     },
     {
@@ -96,7 +96,7 @@ window.FOLIO = {
       client: "Salon",
       url: "../aura/",
       awards: 0,
-      summary: "Salon in Chiado. Cream pages, booking, team and gallery, fed by Aura Desk.",
+      summary: "Salon in Chiado. Live booking fed by Aura Desk.",
       media: [{ w: 16, h: 9, src: "img/costa.jpg", caption: "Salon" }]
     },
     {
@@ -107,7 +107,7 @@ window.FOLIO = {
       client: "Perfume",
       url: "../vela/",
       awards: 0,
-      summary: "One perfume, one page. Night purple, type first, a sample request at the end.",
+      summary: "One perfume, a drawn bottle that takes each note's colour, and a wear clock.",
       media: [{ w: 16, h: 9, src: "img/nuno.jpg", caption: "Perfume" }]
     },
     {
@@ -118,7 +118,7 @@ window.FOLIO = {
       client: "Restaurant",
       url: "../osteria/",
       awards: 0,
-      summary: "A restaurant told as one service. Paper tones, editorial type and a reservation form.",
+      summary: "One menu, two sittings. Wine pairing, cellar and live seat counts.",
       media: [{ w: 16, h: 9, src: "img/calma.jpg", caption: "Restaurant" }]
     },
     {
@@ -129,19 +129,19 @@ window.FOLIO = {
       client: "Photographer",
       url: "../lumen/",
       awards: 0,
-      summary: "Photographer lookbook. Near-black, a horizontal rail, almost no copy.",
+      summary: "Photographer's light table. Viewfinder hero, filterable frames, loupe lightbox.",
       media: [{ w: 16, h: 9, src: "img/bruma.jpg", caption: "Lookbook" }]
     },
     {
       slug: "atelier",
-      title: "Atelier",
+      title: "Atelier Moura",
       featured: true,
       year: "2026",
-      client: "Studio",
+      client: "showcase",
       url: "../atelier/",
       awards: 0,
-      summary: "Sales studio for the handmade sites. Dark pages, demo grid and packages.",
-      media: [{ w: 16, h: 9, src: "img/arquivo.jpg", caption: "Studio" }]
+      summary: "Bespoke tailor. Draw your jacket live, browse the cloth, book a fitting.",
+      media: [{ w: 16, h: 9, src: "img/arquivo.jpg", caption: "Tailor" }]
     }
   ]
 };

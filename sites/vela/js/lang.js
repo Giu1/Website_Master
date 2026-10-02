@@ -72,7 +72,7 @@ window.SITE_I18N = {
     errEmail: "Please add an email so we can confirm.",
     sent: "Thank you, {name}. Your {format} is on our list — we post every Tuesday. (Demo: nothing was sent.)",
     footerLine: "A fictional perfume house. The bottle is drawn, not photographed.",
-    backAtelier: "Made by Atelier"
+    backAtelier: "More demos"
   },
   pt: {
     "title.home": "Vela N°07 — Night Bloom",
@@ -147,7 +147,7 @@ window.SITE_I18N = {
     errEmail: "Indique um email para confirmarmos.",
     sent: "Obrigado, {name}. O seu pedido de {format} está na lista — enviamos todas as terças-feiras. (Demo: nada foi enviado.)",
     footerLine: "Uma casa de perfumes fictícia. O frasco é desenhado, não fotografado.",
-    backAtelier: "Feito pelo Atelier"
+    backAtelier: "Mais demos"
   }
 };
 
