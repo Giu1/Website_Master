@@ -4,8 +4,9 @@
  * carousel; narrow screens and reduced-motion get a flat scroller instead.
  */
 const F = window.FOLIO;
-// hidden: true keeps a site in data.js but off the hub
-F.projects = F.projects.filter((p) => !p.hidden);
+// hidden: true keeps a site in data.js but off the hub.
+// The hub shows sites in reverse data.js order (last entry first).
+F.projects = F.projects.filter((p) => !p.hidden).reverse();
 const featured = F.projects.filter((p) => p.featured);
 
 const $ = (id) => document.getElementById(id);
