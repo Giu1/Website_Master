@@ -34,7 +34,8 @@ window.FOLIO = {
       media: [
         { w: 16, h: 9, src: "img/shots/forma-1.jpg", caption: "Home" },
         { w: 16, h: 9, src: "img/shots/forma-2.jpg", caption: "Categories" },
-        { w: 16, h: 9, src: "img/shots/forma-3.jpg", caption: "Featured products" }
+        { w: 16, h: 9, src: "img/shots/forma-3.jpg", caption: "Featured products" },
+        { w: 16, h: 9, src: "img/shots/forma-4.jpg", caption: "More products" }
       ]
     },
     {
@@ -49,7 +50,8 @@ window.FOLIO = {
       media: [
         { w: 16, h: 9, src: "img/shots/amostras-1.jpg", caption: "Picker" },
         { w: 16, h: 9, src: "img/shots/amostras-2.jpg", caption: "Phone preview" },
-        { w: 16, h: 9, src: "img/shots/amostras-3.jpg", caption: "Sample: Azulejo" }
+        { w: 16, h: 9, src: "img/shots/amostras-3.jpg", caption: "Sample: Azulejo" },
+        { w: 16, h: 9, src: "img/shots/amostras-4.jpg", caption: "Sample: Leque" }
       ]
     },
     {
@@ -64,7 +66,8 @@ window.FOLIO = {
       media: [
         { w: 16, h: 9, src: "img/shots/aura-desk-1.jpg", caption: "Today" },
         { w: 16, h: 9, src: "img/shots/aura-desk-2.jpg", caption: "Insights" },
-        { w: 16, h: 9, src: "img/shots/aura-desk-3.jpg", caption: "Clients" }
+        { w: 16, h: 9, src: "img/shots/aura-desk-3.jpg", caption: "Clients" },
+        { w: 16, h: 9, src: "img/shots/aura-desk-4.jpg", caption: "Services" }
       ]
     },
     {
@@ -79,7 +82,8 @@ window.FOLIO = {
       media: [
         { w: 16, h: 9, src: "img/shots/brightline-1.jpg", caption: "Instant quote" },
         { w: 16, h: 9, src: "img/shots/brightline-2.jpg", caption: "Rooms" },
-        { w: 16, h: 9, src: "img/shots/brightline-3.jpg", caption: "Booking" }
+        { w: 16, h: 9, src: "img/shots/brightline-3.jpg", caption: "Booking" },
+        { w: 16, h: 9, src: "img/shots/brightline-4.jpg", caption: "What's included" }
       ]
     },
     {
@@ -94,7 +98,8 @@ window.FOLIO = {
       media: [
         { w: 16, h: 9, src: "img/shots/nido-1.jpg", caption: "Home" },
         { w: 16, h: 9, src: "img/shots/nido-2.jpg", caption: "Today's tray" },
-        { w: 16, h: 9, src: "img/shots/nido-3.jpg", caption: "Catering" }
+        { w: 16, h: 9, src: "img/shots/nido-3.jpg", caption: "Catering" },
+        { w: 16, h: 9, src: "img/shots/nido-4.jpg", caption: "Weekends" }
       ]
     },
     {
@@ -109,7 +114,8 @@ window.FOLIO = {
       media: [
         { w: 16, h: 9, src: "img/shots/aura-1.jpg", caption: "Home" },
         { w: 16, h: 9, src: "img/shots/aura-2.jpg", caption: "Services & prices" },
-        { w: 16, h: 9, src: "img/shots/aura-3.jpg", caption: "The salon" }
+        { w: 16, h: 9, src: "img/shots/aura-3.jpg", caption: "The salon" },
+        { w: 16, h: 9, src: "img/shots/aura-4.jpg", caption: "Specialists" }
       ]
     },
     {
@@ -124,7 +130,8 @@ window.FOLIO = {
       media: [
         { w: 16, h: 9, src: "img/shots/vela-1.jpg", caption: "Home" },
         { w: 16, h: 9, src: "img/shots/vela-2.jpg", caption: "The notes" },
-        { w: 16, h: 9, src: "img/shots/vela-3.jpg", caption: "Gallery" }
+        { w: 16, h: 9, src: "img/shots/vela-3.jpg", caption: "Gallery" },
+        { w: 16, h: 9, src: "img/shots/vela-4.jpg", caption: "Wear clock" }
       ]
     },
     {
@@ -139,7 +146,8 @@ window.FOLIO = {
       media: [
         { w: 16, h: 9, src: "img/shots/osteria-1.jpg", caption: "Home" },
         { w: 16, h: 9, src: "img/shots/osteria-2.jpg", caption: "Tonight's menu" },
-        { w: 16, h: 9, src: "img/shots/osteria-3.jpg", caption: "The courses" }
+        { w: 16, h: 9, src: "img/shots/osteria-3.jpg", caption: "The courses" },
+        { w: 16, h: 9, src: "img/shots/osteria-4.jpg", caption: "The garden" }
       ]
     },
     {
@@ -154,7 +162,8 @@ window.FOLIO = {
       media: [
         { w: 16, h: 9, src: "img/shots/lumen-1.jpg", caption: "Viewfinder" },
         { w: 16, h: 9, src: "img/shots/lumen-2.jpg", caption: "The light table" },
-        { w: 16, h: 9, src: "img/shots/lumen-3.jpg", caption: "Frames" }
+        { w: 16, h: 9, src: "img/shots/lumen-3.jpg", caption: "Frames" },
+        { w: 16, h: 9, src: "img/shots/lumen-4.jpg", caption: "Series" }
       ]
     },
     {
@@ -169,7 +178,8 @@ window.FOLIO = {
       media: [
         { w: 16, h: 9, src: "img/shots/atelier-1.jpg", caption: "Home" },
         { w: 16, h: 9, src: "img/shots/atelier-2.jpg", caption: "Jacket designer" },
-        { w: 16, h: 9, src: "img/shots/atelier-3.jpg", caption: "Cloth book" }
+        { w: 16, h: 9, src: "img/shots/atelier-3.jpg", caption: "Cloth book" },
+        { w: 16, h: 9, src: "img/shots/atelier-4.jpg", caption: "Process" }
       ]
     }
   ]
