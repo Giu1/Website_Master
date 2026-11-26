@@ -91,6 +91,23 @@ window.FOLIO = {
       ]
     },
     {
+      slug: "slab-journey",
+      group: "past",   // examples | live | past (the buttons at the top of the stage)
+      title: "Slab Journey",
+      featured: true,
+      year: "2026",
+      client: "Slab Journey",
+      url: "../slab-journey/",
+      awards: 0,
+      summary: "Price tracker for graded Pokémon cards: an Android and Windows app in Kotlin Multiplatform, and its Next.js website. Try the app in a clickable phone and browse the archived site.",
+      media: [
+        { w: 16, h: 9, src: "img/shots/slab-journey-1.jpg", caption: "Project" },
+        { w: 16, h: 9, src: "img/shots/slab-journey-2.jpg", caption: "App" },
+        { w: 16, h: 9, src: "img/shots/slab-journey-3.jpg", caption: "Website" },
+        { w: 16, h: 9, src: "img/shots/slab-journey-4.jpg", caption: "Pricing" }
+      ]
+    },
+    {
       slug: "aura-desk",
       group: "examples",   // examples | live | past (the buttons at the top of the stage)
       title: "Store BackOffice",
@@ -156,23 +173,6 @@ window.FOLIO = {
         { w: 16, h: 9, src: "img/shots/aura-2.jpg", caption: "Services & prices" },
         { w: 16, h: 9, src: "img/shots/aura-3.jpg", caption: "The salon" },
         { w: 16, h: 9, src: "img/shots/aura-4.jpg", caption: "Specialists" }
-      ]
-    },
-    {
-      slug: "vela",
-      group: "examples",   // examples | live | past (the buttons at the top of the stage)
-      title: "Perfume Store",
-      featured: true,
-      year: "2026",
-      client: "Perfume",
-      url: "../vela/",
-      awards: 0,
-      summary: "One perfume, a drawn bottle that takes each note's colour, and a wear clock.",
-      media: [
-        { w: 16, h: 9, src: "img/shots/vela-1.jpg", caption: "Home" },
-        { w: 16, h: 9, src: "img/shots/vela-2.jpg", caption: "The notes" },
-        { w: 16, h: 9, src: "img/shots/vela-3.jpg", caption: "Gallery" },
-        { w: 16, h: 9, src: "img/shots/vela-4.jpg", caption: "Wear clock" }
       ]
     },
     {

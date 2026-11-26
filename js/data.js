@@ -202,6 +202,17 @@ window.FOLIO = {
       awards: 0,
       summary: "Salon on a colour fan: services and tones as blades, house palette and online booking.",
       media: [{ w: 16, h: 9, src: "sites/leque/img/card.jpg", kind: "sans", word: "Leque", colors: ["#111010", "#d9a066"], ink: "#f4ede6", caption: "Colour fan" }]
+    },
+    {
+      slug: "slab-journey",
+      title: "Slab Journey",
+      featured: true,
+      year: "2026",
+      client: "slab journey",
+      url: "sites/slab-journey/",
+      awards: 0,
+      summary: "Graded Pokémon card price tracker: clickable phone preview of the Android app and an archived copy of its website.",
+      media: [{ w: 16, h: 9, src: "sites/slab-journey/img/card.jpg", kind: "sans", word: "Slab Journey", colors: ["#0a0a0a", "#ffd700"], ink: "#ffffff", caption: "App and website" }]
     }
   ]
 };
