@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Amostra · Azulejo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root { --blue: #1d3fa6; --ink: #0e1d4f; --paper: #f5f7fb; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.55 "Archivo", system-ui, sans-serif; overflow-x: hidden; }
+  a { color: inherit; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 5vw; background: var(--blue); color: #fff; font-size: 14px; }
+  nav b { font-family: "Archivo Black"; letter-spacing: .02em; }
+  nav a { text-decoration: none; font-weight: 600; }
+
+  .facade { position: relative; padding: 6vw 5vw 7vw; overflow: hidden; }
+  .tiles { position: absolute; inset: 0; overflow: hidden; display: grid; grid-template-columns: repeat(auto-fill, 90px); grid-auto-rows: 90px; perspective: 900px; }
+  .tile { background: var(--tile) center / cover; backface-visibility: hidden; }
+  @media (prefers-reduced-motion: no-preference) {
+    .tile { animation: flip .7s cubic-bezier(.3,.7,.3,1) both; animation-delay: var(--d); }
+    @keyframes flip { from { transform: rotateY(90deg); opacity: 0; } }
+  }
+  .sign {
+    position: relative; max-width: 620px; padding: 32px 36px; background: #fff; border: 6px double var(--blue);
+    box-shadow: 0 20px 40px -24px rgba(14,29,79,.6);
+  }
+  .sign h1 { margin: 0; font: 400 clamp(46px, 8vw, 96px)/.9 "Archivo Black", sans-serif; color: var(--blue); letter-spacing: -.02em; }
+  .sign p { margin: 14px 0 0; font-size: 18px; }
+  .status { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 6px 12px; border: 1.5px solid currentColor; font-size: 14px; font-weight: 600; }
+  .status i { width: 8px; height: 8px; border-radius: 50%; background: #c62828; }
+  .status.open i { background: #1e9e4a; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .btn { padding: 12px 18px; background: var(--blue); color: #fff; text-decoration: none; font-weight: 600; }
+  .btn.line { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+
+  section { padding: 7vw 5vw; }
+  h2 { margin: 0 0 28px; font: 400 clamp(30px, 4vw, 52px)/1 "Archivo Black", sans-serif; text-transform: uppercase; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0; border: 2px solid var(--blue); }
+  .svc { position: relative; aspect-ratio: 1; perspective: 800px; border: 1px solid var(--blue); }
+  .svc > div { position: absolute; inset: 0; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; backface-visibility: hidden; transition: transform .6s; }
+  .svc .front { background: var(--tile) center / 50%; }
+  .svc .front b { align-self: flex-start; background: #fff; padding: 6px 10px; font: 400 20px "Archivo Black"; color: var(--blue); }
+  .svc .back { background: var(--blue); color: #fff; transform: rotateY(180deg); }
+  .svc .back b { font: 400 20px "Archivo Black"; }
+  .svc .back em { font-style: normal; font-weight: 600; font-size: 18px; }
+  .svc:hover .front, .svc:focus-within .front, .svc.flip .front { transform: rotateY(-180deg); }
+  .svc:hover .back, .svc:focus-within .back, .svc.flip .back { transform: rotateY(0); }
+  .svc button { all: unset; position: absolute; inset: 0; cursor: pointer; z-index: 2; }
+  .svc button:focus-visible { outline: 3px solid #f2b705; outline-offset: -3px; }
+
+  .info { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; background: var(--blue); color: #fff; }
+  .info h2 { color: #fff; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.25); }
+  td:last-child { text-align: right; font-weight: 600; }
+  .info .btn { background: #fff; color: var(--blue); }
+  footer { padding: 24px 5vw; font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  @media (max-width: 720px) {
+    .info { grid-template-columns: 1fr; }
+    .tiles { grid-template-columns: repeat(auto-fill, 64px); grid-auto-rows: 64px; }
+    .sign { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<nav><b data-c="nomeCompleto"></b><a data-tel>☎ <span data-c="telefone"></span></a></nav>
+
+<header class="facade">
+  <div class="tiles" id="tiles" aria-hidden="true"></div>
+  <div class="sign">
+    <h1 data-c="nomeCompleto"></h1>
+    <p><span data-c="tipo"></span> · <span data-c="morada"></span>, <span data-c="cidade"></span></p>
+    <span class="status" id="status"><i></i><span id="st"></span></span>
+    <div class="btns">
+      <a class="btn" data-tel>Ligar para marcar</a>
+      <a class="btn line" data-map target="_blank" rel="noopener">Como chegar</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <h2>O que fazemos</h2>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="info">
+  <div>
+    <h2>Horário</h2>
+    <table id="hours"></table>
+  </div>
+  <div>
+    <h2>Morada</h2>
+    <p><span data-c="morada"></span><br /><span data-c="codigoPostal"></span></p>
+    <p><span data-c="telefone"></span> · <span data-c="instagram"></span></p>
+    <div class="btns"><a class="btn" data-map target="_blank" rel="noopener">Abrir no mapa</a></div>
+  </div>
+</section>
+
+<footer><span>© <span data-c="nomeCompleto"></span></span><span>Amostra 2 · Azulejo</span></footer>
+
+<script src="../../js/cliente.js"></script>
+<script>
+  const C = window.CLIENTE;
+  document.querySelectorAll("[data-c]").forEach((el) => (el.textContent = C[el.dataset.c]));
+  document.querySelectorAll("[data-tel]").forEach((el) => (el.href = C.telefoneHref));
+  document.querySelectorAll("[data-map]").forEach((el) => (el.href = C.mapa));
+
+  /* Azulejo desenhado em SVG */
+  const tileSvg = (fg, bg) => "url(\"data:image/svg+xml," + encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='${bg}'/>` +
+    `<g fill='${fg}'><path d='M0 0h22a28 28 0 0 1-22 22zM100 0v22a28 28 0 0 1-22-22zM0 100v-22a28 28 0 0 1 22 22zM100 100h-22a28 28 0 0 1 22-22z'/>` +
+    `<path d='M50 18c8 14 18 24 32 32-14 8-24 18-32 32-8-14-18-24-32-32 14-8 24-18 32-32z'/></g>` +
+    `<circle cx='50' cy='50' r='9' fill='${bg}'/><circle cx='50' cy='50' r='4' fill='${fg}'/>` +
+    `<path d='M50 0v6M50 94v6M0 50h6M94 50h6' stroke='${fg}' stroke-width='3'/></svg>`) + "\")";
+  const T1 = tileSvg("#1d3fa6", "#f5f7fb"), T2 = tileSvg("#f5f7fb", "#1d3fa6");
+  document.documentElement.style.setProperty("--tile", T1);
+
+  const tiles = document.getElementById("tiles");
+  const fill = () => {
+    const size = innerWidth < 720 ? 64 : 90;
+    const n = (Math.ceil(tiles.clientWidth / size) + 1) * (Math.ceil(tiles.clientHeight / size) + 1);
+    tiles.innerHTML = Array.from({ length: n }, (_, i) => `<div class="tile" style="--d:${(i % 17) * 40 + Math.floor(i / 17) * 30}ms"></div>`).join("");
+  };
+  fill();
+  document.fonts && document.fonts.ready.then(fill);
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(fill, 150); });
+
+  const st = C.estado();
+  document.getElementById("st").textContent = st.curto + (st.longo ? " · " + st.longo : "");
+  if (st.aberto) document.getElementById("status").classList.add("open");
+
+  document.getElementById("grid").innerHTML = C.servicos.map((s, i) => `
+    <div class="svc">
+      <button type="button" aria-label="${s.nome}: ${s.desc}, ${s.preco}"></button>
+      <div class="front"><b>${s.nome}</b></div>
+      <div class="back"><b>${s.nome}</b><span>${s.desc}</span><em>${s.preco}</em></div>
+    </div>`).join("");
+  document.querySelectorAll(".svc").forEach((el, i) => el.style.setProperty("--tile", i % 2 ? T2 : T1));
+  document.querySelectorAll(".svc button").forEach((b) => b.addEventListener("click", () => b.parentElement.classList.toggle("flip")));
+
+  document.getElementById("hours").innerHTML = C.horarioLinhas().map((l) => `<tr><td>${l.dias}</td><td>${l.horas}</td></tr>`).join("");
+</script>
+</body>
+</html>

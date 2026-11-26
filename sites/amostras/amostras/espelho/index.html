@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Amostra · Espelho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Caveat:wght@600&display=swap" rel="stylesheet" />
+<style>
+  :root { --teal: #0f3d3b; --teal2: #0b2f2e; --gold: #d8b06a; --cream: #f6efe2; --sun: #ffd84d; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--teal); color: var(--cream); font: 400 16px/1.55 "Bricolage Grotesque", system-ui, sans-serif; overflow-x: hidden; }
+  a { color: inherit; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 5vw; font-size: 14px; }
+  nav b { font-weight: 800; font-size: 18px; }
+  nav b span { color: var(--sun); }
+  nav a.call { padding: 8px 14px; border-radius: 99px; background: var(--sun); color: #1a1a1a; text-decoration: none; font-weight: 500; }
+
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: center; padding: 3vw 5vw 6vw; }
+  .mirror-wrap { position: relative; justify-self: center; width: min(400px, 82vw); }
+  .mirror {
+    position: relative; aspect-ratio: 4 / 5; border-radius: 18px; padding: 26px;
+    background: linear-gradient(135deg, #e9c98a, #a8833f 40%, #f1d79f 60%, #8f6a2c);
+    box-shadow: 0 30px 60px -30px #000;
+  }
+  .glass {
+    height: 100%; border-radius: 6px; overflow: hidden; position: relative;
+    background: radial-gradient(circle at 30% 25%, #3f7c77, #163f3d 60%, #0c2a29);
+  }
+  .glass::after { content: ""; position: absolute; inset: -40%; background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.18) 47%, transparent 54%); animation: sheen 7s ease-in-out infinite; }
+  @keyframes sheen { 0%, 60% { transform: translateX(-40%); } 100% { transform: translateX(40%); } }
+  /* Silhueta ilustrada */
+  .figure { position: absolute; left: 50%; bottom: 0; width: 70%; transform: translateX(-50%); }
+  .bulb { position: absolute; width: 20px; height: 20px; border-radius: 50%; background: #6d5a35; transition: background .4s, box-shadow .4s; }
+  .on .bulb.lit { background: #fff6d6; box-shadow: 0 0 10px 3px #ffe9a3, 0 0 34px 10px rgba(255,225,140,.45); }
+  .note {
+    position: absolute; padding: 8px 12px; color: #1d1d1d; font: 600 15px/1.2 "Caveat", cursive;
+    box-shadow: 0 8px 16px -8px rgba(0,0,0,.6);
+  }
+  .note.status { top: 18px; left: -26px; background: #fff; transform: rotate(-6deg); }
+  .note.status i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #c33; margin-right: 6px; }
+  .on .note.status i { background: #2bb24c; }
+  .note.phone { bottom: 40px; right: -30px; background: var(--sun); transform: rotate(4deg); font-size: 16px; }
+  .note.phone strong { display: block; font: 800 20px/1.1 "Bricolage Grotesque", sans-serif; }
+
+  .copy h1 { margin: 0; font-size: clamp(54px, 8vw, 110px); line-height: .9; letter-spacing: -.04em; font-weight: 800; }
+  .copy h1 span { color: var(--sun); }
+  .copy p.lead { font-size: clamp(18px, 1.8vw, 24px); margin: 18px 0 8px; font-weight: 500; }
+  .copy .where { opacity: .8; font-size: 14px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .btn { padding: 12px 18px; border-radius: 99px; text-decoration: none; font-weight: 500; font-size: 15px; border: 1.5px solid var(--cream); }
+  .btn.solid { background: var(--sun); border-color: var(--sun); color: #1a1a1a; }
+
+  .drawer { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 0 5vw 6vw; }
+  .drawer span { padding: 10px 16px 12px; border-radius: 10px 10px 4px 4px; font-weight: 500; font-size: 14px; color: #1b1b1b; }
+
+  section.block { padding: 7vw 5vw; background: var(--cream); color: #1d2b2a; }
+  section.block.dark { background: var(--teal2); color: var(--cream); }
+  .block h2 { margin: 0 0 28px; font-size: clamp(32px, 4.5vw, 56px); line-height: 1; letter-spacing: -.03em; }
+  .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .service { padding: 20px; border-radius: 14px; background: #fff; border: 1px solid #e3d8c4; }
+  .service h3 { margin: 0 0 4px; font-size: 20px; }
+  .service p { margin: 0 0 12px; font-size: 14px; opacity: .75; }
+  .service em { font-style: normal; font-weight: 800; color: var(--teal); }
+  .info { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; }
+  .hours { list-style: none; margin: 0; padding: 0; }
+  .hours li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed rgba(246,239,226,.3); }
+  footer { padding: 28px 5vw; font-size: 13px; opacity: .7; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+    .reveal.in { opacity: 1; transform: none; }
+  }
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding-top: 4vw; }
+    .copy { order: -1; }
+    .info { grid-template-columns: 1fr; }
+    .note.status { left: -8px; }
+    .note.phone { right: -8px; }
+  }
+</style>
+</head>
+<body>
+<nav><b>Estúdio <span data-c="nome"></span></b><a class="call" data-tel>Ligar</a></nav>
+
+<header class="hero">
+  <div class="copy">
+    <h1>Estúdio <span data-c="nome"></span></h1>
+    <p class="lead"><span data-c="tipo"></span>,<br />aqui em <span data-c="cidade"></span>.</p>
+    <p class="where">📍 <span data-c="morada"></span> · <span data-c="cidade"></span></p>
+    <div class="btns">
+      <a class="btn solid" data-tel>Ligar para marcar</a>
+      <a class="btn" data-map target="_blank" rel="noopener">Como chegar</a>
+    </div>
+  </div>
+  <div class="mirror-wrap" id="mw">
+    <div class="mirror" id="mirror">
+      <div class="glass">
+        <svg class="figure" viewBox="0 0 200 240" aria-hidden="true">
+          <path d="M100 30c-38 0-62 30-60 70 1 26-14 44-22 70 30 8 50-6 58-26h48c8 20 28 34 58 26-8-26-23-44-22-70 2-40-22-70-60-70z" fill="#1c1410"/>
+          <ellipse cx="100" cy="100" rx="36" ry="44" fill="#b07a55"/>
+          <path d="M64 92c4-34 24-46 40-46s34 16 34 40c-14-14-40-20-74 6z" fill="#1c1410"/>
+          <path d="M40 240c4-48 30-70 60-70s56 22 60 70z" fill="#223"/>
+        </svg>
+      </div>
+    </div>
+    <div class="note status" id="status"><i></i><span id="st1"></span><br /><small id="st2"></small></div>
+    <div class="note phone">Marcações por telefone<strong data-c="telefone"></strong></div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer"></div>
+
+<section class="block" id="servicos">
+  <h2 class="reveal">O que fazemos</h2>
+  <div class="services" id="services"></div>
+</section>
+
+<section class="block dark">
+  <div class="info">
+    <div class="reveal">
+      <h2>Horário</h2>
+      <ul class="hours" id="hours"></ul>
+    </div>
+    <div class="reveal">
+      <h2>Onde estamos</h2>
+      <p><span data-c="morada"></span><br /><span data-c="codigoPostal"></span></p>
+      <p><a data-tel><span data-c="telefone"></span></a><br /><span data-c="instagram"></span></p>
+      <div class="btns"><a class="btn" data-map target="_blank" rel="noopener">Abrir no mapa</a></div>
+    </div>
+  </div>
+</section>
+
+<footer><span>© <span data-c="nomeCompleto"></span></span><span>Amostra 1 · Espelho</span></footer>
+
+<script src="../../js/cliente.js"></script>
+<script>
+  const C = window.CLIENTE;
+  document.querySelectorAll("[data-c]").forEach((el) => (el.textContent = C[el.dataset.c]));
+  document.querySelectorAll("[data-tel]").forEach((el) => (el.href = C.telefoneHref));
+  document.querySelectorAll("[data-map]").forEach((el) => (el.href = C.mapa));
+
+  const colors = ["#ffd84d", "#e9a36b", "#9fd1c3", "#f2b7c4", "#fff"];
+  document.getElementById("drawer").innerHTML = C.servicos.map((s, i) => `<span style="background:${colors[i % colors.length]}">${s.nome}</span>`).join("");
+  document.getElementById("services").innerHTML = C.servicos.map((s) => `<div class="service reveal"><h3>${s.nome}</h3><p>${s.desc}</p><em>${s.preco}</em></div>`).join("");
+  document.getElementById("hours").innerHTML = C.horarioLinhas().map((l) => `<li><span>${l.dias}</span><b>${l.horas}</b></li>`).join("");
+
+  const st = C.estado();
+  document.getElementById("st1").textContent = st.curto;
+  document.getElementById("st2").textContent = st.longo;
+
+  /* Lâmpadas à volta do espelho */
+  const m = document.getElementById("mirror");
+  const bulbs = [];
+  const place = () => {
+    bulbs.forEach((b) => b.remove()); bulbs.length = 0;
+    const w = m.clientWidth, h = m.clientHeight, inset = 3;
+    const pts = [];
+    const nx = 4, ny = 5;
+    for (let i = 0; i < nx; i++) pts.push([(i + .5) / nx * w, inset]);
+    for (let i = 0; i < ny; i++) pts.push([w - inset, (i + .5) / ny * h]);
+    for (let i = nx - 1; i >= 0; i--) pts.push([(i + .5) / nx * w, h - inset]);
+    for (let i = ny - 1; i >= 0; i--) pts.push([inset, (i + .5) / ny * h]);
+    pts.forEach(([x, y], i) => {
+      const b = document.createElement("i");
+      b.className = "bulb";
+      b.style.left = x - 10 + "px"; b.style.top = y - 10 + "px";
+      m.appendChild(b); bulbs.push(b);
+    });
+  };
+  place();
+  addEventListener("resize", place);
+  if (st.aberto) {
+    m.parentElement.classList.add("on");
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    bulbs.forEach((b, i) => setTimeout(() => b.classList.add("lit"), reduce ? 0 : 300 + i * 110));
+    addEventListener("resize", () => bulbs.forEach((b) => b.classList.add("lit")));
+  }
+
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && (e.target.classList.add("in"), io.unobserve(e.target))), { threshold: .15 });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+</script>
+</body>
+</html>

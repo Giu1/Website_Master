@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Amostra · Leque</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;800&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg: #111010; --fg: #f4ede6; --muted: #a59d95; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 400 16px/1.55 "Syne", system-ui, sans-serif; overflow-x: hidden; }
+  a { color: inherit; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 5vw; font-size: 14px; position: relative; z-index: 3; }
+  nav b { font-weight: 800; letter-spacing: .02em; }
+  nav a { padding: 8px 14px; border: 1px solid #3a3634; border-radius: 99px; text-decoration: none; }
+
+  .hero { position: relative; min-height: 640px; height: 92vh; max-height: 860px; overflow: hidden; }
+  .title { position: absolute; left: 5vw; top: 2vh; z-index: 2; max-width: 46ch; }
+  .title h1 { margin: 0; font-weight: 800; font-size: clamp(48px, 8vw, 120px); line-height: .9; letter-spacing: -.03em; }
+  .title p { color: var(--muted); margin: 14px 0 0; }
+  .fan { position: absolute; left: 50%; bottom: -40px; width: 0; height: 0; }
+  .blade {
+    position: absolute; left: -38px; bottom: 0; width: 76px; height: min(58vh, 480px);
+    transform-origin: 38px calc(100% - 30px); transform: rotate(0deg);
+    border-radius: 38px 38px 10px 10px; padding: 18px 0; cursor: pointer; border: 0;
+    background: linear-gradient(180deg, var(--c), color-mix(in srgb, var(--c) 70%, #000));
+    box-shadow: -8px 0 18px -10px rgba(0,0,0,.7);
+    transition: transform .9s cubic-bezier(.2,.8,.2,1), filter .3s;
+    color: #fff; font: 600 13px "Syne", sans-serif;
+  }
+  .blade span { display: block; writing-mode: vertical-rl; transform: rotate(180deg); margin: 0 auto; letter-spacing: .08em; text-transform: uppercase; text-shadow: 0 1px 3px rgba(0,0,0,.4); }
+  .blade::after { content: ""; position: absolute; left: 50%; bottom: 22px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: #d8d0c4; box-shadow: inset 0 0 0 3px #8c857c; }
+  .blade.sel { filter: brightness(1.15); }
+  .blade:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+  .card { position: absolute; right: 5vw; top: 16vh; z-index: 2; width: min(320px, 90vw); padding: 22px; border-radius: 16px; background: rgba(28,26,25,.85); backdrop-filter: blur(8px); border: 1px solid #2e2a28; }
+  .card small { color: var(--muted); }
+  .card h2 { margin: 2px 0 6px; font-size: 30px; font-weight: 800; }
+  .card em { font-style: normal; font-weight: 800; }
+  .card .chip { display: inline-block; width: 14px; height: 14px; border-radius: 50%; vertical-align: -2px; margin-right: 6px; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .btn { padding: 11px 16px; border-radius: 99px; background: var(--fg); color: var(--bg); text-decoration: none; font-weight: 500; font-size: 14px; }
+  .btn.line { background: transparent; color: var(--fg); border: 1px solid #4a4542; }
+
+  section { padding: 7vw 5vw; border-top: 1px solid #262321; display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; }
+  h3 { margin: 0 0 18px; font-size: clamp(28px, 3.6vw, 44px); font-weight: 800; letter-spacing: -.02em; }
+  .list div { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #262321; }
+  .list span { color: var(--muted); }
+  footer { padding: 22px 5vw; color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  @media (max-width: 760px) {
+    .hero { height: auto; min-height: 0; padding-bottom: 360px; }
+    .title { position: relative; left: 0; top: 0; padding: 0 5vw; }
+    .card { position: relative; right: auto; top: auto; margin: 24px 5vw 0; width: auto; }
+    .blade { width: 56px; left: -28px; height: 300px; transform-origin: 28px calc(100% - 26px); font-size: 11px; }
+    section { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav><b data-c="nomeCompleto"></b><a data-tel data-c="telefone"></a></nav>
+
+<header class="hero" id="hero">
+  <div class="title">
+    <h1>Escolha<br />a sua cor.</h1>
+    <p><span data-c="tipo"></span> em <span data-c="cidade"></span>. Toque numa lâmina do leque.</p>
+  </div>
+  <aside class="card" aria-live="polite">
+    <small id="k-kind"></small>
+    <h2 id="k-name"></h2>
+    <p id="k-desc"></p>
+    <em id="k-price"></em>
+    <div class="btns">
+      <a class="btn" data-tel>Ligar para marcar</a>
+      <a class="btn line" data-map target="_blank" rel="noopener">Como chegar</a>
+    </div>
+  </aside>
+  <div class="fan" id="fan"></div>
+</header>
+
+<section>
+  <div><h3>Horário</h3><div class="list" id="hours"></div></div>
+  <div>
+    <h3>Onde</h3>
+    <p><span data-c="morada"></span><br /><span data-c="codigoPostal"></span></p>
+    <p id="status"></p>
+    <p><span data-c="instagram"></span></p>
+  </div>
+</section>
+
+<footer><span>© <span data-c="nomeCompleto"></span></span><span>Amostra 5 · Leque</span></footer>
+
+<script src="../../js/cliente.js"></script>
+<script>
+  const C = window.CLIENTE;
+  document.querySelectorAll("[data-c]").forEach((el) => (el.textContent = C[el.dataset.c]));
+  document.querySelectorAll("[data-tel]").forEach((el) => (el.href = C.telefoneHref));
+  document.querySelectorAll("[data-map]").forEach((el) => (el.href = C.mapa));
+
+  /* Lâminas: os serviços, e entre eles tons de coloração. */
+  const color = C.servicos.find((s) => /color/i.test(s.nome)) || C.servicos[0];
+  const tones = [["Cobre", "#b4532a"], ["Mel", "#c99a4b"], ["Ameixa", "#5b2a46"], ["Grafite", "#3b3b40"]];
+  const svcColors = ["#d9a066", "#8e3b2f", "#2f4f4a", "#c46b7c", "#e4d2b8"];
+  const blades = [];
+  C.servicos.forEach((s, i) => {
+    blades.push({ kind: "Serviço", name: s.nome, desc: s.desc, price: s.preco, c: svcColors[i % svcColors.length] });
+    if (tones[i]) blades.push({ kind: "Tom de coloração", name: tones[i][0], desc: color.desc, price: color.preco, c: tones[i][1] });
+  });
+
+  const fan = document.getElementById("fan");
+  const els = blades.map((b, i) => {
+    const el = document.createElement("button");
+    el.type = "button";
+    el.className = "blade";
+    el.style.setProperty("--c", b.c);
+    el.style.zIndex = i;
+    el.innerHTML = `<span>${b.name}</span>`;
+    el.setAttribute("aria-label", b.kind + ": " + b.name);
+    el.addEventListener("click", () => pick(i));
+    el.addEventListener("mouseenter", () => pick(i));
+    fan.appendChild(el);
+    return el;
+  });
+
+  let spread = 0, sel = 0, bias = 0;
+  const layout = () => {
+    const n = els.length, total = spread;
+    els.forEach((el, i) => {
+      const a = -total / 2 + (n > 1 ? (i / (n - 1)) * total : 0) + bias;
+      const lift = i === sel ? -26 : 0;
+      el.style.transform = `rotate(${a}deg) translateY(${lift}px)`;
+      el.firstChild.style.transform = a < 0 ? "none" : "rotate(180deg)";
+    });
+  };
+  function pick(i) {
+    sel = i;
+    els.forEach((el, k) => el.classList.toggle("sel", k === i));
+    const b = blades[i];
+    document.getElementById("k-kind").innerHTML = `<span class="chip" style="background:${b.c}"></span>${b.kind}`;
+    document.getElementById("k-name").textContent = b.name;
+    document.getElementById("k-desc").textContent = b.desc;
+    document.getElementById("k-price").textContent = b.price;
+    layout();
+  }
+  pick(0);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  setTimeout(() => { spread = innerWidth < 760 ? 92 : 130; layout(); }, reduce ? 0 : 250);
+
+  /* O leque inclina-se um pouco para o lado do rato. */
+  document.getElementById("hero").addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "mouse" || reduce) return;
+    bias = ((e.clientX / innerWidth) - .5) * 12;
+    layout();
+  });
+
+  document.getElementById("hours").innerHTML = C.horarioLinhas().map((l) => `<div><span>${l.dias}</span><b>${l.horas}</b></div>`).join("");
+  const st = C.estado();
+  document.getElementById("status").textContent = st.curto + (st.longo ? ", " + st.longo : "") + ".";
+</script>
+</body>
+</html>
