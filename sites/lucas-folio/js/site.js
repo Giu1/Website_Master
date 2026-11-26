@@ -4,6 +4,10 @@
  * index.html. Narrow screens, reduced motion, or no WebGL get a flat scroller.
  */
 const F = window.FOLIO;
+/* ?work=examples|live|past keeps only that group's cards (the buttons at the top of the stage) */
+const WORK_GROUP = new URLSearchParams(location.search).get("work");
+const ALL_PROJECTS = F.projects;
+if (WORK_GROUP && F.projects.some((p) => p.group === WORK_GROUP)) F.projects = F.projects.filter((p) => p.group === WORK_GROUP);
 const featured = F.projects.filter((p) => p.featured);
 const body = document.body;
 
@@ -74,6 +78,15 @@ function fillChrome() {
 }
 
 /** Traditional view: every project as a plain grid. Needs media warmed. */
+/** A group with no cards yet stays visible but can't be pressed. */
+function fillGroups() {
+  document.querySelectorAll("[data-group]").forEach((a) => {
+    const n = ALL_PROJECTS.filter((p) => p.group === a.dataset.group).length;
+    a.setAttribute("aria-disabled", String(!n));
+    a.title = n ? `${n} ${n === 1 ? "site" : "sites"}` : "Coming soon";
+  });
+}
+
 function fillGrid() {
   $("grid-count").textContent = `${F.projects.length} projects`;
   $("grid-list").innerHTML = F.projects
@@ -1838,6 +1851,7 @@ async function boot() {
 
   await mediaReady;
   fillGrid();
+  fillGroups();
   placePill(false);
   stage = await stageReady;
 

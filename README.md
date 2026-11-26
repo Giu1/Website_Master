@@ -32,6 +32,9 @@ Always serve from the repo root. The hub, the sibling links between demos, and t
 | `sites/lucas/` | Lucas Bastos | Personal portfolio: 4 pages, curved transitions, looping name, hero photo switcher | EN |
 | `sites/lucas-folio/` | Lucas Bastos — Work | Lucas's header, a scroll-driven page change, then the Folio stage with every site in this repo as a card | EN + PT-PT header, EN stage |
 | `sites/amostras/` | Amostras | Client proposal: six sample sites for one client, live preview with Computador/Telemóvel toggle. Reusable per client | PT-PT |
+| `sites/montra/` | Estúdio Lírio — Montra | Salon shopfront: live open/closed sign, price board, team, online booking (Amostra 3, expanded) | PT-PT |
+| `sites/rotulo/` | Estúdio Lírio — Rótulo | Salon as a product label: counted facts, full price table, team, online booking (Amostra 4, expanded) | PT-PT |
+| `sites/leque/` | Estúdio Lírio — Leque | Salon on a colour fan: services and tones as blades, palette, online booking (Amostra 5, expanded) | PT-PT |
 
 Each site has its own `README.md`. FORMA's catalog guide is `sites/forma/COMO-EDITAR.md`.
 

@@ -5,13 +5,18 @@
  * bottom-right corner where the newsletter button used to be.
  */
 (() => {
-  const link = document.getElementById("contact-btn");
-  if (!link) return;
-  const cv = link.querySelector("canvas");
-  const ctx = cv.getContext("2d");
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const TEXT = "CONTACT ME";
-  const INK = "#ffd84d";      // brick colour: warm yellow on near-black reads at a glance
+
+  // "Contact me" plus the work-group buttons at the top (data-px holds their word)
+  document.querySelectorAll("#contact-btn, [data-px]").forEach((link) => mount(link, link.dataset.px || "CONTACT ME", link.dataset.pxShort));
+
+  function mount(link, LONG, SHORT) {
+  let TEXT = LONG;
+  const cv = link.querySelector("canvas");
+  if (!cv) return;
+  const ctx = cv.getContext("2d");
+  // brick colour: warm yellow on near-black reads at a glance; the chosen group inverts it
+  const ink = () => (link.classList.contains("is-on") ? "#141517" : "#ffd84d");
   const SHADOW = "rgba(0, 0, 0, 0.6)";
 
   let W = 0, H = 0, step = 3, bricks = [];
@@ -23,6 +28,8 @@
     if (r.width < 2) return;
     const dpr = Math.min(2, devicePixelRatio || 1);
     W = r.width; H = r.height;
+    // narrow buttons (phones) use the short word when there is one
+    TEXT = SHORT && W < 180 ? SHORT : LONG;
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     // Read the word on the font's own pixel grid, so every font pixel becomes
@@ -67,6 +74,7 @@
 
     // fit the grid in the button and centre it
     step = Math.max(2, Math.floor(Math.min((W * 0.9) / cols, (H * 0.56) / rows)));
+    if (SHORT && W < 180) step = 2;          // same brick size on all three small buttons
     const ox = Math.round((W - cols * step) / 2);
     const oy = Math.round((H - rows * step) / 2);
     bricks = cells.map(([c, r]) => {
@@ -79,8 +87,11 @@
   function draw() {
     ctx.clearRect(0, 0, W, H);
     const s = step - 1;
-    ctx.fillStyle = SHADOW;
-    for (const b of bricks) ctx.fillRect(b.x + 1, b.y + 1.5, s, s);
+    const INK = ink();
+    if (INK !== "#141517") {
+      ctx.fillStyle = SHADOW;
+      for (const b of bricks) ctx.fillRect(b.x + 1, b.y + 1.5, s, s);
+    }
     ctx.fillStyle = INK;
     for (const b of bricks) {
       if (Math.abs(b.r) < 0.02) { ctx.fillRect(b.x, b.y, s, s); continue; }
@@ -137,4 +148,6 @@
 
   (document.fonts ? document.fonts.load('400 20px "Silkscreen"').catch(() => {}) : Promise.resolve()).then(build);
   addEventListener("resize", build);
+  link.pxRedraw = build;
+  }
 })();
