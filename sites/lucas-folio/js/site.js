@@ -518,7 +518,9 @@ function sheetHTML(p) {
   if (p.client && p.client !== p.title) chips.push(`<span class="chip">${esc(p.client)}</span>`);
   if (p.year) chips.push(`<span class="chip">${esc(p.year)}</span>`);
   for (let i = 0; i < (p.awards || 0); i++) chips.push(`<span class="award" title="Award">${AWARD_SVG}</span>`);
-  const media = (p.media || [])
+  // a live, working copy of the site sits on top; the screenshots after the card face follow it
+  const preview = p.url ? previewHTML(p) : "";
+  const media = (p.url ? (p.media || []).slice(1) : (p.media || []))
     .map((m) => {
       const cap = m.caption ? `<figcaption>${esc(m.caption)}</figcaption>` : "";
       if (m.video) return `<figure><video src="${esc(m.video)}" playsinline loop muted autoplay></video>${cap}</figure>`;
@@ -529,14 +531,14 @@ function sheetHTML(p) {
     .join("");
   return `
     <div class="sheet-scroll">
-      <div class="sheet-grid">
+      <div class="sheet-grid${preview ? " has-preview" : ""}">
         <div class="sheet-copy">
           <h1>${esc(p.title)}</h1>
           <p class="summary">${esc(p.summary || "")}</p>
           <div class="meta">${chips.join("")}</div>
           ${p.url ? `<a class="open-site" href="${esc(p.url)}" target="_blank" rel="noopener">Open the live site ${ARROW_SVG}</a>` : ""}
         </div>
-        <div class="sheet-media">${media}</div>
+        <div class="sheet-media">${preview}${media}</div>
       </div>
     </div>
     <svg class="progress" viewBox="0 0 20 20" aria-hidden="true">
@@ -544,6 +546,84 @@ function sheetHTML(p) {
       <circle class="bar" cx="10" cy="10" r="8.5" pathLength="100"/>
     </svg>`;
 }
+
+/* ───────── live preview: the real site in a frame, as desktop or phone ───────── */
+
+const DESK_W = 1440;                         // the desktop preview renders the site at this width, scaled to fit
+const PHONE_W = 390, PHONE_H = 844;          // and the phone preview at this size
+const PV_KEY = "folio-preview-device";
+let pvDevice = "desktop";
+try { pvDevice = localStorage.getItem(PV_KEY) || (matchMedia("(max-width: 640px)").matches ? "mobile" : "desktop"); } catch { /* storage blocked */ }
+
+function previewHTML(p) {
+  const btn = (d, label, icon) =>
+    `<button type="button" data-device="${d}" aria-pressed="${pvDevice === d}">${icon}<span>${label}</span></button>`;
+  const desk = `<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="10" rx="1.2"/><path d="M7 16.5h6M10 13.5v3"/></svg>`;
+  const phone = `<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="6" y="2.5" width="8" height="15" rx="1.6"/><path d="M9 15h2"/></svg>`;
+  return `
+    <figure class="preview" data-device="${pvDevice}">
+      <div class="pv-bar">
+        <span class="pv-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="pv-url">${esc(p.title)}</span>
+        <span class="pv-device" role="group" aria-label="Preview as">${btn("desktop", "Desktop", desk)}${btn("mobile", "Mobile", phone)}</span>
+        <a class="pv-open" href="${esc(p.url)}" target="_blank" rel="noopener">Open full site ${ARROW_SVG}</a>
+      </div>
+      <div class="pv-screen"><div class="pv-frame"><iframe data-src="${esc(p.url)}" title="Live preview of ${esc(p.title)}"></iframe></div></div>
+      <figcaption>Live preview: click around, it works like the real site</figcaption>
+    </figure>`;
+}
+
+function fitPreview(fig) {
+  const screen = fig.querySelector(".pv-screen");
+  const frame = fig.querySelector(".pv-frame");
+  const iframe = frame.querySelector("iframe");
+  const w = screen.clientWidth, h = screen.clientHeight;
+  if (!w || !h) return;
+  if (fig.dataset.device === "mobile") {
+    const k = Math.min(1, (h - 32) / (PHONE_H + 20), (w - 32) / (PHONE_W + 20));
+    frame.style.width = PHONE_W + "px";
+    frame.style.height = PHONE_H + "px";
+    iframe.style.width = PHONE_W + "px";
+    iframe.style.height = PHONE_H + "px";
+    frame.style.transform = `translate(-50%, -50%) scale(${k})`;
+  } else {
+    const k = w / DESK_W;
+    frame.style.width = DESK_W + "px";
+    frame.style.height = h / k + "px";
+    iframe.style.width = DESK_W + "px";
+    iframe.style.height = h / k + "px";
+    frame.style.transform = `scale(${k})`;
+  }
+}
+
+const pvObserver = typeof ResizeObserver === "function"
+  ? new ResizeObserver((entries) => { for (const e of entries) fitPreview(e.target.closest(".preview")); })
+  : null;
+
+// only the open sheet runs its site; the neighbours waiting left and right stay empty
+function syncPreviews() {
+  for (const el of $("sheets").children) {
+    const iframe = el.querySelector(".preview iframe");
+    if (!iframe) continue;
+    if (el === sheets.cur) {
+      if (!iframe.getAttribute("src")) iframe.src = iframe.dataset.src;
+    } else if (iframe.getAttribute("src")) {
+      iframe.removeAttribute("src");
+    }
+  }
+}
+
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".pv-device button");
+  if (!b) return;
+  pvDevice = b.dataset.device;
+  try { localStorage.setItem(PV_KEY, pvDevice); } catch { /* storage blocked */ }
+  for (const fig of document.querySelectorAll(".preview")) {
+    fig.dataset.device = pvDevice;
+    fig.querySelectorAll(".pv-device button").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.device === pvDevice)));
+    fitPreview(fig);
+  }
+});
 
 function makeSheet(p, pos) {
   const el = document.createElement("article");
@@ -557,6 +637,8 @@ function makeSheet(p, pos) {
     bar.style.strokeDashoffset = String(100 - (max > 0 ? (scroller.scrollTop / max) * 100 : 0));
   }, { passive: true });
   $("sheets").appendChild(el);
+  const fig = el.querySelector(".preview");
+  if (fig) { fitPreview(fig); pvObserver && pvObserver.observe(fig.querySelector(".pv-screen")); }
   return el;
 }
 
@@ -569,6 +651,7 @@ function markCurrent() {
     const h = el.querySelector("h1");
     if (h) h.id = cur ? "case-title" : "";
   }
+  syncPreviews();
 }
 
 function buildSheets(slug) {
