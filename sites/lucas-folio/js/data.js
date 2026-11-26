@@ -8,7 +8,7 @@ window.FOLIO = {
   name: "Lucas Bastos",
   role: "designer & developer",
   email: "ola@lucasbastos.pt",
-  awards: "10 sites — one repository, no build step.",
+  awards: "12 sites — one repository, no build step.",
   bio: [
     "Lucas Bastos designs and builds websites from Lisbon: hand-written HTML, CSS and JavaScript, with motion and interaction doing the work.",
     "Every card here is a live site from the same repository. Open one to see the case, then visit it."
@@ -24,6 +24,7 @@ window.FOLIO = {
   projects: [
     {
       slug: "forma",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
       title: "3D Print Store",
       featured: true,
       year: "2026",
@@ -39,23 +40,59 @@ window.FOLIO = {
       ]
     },
     {
-      slug: "amostras",
-      title: "Amostras",
+      slug: "montra",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
+      title: "Salon Storefront",
       featured: true,
       year: "2026",
-      client: "Proposal",
-      url: "../amostras/",
+      client: "Salon",
+      url: "../montra/",
       awards: 0,
-      summary: "Client proposal: six working sample sites for one salon, previewed as desktop or phone. Reusable for any client.",
+      summary: "Hair and beauty salon as a shopfront: awning, a door sign that really says open or closed, price board and online booking.",
       media: [
-        { w: 16, h: 9, src: "img/shots/amostras-1.jpg", caption: "Picker" },
-        { w: 16, h: 9, src: "img/shots/amostras-2.jpg", caption: "Phone preview" },
-        { w: 16, h: 9, src: "img/shots/amostras-3.jpg", caption: "Sample: Azulejo" },
-        { w: 16, h: 9, src: "img/shots/amostras-4.jpg", caption: "Sample: Leque" }
+        { w: 16, h: 9, src: "img/shots/montra-1.jpg", caption: "Shopfront" },
+        { w: 16, h: 9, src: "img/shots/montra-2.jpg", caption: "Price board" },
+        { w: 16, h: 9, src: "img/shots/montra-3.jpg", caption: "Booking" },
+        { w: 16, h: 9, src: "img/shots/montra-4.jpg", caption: "Team" }
+      ]
+    },
+    {
+      slug: "rotulo",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
+      title: "Salon Label",
+      featured: true,
+      year: "2026",
+      client: "Salon",
+      url: "../rotulo/",
+      awards: 0,
+      summary: "Hair and beauty salon as a product label: bold grid, counted facts, the full price table and online booking.",
+      media: [
+        { w: 16, h: 9, src: "img/shots/rotulo-1.jpg", caption: "Label" },
+        { w: 16, h: 9, src: "img/shots/rotulo-2.jpg", caption: "Price table" },
+        { w: 16, h: 9, src: "img/shots/rotulo-3.jpg", caption: "Booking" },
+        { w: 16, h: 9, src: "img/shots/rotulo-4.jpg", caption: "Team" }
+      ]
+    },
+    {
+      slug: "leque",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
+      title: "Salon Colour Fan",
+      featured: true,
+      year: "2026",
+      client: "Salon",
+      url: "../leque/",
+      awards: 0,
+      summary: "Hair and beauty salon on a colour fan: services and tones as blades, a house palette and online booking.",
+      media: [
+        { w: 16, h: 9, src: "img/shots/leque-1.jpg", caption: "Colour fan" },
+        { w: 16, h: 9, src: "img/shots/leque-2.jpg", caption: "Services" },
+        { w: 16, h: 9, src: "img/shots/leque-3.jpg", caption: "Palette" },
+        { w: 16, h: 9, src: "img/shots/leque-4.jpg", caption: "Booking" }
       ]
     },
     {
       slug: "aura-desk",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
       title: "Store BackOffice",
       featured: true,
       year: "2026",
@@ -72,6 +109,7 @@ window.FOLIO = {
     },
     {
       slug: "brightline",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
       title: "House Cleaning Services",
       featured: true,
       year: "2026",
@@ -88,6 +126,7 @@ window.FOLIO = {
     },
     {
       slug: "nido",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
       title: "Bakery Website",
       featured: true,
       year: "2026",
@@ -104,6 +143,7 @@ window.FOLIO = {
     },
     {
       slug: "aura",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
       title: "Hairdresser Website",
       featured: true,
       year: "2026",
@@ -120,6 +160,7 @@ window.FOLIO = {
     },
     {
       slug: "vela",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
       title: "Perfume Store",
       featured: true,
       year: "2026",
@@ -136,6 +177,7 @@ window.FOLIO = {
     },
     {
       slug: "osteria",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
       title: "Restaurant Website",
       featured: true,
       year: "2026",
@@ -152,6 +194,7 @@ window.FOLIO = {
     },
     {
       slug: "lumen",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
       title: "Photographer Website",
       featured: true,
       year: "2026",
@@ -168,6 +211,7 @@ window.FOLIO = {
     },
     {
       slug: "atelier",
+      group: "examples",   // examples | live | past (the buttons at the top of the stage)
       title: "HandBuilt/Rustic Item Store",
       featured: true,
       year: "2026",

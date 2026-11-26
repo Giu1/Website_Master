@@ -726,7 +726,7 @@ body.is-flat .panel.is-open .ring-css { transform: none; opacity: 1; transition:
 }
 .preview[data-device="mobile"] .pv-screen {
   aspect-ratio: auto;
-  height: min(82vh, 880px);
+  height: min(calc(100vh - 2 * var(--sheet-y) - 110px), 880px);
   background: #eeede9 radial-gradient(circle at 50% 40%, #f7f6f2, #eeede9 70%);
 }
 .pv-frame { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
@@ -738,7 +738,30 @@ body.is-flat .panel.is-open .ring-css { transform: none; opacity: 1; transition:
   border: 10px solid #111;
   border-radius: 46px;
   overflow: hidden;
+  /* the iframe is its own layer and ignores border-radius clipping; clip-path holds it */
+  clip-path: inset(0 round 46px);
+  padding: 30px 0 24px;                     /* status bar and home bar, so the site never runs into the round corners */
+  background: #fff;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+}
+.preview[data-device="mobile"] .pv-frame::before {
+  content: "9:41";
+  position: absolute;
+  top: 7px;
+  left: 30px;
+  font: 600 13px/16px -apple-system, "Inter Tight", system-ui, sans-serif;
+  color: #111;
+}
+.preview[data-device="mobile"] .pv-frame::after {
+  content: "";
+  position: absolute;
+  bottom: 9px;
+  left: 50%;
+  width: 120px;
+  height: 5px;
+  margin-left: -60px;
+  border-radius: 3px;
+  background: #111;
 }
 .pv-frame iframe { display: block; border: 0; background: #fff; }
 
@@ -935,4 +958,27 @@ a.chip.go svg { width: 45%; height: 45%; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; transition-delay: 0s !important; }
+}
+
+/* ───────── preview and screenshots sized so the case sheet fits on screen ───────── */
+
+@media (min-width: 861px) {
+  .sheet-grid.has-preview {
+    grid-template-columns: minmax(260px, 24%) 1fr;
+    column-gap: max(20px, 2vw);
+    padding-right: max(76px, 6vw);          /* keeps the close button clear of the preview */
+  }
+  .sheet-grid.has-preview .sheet-copy { padding: max(20px, 2vw) max(18px, 1.6vw); }
+  .sheet-grid.has-preview .sheet-media { padding: max(20px, 2vw) 0; justify-content: flex-start; }
+
+  /* the whole preview fits on screen: as wide as the column allows, never taller than the window */
+  .sheet-grid.has-preview .preview {
+    width: min(100%, calc((100vh - 2 * var(--sheet-y) - 2 * max(20px, 2vw) - 50px) * 1.6));
+  }
+
+  .sheet-grid.has-preview .shot-grid { gap: 6px; margin-top: max(16px, 1.4vw); }
+  .sheet-grid.has-preview .shot img { border-radius: 4px; }
+  .sheet-grid.has-preview .shot span { margin-top: 0.35em; font-size: 10px; }
+  .sheet-grid.has-preview .open-site { margin-top: max(14px, 1.4vw); }
+  .sheet-grid.has-preview .meta { margin-top: max(14px, 1.4vw); }
 }

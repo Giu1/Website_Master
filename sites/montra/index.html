@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Estúdio Lírio · Cabeleireiro e estética em Coimbra</title>
+<meta name="description" content="Cabeleireiro e estética na Rua da Sofia, em Coimbra. Cortes, coloração, tranças, penteados e estética. Marque online." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+
+<header class="top" id="top">
+  <a class="brand" href="#inicio"><span class="brand-dot" aria-hidden="true"></span><span data-c="nomeCompleto"></span></a>
+  <nav class="menu" id="menu" aria-label="Principal">
+    <a href="#servicos">Serviços</a>
+    <a href="#salao">O salão</a>
+    <a href="#equipa">Equipa</a>
+    <a href="#opinioes">Opiniões</a>
+    <a href="#contactos">Contactos</a>
+  </nav>
+  <a class="top-cta" href="#marcar">Marcar</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i></button>
+</header>
+
+<main id="conteudo">
+  <!-- A fachada: toldo, montra e porta com a placa -->
+  <div class="street" id="inicio">
+    <div class="awning"><span data-c="nomeCompleto"></span></div>
+    <div class="front">
+      <div class="window">
+        <p class="eyebrow">Rua da Sofia · desde <span data-c="desde"></span></p>
+        <h1>Cabeleireiro <em>e estética</em>, à porta da rua.</h1>
+        <p class="lead">Cortes, cor, tranças e unhas numa loja antiga de <span data-c="cidade"></span>. Preços escritos na montra e tempo para ouvir antes de cortar.</p>
+        <div class="btns">
+          <a class="btn" href="#marcar">Marcar online</a>
+          <a class="btn ghost" data-tel>Ligar <span data-c="telefone"></span></a>
+        </div>
+        <ul class="window-stickers" aria-label="Destaques">
+          <li>Sem amoníaco</li>
+          <li>Crianças bem-vindas</li>
+          <li>Cartão e MB WAY</li>
+        </ul>
+      </div>
+      <div class="door">
+        <div class="sign-hang" id="sign" role="img" tabindex="0">
+          <svg width="80" height="40" viewBox="0 0 80 40" aria-hidden="true"><path d="M10 40 L40 4 L70 40" fill="none" stroke="#d8b06a" stroke-width="2"/><circle cx="40" cy="4" r="3" fill="#d8b06a"/></svg>
+          <div class="plate"><div class="a">Aberto</div><div class="f">Fechado</div></div>
+        </div>
+        <p class="sign-note" id="sign-note"></p>
+        <span class="door-num">112</span>
+      </div>
+    </div>
+    <div class="pavement" aria-hidden="true"></div>
+  </div>
+
+  <!-- Na montra: as cinco famílias, como frascos na prateleira -->
+  <section class="shelf-sec reveal" aria-labelledby="h-montra">
+    <div class="sec-head">
+      <p class="eyebrow">Na montra</p>
+      <h2 id="h-montra">O que fazemos</h2>
+    </div>
+    <div class="shelf" id="shelf"></div>
+  </section>
+
+  <!-- Tabela completa -->
+  <section class="prices reveal" id="servicos" aria-labelledby="h-precos">
+    <div class="sec-head">
+      <p class="eyebrow">Tabela de preços</p>
+      <h2 id="h-precos">Serviços e preços</h2>
+      <p class="sub">Preços com IVA. O tempo é o que costuma demorar; marcamos com folga.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Famílias de serviços" id="tabs"></div>
+    <div class="board" id="board" role="tabpanel"></div>
+  </section>
+
+  <!-- O salão -->
+  <section class="salon reveal" id="salao" aria-labelledby="h-salao">
+    <div class="salon-art" aria-hidden="true">
+      <div class="mirror"><i></i></div>
+      <div class="mirror"><i></i></div>
+      <div class="chair"></div>
+      <div class="chair"></div>
+      <div class="plant"></div>
+      <div class="floor"></div>
+    </div>
+    <div class="salon-text">
+      <p class="eyebrow">O salão</p>
+      <h2 id="h-salao">Uma loja antiga, quatro cadeiras</h2>
+      <div id="sobre"></div>
+      <dl class="numbers" id="numbers"></dl>
+    </div>
+  </section>
+
+  <!-- Equipa -->
+  <section class="team-sec reveal" id="equipa" aria-labelledby="h-equipa">
+    <div class="sec-head">
+      <p class="eyebrow">Equipa</p>
+      <h2 id="h-equipa">Quem está atrás da cadeira</h2>
+    </div>
+    <div class="team" id="team"></div>
+  </section>
+
+  <!-- Marcar -->
+  <section class="book-sec reveal" id="marcar" aria-labelledby="h-marcar">
+    <div class="ticket">
+      <div class="ticket-head">
+        <p class="eyebrow">Marcação</p>
+        <h2 id="h-marcar">Marque a sua vez</h2>
+        <p class="sub">Escolha o serviço, a pessoa, o dia e a hora. Fica marcado na hora; se preferir, <a data-tel>ligue</a>.</p>
+      </div>
+      <div id="booking"></div>
+    </div>
+  </section>
+
+  <!-- Opiniões, como bilhetes colados na montra -->
+  <section class="notes-sec reveal" id="opinioes" aria-labelledby="h-opinioes">
+    <div class="sec-head">
+      <p class="eyebrow">Bilhetes na montra</p>
+      <h2 id="h-opinioes">O que dizem</h2>
+    </div>
+    <div class="notes" id="notes"></div>
+  </section>
+
+  <!-- Perguntas -->
+  <section class="faq-sec reveal" aria-labelledby="h-faq">
+    <div class="sec-head">
+      <p class="eyebrow">Antes de vir</p>
+      <h2 id="h-faq">Perguntas frequentes</h2>
+    </div>
+    <div class="faq" id="faq"></div>
+  </section>
+
+  <!-- Horário e morada -->
+  <section class="visit reveal" id="contactos" aria-labelledby="h-visit">
+    <div>
+      <p class="eyebrow">Horário</p>
+      <h2 id="h-visit">Quando estamos</h2>
+      <div class="hours" id="hours"></div>
+      <p class="status" id="status"></p>
+    </div>
+    <div>
+      <p class="eyebrow">Morada</p>
+      <h2>Onde estamos</h2>
+      <svg class="street-map" viewBox="0 0 360 200" role="img" aria-label="Mapa: Rua da Sofia, entre a Praça 8 de Maio e o Mercado">
+        <rect width="360" height="200" fill="#efe2cf"/>
+        <path d="M-10 120 L370 92" stroke="#fff" stroke-width="26"/>
+        <path d="M200 -10 L230 210" stroke="#fff" stroke-width="18"/>
+        <path d="M40 -10 L70 210" stroke="#fff" stroke-width="12"/>
+        <text x="96" y="118" font-size="11" fill="#6b3b22" transform="rotate(-4 96 118)">Rua da Sofia</text>
+        <text x="236" y="40" font-size="10" fill="#6b3b22">Mercado</text>
+        <text x="78" y="186" font-size="10" fill="#6b3b22">Pç. 8 de Maio</text>
+        <g transform="translate(150 96)"><circle r="16" fill="#b23a2b"/><text y="5" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">L</text></g>
+      </svg>
+      <p class="addr"><span data-c="morada"></span><br /><span data-c="codigoPostal"></span><br /><a data-mail data-c="email"></a> · <span data-c="instagram"></span></p>
+      <div class="btns"><a class="btn" data-map target="_blank" rel="noopener">Abrir no mapa</a><a class="btn ghost dark" data-tel>Ligar</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>© <span id="year"></span> <span data-c="nomeCompleto"></span> · <span data-c="morada"></span>, <span data-c="cidade"></span></span>
+  <a href="#inicio">Voltar ao início ↑</a>
+</footer>
+
+<a class="float-cta" href="#marcar" id="float-cta">Marcar</a>
+
+<script src="js/cliente.js"></script>
+<script src="js/marcar.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

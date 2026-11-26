@@ -157,6 +157,23 @@
     leaveTo(a.getAttribute("href"), key);
   });
 
+  // Work groups at the top of the stage: the same panel, then the stage again with only that group.
+  // Pressing the group that is already chosen goes back to all work.
+  const GROUP_KEYS = { examples: "nav.examples", live: "nav.live", past: "nav.past" };
+  const chosen = new URLSearchParams(location.search).get("work");
+  document.querySelectorAll("[data-group]").forEach((a) => {
+    const on = a.dataset.group === chosen;
+    a.classList.toggle("is-on", on);
+    if (on) a.setAttribute("aria-current", "true");
+    a.addEventListener("click", (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+      e.preventDefault();
+      if (a.getAttribute("aria-disabled") === "true") return;
+      if (on) leaveTo("index.html#work", "nav.allwork");
+      else leaveTo(a.getAttribute("href"), GROUP_KEYS[a.dataset.group]);
+    });
+  });
+
   // EN / PT switch: the resting label follows the language
   document.addEventListener("langchange", () => {
     if (!tween && !leaving) vText.textContent = t("nav.work");

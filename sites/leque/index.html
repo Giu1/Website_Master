@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Estúdio Lírio · Cor, corte e estética em Coimbra</title>
+<meta name="description" content="Coloração, cortes, tranças e estética na Rua da Sofia, Coimbra. Escolha a sua cor no leque e marque online." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#inicio"><span class="brand-fan" aria-hidden="true"><i></i><i></i><i></i></span><span data-c="nomeCompleto"></span></a>
+  <nav class="links" id="menu" aria-label="Principal">
+    <a href="#servicos">Serviços</a>
+    <a href="#cor">Cor</a>
+    <a href="#equipa">Equipa</a>
+    <a href="#opinioes">Opiniões</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a class="pill" href="#marcar">Marcar</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i></button>
+</header>
+
+<main id="conteudo">
+  <!-- O leque: serviços e tons de cor como lâminas -->
+  <section class="hero" id="inicio" aria-labelledby="h-hero">
+    <div class="title">
+      <p class="eyebrow"><span class="dot" id="dot"></span><span id="now"></span></p>
+      <h1 id="h-hero">Escolha<br />a sua cor.</h1>
+      <p class="lead"><span data-c="tipo"></span> em <span data-c="cidade"></span>, desde <span data-c="desde"></span>. Passe ou toque numa lâmina do leque.</p>
+    </div>
+    <aside class="card" aria-live="polite">
+      <small id="k-kind"></small>
+      <h2 id="k-name"></h2>
+      <p id="k-desc"></p>
+      <em id="k-price"></em>
+      <div class="btns">
+        <a class="btn" href="#marcar" id="k-book">Marcar isto</a>
+        <a class="btn line" data-tel>Ligar</a>
+      </div>
+    </aside>
+    <div class="fan" id="fan"></div>
+  </section>
+
+  <!-- Serviços -->
+  <section class="sec" id="servicos" aria-labelledby="h-servicos">
+    <div class="sec-head">
+      <p class="eyebrow">Serviços</p>
+      <h2 id="h-servicos">Cinco lâminas, uma tabela</h2>
+      <p class="muted">Preços com IVA. O tempo é o que costuma demorar; marcamos com folga.</p>
+    </div>
+    <div class="families" id="families"></div>
+  </section>
+
+  <!-- Paleta -->
+  <section class="sec palette-sec" id="cor" aria-labelledby="h-cor">
+    <div class="sec-head">
+      <p class="eyebrow">Cor</p>
+      <h2 id="h-cor">A paleta da casa</h2>
+      <p class="muted">Coloração sem amoníaco e tonalizantes vegan. Primeira cor? Fazemos teste de alergia 48 horas antes.</p>
+    </div>
+    <div class="palette" id="palette" role="list"></div>
+    <div class="tone-card" id="tone-card" aria-live="polite"></div>
+  </section>
+
+  <!-- Equipa -->
+  <section class="sec" id="equipa" aria-labelledby="h-equipa">
+    <div class="sec-head">
+      <p class="eyebrow">Equipa</p>
+      <h2 id="h-equipa">Quatro mãos, quatro cores</h2>
+    </div>
+    <div class="team" id="team"></div>
+  </section>
+
+  <!-- Marcar -->
+  <section class="sec book-sec" id="marcar" aria-labelledby="h-marcar">
+    <div class="sec-head">
+      <p class="eyebrow">Marcar</p>
+      <h2 id="h-marcar">Reserve a sua cadeira</h2>
+      <p class="muted">Escolha o serviço, a pessoa, o dia e a hora. Fica marcado na hora. Se preferir, <a data-tel>ligue</a>.</p>
+    </div>
+    <div class="book" id="booking"></div>
+  </section>
+
+  <!-- Opiniões -->
+  <section class="sec quotes-sec" id="opinioes" aria-labelledby="h-opinioes">
+    <p class="eyebrow" id="h-opinioes">Opiniões</p>
+    <div class="quotes" id="quotes" aria-live="polite"></div>
+    <div class="quote-nav">
+      <button type="button" id="q-prev" aria-label="Opinião anterior">←</button>
+      <span id="q-count" class="muted"></span>
+      <button type="button" id="q-next" aria-label="Opinião seguinte">→</button>
+    </div>
+  </section>
+
+  <!-- Perguntas -->
+  <section class="sec two" aria-labelledby="h-faq">
+    <div class="sec-head">
+      <p class="eyebrow">Antes de vir</p>
+      <h2 id="h-faq">Perguntas</h2>
+    </div>
+    <div class="faq" id="faq"></div>
+  </section>
+
+  <!-- Contacto -->
+  <section class="sec two" id="contacto" aria-labelledby="h-contacto">
+    <div>
+      <p class="eyebrow">Horário</p>
+      <h2 id="h-contacto">Quando</h2>
+      <div class="list" id="hours"></div>
+      <p class="status" id="status"></p>
+    </div>
+    <div>
+      <p class="eyebrow">Morada</p>
+      <h2>Onde</h2>
+      <p class="addr"><span data-c="morada"></span><br /><span data-c="codigoPostal"></span></p>
+      <p class="addr"><a data-tel data-c="telefone"></a><br /><a data-mail data-c="email"></a><br /><span data-c="instagram"></span></p>
+      <div class="btns"><a class="btn" data-map target="_blank" rel="noopener">Abrir no mapa</a><a class="btn line" href="#marcar">Marcar</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>© <span id="year"></span> <span data-c="nomeCompleto"></span> · <span data-c="morada"></span>, <span data-c="cidade"></span></span>
+  <a href="#inicio">Voltar ao leque ↑</a>
+</footer>
+
+<a class="float-cta" href="#marcar" id="float-cta">Marcar</a>
+
+<script src="js/cliente.js"></script>
+<script src="js/marcar.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
