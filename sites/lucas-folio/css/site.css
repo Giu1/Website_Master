@@ -738,7 +738,30 @@ body.is-flat .panel.is-open .ring-css { transform: none; opacity: 1; transition:
   border: 10px solid #111;
   border-radius: 46px;
   overflow: hidden;
+  /* the iframe is its own layer and ignores border-radius clipping; clip-path holds it */
+  clip-path: inset(0 round 46px);
+  padding: 30px 0 24px;                     /* status bar and home bar, so the site never runs into the round corners */
+  background: #fff;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+}
+.preview[data-device="mobile"] .pv-frame::before {
+  content: "9:41";
+  position: absolute;
+  top: 7px;
+  left: 30px;
+  font: 600 13px/16px -apple-system, "Inter Tight", system-ui, sans-serif;
+  color: #111;
+}
+.preview[data-device="mobile"] .pv-frame::after {
+  content: "";
+  position: absolute;
+  bottom: 9px;
+  left: 50%;
+  width: 120px;
+  height: 5px;
+  margin-left: -60px;
+  border-radius: 3px;
+  background: #111;
 }
 .pv-frame iframe { display: block; border: 0; background: #fff; }
 

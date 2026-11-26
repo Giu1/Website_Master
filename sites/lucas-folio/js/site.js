@@ -552,6 +552,7 @@ function sheetHTML(p) {
 
 const DESK_W = 1440;                         // the desktop preview renders the site at this width, scaled to fit
 const PHONE_W = 390, PHONE_H = 844;          // and the phone preview at this size
+const PHONE_BARS = 30 + 24;                  // status bar + home bar padding in the phone frame (css)
 const PV_KEY = "folio-preview-device";
 let pvDevice = "desktop";
 try { pvDevice = localStorage.getItem(PV_KEY) || (matchMedia("(max-width: 640px)").matches ? "mobile" : "desktop"); } catch { /* storage blocked */ }
@@ -652,10 +653,11 @@ function fitPreview(fig) {
   if (!w || !h) return;
   if (fig.dataset.device === "mobile") {
     const k = Math.min(1, (h - 32) / (PHONE_H + 20), (w - 32) / (PHONE_W + 20));
+    const screenH = PHONE_H - PHONE_BARS;   // the site gets what's left between status bar and home bar
     frame.style.width = PHONE_W + "px";
-    frame.style.height = PHONE_H + "px";
+    frame.style.height = screenH + "px";
     iframe.style.width = PHONE_W + "px";
-    iframe.style.height = PHONE_H + "px";
+    iframe.style.height = screenH + "px";
     frame.style.transform = `translate(-50%, -50%) scale(${k})`;
   } else {
     const k = w / DESK_W;
@@ -666,6 +668,27 @@ function fitPreview(fig) {
     frame.style.transform = `scale(${k})`;
   }
 }
+
+// phones have overlay scrollbars; a desktop browser would draw a bar in the site and one in each panel
+const PHONE_CSS = "*{scrollbar-width:none!important}*::-webkit-scrollbar{display:none!important}";
+function phoneScrollbars(fig) {
+  const iframe = fig.querySelector("iframe");
+  let doc;
+  try { doc = iframe.contentDocument; } catch { return; }   // another origin: leave it
+  if (!doc || !doc.head) return;
+  let tag = doc.getElementById("folio-phone-css");
+  if (fig.dataset.device === "mobile") {
+    if (!tag) {
+      tag = doc.createElement("style");
+      tag.id = "folio-phone-css";
+      tag.textContent = PHONE_CSS;
+      doc.head.appendChild(tag);
+    }
+  } else if (tag) tag.remove();
+}
+document.addEventListener("load", (e) => {
+  if (e.target.tagName === "IFRAME" && e.target.closest(".preview")) phoneScrollbars(e.target.closest(".preview"));
+}, true);
 
 const pvObserver = typeof ResizeObserver === "function"
   ? new ResizeObserver((entries) => { for (const e of entries) fitPreview(e.target.closest(".preview")); })
@@ -693,6 +716,7 @@ document.addEventListener("click", (e) => {
     fig.dataset.device = pvDevice;
     fig.querySelectorAll(".pv-device button").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.device === pvDevice)));
     fitPreview(fig);
+    phoneScrollbars(fig);
   }
 });
 
