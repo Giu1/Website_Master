@@ -8,7 +8,7 @@ window.FOLIO = {
   name: "Lucas Bastos",
   role: "designer & developer",
   email: "ola@lucasbastos.pt",
-  awards: "11 sites — one repository, no build step.",
+  awards: "12 sites — one repository, no build step.",
   bio: [
     "Lucas Bastos designs and builds websites from Lisbon: hand-written HTML, CSS and JavaScript, with motion and interaction doing the work.",
     "Every card here is a live site from the same repository. Open one to see the case, then visit it."
@@ -63,6 +63,21 @@ window.FOLIO = {
         { w: 16, h: 9, src: "img/shots/forma-1.jpg", caption: "Home" },
         { w: 16, h: 9, src: "img/shots/forma-2.jpg", caption: "Categories" },
         { w: 16, h: 9, src: "img/shots/forma-3.jpg", caption: "Featured products" }
+      ]
+    },
+    {
+      slug: "amostras",
+      title: "Amostras",
+      featured: true,
+      year: "2026",
+      client: "Proposal",
+      url: "../amostras/",
+      awards: 0,
+      summary: "Client proposal: six working sample sites for one salon, previewed as desktop or phone. Reusable for any client.",
+      media: [
+        { w: 16, h: 9, src: "img/shots/amostras-1.jpg", caption: "Picker" },
+        { w: 16, h: 9, src: "img/shots/amostras-2.jpg", caption: "Phone preview" },
+        { w: 16, h: 9, src: "img/shots/amostras-3.jpg", caption: "Sample: Azulejo" }
       ]
     },
     {

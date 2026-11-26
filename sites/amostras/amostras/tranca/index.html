@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Amostra · Trança</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root { --sun: #f7c51e; --ink: #111; --s1: #111; --s2: #e2412b; --s3: #fff; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--sun); color: var(--ink); font: 400 16px/1.55 "Work Sans", system-ui, sans-serif; overflow-x: hidden; }
+  a { color: inherit; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 5vw; font-weight: 600; font-size: 14px; }
+  nav a { text-decoration: none; padding: 8px 14px; background: var(--ink); color: var(--sun); }
+  main { position: relative; }
+  #braid { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 0; }
+  #braid path { fill: none; stroke-linecap: round; }
+  .sec { position: relative; z-index: 1; min-height: 70vh; padding: 8vh 5vw 8vh 22vw; display: flex; flex-direction: column; justify-content: center; }
+  .hero { min-height: 82vh; }
+  .hero h1 { margin: 0; font: 400 clamp(64px, 13vw, 190px)/.85 "Anton", sans-serif; text-transform: uppercase; letter-spacing: -.01em; }
+  .stripe { height: 30px; margin: 22px 0; max-width: 700px; background: repeating-linear-gradient(-45deg, var(--ink) 0 14px, var(--s2) 14px 28px, var(--s3) 28px 42px); }
+  .hero p { margin: 0; font-size: clamp(18px, 2vw, 24px); font-weight: 600; max-width: 30ch; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+  .btn { padding: 14px 20px; background: var(--ink); color: var(--sun); text-decoration: none; font-weight: 600; }
+  .btn.line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+  h2 { margin: 0 0 24px; font: 400 clamp(40px, 6vw, 84px)/.9 "Anton", sans-serif; text-transform: uppercase; }
+  .svcs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; border-top: 3px solid var(--ink); max-width: 900px; }
+  .svc { padding: 18px 0; border-bottom: 3px solid var(--ink); display: flex; justify-content: space-between; gap: 16px; margin-right: 24px; }
+  .svc b { font: 400 26px/1 "Anton", sans-serif; text-transform: uppercase; display: block; }
+  .svc span { font-size: 14px; }
+  .svc em { font-style: normal; font-weight: 600; white-space: nowrap; }
+  .hours { max-width: 560px; }
+  .hours div { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 2px solid var(--ink); font-size: 18px; }
+  .status { display: inline-block; margin-bottom: 18px; padding: 6px 12px; background: var(--ink); color: var(--sun); font-weight: 600; }
+  @media (prefers-reduced-motion: no-preference) {
+    .sec > * { opacity: 0; transform: translateX(-20px); transition: opacity .6s, transform .6s; }
+    .sec.in > * { opacity: 1; transform: none; }
+  }
+  footer { position: relative; z-index: 1; padding: 24px 5vw 24px 22vw; font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  @media (max-width: 760px) {
+    .sec, footer { padding-left: 64px; padding-right: 20px; }
+    .svc { margin-right: 0; }
+  }
+</style>
+</head>
+<body>
+<nav><span data-c="nomeCompleto"></span><a data-tel data-c="telefone"></a></nav>
+<main id="main">
+  <svg id="braid" aria-hidden="true"><path id="p1" /><path id="p2" /><path id="p3" /></svg>
+
+  <section class="sec hero in">
+    <h1 data-c="nomeCompleto"></h1>
+    <div class="stripe"></div>
+    <p><span data-c="tipo"></span>, na <span data-c="morada"></span>, <span data-c="cidade"></span>.</p>
+    <div class="btns">
+      <a class="btn" data-tel>Ligar para marcar</a>
+      <a class="btn line" data-map target="_blank" rel="noopener">Como chegar</a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>O que fazemos</h2>
+    <div class="svcs" id="svcs"></div>
+  </section>
+
+  <section class="sec">
+    <h2>Horário</h2>
+    <span class="status" id="status"></span>
+    <div class="hours" id="hours"></div>
+  </section>
+
+  <section class="sec">
+    <h2>Venha cá</h2>
+    <p style="font-size:20px;font-weight:600"><span data-c="morada"></span><br /><span data-c="codigoPostal"></span><br /><span data-c="instagram"></span></p>
+    <div class="btns"><a class="btn" data-map target="_blank" rel="noopener">Abrir no mapa</a><a class="btn line" data-tel>Ligar</a></div>
+  </section>
+</main>
+<footer><span>© <span data-c="nomeCompleto"></span></span><span>Amostra 6 · Trança</span></footer>
+
+<script src="../../js/cliente.js"></script>
+<script>
+  const C = window.CLIENTE;
+  document.querySelectorAll("[data-c]").forEach((el) => (el.textContent = C[el.dataset.c]));
+  document.querySelectorAll("[data-tel]").forEach((el) => (el.href = C.telefoneHref));
+  document.querySelectorAll("[data-map]").forEach((el) => (el.href = C.mapa));
+  document.getElementById("svcs").innerHTML = C.servicos.map((s) => `<div class="svc"><div><b>${s.nome}</b><span>${s.desc}</span></div><em>${s.preco}</em></div>`).join("");
+  document.getElementById("hours").innerHTML = C.horarioLinhas().map((l) => `<div><span>${l.dias}</span><b>${l.horas}</b></div>`).join("");
+  const st = C.estado();
+  document.getElementById("status").textContent = st.curto + (st.longo ? " · " + st.longo : "");
+
+  /* A trança: três ondas desfasadas de um terço. */
+  const main = document.getElementById("main"), svg = document.getElementById("braid");
+  const paths = ["p1", "p2", "p3"].map((id) => document.getElementById(id));
+  const colors = ["var(--s1)", "var(--s2)", "var(--s3)"];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let lens = [];
+  function build() {
+    const h = main.offsetHeight, small = innerWidth < 760;
+    const cx = small ? 32 : innerWidth * .11, amp = small ? 18 : Math.min(70, innerWidth * .05);
+    const period = small ? 220 : 340, w = small ? 9 : 16;
+    svg.setAttribute("height", h);
+    svg.setAttribute("viewBox", `0 0 ${innerWidth} ${h}`);
+    paths.forEach((p, k) => {
+      let d = "";
+      for (let y = 0; y <= h; y += 8) {
+        const x = cx + amp * Math.sin((y / period) * 2 * Math.PI + (k * 2 * Math.PI) / 3);
+        d += (y ? "L" : "M") + x.toFixed(1) + " " + y;
+      }
+      p.setAttribute("d", d);
+      p.style.stroke = colors[k];
+      p.style.strokeWidth = w;
+    });
+    lens = paths.map((p) => p.getTotalLength());
+    paths.forEach((p, k) => (p.style.strokeDasharray = lens[k]));
+    draw();
+  }
+  function draw() {
+    const r = main.getBoundingClientRect();
+    const reach = reduce ? 1 : Math.min(1, Math.max(0, (innerHeight * .75 - r.top) / r.height));
+    paths.forEach((p, k) => (p.style.strokeDashoffset = lens[k] * (1 - reach)));
+    const line = r.top + r.height * reach;
+    document.querySelectorAll(".sec").forEach((s) => { if (s.getBoundingClientRect().top + 80 < line) s.classList.add("in"); });
+  }
+  build();
+  addEventListener("scroll", draw, { passive: true });
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(build, 120); });
+  document.fonts && document.fonts.ready.then(build);
+</script>
+</body>
+</html>

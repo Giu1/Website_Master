@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Amostras</title>
+  <meta name="description" content="Amostras de site para escolher, vistas como no computador ou no telemóvel." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="top wrap">
+    <a class="brand" id="brand" href="../../"><span class="dot" aria-hidden="true"></span><span id="brand-name"></span></a>
+    <p class="top-line" id="top-line"></p>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <h1 id="title"></h1>
+      <p id="intro"></p>
+    </section>
+
+    <div class="picker" id="picker" role="radiogroup" aria-label="Amostras"></div>
+
+    <section class="viewer">
+      <div class="stage" id="stage" data-device="desktop">
+        <div class="chrome">
+          <span class="chrome-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="chrome-url" id="chrome-url"></span>
+          <a class="chrome-open" id="open-full" href="#" target="_blank" rel="noopener">Abrir ↗</a>
+        </div>
+        <div class="screen" id="screen">
+          <iframe id="frame" title="Pré-visualização da amostra"></iframe>
+        </div>
+      </div>
+
+      <aside class="panel" aria-live="polite">
+        <div class="device" role="group" aria-label="Ver como">
+          <button type="button" data-device="desktop" aria-pressed="true">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="10" rx="1.2"/><path d="M7 16.5h6M10 13.5v3"/></svg>
+            Computador
+          </button>
+          <button type="button" data-device="mobile" aria-pressed="false">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="6" y="2.5" width="8" height="15" rx="1.6"/><path d="M9 15h2"/></svg>
+            Telemóvel
+          </button>
+        </div>
+        <h2 id="p-name"></h2>
+        <p id="p-desc"></p>
+        <h3>Movimento</h3>
+        <p id="p-move"></p>
+        <h3>Técnica</h3>
+        <p id="p-tech"></p>
+        <div class="step">
+          <button type="button" id="prev" aria-label="Amostra anterior">←</button>
+          <span id="count"></span>
+          <button type="button" id="next" aria-label="Amostra seguinte">→</button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="wrap foot"><p id="foot"></p></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
