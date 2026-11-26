@@ -8,7 +8,7 @@ window.FOLIO = {
   name: "Lucas Bastos",
   role: "designer & developer",
   email: "ola@lucasbastos.pt",
-  awards: "12 sites — one repository, no build step.",
+  awards: "11 sites — one repository, no build step.",
   bio: [
     "Lucas Bastos designs and builds websites from Lisbon: hand-written HTML, CSS and JavaScript, with motion and interaction doing the work.",
     "Every card here is a live site from the same repository. Open one to see the case, then visit it."
@@ -156,23 +156,6 @@ window.FOLIO = {
         { w: 16, h: 9, src: "img/shots/aura-2.jpg", caption: "Services & prices" },
         { w: 16, h: 9, src: "img/shots/aura-3.jpg", caption: "The salon" },
         { w: 16, h: 9, src: "img/shots/aura-4.jpg", caption: "Specialists" }
-      ]
-    },
-    {
-      slug: "vela",
-      group: "examples",   // examples | live | past (the buttons at the top of the stage)
-      title: "Perfume Store",
-      featured: true,
-      year: "2026",
-      client: "Perfume",
-      url: "../vela/",
-      awards: 0,
-      summary: "One perfume, a drawn bottle that takes each note's colour, and a wear clock.",
-      media: [
-        { w: 16, h: 9, src: "img/shots/vela-1.jpg", caption: "Home" },
-        { w: 16, h: 9, src: "img/shots/vela-2.jpg", caption: "The notes" },
-        { w: 16, h: 9, src: "img/shots/vela-3.jpg", caption: "Gallery" },
-        { w: 16, h: 9, src: "img/shots/vela-4.jpg", caption: "Wear clock" }
       ]
     },
     {
