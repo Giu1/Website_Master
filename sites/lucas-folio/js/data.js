@@ -8,7 +8,7 @@ window.FOLIO = {
   name: "Lucas Bastos",
   role: "designer & developer",
   email: "ola@lucasbastos.pt",
-  awards: "11 sites — one repository, no build step.",
+  awards: "12 sites — one repository, no build step.",
   bio: [
     "Lucas Bastos designs and builds websites from Lisbon: hand-written HTML, CSS and JavaScript, with motion and interaction doing the work.",
     "Every card here is a live site from the same repository. Open one to see the case, then visit it."
@@ -88,6 +88,23 @@ window.FOLIO = {
         { w: 16, h: 9, src: "img/shots/leque-2.jpg", caption: "Services" },
         { w: 16, h: 9, src: "img/shots/leque-3.jpg", caption: "Palette" },
         { w: 16, h: 9, src: "img/shots/leque-4.jpg", caption: "Booking" }
+      ]
+    },
+    {
+      slug: "slab-journey",
+      group: "past",   // examples | live | past (the buttons at the top of the stage)
+      title: "Slab Journey",
+      featured: true,
+      year: "2026",
+      client: "Slab Journey",
+      url: "../slab-journey/",
+      awards: 0,
+      summary: "Price tracker for graded Pokémon cards: an Android and Windows app in Kotlin Multiplatform, and its Next.js website. Try the app in a clickable phone and browse the archived site.",
+      media: [
+        { w: 16, h: 9, src: "img/shots/slab-journey-1.jpg", caption: "Project" },
+        { w: 16, h: 9, src: "img/shots/slab-journey-2.jpg", caption: "App" },
+        { w: 16, h: 9, src: "img/shots/slab-journey-3.jpg", caption: "Website" },
+        { w: 16, h: 9, src: "img/shots/slab-journey-4.jpg", caption: "Pricing" }
       ]
     },
     {

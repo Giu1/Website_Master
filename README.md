@@ -35,6 +35,7 @@ Always serve from the repo root. The hub, the sibling links between demos, and t
 | `sites/montra/` | Estúdio Lírio — Montra | Salon shopfront: live open/closed sign, price board, team, online booking (Amostra 3, expanded) | PT-PT |
 | `sites/rotulo/` | Estúdio Lírio — Rótulo | Salon as a product label: counted facts, full price table, team, online booking (Amostra 4, expanded) | PT-PT |
 | `sites/leque/` | Estúdio Lírio — Leque | Salon on a colour fan: services and tones as blades, palette, online booking (Amostra 5, expanded) | PT-PT |
+| `sites/slab-journey/` | Slab Journey | Past project: clickable phone preview of the Android app (rebuilt from its Compose code) and an archived static copy of slabjourney.com in `web/` | EN |
 
 Each site has its own `README.md`. FORMA's catalog guide is `sites/forma/COMO-EDITAR.md`.
 

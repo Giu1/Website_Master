@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Slab Journey · Past project</title>
+<meta name="description" content="Slab Journey: a price tracker for graded Pokémon cards. The Android and Windows app, and the website that went with it." />
+<link rel="icon" href="img/logo.png" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <a class="brand" href="#top"><img src="img/logo.png" alt="" width="24" height="26" /><span>Slab <b>Journey</b></span></a>
+  <nav aria-label="Sections">
+    <a href="#app">App</a>
+    <a href="#web">Website</a>
+    <a href="#stack">Built with</a>
+  </nav>
+  <a class="back" href="../lucas-folio/index.html?work=past#work">← Portfolio</a>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <p class="eyebrow"><span class="dot"></span>Past project · 2026</p>
+    <h1>Know what your <em>slabs</em> are worth.</h1>
+    <p class="lead">Slab Journey tracked the market value of graded Pokémon cards. It was an Android and Windows app built from one Kotlin codebase, plus a website for sign-ups, pricing and downloads.</p>
+    <div class="btns">
+      <a class="btn gold" href="#app">Try the app</a>
+      <a class="btn" href="web/index.html">Open the website</a>
+    </div>
+    <dl class="facts">
+      <div><dt>20,000+</dt><dd>cards priced</dd></div>
+      <div><dt>170+</dt><dd>sets covered</dd></div>
+      <div><dt>9</dt><dd>grades per card</dd></div>
+      <div><dt>3</dt><dd>languages</dd></div>
+    </dl>
+  </section>
+
+  <section class="app" id="app" aria-labelledby="h-app">
+    <div class="app-copy">
+      <p class="eyebrow">The app</p>
+      <h2 id="h-app">Tap through it</h2>
+      <p>The phone on this page is the Android app, rebuilt in HTML from its Compose code: same colours, layout and wording. Tap a card, switch grades, add it to your portfolio, and use the bar at the bottom like you would on the phone.</p>
+      <ol class="jump" id="jump">
+        <li><button type="button" data-go="landing">Welcome</button></li>
+        <li><button type="button" data-go="explorer">Market Explorer</button></li>
+        <li><button type="button" data-go="card" data-card="pikachu">Card detail</button></li>
+        <li><button type="button" data-go="collection">Set tracker</button></li>
+        <li><button type="button" data-go="portfolio">Portfolio</button></li>
+        <li><button type="button" data-go="social">Community</button></li>
+        <li><button type="button" data-go="account">Account</button></li>
+      </ol>
+      <p class="note">Card prices come from the app's own screenshots. Collection, portfolio and community numbers are demo data, because the real ones lived behind sign-in.</p>
+    </div>
+
+    <div class="device-wrap">
+      <div class="device" aria-label="Slab Journey app preview">
+        <div class="device-screen">
+          <div class="statusbar" aria-hidden="true"><span id="clock">9:41</span><span class="sb-icons"><i></i><i></i><i></i></span></div>
+          <div class="screen" id="screen" aria-live="polite"></div>
+          <nav class="tabbar" id="tabbar" aria-label="App tabs"></nav>
+          <div class="toast" id="toast" role="status"></div>
+        </div>
+      </div>
+      <p class="device-hint">Tap inside the phone</p>
+    </div>
+  </section>
+
+  <section class="web" id="web" aria-labelledby="h-web">
+    <p class="eyebrow">The website</p>
+    <h2 id="h-web">slabjourney.com, kept as it was</h2>
+    <p class="lead small">An archived copy of the Next.js site, saved page by page so it runs without a server. Menus, questions and dark mode still work; sign-up is switched off.</p>
+    <div class="shots">
+      <a class="shot desk" href="web/index.html"><img src="img/web-desktop.jpg" alt="Slab Journey homepage on a laptop" loading="lazy" width="1440" height="900" /><span>Homepage</span></a>
+      <a class="shot desk" href="web/pricing.html"><img src="img/web-pricing.jpg" alt="Pricing page with Free, Plus and Slab'Em All plans" loading="lazy" width="1440" height="900" /><span>Pricing</span></a>
+      <a class="shot phone" href="web/index.html"><img src="img/web-phone.jpg" alt="Homepage on a phone" loading="lazy" width="390" height="844" /><span>On a phone</span></a>
+    </div>
+    <ul class="pages">
+      <li><a href="web/index.html">Home</a></li>
+      <li><a href="web/pricing.html">Pricing</a></li>
+      <li><a href="web/premium.html">Premium</a></li>
+      <li><a href="web/download.html">Download</a></li>
+      <li><a href="web/blog.html">Blog</a></li>
+      <li><a href="web/about.html">About</a></li>
+      <li><a href="web/login.html">Sign in</a></li>
+      <li><a href="web/privacy.html">Privacy</a></li>
+      <li><a href="web/terms.html">Terms</a></li>
+    </ul>
+  </section>
+
+  <section class="stack" id="stack" aria-labelledby="h-stack">
+    <p class="eyebrow">Built with</p>
+    <h2 id="h-stack">One codebase for the app, one for the web</h2>
+    <div class="cols">
+      <article>
+        <h3>App · Android &amp; Windows</h3>
+        <ul>
+          <li>Kotlin Multiplatform with Compose Multiplatform, so one UI ran on Android, Windows and iOS</li>
+          <li>Supabase (Postgres and Auth) over Ktor, with Koin for wiring</li>
+          <li>Daily PriceCharting and Cardmarket prices, converted to euros on the device</li>
+          <li>Portfolio with profit and loss, set tracker, trades with shop safekeeping, card scan</li>
+          <li>English, Portuguese and Spanish</li>
+        </ul>
+      </article>
+      <article>
+        <h3>Website</h3>
+        <ul>
+          <li>Next.js 14 and Tailwind, light and dark themes</li>
+          <li>Live grade price table, plans and a waitlist for paid tiers</li>
+          <li>Accounts on the same Supabase project as the app</li>
+          <li>Signed Windows installer downloads behind an allowlist</li>
+          <li>Cookie consent with analytics only after opt-in</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Slab Journey · 2026</span>
+  <a href="../lucas-folio/index.html?work=past#work">Back to past projects</a>
+</footer>
+
+<script src="js/phone.js"></script>
+</body>
+</html>
