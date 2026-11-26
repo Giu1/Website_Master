@@ -139,7 +139,6 @@ PHOTOS = [  # file, backdrop colour sampled from the photo's edges, wide (fills 
     ("img/hero/lucas-4-w.jpg", "#3c4d4d", False),
     ("img/hero/lucas-5.jpg", "#334343", False),
     ("img/hero/lucas-6.jpg", "#374847", False),
-    ("img/hero/lucas-7-w.jpg", "#324041", False),
 ]
 DEFAULT_PHOTO = 0  # lucas-wide: the header on every visit
 for i in range(len(PHOTOS)):
