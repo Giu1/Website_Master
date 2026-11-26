@@ -26,7 +26,7 @@
     <div class="hl-curve"></div>
   </div>
 
-  <header class="hero" id="hero" style="--hero:#344243">
+  <header class="hero" id="hero" style="--hero:#41514f">
     <div class="bar">
       <a class="credit" href="#featured" data-credit>
         <span class="copy">©</span>
@@ -42,21 +42,10 @@
       </div>
     </div>
 
-    <div class="portrait wide" id="portrait">
-      <img src="img/hero/lucas-wide.jpg" alt="Lucas Bastos" fetchpriority="high" />
+    <div class="portrait" id="portrait">
+      <img src="img/hero/lucas-3.jpg" alt="Lucas Bastos" fetchpriority="high" />
     </div>
 
-    <div class="photo-switch" role="group" aria-label="Choose the hero photo" data-i18n-aria="photo.group.attr">
-      <span class="ps-label" data-i18n="photo">Photo</span>
-        <button type="button" data-photo="img/hero/lucas-wide.jpg" data-bg="#344243" data-wide aria-label="Photo 1" data-i18n-aria="photo1.attr" aria-pressed="true"><img src="img/hero/lucas-wide-thumb.jpg" alt="" /></button>
-        <button type="button" data-photo="img/hero/lucas-wide-2.jpg" data-bg="#384546" data-wide aria-label="Photo 2" data-i18n-aria="photo2.attr" aria-pressed="false"><img src="img/hero/lucas-wide-2-thumb.jpg" alt="" /></button>
-        <button type="button" data-photo="img/hero/lucas-1-w.jpg" data-bg="#3b4b49" aria-label="Photo 3" data-i18n-aria="photo3.attr" aria-pressed="false"><img src="img/hero/lucas-1-w-thumb.jpg" alt="" /></button>
-        <button type="button" data-photo="img/hero/lucas-2.jpg" data-bg="#364747" aria-label="Photo 4" data-i18n-aria="photo4.attr" aria-pressed="false"><img src="img/hero/lucas-2-thumb.jpg" alt="" /></button>
-        <button type="button" data-photo="img/hero/lucas-3.jpg" data-bg="#41514f" aria-label="Photo 5" data-i18n-aria="photo5.attr" aria-pressed="false"><img src="img/hero/lucas-3-thumb.jpg" alt="" /></button>
-        <button type="button" data-photo="img/hero/lucas-4-w.jpg" data-bg="#3c4d4d" aria-label="Photo 6" data-i18n-aria="photo6.attr" aria-pressed="false"><img src="img/hero/lucas-4-w-thumb.jpg" alt="" /></button>
-        <button type="button" data-photo="img/hero/lucas-5.jpg" data-bg="#334343" aria-label="Photo 7" data-i18n-aria="photo7.attr" aria-pressed="false"><img src="img/hero/lucas-5-thumb.jpg" alt="" /></button>
-        <button type="button" data-photo="img/hero/lucas-6.jpg" data-bg="#374847" aria-label="Photo 8" data-i18n-aria="photo8.attr" aria-pressed="false"><img src="img/hero/lucas-6-thumb.jpg" alt="" /></button>
-    </div>
 
     <div class="hanger">
       <p data-i18n="hanger">Located<br />in<br />Portugal</p>
@@ -120,6 +109,13 @@
     <button class="label to-top" id="to-top" type="button" aria-label="Back to the top">↑ Top</button>
     <button class="label" id="profile-btn" type="button" aria-expanded="false" aria-controls="profile">Profile</button>
   </header>
+
+  <!-- Work groups: same pixel-brick buttons as "Contact me"; each one shows only that group's cards -->
+  <nav class="work-groups" id="work-groups" aria-label="Work groups">
+    <a class="px-btn" data-group="examples" data-px="EXAMPLES" data-px-fit="LIVE PROJECTS" href="index.html?work=examples#work"><canvas aria-hidden="true"></canvas><span class="sr-only">Examples</span></a>
+    <a class="px-btn" data-group="live" data-px="LIVE PROJECTS" data-px-short="LIVE" href="index.html?work=live#work"><canvas aria-hidden="true"></canvas><span class="sr-only">Live projects</span></a>
+    <a class="px-btn" data-group="past" data-px="PAST PROJECTS" data-px-short="PAST" href="index.html?work=past#work"><canvas aria-hidden="true"></canvas><span class="sr-only">Past projects</span></a>
+  </nav>
 
   <div class="dock">
     <div class="dock-left">

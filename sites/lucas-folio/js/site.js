@@ -4,6 +4,10 @@
  * index.html. Narrow screens, reduced motion, or no WebGL get a flat scroller.
  */
 const F = window.FOLIO;
+/* ?work=examples|live|past keeps only that group's cards (the buttons at the top of the stage) */
+const WORK_GROUP = new URLSearchParams(location.search).get("work");
+const ALL_PROJECTS = F.projects;
+if (WORK_GROUP && F.projects.some((p) => p.group === WORK_GROUP)) F.projects = F.projects.filter((p) => p.group === WORK_GROUP);
 const featured = F.projects.filter((p) => p.featured);
 const body = document.body;
 
@@ -74,6 +78,15 @@ function fillChrome() {
 }
 
 /** Traditional view: every project as a plain grid. Needs media warmed. */
+/** A group with no cards yet stays visible but can't be pressed. */
+function fillGroups() {
+  document.querySelectorAll("[data-group]").forEach((a) => {
+    const n = ALL_PROJECTS.filter((p) => p.group === a.dataset.group).length;
+    a.setAttribute("aria-disabled", String(!n));
+    a.title = n ? `${n} ${n === 1 ? "site" : "sites"}` : "Coming soon";
+  });
+}
+
 function fillGrid() {
   $("grid-count").textContent = `${F.projects.length} projects`;
   $("grid-list").innerHTML = F.projects
@@ -110,12 +123,13 @@ function loadImage(src) {
 
 async function warmMedia(onProgress) {
   const list = [];
-  for (const p of F.projects) for (const m of p.media || []) if (m.src) list.push(m);
+  // only the card faces; the sample screens further down a case sheet load lazily
+  for (const p of F.projects) if (p.media && p.media[0] && p.media[0].src) list.push(p.media[0]);
   const total = list.length + 1;
   let done = 0;
   const tick = () => onProgress(++done / total);
   await Promise.all(
-    list.map((m) => loadImage(m.src).then((img) => { m._img = img; }).catch(() => {}).finally(tick))
+    list.map((m) => loadImage(m.src).then((img) => { m._img = img; }).catch(() => { m._failed = true; }).finally(tick))
   );
   try {
     await Promise.all([
@@ -364,7 +378,7 @@ const posterCache = new Map();
 
 /** Image source for a media item inside a case sheet. */
 function mediaURL(project, media) {
-  if (media._img) return media.src;
+  if (media._img || (media.src && !media._failed)) return media.src;
   if (posterCache.has(media)) return posterCache.get(media);
   const w = 1400;
   const h = Math.max(1, Math.round(w * (media.h / media.w)));
@@ -517,22 +531,28 @@ function sheetHTML(p) {
   if (p.client && p.client !== p.title) chips.push(`<span class="chip">${esc(p.client)}</span>`);
   if (p.year) chips.push(`<span class="chip">${esc(p.year)}</span>`);
   for (let i = 0; i < (p.awards || 0); i++) chips.push(`<span class="award" title="Award">${AWARD_SVG}</span>`);
-  const media = (p.media || [])
+  // a live, working copy of the site sits on top; the screenshots after the card face follow it
+  const preview = p.url ? previewHTML(p) : "";
+  const media = (p.url ? [] : (p.media || []))
     .map((m) => {
       const cap = m.caption ? `<figcaption>${esc(m.caption)}</figcaption>` : "";
       if (m.video) return `<figure><video src="${esc(m.video)}" playsinline loop muted autoplay></video>${cap}</figure>`;
-      return `<figure><img alt="${esc(m.caption || p.title)}" src="${mediaURL(p, m)}" loading="lazy"></figure>`;
+      const img = `<img alt="${esc(p.title)}: ${esc(m.caption || "sample")}" src="${mediaURL(p, m)}" loading="lazy">`;
+      const shot = p.url ? `<a class="sample" href="${esc(p.url)}" target="_blank" rel="noopener">${img}</a>` : img;
+      return `<figure>${shot}${cap}</figure>`;
     })
     .join("");
   return `
     <div class="sheet-scroll">
-      <div class="sheet-grid">
+      <div class="sheet-grid${preview ? " has-preview" : ""}">
         <div class="sheet-copy">
           <h1>${esc(p.title)}</h1>
           <p class="summary">${esc(p.summary || "")}</p>
           <div class="meta">${chips.join("")}</div>
+          ${p.url ? `<a class="open-site" href="${esc(p.url)}" target="_blank" rel="noopener">Open the live site ${ARROW_SVG}</a>` : ""}
+          ${p.url ? shotGridHTML(p) : ""}
         </div>
-        <div class="sheet-media">${media}</div>
+        <div class="sheet-media">${preview}${media}</div>
       </div>
     </div>
     <svg class="progress" viewBox="0 0 20 20" aria-hidden="true">
@@ -540,6 +560,196 @@ function sheetHTML(p) {
       <circle class="bar" cx="10" cy="10" r="8.5" pathLength="100"/>
     </svg>`;
 }
+
+/* ───────── live preview: the real site in a frame, as desktop or phone ───────── */
+
+const DESK_W = 1440;                         // the desktop preview renders the site at this width, scaled to fit
+const PHONE_W = 390, PHONE_H = 844;          // and the phone preview at this size
+const PHONE_BARS = 30 + 24;                  // status bar + home bar padding in the phone frame (css)
+const PV_KEY = "folio-preview-device";
+let pvDevice = "desktop";
+try { pvDevice = localStorage.getItem(PV_KEY) || (matchMedia("(max-width: 640px)").matches ? "mobile" : "desktop"); } catch { /* storage blocked */ }
+
+function previewHTML(p) {
+  const btn = (d, label, icon) =>
+    `<button type="button" data-device="${d}" aria-pressed="${pvDevice === d}">${icon}<span>${label}</span></button>`;
+  const desk = `<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="10" rx="1.2"/><path d="M7 16.5h6M10 13.5v3"/></svg>`;
+  const phone = `<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="6" y="2.5" width="8" height="15" rx="1.6"/><path d="M9 15h2"/></svg>`;
+  return `
+    <figure class="preview" data-device="${pvDevice}">
+      <div class="pv-bar">
+        <span class="pv-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="pv-url" data-site="${esc(p.title)} · live preview, click around" data-app="${esc(p.title)} · the app, tap around">${esc(p.title)} · live preview, click around</span>
+        <span class="pv-device" role="group" aria-label="Preview as">${btn("desktop", "Desktop", desk)}${btn("mobile", "Mobile", phone)}</span>
+        ${p.app ? `<button type="button" class="pv-app" aria-pressed="false" data-site="${esc(p.url)}" data-app="${esc(p.app)}">${phone}<span>App</span></button>` : ""}
+      </div>
+      <div class="pv-screen"><div class="pv-frame"><iframe data-src="${esc(p.url)}" title="Live preview of ${esc(p.title)}"></iframe></div></div>
+    </figure>`;
+}
+
+/* screenshots: a 2×2 grid under the button; a click opens them full size */
+function shotGridHTML(p) {
+  const shots = (p.media || []).filter((m) => m.src).slice(0, 4);
+  if (!shots.length) return "";
+  return `<div class="shot-grid">${shots
+    .map((m, i) => `<button type="button" class="shot" data-slug="${esc(p.slug)}" data-i="${i}" aria-label="Show ${esc(m.caption || p.title)} full size"><img src="${esc(m.src)}" alt="" loading="lazy"><span>${esc(m.caption || "")}</span></button>`)
+    .join("")}</div>`;
+}
+
+const lightbox = (() => {
+  const box = document.createElement("div");
+  box.className = "lightbox";
+  box.hidden = true;
+  box.setAttribute("role", "dialog");
+  box.setAttribute("aria-modal", "true");
+  box.setAttribute("aria-label", "Screenshot");
+  box.innerHTML = `
+    <button type="button" class="lb-close" aria-label="Close">×</button>
+    <button type="button" class="lb-step lb-prev" aria-label="Previous screenshot">←</button>
+    <figure><img alt=""><figcaption></figcaption></figure>
+    <button type="button" class="lb-step lb-next" aria-label="Next screenshot">→</button>`;
+  document.body.appendChild(box);
+  const img = box.querySelector("img");
+  const cap = box.querySelector("figcaption");
+  let list = [], i = 0, back = null;
+  const show = () => {
+    const m = list[i];
+    img.src = m.src;
+    img.alt = m.caption || "";
+    cap.textContent = `${m.caption || ""}  ·  ${i + 1} / ${list.length}`;
+  };
+  const step = (d) => { i = (i + d + list.length) % list.length; show(); };
+  const close = () => {
+    box.classList.remove("is-open");
+    setTimeout(() => { if (!box.classList.contains("is-open")) box.hidden = true; }, 300);
+    if (back) back.focus();
+  };
+  box.addEventListener("click", (e) => {
+    if (e.target.closest(".lb-prev")) step(-1);
+    else if (e.target.closest(".lb-next")) step(1);
+    else if (!e.target.closest("img")) close();
+  });
+  // capture, so the case sheet's own keys (Esc closes it, arrows change project) wait while this is open
+  addEventListener("keydown", (e) => {
+    if (box.hidden) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowLeft") step(-1);
+    else if (e.key === "ArrowRight") step(1);
+    else return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+  }, true);
+  return {
+    open(shots, at, from) {
+      list = shots; i = at; back = from;
+      box.classList.toggle("single", list.length < 2);
+      show();
+      box.hidden = false;
+      requestAnimationFrame(() => box.classList.add("is-open"));
+      box.querySelector(".lb-close").focus();
+    }
+  };
+})();
+
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".shot-grid .shot");
+  if (!b) return;
+  const p = F.projects.find((x) => x.slug === b.dataset.slug);
+  if (!p) return;
+  lightbox.open((p.media || []).filter((m) => m.src).slice(0, 4), Number(b.dataset.i), b);
+});
+
+function fitPreview(fig) {
+  const screen = fig.querySelector(".pv-screen");
+  const frame = fig.querySelector(".pv-frame");
+  const iframe = frame.querySelector("iframe");
+  const w = screen.clientWidth, h = screen.clientHeight;
+  if (!w || !h) return;
+  if (fig.dataset.device === "mobile") {
+    const k = Math.min(1, (h - 32) / (PHONE_H + 20), (w - 32) / (PHONE_W + 20));
+    const screenH = PHONE_H - PHONE_BARS;   // the site gets what's left between status bar and home bar
+    frame.style.width = PHONE_W + "px";
+    frame.style.height = screenH + "px";
+    iframe.style.width = PHONE_W + "px";
+    iframe.style.height = screenH + "px";
+    frame.style.transform = `translate(-50%, -50%) scale(${k})`;
+  } else {
+    const k = w / DESK_W;
+    frame.style.width = DESK_W + "px";
+    frame.style.height = h / k + "px";
+    iframe.style.width = DESK_W + "px";
+    iframe.style.height = h / k + "px";
+    frame.style.transform = `scale(${k})`;
+  }
+}
+
+// phones have overlay scrollbars; a desktop browser would draw a bar in the site and one in each panel
+const PHONE_CSS = "*{scrollbar-width:none!important}*::-webkit-scrollbar{display:none!important}";
+function phoneScrollbars(fig) {
+  const iframe = fig.querySelector("iframe");
+  let doc;
+  try { doc = iframe.contentDocument; } catch { return; }   // another origin: leave it
+  if (!doc || !doc.head) return;
+  let tag = doc.getElementById("folio-phone-css");
+  if (fig.dataset.device === "mobile") {
+    if (!tag) {
+      tag = doc.createElement("style");
+      tag.id = "folio-phone-css";
+      tag.textContent = PHONE_CSS;
+      doc.head.appendChild(tag);
+    }
+  } else if (tag) tag.remove();
+}
+document.addEventListener("load", (e) => {
+  if (e.target.tagName === "IFRAME" && e.target.closest(".preview")) phoneScrollbars(e.target.closest(".preview"));
+}, true);
+
+const pvObserver = typeof ResizeObserver === "function"
+  ? new ResizeObserver((entries) => { for (const e of entries) fitPreview(e.target.closest(".preview")); })
+  : null;
+
+// only the open sheet runs its site; the neighbours waiting left and right stay empty
+function syncPreviews() {
+  for (const el of $("sheets").children) {
+    const iframe = el.querySelector(".preview iframe");
+    if (!iframe) continue;
+    if (el === sheets.cur) {
+      if (!iframe.getAttribute("src")) iframe.src = iframe.dataset.src;
+    } else if (iframe.getAttribute("src")) {
+      iframe.removeAttribute("src");
+    }
+  }
+}
+
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".pv-device button");
+  if (!b) return;
+  pvDevice = b.dataset.device;
+  try { localStorage.setItem(PV_KEY, pvDevice); } catch { /* storage blocked */ }
+  for (const fig of document.querySelectorAll(".preview")) {
+    fig.dataset.device = pvDevice;
+    fig.querySelectorAll(".pv-device button").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.device === pvDevice)));
+    fitPreview(fig);
+    phoneScrollbars(fig);
+  }
+});
+
+// projects with an app: the "App" button swaps the website for the app, shown on a phone
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".pv-app");
+  if (!b) return;
+  const fig = b.closest(".preview");
+  const iframe = fig.querySelector("iframe");
+  const on = b.getAttribute("aria-pressed") !== "true";
+  b.setAttribute("aria-pressed", String(on));
+  iframe.dataset.src = on ? b.dataset.app : b.dataset.site;
+  iframe.src = iframe.dataset.src;
+  fig.dataset.device = on ? "mobile" : pvDevice;
+  fig.querySelectorAll(".pv-device button").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.device === fig.dataset.device)));
+  fig.querySelector(".pv-url").firstChild.textContent = on ? fig.querySelector(".pv-url").dataset.app : fig.querySelector(".pv-url").dataset.site;
+  fitPreview(fig);
+  phoneScrollbars(fig);
+});
 
 function makeSheet(p, pos) {
   const el = document.createElement("article");
@@ -553,6 +763,8 @@ function makeSheet(p, pos) {
     bar.style.strokeDashoffset = String(100 - (max > 0 ? (scroller.scrollTop / max) * 100 : 0));
   }, { passive: true });
   $("sheets").appendChild(el);
+  const fig = el.querySelector(".preview");
+  if (fig) { fitPreview(fig); pvObserver && pvObserver.observe(fig.querySelector(".pv-screen")); }
   return el;
 }
 
@@ -565,6 +777,7 @@ function markCurrent() {
     const h = el.querySelector("h1");
     if (h) h.id = cur ? "case-title" : "";
   }
+  syncPreviews();
 }
 
 function buildSheets(slug) {
@@ -1656,6 +1869,7 @@ async function boot() {
 
   await mediaReady;
   fillGrid();
+  fillGroups();
   placePill(false);
   stage = await stageReady;
 

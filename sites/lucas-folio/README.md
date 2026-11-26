@@ -4,9 +4,9 @@ Lucas's header on top of the Folio stage. Vanilla HTML/CSS/JS; Three.js comes fr
 
 ## How it plays
 
-1. **Header** — the same header as `../lucas/`: wide photo (never zoomed past 16:9), photo switcher (temporary, every visit starts on photo 1), "Located in Portugal" pill, caption, looping name, EN / PT toggle. A small "Scroll" cue sits at the bottom.
+1. **Header** — the same header as `../lucas/`: one fixed portrait (`img/hero/lucas-3.jpg`; the photo switcher is gone), "Located in Portugal" pill, caption, looping name, EN / PT toggle. A small "Scroll" cue sits at the bottom.
 2. **Scroll down** — the page does not move. The wheel (or a swipe, or ↓ / Page Down / Space) drives the page-change panel by hand: the dark panel rises with a curved top edge and names the next view ("• Work"), then lifts off with a curved bottom edge. Scrolling back up runs it in reverse; letting go part-way finishes the move in the direction you were going. "Work" in the top bar plays the whole move.
-3. **Stage** — as the panel lifts, the cards rise in. From here it is Folio: Featured / Full / Traditional, Profile and case sheets. The cards always use **Style 5**: Folio's Style 4 still, deep wave with a bold title and summary (no style switcher on this page). Each card is a site in this repository; its sheet's ↗ chip opens the site.
+3. **Stage** — as the panel lifts, the cards rise in. From here it is Folio: Featured / Full / Traditional, Profile and case sheets. The cards always use **Style 5**: Folio's Style 4 still, deep wave with a bold title and summary (no style switcher on this page). Each card is a site in this repository, and its face is a real screenshot of that site. Its case sheet has the title, summary and **Open the live site** on the left, and under that a 2×2 grid of screenshots (`img/shots/<slug>-1…4.jpg`); clicking one opens it full size in an overlay (← → to step, Esc or a click outside to close). On the right is a **live preview**: the real site running in a framed window, with a **Desktop / Mobile** switch (desktop renders at 1440 px scaled to fit; mobile is a 390×844 phone; the choice is remembered). Only the open sheet loads its site.
 
 Clicking **Lucas Bastos** (top left) or **↑ Top** (top centre) plays the panel in reverse and brings the header back. The newsletter is gone; bottom right is a **Contact me** button in pixel bricks (PULSE-style; yellow Silkscreen on near-black, one brick per font pixel so every letter stays crisp): bricks near the pointer scatter and spring back, and a click plays the panel up ("• Contact") and opens this site's own **contact page** (`contact.html`). A link with a hash (`#full`, `#traditional`, `#p/forma`) skips the header and opens the stage directly.
 
@@ -21,7 +21,7 @@ Clicking **Lucas Bastos** (top left) or **↑ Top** (top centre) plays the panel
 | `index.html` | Header, panel and greeting on top; Folio's markup below |
 | `css/hero.css` | Header, panel and greeting styles (scoped, so they never touch the stage) |
 | `css/site.css` | Folio's stage styles (copied from `../folio/`) |
-| `js/hero.js` | Greeting, photo switcher, looping name, scroll-driven panel |
+| `js/hero.js` | Greeting, looping name, scroll-driven panel |
 | `js/contact-px.js` | The pixel-brick Contact me button |
 | `about.html`, `contact.html` | About and contact pages |
 | `css/lucas.css`, `js/lucas.js`, `js/lang.js` | Styles, script and EN / PT text for those pages (copied from `../lucas/`) |
@@ -29,6 +29,7 @@ Clicking **Lucas Bastos** (top left) or **↑ Top** (top centre) plays the panel
 | `js/i18n.js` | Shared language helper (keep identical to the other sites) |
 | `js/data.js` | The cards: one entry per site, `url` relative to this folder |
 | `js/site.js` | Folio's stage (copied), told to wait for the header |
-| `img/hero/` | Web copies of Lucas's photos |
+| `img/hero/` | Web copies of Lucas's photos (only `lucas-3.jpg` is used) |
+| `img/shots/` | Screenshots of each site (1440×810): `-1` is the card face, the rest are sample screens in the case sheet |
 
-To add a site: copy a block in `js/data.js`, set `url: "../<folder>/"` and an image in `img/`.
+To add a site: copy a block in `js/data.js`, set `url: "../<folder>/"`, and add screenshots to `img/shots/` (the first `media` entry is the card, the others stack in the case sheet and load lazily).

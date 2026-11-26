@@ -169,6 +169,50 @@ window.FOLIO = {
       awards: 0,
       summary: "Client proposal page: six sample sites to pick from, seen as desktop or phone.",
       media: [{ w: 16, h: 9, src: "sites/amostras/img/espelho.png", kind: "sans", word: "Amostras", colors: ["#fafaf8", "#ff5a1f"], ink: "#111111", caption: "Proposal" }]
+    },
+    {
+      slug: "montra",
+      title: "Estúdio Lírio — Montra",
+      featured: true,
+      year: "2026",
+      client: "salon",
+      url: "sites/montra/",
+      awards: 0,
+      summary: "Salon shopfront: awning, live open/closed door sign, price board, team and online booking.",
+      media: [{ w: 16, h: 9, src: "sites/montra/img/card.jpg", kind: "sans", word: "Montra", colors: ["#f6efe4", "#b23a2b"], ink: "#2a1712", caption: "Shopfront" }]
+    },
+    {
+      slug: "rotulo",
+      title: "Estúdio Lírio — Rótulo",
+      featured: true,
+      year: "2026",
+      client: "salon",
+      url: "sites/rotulo/",
+      awards: 0,
+      summary: "Salon as a product label: bold grid, counted facts, full price table and online booking.",
+      media: [{ w: 16, h: 9, src: "sites/rotulo/img/card.jpg", kind: "sans", word: "Rótulo", colors: ["#f3eee4", "#121212"], ink: "#121212", caption: "Label" }]
+    },
+    {
+      slug: "leque",
+      title: "Estúdio Lírio — Leque",
+      featured: true,
+      year: "2026",
+      client: "salon",
+      url: "sites/leque/",
+      awards: 0,
+      summary: "Salon on a colour fan: services and tones as blades, house palette and online booking.",
+      media: [{ w: 16, h: 9, src: "sites/leque/img/card.jpg", kind: "sans", word: "Leque", colors: ["#111010", "#d9a066"], ink: "#f4ede6", caption: "Colour fan" }]
+    },
+    {
+      slug: "slab-journey",
+      title: "Slab Journey",
+      featured: true,
+      year: "2026",
+      client: "slab journey",
+      url: "sites/slab-journey/web/index.html",
+      awards: 0,
+      summary: "Graded Pokémon card price tracker: an archived copy of its website, and the Android app rebuilt for the web (app.html).",
+      media: [{ w: 16, h: 9, src: "sites/slab-journey/img/card.jpg", kind: "sans", word: "Slab Journey", colors: ["#0a0a0a", "#ffd700"], ink: "#ffffff", caption: "App and website" }]
     }
   ]
 };

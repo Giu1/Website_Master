@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Estúdio Lírio · Cabeleireiro e estética, Coimbra</title>
+<meta name="description" content="Cabeleireiro e estética na Rua da Sofia, Coimbra. Tabela de preços completa, equipa, horário e marcação online." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+
+<header class="bar mono" id="bar">
+  <a class="bar-brand" href="#topo"><span data-c="nomeCompleto"></span><i id="dot" aria-hidden="true"></i></a>
+  <nav class="bar-nav" id="menu" aria-label="Principal">
+    <a href="#tabela">01 Tabela</a>
+    <a href="#equipa">02 Equipa</a>
+    <a href="#marcar">03 Marcar</a>
+    <a href="#perguntas">04 Perguntas</a>
+    <a href="#contacto">05 Contacto</a>
+  </nav>
+  <a class="bar-tel" data-tel data-c="telefone"></a>
+  <button class="burger mono" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+</header>
+
+<main id="conteudo">
+  <!-- O rótulo: nome grande, estado, números, ações -->
+  <article class="label" id="topo" aria-labelledby="h-nome">
+    <div class="row head">
+      <div class="cell">
+        <p class="mono kicker">Ref. LIR-<span data-c="desde"></span> · Rua da Sofia, 112</p>
+        <h1 id="h-nome">Estúdio<br /><span data-c="nome"></span><small><span data-c="tipo"></span> · <span data-c="cidade"></span></small></h1>
+      </div>
+      <div class="cell badge" id="badge">
+        <div>
+          <span class="mono">Estado</span>
+          <b id="st1"></b>
+          <span class="mono" id="st2"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row facts" id="facts"></div>
+    <div class="row cta">
+      <a href="#marcar">Marcar online <span>→</span></a>
+      <a data-tel>Ligar <span data-c="telefone"></span> <span>→</span></a>
+      <a data-map target="_blank" rel="noopener">Como chegar <span>→</span></a>
+    </div>
+  </article>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <!-- 01 Tabela -->
+  <section class="label" id="tabela" aria-labelledby="h-tabela">
+    <div class="row sec-head">
+      <div class="cell"><p class="mono">01</p></div>
+      <div class="cell"><h2 id="h-tabela">Tabela de preços</h2><p class="mono">Preços com IVA · duração aproximada · marcamos com folga</p></div>
+    </div>
+    <div class="row filter mono" role="toolbar" aria-label="Filtrar por família" id="filter"></div>
+    <div class="row families" id="families"></div>
+    <div class="row note mono"><div class="cell">* Cabelo comprido ou muito volume pode acrescentar 10–20%. Dizemos sempre antes de começar.</div></div>
+  </section>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <!-- Composição -->
+  <section class="label" aria-labelledby="h-sobre">
+    <div class="row split">
+      <div class="cell">
+        <h2 id="h-sobre">Composição</h2>
+        <div id="sobre" class="prose"></div>
+      </div>
+      <div class="cell">
+        <h2>Contém</h2>
+        <table class="table mono-num" id="contem"></table>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <!-- 02 Equipa -->
+  <section class="label" id="equipa" aria-labelledby="h-equipa">
+    <div class="row sec-head">
+      <div class="cell"><p class="mono">02</p></div>
+      <div class="cell"><h2 id="h-equipa">Equipa</h2><p class="mono">Quatro pessoas · cada uma com a sua especialidade</p></div>
+    </div>
+    <div class="row team" id="team"></div>
+  </section>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <!-- 03 Marcar -->
+  <section class="label" id="marcar" aria-labelledby="h-marcar">
+    <div class="row sec-head">
+      <div class="cell"><p class="mono">03</p></div>
+      <div class="cell"><h2 id="h-marcar">Marcar</h2><p class="mono">Serviço · pessoa · dia · hora · os seus dados. Prefere falar? <a data-tel>Ligue</a>.</p></div>
+    </div>
+    <div class="row"><div class="cell" id="booking"></div></div>
+  </section>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <!-- Opiniões -->
+  <section class="label" aria-labelledby="h-op">
+    <div class="row sec-head">
+      <div class="cell"><p class="mono">QC</p></div>
+      <div class="cell"><h2 id="h-op">Controlo de qualidade</h2><p class="mono">O que dizem os clientes, sem edição</p></div>
+    </div>
+    <div class="row quotes" id="quotes"></div>
+  </section>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <!-- 04 Perguntas -->
+  <section class="label" id="perguntas" aria-labelledby="h-faq">
+    <div class="row sec-head">
+      <div class="cell"><p class="mono">04</p></div>
+      <div class="cell"><h2 id="h-faq">Modo de usar</h2><p class="mono">Perguntas frequentes</p></div>
+    </div>
+    <div class="faq" id="faq"></div>
+  </section>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <!-- 05 Contacto -->
+  <section class="label" id="contacto" aria-labelledby="h-contacto">
+    <div class="row sec-head">
+      <div class="cell"><p class="mono">05</p></div>
+      <div class="cell"><h2 id="h-contacto">Horário e morada</h2><p class="mono" id="status"></p></div>
+    </div>
+    <div class="row split">
+      <div class="cell">
+        <h3 class="mono">Horário</h3>
+        <table class="table" id="hours"></table>
+      </div>
+      <div class="cell">
+        <h3 class="mono">Morada</h3>
+        <p class="addr"><span data-c="morada"></span><br /><span data-c="codigoPostal"></span></p>
+        <p class="addr"><a data-tel data-c="telefone"></a><br /><a data-mail data-c="email"></a><br /><span data-c="instagram"></span></p>
+        <div class="barcode" aria-hidden="true"></div>
+        <p class="mono barcode-num">5 600000 <span data-c="desde"></span>12</p>
+        <a class="map-link mono" data-map target="_blank" rel="noopener">Abrir no mapa →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot mono">
+  <span>© <span id="year"></span> <span data-c="nomeCompleto"></span></span>
+  <span>Feito em <span data-c="cidade"></span></span>
+  <a href="#topo">Topo ↑</a>
+</footer>
+
+<a class="float-cta mono" href="#marcar" id="float-cta">Marcar →</a>
+
+<script src="js/cliente.js"></script>
+<script src="js/marcar.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

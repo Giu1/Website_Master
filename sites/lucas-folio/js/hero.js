@@ -157,6 +157,23 @@
     leaveTo(a.getAttribute("href"), key);
   });
 
+  // Work groups at the top of the stage: the same panel, then the stage again with only that group.
+  // Pressing the group that is already chosen goes back to all work.
+  const GROUP_KEYS = { examples: "nav.examples", live: "nav.live", past: "nav.past" };
+  const chosen = new URLSearchParams(location.search).get("work");
+  document.querySelectorAll("[data-group]").forEach((a) => {
+    const on = a.dataset.group === chosen;
+    a.classList.toggle("is-on", on);
+    if (on) a.setAttribute("aria-current", "true");
+    a.addEventListener("click", (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+      e.preventDefault();
+      if (a.getAttribute("aria-disabled") === "true") return;
+      if (on) leaveTo("index.html#work", "nav.allwork");
+      else leaveTo(a.getAttribute("href"), GROUP_KEYS[a.dataset.group]);
+    });
+  });
+
   // EN / PT switch: the resting label follows the language
   document.addEventListener("langchange", () => {
     if (!tween && !leaving) vText.textContent = t("nav.work");
@@ -228,31 +245,6 @@
     if (nameX <= -half) nameX += half;
     track.style.transform = `translate3d(${nameX}px,0,0)`;
   }
-
-  /* ───────── photo switcher (temporary; every visit starts on photo 1) ───────── */
-
-  const portrait = $("#portrait");
-  const photoBtns = [...document.querySelectorAll(".photo-switch [data-photo]")];
-  function showPhoto(btn) {
-    const src = btn.dataset.photo;
-    photoBtns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-    hero.style.setProperty("--hero", btn.dataset.bg);
-    const current = portrait.querySelector("img:last-child");
-    if (current && current.getAttribute("src") === src) return;
-    const wide = btn.hasAttribute("data-wide");
-    const img = new Image();
-    img.alt = "Lucas Bastos";
-    img.src = src;
-    img.className = reduced ? "" : "incoming";
-    const reveal = () => {
-      portrait.classList.toggle("wide", wide);
-      portrait.appendChild(img);
-      requestAnimationFrame(() => requestAnimationFrame(() => img.classList.remove("incoming")));
-      setTimeout(() => { while (portrait.children.length > 1) portrait.firstElementChild.remove(); }, 900);
-    };
-    img.decode ? img.decode().then(reveal, reveal) : (img.onload = reveal);
-  }
-  photoBtns.forEach((b) => b.addEventListener("click", () => showPhoto(b)));
 
   /* ───────── first-visit greeting ───────── */
 
