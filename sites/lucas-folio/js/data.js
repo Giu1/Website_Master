@@ -8,7 +8,7 @@ window.FOLIO = {
   name: "Lucas Bastos",
   role: "designer & developer",
   email: "ola@lucasbastos.pt",
-  awards: "12 sites — one repository, no build step.",
+  awards: "10 sites — one repository, no build step.",
   bio: [
     "Lucas Bastos designs and builds websites from Lisbon: hand-written HTML, CSS and JavaScript, with motion and interaction doing the work.",
     "Every card here is a live site from the same repository. Open one to see the case, then visit it."
@@ -23,36 +23,8 @@ window.FOLIO = {
 
   projects: [
     {
-      slug: "lucas",
-      title: "Lucas Bastos",
-      featured: true,
-      year: "2026",
-      client: "Personal",
-      url: "../lucas/",
-      awards: 0,
-      summary: "Personal portfolio. Four pages, curved panel transitions, a live photo switcher, English and Portuguese.",
-      media: [
-        { w: 16, h: 9, src: "img/shots/lucas-1.jpg", caption: "Home" },
-        { w: 16, h: 9, src: "img/shots/lucas-2.jpg", caption: "About" },
-        { w: 16, h: 9, src: "img/shots/lucas-3.jpg", caption: "Recent work" }
-      ]
-    },
-    {
-      slug: "folio",
-      title: "Folio",
-      featured: true,
-      year: "2026",
-      client: "Template",
-      url: "../folio/",
-      awards: 0,
-      summary: "Design-engineer portfolio. A 3D stage with four card styles, an index lens and case sheets.",
-      media: [
-        { w: 16, h: 9, src: "img/shots/folio-1.jpg", caption: "Stage" }
-      ]
-    },
-    {
       slug: "forma",
-      title: "FORMA",
+      title: "3D Print Store",
       featured: true,
       year: "2026",
       client: "Shop",
@@ -82,7 +54,7 @@ window.FOLIO = {
     },
     {
       slug: "aura-desk",
-      title: "Aura Desk",
+      title: "Store BackOffice",
       featured: true,
       year: "2026",
       client: "Backoffice",
@@ -97,7 +69,7 @@ window.FOLIO = {
     },
     {
       slug: "brightline",
-      title: "Brightline",
+      title: "House Cleaning Services",
       featured: true,
       year: "2026",
       client: "Cleaning",
@@ -112,7 +84,7 @@ window.FOLIO = {
     },
     {
       slug: "nido",
-      title: "Nido",
+      title: "Bakery Website",
       featured: true,
       year: "2026",
       client: "Bakery",
@@ -127,7 +99,7 @@ window.FOLIO = {
     },
     {
       slug: "aura",
-      title: "Aura",
+      title: "Hairdresser Website",
       featured: true,
       year: "2026",
       client: "Salon",
@@ -142,7 +114,7 @@ window.FOLIO = {
     },
     {
       slug: "vela",
-      title: "Vela",
+      title: "Perfume Store",
       featured: true,
       year: "2026",
       client: "Perfume",
@@ -157,7 +129,7 @@ window.FOLIO = {
     },
     {
       slug: "osteria",
-      title: "Osteria Corvo",
+      title: "Restaurant Website",
       featured: true,
       year: "2026",
       client: "Restaurant",
@@ -172,7 +144,7 @@ window.FOLIO = {
     },
     {
       slug: "lumen",
-      title: "Lumen",
+      title: "Photographer Website",
       featured: true,
       year: "2026",
       client: "Photographer",
@@ -187,7 +159,7 @@ window.FOLIO = {
     },
     {
       slug: "atelier",
-      title: "Atelier Moura",
+      title: "HandBuilt/Rustic Item Store",
       featured: true,
       year: "2026",
       client: "showcase",
