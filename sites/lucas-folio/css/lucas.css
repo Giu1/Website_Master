@@ -973,18 +973,21 @@ body.dark-page { background: var(--dark); }
   max-width: 9em;
 }
 
-.contact-form { margin-top: clamp(70px, 8vw, 130px); }
+.contact-form { margin-top: clamp(40px, 4vw, 64px); }
+
+/* two short fields share a row; the message keeps the full width */
+.field-row { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(24px, 3vw, 48px); }
 
 .field {
   display: grid;
-  grid-template-columns: clamp(40px, 4.6vw, 74px) 1fr;
-  row-gap: 0.6em;
-  padding: clamp(28px, 3.1vw, 50px) 0;
+  grid-template-columns: clamp(26px, 2.2vw, 36px) 1fr;
+  row-gap: 0.25em;
+  padding: clamp(14px, 1.4vw, 22px) 0;
   border-top: 1px solid var(--line-dark);
 }
 
-.field .num { grid-row: span 2; padding-top: 0.6em; }
-.field label { font-size: clamp(20px, 1.85vw, 30px); }
+.field .num { grid-row: span 2; padding-top: 0.35em; }
+.field label { font-size: clamp(16px, 1.2vw, 20px); }
 
 .field input, .field textarea {
   width: 100%;
@@ -992,8 +995,8 @@ body.dark-page { background: var(--dark); }
   background: none;
   color: var(--white);
   font: inherit;
-  font-size: clamp(15px, 1.25vw, 20px);
-  padding: 0.4em 0;
+  font-size: clamp(15px, 1.1vw, 18px);
+  padding: 0.3em 0;
   outline: none;
   resize: vertical;
 }
@@ -1001,9 +1004,13 @@ body.dark-page { background: var(--dark); }
 .field input::placeholder, .field textarea::placeholder { color: rgba(255, 255, 255, 0.3); }
 .field:focus-within { border-top-color: rgba(255, 255, 255, 0.55); }
 
-.send-line { margin: clamp(30px, 3vw, 50px) 0 0; }
+.send-line { margin: clamp(24px, 2.4vw, 40px) 0 0; }
 .send-line .btn-cta { right: 12%; }
-.form-note { min-height: 1.6em; margin-top: clamp(110px, 10vw, 160px); font-size: var(--small); opacity: 0.7; }
+.form-note { min-height: 1.6em; margin-top: clamp(80px, 7vw, 110px); font-size: var(--small); opacity: 0.7; }
+
+@media (max-width: 640px) {
+  .field-row { grid-template-columns: 1fr; }
+}
 
 .contact-side { padding-top: clamp(40px, 3vw, 60px); display: grid; align-content: start; gap: clamp(30px, 3vw, 50px); font-size: clamp(13px, 0.95vw, 15px); }
 .contact-side .arrow { width: clamp(12px, 1.05vw, 17px); height: auto; margin-bottom: clamp(30px, 5vw, 90px); }

@@ -89,29 +89,33 @@
           <div class="contact-main">
             <h1><img class="avatar" src="img/hero/lucas-4-w-thumb.jpg" alt="" /><span class="split" data-reveal data-i18n="h1.contact">Let’s start a project together</span></h1>
             <form class="contact-form" id="contact-form" novalidate>
-              <div class="field">
-                <span class="eyebrow num">01</span>
-                <label for="f-name" data-i18n="f.name">What’s your name?</label>
-                <input id="f-name" name="name" type="text" placeholder="Ana Costa *" data-i18n-placeholder="ph.name.attr" autocomplete="name" required />
+              <div class="field-row">
+                <div class="field">
+                  <span class="eyebrow num">01</span>
+                  <label for="f-name" data-i18n="f.name">Name</label>
+                  <input id="f-name" name="name" type="text" placeholder="Ana Costa *" data-i18n-placeholder="ph.name.attr" autocomplete="name" required />
+                </div>
+                <div class="field">
+                  <span class="eyebrow num">02</span>
+                  <label for="f-email" data-i18n="f.email">Email</label>
+                  <input id="f-email" name="email" type="email" placeholder="ana@costa.pt *" data-i18n-placeholder="ph.email.attr" autocomplete="email" required />
+                </div>
               </div>
-              <div class="field">
-                <span class="eyebrow num">02</span>
-                <label for="f-email" data-i18n="f.email">What’s your email?</label>
-                <input id="f-email" name="email" type="email" placeholder="ana@costa.pt *" data-i18n-placeholder="ph.email.attr" autocomplete="email" required />
-              </div>
-              <div class="field">
-                <span class="eyebrow num">03</span>
-                <label for="f-org" data-i18n="f.org">What’s the name of your organisation?</label>
-                <input id="f-org" name="org" type="text" placeholder="Costa &amp; Filhos" data-i18n-placeholder="ph.org.attr" autocomplete="organization" />
-              </div>
-              <div class="field">
-                <span class="eyebrow num">04</span>
-                <label for="f-services" data-i18n="f.services">What services are you looking for?</label>
-                <input id="f-services" name="services" type="text" placeholder="Web design, development …" data-i18n-placeholder="ph.services.attr" autocomplete="off" />
+              <div class="field-row">
+                <div class="field">
+                  <span class="eyebrow num">03</span>
+                  <label for="f-org" data-i18n="f.org">Company</label>
+                  <input id="f-org" name="org" type="text" placeholder="Costa &amp; Filhos" data-i18n-placeholder="ph.org.attr" autocomplete="organization" />
+                </div>
+                <div class="field">
+                  <span class="eyebrow num">04</span>
+                  <label for="f-services" data-i18n="f.services">Services</label>
+                  <input id="f-services" name="services" type="text" placeholder="Web design, development …" data-i18n-placeholder="ph.services.attr" autocomplete="off" />
+                </div>
               </div>
               <div class="field">
                 <span class="eyebrow num">05</span>
-                <label for="f-msg" data-i18n="f.msg">Your message</label>
+                <label for="f-msg" data-i18n="f.msg">Message</label>
                 <textarea id="f-msg" name="message" rows="3" placeholder="Hello Lucas, can you help me with … *" data-i18n-placeholder="ph.msg.attr" required></textarea>
               </div>
               <div class="footer-line send-line">
