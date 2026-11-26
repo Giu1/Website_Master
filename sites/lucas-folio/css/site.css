@@ -715,6 +715,11 @@ body.is-flat .panel.is-open .ring-css { transform: none; opacity: 1; transition:
 .pv-device button { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border: 0; border-radius: 999px; background: transparent; box-shadow: none; opacity: 1; color: #555; font: inherit; cursor: pointer; transition: background-color 0.25s ease, color 0.25s ease; }
 .pv-device button[aria-pressed="true"] { background: #000; color: #fff; }
 .pv-device svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+/* "App": floats beside Desktop/Mobile on projects that have an app */
+.pv-app { display: inline-flex; align-items: center; gap: 5px; padding: 6px 14px; border: 0; border-radius: 999px; background: #ffd84d; color: #141517; font: inherit; font-weight: 600; cursor: pointer; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18); transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease; }
+.pv-app:hover { transform: translateY(-1px); }
+.pv-app[aria-pressed="true"] { background: #000; color: #ffd84d; }
+.pv-app svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .pv-screen {
   position: relative;
   aspect-ratio: 16 / 10;
