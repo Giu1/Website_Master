@@ -726,7 +726,7 @@ body.is-flat .panel.is-open .ring-css { transform: none; opacity: 1; transition:
 }
 .preview[data-device="mobile"] .pv-screen {
   aspect-ratio: auto;
-  height: min(calc(100vh - 110px), 880px);
+  height: min(calc(100vh - 2 * var(--sheet-y) - 110px), 880px);
   background: #eeede9 radial-gradient(circle at 50% 40%, #f7f6f2, #eeede9 70%);
 }
 .pv-frame { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
@@ -937,11 +937,7 @@ a.chip.go svg { width: 45%; height: 45%; }
   *, *::before, *::after { transition-duration: 0.01ms !important; transition-delay: 0s !important; }
 }
 
-/* ───────── case sheet fills the screen; preview and screenshots sized to fit it ───────── */
-:root { --sheet-x: 0px; --sheet-y: 0px; }
-.sheet { border-radius: 0; }
-.sheet.is-prev, .sheet.is-far-prev { transform: translateX(-104vw); }
-.sheet.is-next, .sheet.is-far-next { transform: translateX(104vw); }
+/* ───────── preview and screenshots sized so the case sheet fits on screen ───────── */
 
 @media (min-width: 861px) {
   .sheet-grid.has-preview {
@@ -954,7 +950,7 @@ a.chip.go svg { width: 45%; height: 45%; }
 
   /* the whole preview fits on screen: as wide as the column allows, never taller than the window */
   .sheet-grid.has-preview .preview {
-    width: min(100%, calc((100vh - 2 * max(20px, 2vw) - 50px) * 1.6));
+    width: min(100%, calc((100vh - 2 * var(--sheet-y) - 2 * max(20px, 2vw) - 50px) * 1.6));
   }
 
   .sheet-grid.has-preview .shot-grid { gap: 6px; margin-top: max(16px, 1.4vw); }
