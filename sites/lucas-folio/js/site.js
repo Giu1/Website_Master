@@ -110,12 +110,13 @@ function loadImage(src) {
 
 async function warmMedia(onProgress) {
   const list = [];
-  for (const p of F.projects) for (const m of p.media || []) if (m.src) list.push(m);
+  // only the card faces; the sample screens further down a case sheet load lazily
+  for (const p of F.projects) if (p.media && p.media[0] && p.media[0].src) list.push(p.media[0]);
   const total = list.length + 1;
   let done = 0;
   const tick = () => onProgress(++done / total);
   await Promise.all(
-    list.map((m) => loadImage(m.src).then((img) => { m._img = img; }).catch(() => {}).finally(tick))
+    list.map((m) => loadImage(m.src).then((img) => { m._img = img; }).catch(() => { m._failed = true; }).finally(tick))
   );
   try {
     await Promise.all([
@@ -364,7 +365,7 @@ const posterCache = new Map();
 
 /** Image source for a media item inside a case sheet. */
 function mediaURL(project, media) {
-  if (media._img) return media.src;
+  if (media._img || (media.src && !media._failed)) return media.src;
   if (posterCache.has(media)) return posterCache.get(media);
   const w = 1400;
   const h = Math.max(1, Math.round(w * (media.h / media.w)));
@@ -521,7 +522,9 @@ function sheetHTML(p) {
     .map((m) => {
       const cap = m.caption ? `<figcaption>${esc(m.caption)}</figcaption>` : "";
       if (m.video) return `<figure><video src="${esc(m.video)}" playsinline loop muted autoplay></video>${cap}</figure>`;
-      return `<figure><img alt="${esc(m.caption || p.title)}" src="${mediaURL(p, m)}" loading="lazy"></figure>`;
+      const img = `<img alt="${esc(p.title)}: ${esc(m.caption || "sample")}" src="${mediaURL(p, m)}" loading="lazy">`;
+      const shot = p.url ? `<a class="sample" href="${esc(p.url)}" target="_blank" rel="noopener">${img}</a>` : img;
+      return `<figure>${shot}${cap}</figure>`;
     })
     .join("");
   return `
@@ -531,6 +534,7 @@ function sheetHTML(p) {
           <h1>${esc(p.title)}</h1>
           <p class="summary">${esc(p.summary || "")}</p>
           <div class="meta">${chips.join("")}</div>
+          ${p.url ? `<a class="open-site" href="${esc(p.url)}" target="_blank" rel="noopener">Open the live site ${ARROW_SVG}</a>` : ""}
         </div>
         <div class="sheet-media">${media}</div>
       </div>

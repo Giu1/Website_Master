@@ -229,31 +229,6 @@
     track.style.transform = `translate3d(${nameX}px,0,0)`;
   }
 
-  /* ───────── photo switcher (temporary; every visit starts on photo 1) ───────── */
-
-  const portrait = $("#portrait");
-  const photoBtns = [...document.querySelectorAll(".photo-switch [data-photo]")];
-  function showPhoto(btn) {
-    const src = btn.dataset.photo;
-    photoBtns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-    hero.style.setProperty("--hero", btn.dataset.bg);
-    const current = portrait.querySelector("img:last-child");
-    if (current && current.getAttribute("src") === src) return;
-    const wide = btn.hasAttribute("data-wide");
-    const img = new Image();
-    img.alt = "Lucas Bastos";
-    img.src = src;
-    img.className = reduced ? "" : "incoming";
-    const reveal = () => {
-      portrait.classList.toggle("wide", wide);
-      portrait.appendChild(img);
-      requestAnimationFrame(() => requestAnimationFrame(() => img.classList.remove("incoming")));
-      setTimeout(() => { while (portrait.children.length > 1) portrait.firstElementChild.remove(); }, 900);
-    };
-    img.decode ? img.decode().then(reveal, reveal) : (img.onload = reveal);
-  }
-  photoBtns.forEach((b) => b.addEventListener("click", () => showPhoto(b)));
-
   /* ───────── first-visit greeting ───────── */
 
   const loader = $("#hl-loader");

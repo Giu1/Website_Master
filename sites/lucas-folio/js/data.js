@@ -31,7 +31,11 @@ window.FOLIO = {
       url: "../lucas/",
       awards: 0,
       summary: "Personal portfolio. Four pages, curved panel transitions, a live photo switcher, English and Portuguese.",
-      media: [{ w: 16, h: 9, src: "img/lucas-card.jpg", caption: "Freelancer" }]
+      media: [
+        { w: 16, h: 9, src: "img/shots/lucas-1.jpg", caption: "Home" },
+        { w: 16, h: 9, src: "img/shots/lucas-2.jpg", caption: "About" },
+        { w: 16, h: 9, src: "img/shots/lucas-3.jpg", caption: "Recent work" }
+      ]
     },
     {
       slug: "folio",
@@ -42,7 +46,9 @@ window.FOLIO = {
       url: "../folio/",
       awards: 0,
       summary: "Design-engineer portfolio. A 3D stage with four card styles, an index lens and case sheets.",
-      media: [{ w: 16, h: 9, src: "img/mare.jpg", caption: "Stage" }]
+      media: [
+        { w: 16, h: 9, src: "img/shots/folio-1.jpg", caption: "Stage" }
+      ]
     },
     {
       slug: "forma",
@@ -53,7 +59,11 @@ window.FOLIO = {
       url: "../forma/",
       awards: 0,
       summary: "3D-print shop. Catalogue, cart, checkout and a quote estimator, all in the browser.",
-      media: [{ w: 16, h: 9, src: "img/largo.jpg", caption: "Shop" }]
+      media: [
+        { w: 16, h: 9, src: "img/shots/forma-1.jpg", caption: "Home" },
+        { w: 16, h: 9, src: "img/shots/forma-2.jpg", caption: "Categories" },
+        { w: 16, h: 9, src: "img/shots/forma-3.jpg", caption: "Featured products" }
+      ]
     },
     {
       slug: "aura-desk",
@@ -64,7 +74,11 @@ window.FOLIO = {
       url: "../aura-desk/",
       awards: 0,
       summary: "Aura's backoffice: requests, clients, insights, team and days off. Login demo / demo.",
-      media: [{ w: 16, h: 9, src: "img/largo.jpg", caption: "Desk" }]
+      media: [
+        { w: 16, h: 9, src: "img/shots/aura-desk-1.jpg", caption: "Today" },
+        { w: 16, h: 9, src: "img/shots/aura-desk-2.jpg", caption: "Insights" },
+        { w: 16, h: 9, src: "img/shots/aura-desk-3.jpg", caption: "Clients" }
+      ]
     },
     {
       slug: "brightline",
@@ -75,7 +89,11 @@ window.FOLIO = {
       url: "../brightline/",
       awards: 0,
       summary: "Home cleaning. Instant quote, area check, booking by crew size.",
-      media: [{ w: 16, h: 9, src: "img/estacao.jpg", caption: "Cleaning" }]
+      media: [
+        { w: 16, h: 9, src: "img/shots/brightline-1.jpg", caption: "Instant quote" },
+        { w: 16, h: 9, src: "img/shots/brightline-2.jpg", caption: "Rooms" },
+        { w: 16, h: 9, src: "img/shots/brightline-3.jpg", caption: "Booking" }
+      ]
     },
     {
       slug: "nido",
@@ -86,7 +104,11 @@ window.FOLIO = {
       url: "../nido/",
       awards: 0,
       summary: "Bakery on the clock. Stock sells through the morning; pre-order for pick-up.",
-      media: [{ w: 16, h: 9, src: "img/mare.jpg", caption: "Bakery" }]
+      media: [
+        { w: 16, h: 9, src: "img/shots/nido-1.jpg", caption: "Home" },
+        { w: 16, h: 9, src: "img/shots/nido-2.jpg", caption: "Today's tray" },
+        { w: 16, h: 9, src: "img/shots/nido-3.jpg", caption: "Catering" }
+      ]
     },
     {
       slug: "aura",
@@ -97,7 +119,11 @@ window.FOLIO = {
       url: "../aura/",
       awards: 0,
       summary: "Salon in Chiado. Live booking fed by Aura Desk.",
-      media: [{ w: 16, h: 9, src: "img/costa.jpg", caption: "Salon" }]
+      media: [
+        { w: 16, h: 9, src: "img/shots/aura-1.jpg", caption: "Home" },
+        { w: 16, h: 9, src: "img/shots/aura-2.jpg", caption: "Services & prices" },
+        { w: 16, h: 9, src: "img/shots/aura-3.jpg", caption: "The salon" }
+      ]
     },
     {
       slug: "vela",
@@ -108,7 +134,11 @@ window.FOLIO = {
       url: "../vela/",
       awards: 0,
       summary: "One perfume, a drawn bottle that takes each note's colour, and a wear clock.",
-      media: [{ w: 16, h: 9, src: "img/nuno.jpg", caption: "Perfume" }]
+      media: [
+        { w: 16, h: 9, src: "img/shots/vela-1.jpg", caption: "Home" },
+        { w: 16, h: 9, src: "img/shots/vela-2.jpg", caption: "The notes" },
+        { w: 16, h: 9, src: "img/shots/vela-3.jpg", caption: "Gallery" }
+      ]
     },
     {
       slug: "osteria",
@@ -119,7 +149,11 @@ window.FOLIO = {
       url: "../osteria/",
       awards: 0,
       summary: "One menu, two sittings. Wine pairing, cellar and live seat counts.",
-      media: [{ w: 16, h: 9, src: "img/calma.jpg", caption: "Restaurant" }]
+      media: [
+        { w: 16, h: 9, src: "img/shots/osteria-1.jpg", caption: "Home" },
+        { w: 16, h: 9, src: "img/shots/osteria-2.jpg", caption: "Tonight's menu" },
+        { w: 16, h: 9, src: "img/shots/osteria-3.jpg", caption: "The courses" }
+      ]
     },
     {
       slug: "lumen",
@@ -130,7 +164,11 @@ window.FOLIO = {
       url: "../lumen/",
       awards: 0,
       summary: "Photographer's light table. Viewfinder hero, filterable frames, loupe lightbox.",
-      media: [{ w: 16, h: 9, src: "img/bruma.jpg", caption: "Lookbook" }]
+      media: [
+        { w: 16, h: 9, src: "img/shots/lumen-1.jpg", caption: "Viewfinder" },
+        { w: 16, h: 9, src: "img/shots/lumen-2.jpg", caption: "The light table" },
+        { w: 16, h: 9, src: "img/shots/lumen-3.jpg", caption: "Frames" }
+      ]
     },
     {
       slug: "atelier",
@@ -141,7 +179,11 @@ window.FOLIO = {
       url: "../atelier/",
       awards: 0,
       summary: "Bespoke tailor. Draw your jacket live, browse the cloth, book a fitting.",
-      media: [{ w: 16, h: 9, src: "img/arquivo.jpg", caption: "Tailor" }]
+      media: [
+        { w: 16, h: 9, src: "img/shots/atelier-1.jpg", caption: "Home" },
+        { w: 16, h: 9, src: "img/shots/atelier-2.jpg", caption: "Jacket designer" },
+        { w: 16, h: 9, src: "img/shots/atelier-3.jpg", caption: "Cloth book" }
+      ]
     }
   ]
 };
