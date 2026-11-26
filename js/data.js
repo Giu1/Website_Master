@@ -209,9 +209,9 @@ window.FOLIO = {
       featured: true,
       year: "2026",
       client: "slab journey",
-      url: "sites/slab-journey/",
+      url: "sites/slab-journey/web/index.html",
       awards: 0,
-      summary: "Graded Pokémon card price tracker: clickable phone preview of the Android app and an archived copy of its website.",
+      summary: "Graded Pokémon card price tracker: an archived copy of its website, and the Android app rebuilt for the web (app.html).",
       media: [{ w: 16, h: 9, src: "sites/slab-journey/img/card.jpg", kind: "sans", word: "Slab Journey", colors: ["#0a0a0a", "#ffd700"], ink: "#ffffff", caption: "App and website" }]
     }
   ]

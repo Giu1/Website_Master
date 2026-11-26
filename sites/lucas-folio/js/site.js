@@ -579,8 +579,9 @@ function previewHTML(p) {
     <figure class="preview" data-device="${pvDevice}">
       <div class="pv-bar">
         <span class="pv-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="pv-url">${esc(p.title)} · live preview, click around</span>
+        <span class="pv-url" data-site="${esc(p.title)} · live preview, click around" data-app="${esc(p.title)} · the app, tap around">${esc(p.title)} · live preview, click around</span>
         <span class="pv-device" role="group" aria-label="Preview as">${btn("desktop", "Desktop", desk)}${btn("mobile", "Mobile", phone)}</span>
+        ${p.app ? `<button type="button" class="pv-app" aria-pressed="false" data-site="${esc(p.url)}" data-app="${esc(p.app)}">${phone}<span>App</span></button>` : ""}
       </div>
       <div class="pv-screen"><div class="pv-frame"><iframe data-src="${esc(p.url)}" title="Live preview of ${esc(p.title)}"></iframe></div></div>
     </figure>`;
@@ -731,6 +732,23 @@ document.addEventListener("click", (e) => {
     fitPreview(fig);
     phoneScrollbars(fig);
   }
+});
+
+// projects with an app: the "App" button swaps the website for the app, shown on a phone
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".pv-app");
+  if (!b) return;
+  const fig = b.closest(".preview");
+  const iframe = fig.querySelector("iframe");
+  const on = b.getAttribute("aria-pressed") !== "true";
+  b.setAttribute("aria-pressed", String(on));
+  iframe.dataset.src = on ? b.dataset.app : b.dataset.site;
+  iframe.src = iframe.dataset.src;
+  fig.dataset.device = on ? "mobile" : pvDevice;
+  fig.querySelectorAll(".pv-device button").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.device === fig.dataset.device)));
+  fig.querySelector(".pv-url").firstChild.textContent = on ? fig.querySelector(".pv-url").dataset.app : fig.querySelector(".pv-url").dataset.site;
+  fitPreview(fig);
+  phoneScrollbars(fig);
 });
 
 function makeSheet(p, pos) {

@@ -73,7 +73,13 @@
     }
 
     // fit the grid in the button and centre it
-    step = Math.max(2, Math.floor(Math.min((W * 0.9) / cols, (H * 0.56) / rows)));
+    // data-px-fit: size the bricks as if the button held that longer word, so the
+    // three work-group buttons share one letter size (EXAMPLES would grow to fill otherwise)
+    let fitCols = cols;
+    if (link.dataset.pxFit && TEXT === LONG) {
+      fitCols = Math.max(cols, Math.round(cols * o.measureText(link.dataset.pxFit).width / o.measureText(TEXT).width));
+    }
+    step = Math.max(2, Math.floor(Math.min((W * 0.9) / fitCols, (H * 0.56) / rows)));
     if (SHORT && W < 180) step = 2;          // same brick size on all three small buttons
     const ox = Math.round((W - cols * step) / 2);
     const oy = Math.round((H - rows * step) / 2);

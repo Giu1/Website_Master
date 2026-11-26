@@ -251,9 +251,7 @@
       t.setAttribute("aria-current", on ? "page" : "false");
     });
     screen.innerHTML = V[state.view]();
-    if (!push) screen.scrollTop = 0;
-    if (push) screen.scrollTop = 0;
-    $$("#jump [data-go]").forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === state.view)));
+    screen.scrollTop = 0;
     const q = $("#q", screen);
     if (q) q.addEventListener("input", () => {
       state.q = q.value;
@@ -291,11 +289,6 @@
     const ts = t.closest("[data-toast]"); if (ts) return toast(ts.dataset.toast);
   });
   tabbar.addEventListener("click", (e) => { const b = e.target.closest("[data-tab]"); if (b) go(b.dataset.tab); });
-  $("#jump").addEventListener("click", (e) => {
-    const b = e.target.closest("[data-go]"); if (!b) return;
-    if (b.dataset.go === "card") { state.view = "explorer"; go("card", { card: b.dataset.card }); } else go(b.dataset.go);
-    if (matchMedia("(max-width: 900px)").matches) $(".device").scrollIntoView({ block: "center" });
-  });
 
   const clock = $("#clock");
   const tick = () => { const d = new Date(); clock.textContent = d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0"); };

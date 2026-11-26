@@ -97,14 +97,15 @@ window.FOLIO = {
       featured: true,
       year: "2026",
       client: "Slab Journey",
-      url: "../slab-journey/",
+      url: "../slab-journey/web/index.html",
+      app: "../slab-journey/app.html",   // the "App" button in the live preview swaps the site for this
       awards: 0,
-      summary: "Price tracker for graded Pokémon cards: an Android and Windows app in Kotlin Multiplatform, and its Next.js website. Try the app in a clickable phone and browse the archived site.",
+      summary: "Price tracker for graded Pokémon cards: an Android and Windows app in Kotlin Multiplatform, and its Next.js website. Press App in the preview to try the app.",
       media: [
-        { w: 16, h: 9, src: "img/shots/slab-journey-1.jpg", caption: "Project" },
-        { w: 16, h: 9, src: "img/shots/slab-journey-2.jpg", caption: "App" },
-        { w: 16, h: 9, src: "img/shots/slab-journey-3.jpg", caption: "Website" },
-        { w: 16, h: 9, src: "img/shots/slab-journey-4.jpg", caption: "Pricing" }
+        { w: 16, h: 9, src: "img/shots/slab-journey-1.jpg", caption: "Website" },
+        { w: 16, h: 9, src: "img/shots/slab-journey-2.jpg", caption: "Pricing" },
+        { w: 16, h: 9, src: "img/shots/slab-journey-3.jpg", caption: "App" },
+        { w: 16, h: 9, src: "img/shots/slab-journey-4.jpg", caption: "App" }
       ]
     },
     {
