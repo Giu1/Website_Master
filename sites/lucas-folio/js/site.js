@@ -520,7 +520,7 @@ function sheetHTML(p) {
   for (let i = 0; i < (p.awards || 0); i++) chips.push(`<span class="award" title="Award">${AWARD_SVG}</span>`);
   // a live, working copy of the site sits on top; the screenshots after the card face follow it
   const preview = p.url ? previewHTML(p) : "";
-  const media = (p.url ? (p.media || []).slice(1) : (p.media || []))
+  const media = (p.url ? [] : (p.media || []))
     .map((m) => {
       const cap = m.caption ? `<figcaption>${esc(m.caption)}</figcaption>` : "";
       if (m.video) return `<figure><video src="${esc(m.video)}" playsinline loop muted autoplay></video>${cap}</figure>`;
@@ -537,6 +537,7 @@ function sheetHTML(p) {
           <p class="summary">${esc(p.summary || "")}</p>
           <div class="meta">${chips.join("")}</div>
           ${p.url ? `<a class="open-site" href="${esc(p.url)}" target="_blank" rel="noopener">Open the live site ${ARROW_SVG}</a>` : ""}
+          ${p.url ? shotGridHTML(p) : ""}
         </div>
         <div class="sheet-media">${preview}${media}</div>
       </div>
@@ -564,14 +565,84 @@ function previewHTML(p) {
     <figure class="preview" data-device="${pvDevice}">
       <div class="pv-bar">
         <span class="pv-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="pv-url">${esc(p.title)}</span>
+        <span class="pv-url">${esc(p.title)} · live preview, click around</span>
         <span class="pv-device" role="group" aria-label="Preview as">${btn("desktop", "Desktop", desk)}${btn("mobile", "Mobile", phone)}</span>
-        <a class="pv-open" href="${esc(p.url)}" target="_blank" rel="noopener">Open full site ${ARROW_SVG}</a>
       </div>
       <div class="pv-screen"><div class="pv-frame"><iframe data-src="${esc(p.url)}" title="Live preview of ${esc(p.title)}"></iframe></div></div>
-      <figcaption>Live preview: click around, it works like the real site</figcaption>
     </figure>`;
 }
+
+/* screenshots: a 2×2 grid under the button; a click opens them full size */
+function shotGridHTML(p) {
+  const shots = (p.media || []).filter((m) => m.src).slice(0, 4);
+  if (!shots.length) return "";
+  return `<div class="shot-grid">${shots
+    .map((m, i) => `<button type="button" class="shot" data-slug="${esc(p.slug)}" data-i="${i}" aria-label="Show ${esc(m.caption || p.title)} full size"><img src="${esc(m.src)}" alt="" loading="lazy"><span>${esc(m.caption || "")}</span></button>`)
+    .join("")}</div>`;
+}
+
+const lightbox = (() => {
+  const box = document.createElement("div");
+  box.className = "lightbox";
+  box.hidden = true;
+  box.setAttribute("role", "dialog");
+  box.setAttribute("aria-modal", "true");
+  box.setAttribute("aria-label", "Screenshot");
+  box.innerHTML = `
+    <button type="button" class="lb-close" aria-label="Close">×</button>
+    <button type="button" class="lb-step lb-prev" aria-label="Previous screenshot">←</button>
+    <figure><img alt=""><figcaption></figcaption></figure>
+    <button type="button" class="lb-step lb-next" aria-label="Next screenshot">→</button>`;
+  document.body.appendChild(box);
+  const img = box.querySelector("img");
+  const cap = box.querySelector("figcaption");
+  let list = [], i = 0, back = null;
+  const show = () => {
+    const m = list[i];
+    img.src = m.src;
+    img.alt = m.caption || "";
+    cap.textContent = `${m.caption || ""}  ·  ${i + 1} / ${list.length}`;
+  };
+  const step = (d) => { i = (i + d + list.length) % list.length; show(); };
+  const close = () => {
+    box.classList.remove("is-open");
+    setTimeout(() => { if (!box.classList.contains("is-open")) box.hidden = true; }, 300);
+    if (back) back.focus();
+  };
+  box.addEventListener("click", (e) => {
+    if (e.target.closest(".lb-prev")) step(-1);
+    else if (e.target.closest(".lb-next")) step(1);
+    else if (!e.target.closest("img")) close();
+  });
+  // capture, so the case sheet's own keys (Esc closes it, arrows change project) wait while this is open
+  addEventListener("keydown", (e) => {
+    if (box.hidden) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowLeft") step(-1);
+    else if (e.key === "ArrowRight") step(1);
+    else return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+  }, true);
+  return {
+    open(shots, at, from) {
+      list = shots; i = at; back = from;
+      box.classList.toggle("single", list.length < 2);
+      show();
+      box.hidden = false;
+      requestAnimationFrame(() => box.classList.add("is-open"));
+      box.querySelector(".lb-close").focus();
+    }
+  };
+})();
+
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".shot-grid .shot");
+  if (!b) return;
+  const p = F.projects.find((x) => x.slug === b.dataset.slug);
+  if (!p) return;
+  lightbox.open((p.media || []).filter((m) => m.src).slice(0, 4), Number(b.dataset.i), b);
+});
 
 function fitPreview(fig) {
   const screen = fig.querySelector(".pv-screen");
