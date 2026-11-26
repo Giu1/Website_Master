@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Amostra · Montra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root { --brick: #b23a2b; --cream: #f7efe3; --ink: #2a1712; --wood: #6b3b22; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #2a1712; color: var(--ink); font: 400 16px/1.55 "DM Sans", system-ui, sans-serif; overflow-x: hidden; }
+  a { color: inherit; }
+  .street { background: var(--cream); padding-bottom: 6vw; }
+  nav { display: flex; justify-content: space-between; padding: 14px 5vw; font-size: 14px; }
+  nav a { text-decoration: none; font-weight: 600; }
+  .awning {
+    height: 90px; margin: 0 3vw; position: relative;
+    background: repeating-linear-gradient(90deg, var(--brick) 0 48px, var(--cream) 48px 96px);
+    border-radius: 6px 6px 0 0; box-shadow: inset 0 -14px 20px -12px rgba(0,0,0,.35);
+  }
+  .awning::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -22px; height: 22px;
+    background: radial-gradient(circle at 24px 0, var(--brick) 23px, transparent 24px) 0 0 / 96px 22px,
+                radial-gradient(circle at 24px 0, var(--cream) 23px, transparent 24px) 48px 0 / 96px 22px;
+    background-repeat: repeat-x;
+    filter: drop-shadow(0 6px 4px rgba(0,0,0,.2));
+  }
+  .awning span { position: absolute; inset: 0; display: grid; place-items: center; font: 400 clamp(26px, 4vw, 44px) "DM Serif Display", serif; color: #fff; text-shadow: 0 2px 0 var(--ink), 0 0 12px rgba(0,0,0,.5); }
+  .front { display: grid; grid-template-columns: 2fr 1fr; gap: 3vw; margin: 0 3vw; padding: 46px 3vw 0; background: var(--wood); border-radius: 0 0 6px 6px; }
+  .window {
+    position: relative; min-height: 380px; margin-bottom: 3vw; padding: 36px; overflow: hidden; color: var(--cream);
+    background: linear-gradient(160deg, #3b5450, #1d2c2a); border: 10px solid #3b2213; border-radius: 4px;
+  }
+  .window::before { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.14) 36%, transparent 42%, transparent 55%, rgba(255,255,255,.08) 58%, transparent 61%); }
+  @media (prefers-reduced-motion: no-preference) { .window::before { animation: glide 9s ease-in-out infinite; } }
+  @keyframes glide { from { transform: translateX(-60%); } to { transform: translateX(60%); } }
+  .window h1 { position: relative; margin: 0; font: 400 clamp(44px, 6.5vw, 86px)/.95 "DM Serif Display", serif; }
+  .window p { position: relative; max-width: 34ch; font-size: 18px; }
+  .btns { position: relative; display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .btn { padding: 12px 18px; border-radius: 4px; background: var(--brick); color: #fff; text-decoration: none; font-weight: 600; }
+  .btn.ghost { background: transparent; border: 1.5px solid var(--cream); }
+  .door { position: relative; background: #3b2213; border-radius: 4px 4px 0 0; min-height: 300px; align-self: end; height: 100%; }
+  .door::before { content: ""; position: absolute; inset: 14px 14px 40% 14px; background: linear-gradient(160deg, #3b5450, #1d2c2a); }
+  .door::after { content: ""; position: absolute; right: 18px; top: 62%; width: 10px; height: 30px; border-radius: 4px; background: #d8b06a; }
+  .sign-hang { position: absolute; left: 50%; top: 14px; width: 150px; margin-left: -75px; transform-origin: 50% 0; perspective: 600px; z-index: 2; cursor: pointer; }
+  @media (prefers-reduced-motion: no-preference) { .sign-hang { animation: swing 3.6s ease-in-out infinite; } }
+  @keyframes swing { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+  .sign-hang svg { display: block; margin: 0 auto; }
+  .plate { position: relative; height: 66px; transform-style: preserve-3d; transition: transform .8s cubic-bezier(.4,1.6,.5,1); }
+  .plate div { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 6px; backface-visibility: hidden; font: 400 26px "DM Serif Display", serif; color: #fff; border: 3px solid #fff; box-shadow: 0 6px 10px rgba(0,0,0,.4); }
+  .plate .a { background: #2e7d32; }
+  .plate .f { background: var(--brick); transform: rotateY(180deg); }
+  .closed .plate { transform: rotateY(180deg); }
+  .sign-note { position: absolute; left: 0; right: 0; top: 110px; text-align: center; color: var(--cream); font-size: 13px; z-index: 2; }
+
+  section { padding: 7vw 5vw; background: var(--cream); }
+  section.alt { background: #efe2cf; }
+  h2 { margin: 0 0 24px; font: 400 clamp(32px, 4.5vw, 56px)/1 "DM Serif Display", serif; color: var(--brick); }
+  .menu { max-width: 760px; }
+  .menu div { display: flex; align-items: baseline; gap: 10px; padding: 14px 0; border-bottom: 1px solid #d9c7ad; }
+  .menu b { font-size: 19px; }
+  .menu span { display: block; opacity: .7; font-size: 14px; font-weight: 400; }
+  .menu i { flex: 1; border-bottom: 2px dotted #c9b28f; transform: translateY(-4px); }
+  .menu em { font-style: normal; font-weight: 600; white-space: nowrap; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; }
+  .hours div { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #d9c7ad; }
+  footer { padding: 22px 5vw; color: var(--cream); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  @media (max-width: 760px) {
+    .front { grid-template-columns: 1fr; padding-top: 34px; }
+    .door { min-height: 220px; order: -1; margin-bottom: 0; }
+    .window { min-height: 0; padding: 26px 22px; }
+    .two { grid-template-columns: 1fr; }
+    .menu i { min-width: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="street">
+  <nav><span data-c="morada"></span><a data-tel data-c="telefone"></a></nav>
+  <div class="awning"><span data-c="nomeCompleto"></span></div>
+  <div class="front">
+    <div class="window">
+      <h1><span data-c="tipo"></span></h1>
+      <p>À porta, na <span data-c="morada"></span>, em <span data-c="cidade"></span>. Entre, ou ligue antes para marcar.</p>
+      <div class="btns">
+        <a class="btn" data-tel>Ligar para marcar</a>
+        <a class="btn ghost" data-map target="_blank" rel="noopener">Como chegar</a>
+      </div>
+    </div>
+    <div class="door">
+      <div class="sign-hang" id="sign" role="img">
+        <svg width="80" height="40" viewBox="0 0 80 40" aria-hidden="true"><path d="M10 40 L40 4 L70 40" fill="none" stroke="#d8b06a" stroke-width="2"/><circle cx="40" cy="4" r="3" fill="#d8b06a"/></svg>
+        <div class="plate"><div class="a">Aberto</div><div class="f">Fechado</div></div>
+      </div>
+      <p class="sign-note" id="sign-note"></p>
+    </div>
+  </div>
+</div>
+
+<section>
+  <h2>Serviços e preços</h2>
+  <div class="menu" id="menu"></div>
+</section>
+
+<section class="alt">
+  <div class="two">
+    <div><h2>Horário</h2><div class="hours" id="hours"></div></div>
+    <div>
+      <h2>Morada</h2>
+      <p><span data-c="morada"></span><br /><span data-c="codigoPostal"></span><br /><span data-c="instagram"></span></p>
+      <div class="btns"><a class="btn" data-map target="_blank" rel="noopener">Abrir no mapa</a></div>
+    </div>
+  </div>
+</section>
+
+<footer><span>© <span data-c="nomeCompleto"></span></span><span>Amostra 3 · Montra</span></footer>
+
+<script src="../../js/cliente.js"></script>
+<script>
+  const C = window.CLIENTE;
+  document.querySelectorAll("[data-c]").forEach((el) => (el.textContent = C[el.dataset.c]));
+  document.querySelectorAll("[data-tel]").forEach((el) => (el.href = C.telefoneHref));
+  document.querySelectorAll("[data-map]").forEach((el) => (el.href = C.mapa));
+
+  const st = C.estado();
+  const sign = document.getElementById("sign");
+  sign.setAttribute("aria-label", st.curto);
+  document.getElementById("sign-note").textContent = st.longo;
+  if (!st.aberto) setTimeout(() => sign.classList.add("closed"), 400);
+  /* Tocar na placa vira-a; volta ao estado real passado um pouco. */
+  sign.addEventListener("click", () => {
+    sign.classList.toggle("closed");
+    clearTimeout(sign.t);
+    sign.t = setTimeout(() => sign.classList.toggle("closed", !st.aberto), 1800);
+  });
+
+  document.getElementById("menu").innerHTML = C.servicos.map((s) => `<div><b>${s.nome}<span>${s.desc}</span></b><i></i><em>${s.preco}</em></div>`).join("");
+  document.getElementById("hours").innerHTML = C.horarioLinhas().map((l) => `<div><span>${l.dias}</span><b>${l.horas}</b></div>`).join("");
+</script>
+</body>
+</html>

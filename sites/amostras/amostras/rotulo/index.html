@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Amostra · Rótulo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root { --paper: #f3eee4; --ink: #121212; --green: #2f6b3f; --line: #121212; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 15px/1.5 "Inter", system-ui, sans-serif; overflow-x: hidden; }
+  a { color: inherit; }
+  .mono { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+  .bar { display: flex; justify-content: space-between; gap: 12px; padding: 12px 4vw; border-bottom: 1.5px solid var(--line); }
+  .label { margin: 4vw; border: 2px solid var(--line); }
+  .row { display: grid; border-bottom: 1.5px solid var(--line); }
+  .row:last-child { border-bottom: 0; }
+  .cell { padding: 20px 24px; border-right: 1.5px solid var(--line); }
+  .cell:last-child { border-right: 0; }
+  .head { grid-template-columns: 1fr auto; }
+  .head h1 { margin: 0; font-weight: 900; font-size: clamp(52px, 10vw, 150px); line-height: .85; letter-spacing: -.05em; }
+  .head h1 small { display: block; font-size: .2em; letter-spacing: -.01em; font-weight: 500; margin-top: 14px; }
+  .badge { display: grid; place-items: center; text-align: center; min-width: 200px; }
+  .badge b { display: block; font-size: 22px; font-weight: 900; color: var(--green); }
+  .badge.closed b { color: #9b2c1f; }
+  .facts { grid-template-columns: repeat(4, 1fr); }
+  .fact b { display: block; font-size: 30px; font-weight: 900; letter-spacing: -.03em; }
+  .cta { grid-template-columns: 1fr 1fr; }
+  .cta a { display: flex; justify-content: space-between; align-items: center; padding: 22px 24px; text-decoration: none; font-weight: 700; font-size: 18px; }
+  .cta a:first-child { background: var(--ink); color: var(--paper); }
+  .cta a:hover span { transform: translateX(4px); }
+  .cta span { transition: transform .2s; }
+
+  h2 { margin: 0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+  .table { width: 100%; border-collapse: collapse; }
+  .table td { padding: 14px 0; border-top: 1px solid var(--line); vertical-align: top; }
+  .table td:last-child { text-align: right; white-space: nowrap; font-weight: 700; }
+  .table small { display: block; opacity: .65; }
+  .split { grid-template-columns: 1.4fr 1fr; }
+  .rule { height: 8px; background: var(--line); transform-origin: left; }
+  @media (prefers-reduced-motion: no-preference) {
+    .rule { transform: scaleX(0); transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+    .rule.in { transform: scaleX(1); }
+  }
+  .barcode { height: 54px; margin-top: 18px; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 7px, transparent 7px 9px, var(--ink) 9px 10px, transparent 10px 14px); }
+  footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 0 4vw 4vw; }
+  @media (max-width: 760px) {
+    .head, .split, .cta { grid-template-columns: 1fr; }
+    .facts { grid-template-columns: 1fr 1fr; }
+    .cell { border-right: 0; border-bottom: 1.5px solid var(--line); }
+    .row > .cell:last-child { border-bottom: 0; }
+    .facts .cell:nth-child(odd) { border-right: 1.5px solid var(--line); }
+    .facts .cell:nth-last-child(-n+2) { border-bottom: 0; }
+    .badge { min-width: 0; }
+    .label { margin: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="bar mono"><span data-c="nomeCompleto"></span><a data-tel data-c="telefone"></a></div>
+
+<main class="label">
+  <div class="row head">
+    <div class="cell"><h1>Estúdio<br /><span data-c="nome"></span><small><span data-c="tipo"></span> · <span data-c="cidade"></span></small></h1></div>
+    <div class="cell badge" id="badge"><div><span class="mono">Estado</span><b id="st1"></b><span class="mono" id="st2"></span></div></div>
+  </div>
+  <div class="row facts" id="facts"></div>
+  <div class="row cta">
+    <a data-tel>Ligar para marcar <span>→</span></a>
+    <a data-map target="_blank" rel="noopener">Como chegar <span>→</span></a>
+  </div>
+  <div class="rule" id="r1"></div>
+  <div class="row split">
+    <div class="cell">
+      <h2>Serviços</h2>
+      <table class="table" id="services"></table>
+    </div>
+    <div class="cell">
+      <h2>Horário</h2>
+      <table class="table" id="hours"></table>
+      <div class="barcode" aria-hidden="true"></div>
+      <p class="mono"><span data-c="morada"></span> · <span data-c="codigoPostal"></span></p>
+    </div>
+  </div>
+</main>
+
+<footer class="mono"><span>© <span data-c="nomeCompleto"></span></span><span>Amostra 4 · Rótulo</span></footer>
+
+<script src="../../js/cliente.js"></script>
+<script>
+  const C = window.CLIENTE;
+  document.querySelectorAll("[data-c]").forEach((el) => (el.textContent = C[el.dataset.c]));
+  document.querySelectorAll("[data-tel]").forEach((el) => (el.href = C.telefoneHref));
+  document.querySelectorAll("[data-map]").forEach((el) => (el.href = C.mapa));
+
+  const st = C.estado();
+  document.getElementById("st1").textContent = st.curto;
+  document.getElementById("st2").textContent = st.longo;
+  if (!st.aberto) document.getElementById("badge").classList.add("closed");
+
+  /* Números calculados a partir dos dados */
+  const min = (s) => { const [h, m] = s.split(":").map(Number); return h * 60 + m; };
+  const open = C.horario.filter((h) => h.abre);
+  const hours = Math.round(open.reduce((t, h) => t + min(h.fecha) - min(h.abre), 0) / 60);
+  const lowest = Math.min(...C.servicos.map((s) => parseInt(s.preco.replace(/\D/g, ""), 10) || 999));
+  const facts = [
+    [C.servicos.length, "", "serviços"],
+    [open.length, "", "dias por semana"],
+    [hours, " h", "abertas por semana"],
+    [lowest, " €", "preço mais baixo"]
+  ];
+  document.getElementById("facts").innerHTML = facts.map(([n, u, l]) => `<div class="cell fact"><b data-n="${n}" data-u="${u}">0${u}</b><span class="mono">${l}</span></div>`).join("");
+
+  document.getElementById("services").innerHTML = C.servicos.map((s) => `<tr><td>${s.nome}<small>${s.desc}</small></td><td>${s.preco}</td></tr>`).join("");
+  document.getElementById("hours").innerHTML = C.horarioLinhas().map((l) => `<tr><td>${l.dias}</td><td>${l.horas}</td></tr>`).join("");
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll("[data-n]").forEach((el) => {
+    const n = +el.dataset.n, u = el.dataset.u;
+    if (reduce) { el.textContent = n + u; return; }
+    const t0 = performance.now();
+    const tick = (t) => { const p = Math.min(1, (t - t0) / 900); el.textContent = Math.round(n * (1 - Math.pow(1 - p, 3))) + u; if (p < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  });
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add("in")));
+  io.observe(document.getElementById("r1"));
+</script>
+</body>
+</html>
