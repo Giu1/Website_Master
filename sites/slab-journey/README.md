@@ -12,6 +12,7 @@ Desktop/Mobile swaps it for the app on a phone.
 | `web/` | Archived static copy of slabjourney.com (10 pages) |
 | `app.html`, `css/`, `js/phone.js` | The Android app rebuilt for the web: fills the screen on a phone, shows a phone frame on wider screens |
 | `img/app/` | Card art cut from the app's own screenshots (plus the Charizard from the website hero) |
+| `img/screens/` | 48 full-screen app screenshots (1920×1200) in app order; the Past projects card shows 4 and the screenshot viewer steps through all of them. `phone/` holds 18 earlier phone shots |
 
 The App button is driven by the `app` field of the project in `sites/lucas-folio/js/data.js`.
 Any project with an `app` URL gets the button.

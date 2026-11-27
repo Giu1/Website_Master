@@ -589,10 +589,14 @@ function previewHTML(p) {
 
 /* screenshots: a 2×2 grid under the button; a click opens them full size */
 function shotGridHTML(p) {
-  const shots = (p.media || []).filter((m) => m.src).slice(0, 4);
+  const all = (p.media || []).filter((m) => m.src);
+  const shots = all.slice(0, 4);
   if (!shots.length) return "";
+  const more = all.length - shots.length;
   return `<div class="shot-grid">${shots
-    .map((m, i) => `<button type="button" class="shot" data-slug="${esc(p.slug)}" data-i="${i}" aria-label="Show ${esc(m.caption || p.title)} full size"><img src="${esc(m.src)}" alt="" loading="lazy"><span>${esc(m.caption || "")}</span></button>`)
+    .map((m, i) => `<button type="button" class="shot" data-slug="${esc(p.slug)}" data-i="${i}" aria-label="Show ${esc(m.caption || p.title)} full size"><img src="${esc(m.src)}" alt="" loading="lazy"><span>${esc(m.caption || "")}</span>${
+      more > 0 && i === shots.length - 1 ? `<em class="shot-more">+${more} more</em>` : ""
+    }</button>`)
     .join("")}</div>`;
 }
 
