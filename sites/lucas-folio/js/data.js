@@ -91,6 +91,23 @@ window.FOLIO = {
       ]
     },
     {
+      slug: "mysticlis",
+      group: "live",   // examples | live | past (the buttons at the top of the stage)
+      title: "Mystic Lis",
+      featured: true,
+      year: "2026",
+      client: "Candles",
+      url: "https://giu1.github.io/MysticLis_Website_-_LinkTree/",
+      awards: 0,
+      summary: "Handmade candles and event favours, live on GitHub Pages. A link-tree home, a filterable shop of real pieces, a photo gallery, an events page and a guided order form. Growing into a full shop.",
+      media: [
+        { w: 16, h: 9, src: "img/shots/mysticlis-1.jpg", caption: "Home" },
+        { w: 16, h: 9, src: "img/shots/mysticlis-2.jpg", caption: "Shop" },
+        { w: 16, h: 9, src: "img/shots/mysticlis-3.jpg", caption: "Gallery" },
+        { w: 16, h: 9, src: "img/shots/mysticlis-4.jpg", caption: "Events" }
+      ]
+    },
+    {
       slug: "slab-journey",
       group: "past",   // examples | live | past (the buttons at the top of the stage)
       title: "Slab Journey",
