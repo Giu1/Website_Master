@@ -597,6 +597,7 @@ function shotGridHTML(p) {
 }
 
 const lightbox = (() => {
+  const CHEV = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${d}"/></svg>`;
   const box = document.createElement("div");
   box.className = "lightbox";
   box.hidden = true;
@@ -605,18 +606,45 @@ const lightbox = (() => {
   box.setAttribute("aria-label", "Screenshot");
   box.innerHTML = `
     <button type="button" class="lb-close" aria-label="Close">×</button>
-    <button type="button" class="lb-step lb-prev" aria-label="Previous screenshot">←</button>
-    <figure><img alt=""><figcaption></figcaption></figure>
-    <button type="button" class="lb-step lb-next" aria-label="Next screenshot">→</button>`;
+    <figure>
+      <div class="lb-stage">
+        <img alt="">
+        <button type="button" class="lb-step lb-prev" aria-label="Previous screenshot"><span>${CHEV("M15 5l-7 7 7 7")}</span></button>
+        <button type="button" class="lb-step lb-next" aria-label="Next screenshot"><span>${CHEV("M9 5l7 7-7 7")}</span></button>
+      </div>
+      <figcaption></figcaption>
+    </figure>
+    <div class="lb-thumbs-wrap">
+      <button type="button" class="lb-toggle" aria-expanded="true"></button>
+      <div class="lb-thumbs" role="group" aria-label="All screenshots"></div>
+    </div>`;
   document.body.appendChild(box);
   const img = box.querySelector("img");
   const cap = box.querySelector("figcaption");
+  const thumbs = box.querySelector(".lb-thumbs");
+  const toggle = box.querySelector(".lb-toggle");
+  const TH_KEY = "folio-lightbox-thumbs";
+  let showThumbs = true;
+  try { showThumbs = localStorage.getItem(TH_KEY) !== "off"; } catch { /* storage blocked */ }
+  const setThumbs = (on) => {
+    showThumbs = on;
+    box.classList.toggle("no-thumbs", !on);
+    toggle.setAttribute("aria-expanded", String(on));
+    toggle.textContent = on ? "Hide previews" : `Show all ${list.length} previews`;
+    try { localStorage.setItem(TH_KEY, on ? "on" : "off"); } catch { /* storage blocked */ }
+  };
   let list = [], i = 0, back = null;
   const show = () => {
     const m = list[i];
     img.src = m.src;
     img.alt = m.caption || "";
     cap.textContent = `${m.caption || ""}  ·  ${i + 1} / ${list.length}`;
+    thumbs.querySelectorAll("button").forEach((t, k) => {
+      const on = k === i;
+      t.classList.toggle("is-on", on);
+      t.setAttribute("aria-current", on ? "true" : "false");
+      if (on && showThumbs) t.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    });
   };
   const step = (d) => { i = (i + d + list.length) % list.length; show(); };
   const close = () => {
@@ -625,9 +653,12 @@ const lightbox = (() => {
     if (back) back.focus();
   };
   box.addEventListener("click", (e) => {
+    const t = e.target.closest(".lb-thumbs button");
+    if (t) { i = Number(t.dataset.i); show(); return; }
+    if (e.target.closest(".lb-toggle")) { setThumbs(!showThumbs); return; }
     if (e.target.closest(".lb-prev")) step(-1);
     else if (e.target.closest(".lb-next")) step(1);
-    else if (!e.target.closest("img")) close();
+    else if (!e.target.closest("img, .lb-thumbs-wrap")) close();
   });
   // capture, so the case sheet's own keys (Esc closes it, arrows change project) wait while this is open
   addEventListener("keydown", (e) => {
@@ -639,24 +670,38 @@ const lightbox = (() => {
     e.preventDefault();
     e.stopImmediatePropagation();
   }, true);
+  // swipe on touch screens
+  let x0 = null;
+  box.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  box.addEventListener("touchend", (e) => {
+    if (x0 === null || list.length < 2) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    x0 = null;
+    if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+  });
   return {
     open(shots, at, from) {
       list = shots; i = at; back = from;
       box.classList.toggle("single", list.length < 2);
-      show();
+      thumbs.innerHTML = list
+        .map((m, k) => `<button type="button" data-i="${k}" aria-label="${esc(m.caption || "Screenshot")} (${k + 1} of ${list.length})"><img src="${esc(m.src)}" alt="" loading="lazy"></button>`)
+        .join("");
+      setThumbs(showThumbs);
       box.hidden = false;
+      show();
       requestAnimationFrame(() => box.classList.add("is-open"));
       box.querySelector(".lb-close").focus();
     }
   };
 })();
 
+// the case sheet shows 4 screenshots; the overlay steps through every one the project has
 document.addEventListener("click", (e) => {
   const b = e.target.closest(".shot-grid .shot");
   if (!b) return;
   const p = F.projects.find((x) => x.slug === b.dataset.slug);
   if (!p) return;
-  lightbox.open((p.media || []).filter((m) => m.src).slice(0, 4), Number(b.dataset.i), b);
+  lightbox.open((p.media || []).filter((m) => m.src), Number(b.dataset.i), b);
 });
 
 function fitPreview(fig) {
